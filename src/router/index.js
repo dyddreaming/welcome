@@ -41,6 +41,13 @@ import modifyManage from '../components/manageLimit/modifyManage.vue'
 // 附加功能管理
 import Business from '../views/AddBusiness.vue'
 import Message from '../views/AddMessage.vue'
+import noPass from '../components/businessManage/noPass.vue'
+import foodDetail from '../components/businessManage/foodDetail.vue'
+import workDetail from '../components/businessManage/workDetail.vue'
+import search from '../components/businessManage/search.vue'
+import partTime from '../components/businessManage/partTime.vue'
+import examinePart from '../components/businessManage/examinePart.vue'
+import examineFood from '../components/businessManage/examineFood.vue'
 // 平台参数配置
 import Plan from '../views/Config.vue'
 // 帮助中心
@@ -189,34 +196,63 @@ const routes = [
     component: sevenClick
   },
   {
-    path:'/dataScroll',
-    component:scroll,
+    path: '/dataScroll',
+    component: scroll,
   },
   {
-    path:'/studentPart',
-    component:studentPart
+    path: '/studentPart',
+    component: studentPart
   },
   {
-    path:'/studentRank',
-    component:studentRank
+    path: '/studentRank',
+    component: studentRank
   },
   {
-    path:'/advertisePart',
-    component:advertisePart
+    path: '/advertisePart',
+    component: advertisePart
   },
   {
-    path:'/taskPart',
-    component:taskPart
+    path: '/taskPart',
+    component: taskPart
   },
   // 权限管理路径
   {
-    path:'/addManage',
-    component:addManage
+    path: '/addManage',
+    component: addManage
   },
   {
-    path:'/modifyManage',
-    component:modifyManage
-  }
+    path: '/modifyManage',
+    component: modifyManage
+  },
+  // 附加功能管理路径
+  {
+    path: '/noPass',
+    component: noPass
+  },
+  {
+    path: '/foodDetail',
+    component: foodDetail
+  },
+  {
+    path: '/workDetail',
+    component: workDetail
+  },
+  {
+    path: '/search',
+    component: search
+  },
+  {
+    path: '/partTime',
+    component: partTime
+  },
+  {
+    path: '/examinePart',
+    component: examinePart
+  },
+  {
+    path: '/examineFood',
+    component: examineFood
+  },
 ]
 
 const router = new VueRouter({

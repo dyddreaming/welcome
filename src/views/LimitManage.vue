@@ -192,7 +192,7 @@
                 type="danger"
                 size="mini"
                 style="background-color: #fa5e00; border: none"
-                @click="handleDelete(scope.row)"
+                @click="singleDelete(scope.row.id)"
                 >删除</el-button
               >
             </template>
@@ -225,17 +225,16 @@
             height: 80%;
             margin-left: 10px;
           "
+          @click="manageDelete"
           >批量删除</el-button
         >
       </div>
     </div>
   </div>
 </template>
-  
   <style>
 @import "../../public/static/css/aside.css";
 </style>
-  
   <script>
 import axios from "axios";
 export default {
@@ -293,6 +292,7 @@ export default {
       // ],
       totalData: [],
       tableData: [],
+      selectedIds: [],
     };
   },
   mounted() {
@@ -304,6 +304,50 @@ export default {
       this.type = "所有";
       this.loadList();
     },
+    // 单个删除
+    singleDelete(id) {
+      this.selectedIds.push(id);
+      this.manageDelete();
+    },
+    // 删除对象
+    manageDelete() {
+      console.log("选择的管理员ID值",this.selectedIds);
+      if (this.selectedIds.length === 0) {
+        this.$message.warning("请先选择要操作的项");
+      } else {
+        this.$confirm("确认删除吗？", "提示", {
+          confirmButtonText: "确认",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+          .then(() => {
+            this.doDelete();
+            this.selectedIds = [];
+          })
+          .catch(() => {});
+      }
+    },
+    doDelete() {
+      // 发送axios请求删除管理员
+      const url = `${
+        this.$store.getters.getIp
+      }/administrators?ids=${this.selectedIds.join("&ids=")}`;
+      axios
+        .delete(url)
+        .then((response) => {
+          console.log("删除成功", response.data);
+          this.$message({
+            message: "删除成功",
+            type: "success",
+          });
+          // 成功删除后刷新页面
+          location.reload();
+        })
+        .catch((error) => {
+          console.error("删除失败", error);
+          this.$message.error("删除失败，请稍后重试");
+        });
+    },
     add() {
       this.$router.push("/addManage");
     },
@@ -311,7 +355,7 @@ export default {
       this.$store.commit("setManageRow", row);
       this.$nextTick(() => {
         this.$router.push("/modifyManage");
-        console.log("前往修改界面");
+        // console.log("前往修改界面");
       });
     },
     loadList() {
@@ -319,7 +363,7 @@ export default {
         .get(`${this.$store.getters.getIp}/administrators/page`, {
           params: {
             page: 1,
-            pageSize: 6,
+            pageSize: 7,
             ...(this.college !== "所有" && { college: this.college }),
             ...(this.type !== "所有" && {
               // 根据 this.type 的值添加不同的 level 参数
@@ -331,6 +375,7 @@ export default {
           this.totalData = response.data.data.records;
           this.tableData = this.totalData.map((item) => {
             return {
+              id: item.id,
               name: item.name,
               username: item.username,
               gender:

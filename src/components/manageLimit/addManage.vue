@@ -232,6 +232,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -252,8 +253,8 @@ export default {
           label: "数学学院",
         },
         {
-          value: "经济学院",
-          label: "经济学院",
+          value: "经管学院",
+          label: "经管学院",
         },
         {
           value: "无",
@@ -274,12 +275,99 @@ export default {
           label: "院级",
         },
       ],
+      newManage: null,
     };
   },
-  methods:{
-    cancel(){
-        this.$router.push("/mainMenu/limit/manager");
-    }
+  mounted() {
+    this.loadData();
+  },
+  methods: {
+    loadData() {
+      this.newManage = this.$store.getters.getNewManage;
+      if (this.newManage != null) {
+        this.nameInput = this.newManage.nameInput;
+        this.radio = this.newManage.radio;
+        this.collegeValue = this.newManage.collegeValue;
+        this.accountInput = this.newManage.accountInput;
+        this.cardInput = this.newManage.cardInput;
+        this.phoneInput = this.newManage.phoneInput;
+        this.grade = this.newManage.grade;
+      }
+    },
+    putData() {
+      let putForm = {
+        nameInput: this.nameInput,
+        radio: this.radio,
+        collegeValue: this.collegeValue,
+        accountInput: this.accountInput,
+        cardInput: this.cardInput,
+        phoneInput: this.phoneInput,
+        grade: this.grade,
+      };
+      this.$store.commit("setNewManage", putForm);
+    },
+    cancel() {
+      this.reset();
+      this.$router.push("/mainMenu/limit/manager");
+    },
+    save() {
+      let name = this.nameInput;
+      let username = this.accountInput;
+      let gender = this.radio === "1" ? 1 : 0;
+      let college = this.collegeValue === "无" ? null : this.collegeValue;
+      let level = this.grade === "校级" ? 0 : 1;
+      let idNumber = this.cardInput;
+      let phone = this.phoneInput;
+      let form = {
+        name: name,
+        username: username,
+        gender: gender,
+        college: college,
+        idNumber,
+        phone: phone,
+        level: level,
+      };
+      console.log(form);
+      axios
+        .post(`${this.$store.getters.getIp}/administrators`, {
+          name,
+          username,
+          gender,
+          college,
+          idNumber,
+          phone,
+          level,
+        })
+        .then((response) => {
+          let message = response.data.msg;
+          if (message == "success") {
+            this.$message.success("添加成功");
+            this.putData();
+          } else if (message == "账号重复") {
+            this.$message.error("账号重复");
+          } else {
+            this.$message.error("该身份证号已经拥有过一个账号，无法重复添加");
+          }
+          // console.log(response.data);
+        })
+        .catch((error) => {
+          console.error("提交失败:", error);
+        });
+    },
+    saveContinue() {
+      this.save();
+      this.reset();
+    },
+    reset() {
+      this.nameInput = "";
+      this.radio = "";
+      this.collegeValue = "";
+      this.accountInput = "";
+      this.cardInput = "";
+      this.phoneInput = "";
+      this.grade = "";
+      this.putData();
+    },
   },
 };
 </script>

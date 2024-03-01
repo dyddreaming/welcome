@@ -8,7 +8,6 @@
       @click="redirectToPrevious"
       >往日注册情况
     </el-button>
-
     <div style="margin-top: 71px; text-align: center">
       <h2
         style="
@@ -160,11 +159,9 @@
     </div>
   </div>
 </template>
-
 <style>
   @import "../../public/static/css/aside.css";
 </style>
-
 <script>
 import axios from "axios";
 import * as echarts from "echarts";
@@ -197,15 +194,12 @@ export default {
         return "#FA5E00";
       }
     },
-
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
-
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-
     fetchCollegesRegisterData() {
       axios
         .get(`${this.$store.getters.getIp}/colleges/list`)
@@ -218,23 +212,18 @@ export default {
           console.log(this.$store.getters.getIp);
         });
     },
-
     calculateRegistrationRate(index) {
       const registerCount = this.CollegeList[index].enrollment;
       const total = this.CollegeList[index].headcount;
       return total === 0 ? 0 : Math.floor((registerCount / total) * 100);
     },
-
     initECharts() {
       // 获取 ECharts 容器
       const chartContainer = this.$refs.chartContainer;
-
       // 初始化 ECharts 实例
       this.myChart = echarts.init(chartContainer);
-
       // 计算环形的宽度
       const ringWidth = 30;
-
       // 获取本科生和研究生总体注册情况
       axios
         .get(`${this.$store.getters.getIp}/students/register/info`)
@@ -243,30 +232,25 @@ export default {
           this.UndergraduateE = response.data.data.underEnrollment;
           this.GraduateC = response.data.data.postCount;
           this.GraduateE = response.data.data.postEnrollment;
-
           this.TotalRegisterRate = Math.floor(
             ((this.UndergraduateE + this.GraduateE) /
               (this.UndergraduateC + this.GraduateC)) *
               100
           );
           this.TotalUnRegisterRate = 100 - this.TotalRegisterRate;
-
           console.log(this.TotalRegisterRate);
           console.log(this.TotalUnRegisterRate);
-
           this.updateChart();
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
     },
-
     updateChart() {
       const option = {
         series: [
           {
             type: "pie",
-
             radius: ["50%", "65%"],
             avoidLabelOverlap: false,
             label: {
@@ -324,13 +308,11 @@ export default {
       };
       this.myChart.setOption(option);
     },
-
     calculateTotalRate(totalCount, enrollmentCount) {
       return totalCount === 0
         ? 0
         : Math.floor((enrollmentCount / totalCount) * 100);
     },
-
     redirectToPrevious(){
       this.$router.push("/totalPrevious");
     },

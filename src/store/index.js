@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    ip: "http://3274c009.r9.cpolar.top",
+    ip: "http://4c49088a.r12.cpolar.top",
     // 学生导入信息
     importForm: {
       nameInput: "",
@@ -30,6 +30,8 @@ export default new Vuex.Store({
     advertiseTime: null,
     // 管理员信息
     manageRow: null,
+    newManage: null,
+    collegeID: null,
   },
   getters: {
     getIp(state) {
@@ -53,6 +55,12 @@ export default new Vuex.Store({
     getManageRow(state) {
       return state.manageRow;
     },
+    getNewManage(state) {
+      return state.newManage;
+    },
+    getCollegeID(state) {
+      return state.collegeID;
+    },
   },
   mutations: {
     setRowData(state, data) {
@@ -70,11 +78,18 @@ export default new Vuex.Store({
     },
     setManageRow(state, row) {
       state.manageRow = row;
-      console.log(state.manageRow);
+      // console.log(state.manageRow);
+    },
+    setNewManage(state, row) {
+      state.newManage = row;
     },
     updateImportForm(state, formData) {
       state.importForm = { ...state.importForm, ...formData };
       // console.log("更新数据:",state.importForm);
+    },
+    setCollegeID(state, id) {
+      state.collegeID = id;
+      // console.log(state.collegeID);
     },
   },
   actions: {

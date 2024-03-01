@@ -17,7 +17,6 @@
       <div style="height: 5%">
         <h2 style="position: relative; left: 1%">任务列表</h2>
       </div>
-
       <!-- 搜索部分 -->
       <div
         style="
@@ -47,7 +46,6 @@
             style="width: 60%"
           ></el-input>
         </div>
-
         <div
           style="
             position: relative;
@@ -98,7 +96,6 @@
             style="width: 30%"
           ></el-date-picker>
         </div>
-
         <div
           style="
             position: relative;
@@ -147,7 +144,6 @@
           </el-button>
         </div>
       </div>
-
       <!-- 数据表格部分 -->
       <div style="height: 78%; position: relative; top: 3%; width: 100%">
         <el-table :data="tableData" border style="width: 100%">
@@ -173,7 +169,6 @@
               </div>
             </template>
           </el-table-column>
-
           <el-table-column
             prop="date"
             label="发布时间"
@@ -242,7 +237,6 @@
     </div>
   </div>
 </template>
-
 <style>
 @import "../../public/static/css/aside.css";
 .search-button {
@@ -256,7 +250,6 @@
   background-color: #fa5e00 !important;
 }
 </style>
-
 <script>
 import axios from "axios";
 export default {
@@ -305,12 +298,10 @@ export default {
       // 每次请求前进行清空
       this.tableData = [];
       let queryString = `?page=1&pageSize=6`;
-
       if(this.nameInput!="")
       {
         queryString += `&name=${this.nameInput}`;
       }
-
       if(this.statusValue!="")
       {
         if(this.statusValue=="进行中")
@@ -322,27 +313,22 @@ export default {
           queryString += `&status=3`;
         }
       }
-
       if(this.startTime!="")
       {
         const startDate = new Date(this.startTime)
         .toISOString()
         .replace(/T/, " ")
         .replace(/\.\d+Z$/, "");
-
         queryString += `&begin=${startDate}`;
       }
-
       if(this.endTime!="")
       {
         const endDate = new Date(this.endTime)
         .toISOString()
         .replace(/T/, " ")
         .replace(/\.\d+Z$/, "");
-
         queryString += `&end=${endDate}`;
       }
-
       axios
         .get(`${this.$store.getters.getIp}/tasks/completion/page${queryString}`)
         .then((response) => {

@@ -220,6 +220,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -263,38 +264,80 @@ export default {
           label: "院级",
         },
       ],
+      id: null,
     };
   },
   created() {
-    this.manageRow = this.$store.getters.getManageRow;
-    console.log("接收到的管理员数据:", this.manageRow);
-    this.nameInput = this.manageRow.name;
-    this.radio = this.manageRow.gender === "男" ? "1" : "0";
-    this.collegeValue = this.manageRow.college;
-    this.accountInput = this.manageRow.account;
-    this.cardInput = this.manageRow.id;
-    this.phoneInput = this.manageRow.phone;
-    this.grade = this.manageRow.grade;
+    this.loadData();
+  },
+  mounted() {
+    this.loadData();
   },
   methods: {
     cancel() {
       this.$router.push("/mainMenu/limit/manager");
     },
-    save() {
-      let upLoadData = {
+    // 加载数据
+    loadData() {
+      this.manageRow = this.$store.getters.getManageRow;
+      // console.log("接收到的管理员数据:", this.manageRow);
+      this.id = this.manageRow.id;
+      this.nameInput = this.manageRow.name;
+      this.radio = this.manageRow.gender === "男" ? "1" : "0";
+      this.collegeValue = this.manageRow.college;
+      this.accountInput = this.manageRow.username;
+      this.cardInput = this.manageRow.idNumber;
+      this.phoneInput = this.manageRow.phone;
+      this.grade = this.manageRow.level;
+    },
+    // 更新数据
+    putData() {
+      let row = {
+        id: this.id,
         name: this.nameInput,
         gender: this.radio === "1" ? "男" : "女",
         college: this.collegeValue,
-        account: this.accountInput,
-        id: this.cardInput,
+        username: this.accountInput,
+        idNumber: this.cardInput,
         phone: this.phoneInput,
-        grade: this.grade,
+        level: this.grade,
       };
-      this.$store.commit("setManageRow", upLoadData);
-      this.$message({
-        message: "修改成功",
-        type: "success",
-      });
+      this.$store.commit("setManageRow", row);
+    },
+    save() {
+      let id = this.id;
+      let name = this.nameInput;
+      let username = this.accountInput;
+      let gender = this.radio === "1" ? 1 : 0;
+      let college = this.collegeValue === "无" ? null : this.collegeValue;
+      let idNumber = this.cardInput;
+      let phone = this.phoneInput;
+      let level = this.grade === "校级" ? 0 : 1;
+      axios
+        .put(`${this.$store.getters.getIp}/administrators`, {
+          id,
+          name,
+          username,
+          gender,
+          college,
+          idNumber,
+          phone,
+          level,
+        })
+        .then((response) => {
+          let message = response.data.msg;
+          if (message == "success") {
+            this.$message.success("修改成功");
+          } else if (message == "账号重复") {
+            this.$message.error("账号重复");
+          }else{
+            this.$message.error("该身份证号已经拥有过一个账号，无法重复添加");
+          }
+          this.putData();
+        })
+        .catch((error) => {
+          console.error("提交失败:", error);
+        });
     },
   },
 };

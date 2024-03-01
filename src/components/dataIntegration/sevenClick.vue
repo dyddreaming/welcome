@@ -37,7 +37,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import * as echarts from "echarts";
 import axios from "axios";
@@ -59,7 +58,6 @@ export default {
     this.time = `${rowTime.getFullYear()}-${(rowTime.getMonth() + 1)
       .toString()
       .padStart(2, "0")}-${rowTime.getDate().toString().padStart(2, "0")}`;
-    // console.log("接收到的时间数据:", this.time);
     for (let i = 0; i < 7; i++) {
       const day = new Date(rowTime.getTime() - i * 24 * 60 * 60 * 1000);
       const formattedDay = `${day.getFullYear()}-${(day.getMonth() + 1)
@@ -67,7 +65,6 @@ export default {
         .padStart(2, "0")}-${day.getDate().toString().padStart(2, "0")}`;
       this.lastDays.unshift(formattedDay);
     }
-    // console.log(this.lastDays);
   },
   methods: {
     initChart() {
@@ -77,15 +74,12 @@ export default {
           this.totalData5 = response.data.data;
           this.adNames = this.totalData5.adNames;
           this.clicks = this.totalData5.clicks;
-          // console.log(this.adNames);
-          // console.log(this.clicks);
         })
         .catch((error) => {
           console.error("Axios request error:", error);
         });
       var chartContainer = document.getElementById("chartContainer");
       var chart = echarts.init(chartContainer);
-
       // 图表配置
       var option = {
         xAxis: {
@@ -113,8 +107,6 @@ export default {
           },
         ],
       };
-
-      // 使用配置项显示图表
       chart.setOption(option);
     },
     goHome() {

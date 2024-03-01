@@ -1,7 +1,6 @@
 <template>
   <div style="height: 100%; width: 100%" id="Map" ref="map"></div>
 </template>
-
 <script>
 import "ol/ol.css";
 import VectorLayer from "ol/layer/Vector";
@@ -156,7 +155,6 @@ export default {
         澳门特别行政区: { center: { lng: 113.54909, lat: 22.198951 } },
         香港特别行政区: { center: { lng: 114.173355, lat: 22.320048 } },
       };
-
       this.layer = new HeatmapLayer({
         source: new VectorSource(),
         blur: 30,

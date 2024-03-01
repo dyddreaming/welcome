@@ -4,13 +4,11 @@ body {
     margin: 0;
     padding: 0;
 }
-
 .body {
     min-width: 1366px;
     display: flex;
     height: 100%;
 }
-
 .app-sidebar {
     width: 200px;
     background-color: #f0f2f5;
@@ -18,7 +16,6 @@ body {
     box-sizing: border-box;
     height: 100%;
 }
-
 .app-main {
     flex: 1;
     /* padding: 20px; */
@@ -26,7 +23,6 @@ body {
     height: 100%;
     background-color: #FFDA9F;
 }
-
 /* 修改菜单项样式 */
 .mbutton {
     background-color: #FFDA9F;
@@ -34,12 +30,10 @@ body {
     /* border-radius: 20px; /*设置圆形圆角，根据需要调整数值 */
     /*margin-bottom: 10px; /* 为了增加菜单项之间的间距，根据需要调整数值 */
 }
-
 .clickbutton {
     background-color: #F89300;
     color: #ffff;
 }
-
 .el-menu-vertical-demo {
     /* border-radius: 20px; */
     top: 10%;
@@ -49,7 +43,6 @@ body {
     position: absolute;
     background-color: #F89300;
 }
-
 #name {
     position: absolute;
     width: 200px;
@@ -57,7 +50,6 @@ body {
     height: 10%;
     color: #ffffff;
 }
-
 #quit {
     width: 200px;
     height: 25%;
@@ -66,128 +58,93 @@ body {
     color: #ffffff;
     top: 75%;
 }
-
 #quitregister {
     position: relative;
     width: 200px;
     height: 60px;
     top: 35px;
-    ;
 }
-
 #quitimg {
     position: relative;
     top: 37px;
 }
-
-/* 设置学生管理图标悬停以及打开样式 */
 .el-submenu__title:hover .el-icon-user,
 .el-submenu__title:hover span {
     color: #808080 !important;
 }
-
 .el-submenu.is-opened .el-submenu__title .el-icon-user,
 .el-submenu.is-opened .el-submenu__title span {
     color: #808080 !important;
 }
-
-/* 设置任务管理图标悬停以及打开样式 */
 .el-submenu__title:hover .el-icon-s-order,
 .el-submenu__title:hover span {
     color: #808080 !important;
 }
-
 .el-submenu.is-opened .el-submenu__title .el-icon-s-order,
 .el-submenu.is-opened .el-submenu__title span {
     color: #808080 !important;
 }
-
-/* 设置数据管理图标悬停以及打开样式 */
 .el-submenu__title:hover .el-icon-document,
 .el-submenu__title:hover span {
     color: #808080 !important;
 }
-
 .el-submenu.is-opened .el-submenu__title .el-icon-document,
 .el-submenu.is-opened .el-submenu__title span {
     color: #808080 !important;
 }
-
-/* 设置权限管理图标悬停以及打开样式 */
 .el-submenu__title:hover .el-icon-lock,
 .el-submenu__title:hover span {
     color: #808080 !important;
 }
-
 .el-submenu.is-opened .el-submenu__title .el-icon-lock,
 .el-submenu.is-opened .el-submenu__title span {
     color: #808080 !important;
 }
-
-/* 设置附加功能管理图标悬停以及打开样式 */
 .el-submenu__title:hover .el-icon-message,
 .el-submenu__title:hover span {
     color: #808080 !important;
 }
-
 .el-submenu.is-opened .el-submenu__title .el-icon-message,
 .el-submenu.is-opened .el-submenu__title span {
     color: #808080 !important;
 }
-
 .el-submenu__icon-arrow::before {
     color: #ffff;
-    /* 设置下拉箭头颜色为白色 */
 }
-
-/* 修改下拉箭头悬停样式 */
 .el-submenu:hover .el-submenu__icon-arrow::before {
     color: #808080 !important;
 }
-
-/* 修改下拉箭头选中样式 */
 .el-submenu.is-opened .el-submenu__icon-arrow::before {
     color: #808080 !important;
 }
-
-/* 修改鼠标悬停样式 */
 .mbutton:hover {
     background-color: #ffffff !important;
     color: #808080 !important;
 }
-
-/* 修改选中样式 */
 .mbutton.is-active {
     background-color: #ffffff !important;
     color: #808080 !important;
 }
-
 .clickbutton:hover {
     background-color: #ffffff !important;
     color: #808080 !important;
 }
-
 .clickbutton.is-active {
     background-color: #ffffff !important;
     color: #808080 !important;
 }
-
 .clickbutton:hover .el-icon-setting {
     color: #808080 !important;
 }
-
 .clickbutton.is-active .el-icon-setting {
     color: #808080 !important;
 }
-
 .clickbutton:hover .el-icon-service {
     color: #808080 !important;
 }
-
 .clickbutton.is-active .el-icon-service {
     color: #808080 !important;
 }
-
 #reviewSituation {
     position: absolute;
     right: 2%;

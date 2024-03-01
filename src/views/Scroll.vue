@@ -1916,7 +1916,6 @@
     </div>
   </div>
 </template>
-
 <style scoped>
 :deep.myTable .el-table,
 :deep.myTable .el-table__expanded-cell {
@@ -1940,7 +1939,6 @@
   background-color: white; /* 竖线颜色为白色 */
 }
 </style>
-
 <script>
 import axios from "axios";
 import * as echarts from "echarts";
@@ -2048,7 +2046,6 @@ export default {
       let hour = String(time.getHours()).padStart(2, "0");
       let minute = String(time.getMinutes()).padStart(2, "0");
       let second = String(time.getSeconds()).padStart(2, "0");
-
       this.currentTime = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
     },
     // 本科生注册情况
@@ -2100,14 +2097,12 @@ export default {
           },
         ],
       };
-
       myChart.setOption(option);
     },
     // 研究生注册情况
     initGraduateChart() {
       var chartDom = document.getElementById("graduateContainer");
       var myChart = echarts.init(chartDom);
-
       var option = {
         tooltip: {
           trigger: "item",
@@ -2308,9 +2303,7 @@ export default {
         }
       });
       // console.log(dataList);
-
       let myChart = echarts.init(this.$refs.mapChart);
-
       let options = {
         title: {
           text: "首次注册地图",
@@ -2360,7 +2353,6 @@ export default {
             },
           ],
         },
-
         series: [
           {
             name: "注册数",
@@ -2399,7 +2391,6 @@ export default {
           },
         ],
       };
-
       myChart.setOption(options);
     },
     renderComChart() {
@@ -2410,9 +2401,7 @@ export default {
       for (let i = 0; i < data.length; i++) {
         dataShadow.push(yMax);
       }
-
       let myChart = echarts.init(this.$refs.comChartContainer);
-
       let option = {
         grid: {
           top: "30%",
@@ -2484,7 +2473,6 @@ export default {
           },
         ],
       };
-
       const zoomSize = 6;
       myChart.on("click", function (params) {
         console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
@@ -2497,7 +2485,6 @@ export default {
             ],
         });
       });
-
       myChart.setOption(option);
     },
     renderJoinChart() {
@@ -2516,7 +2503,6 @@ export default {
       for (let i = 0; i < data.length; i++) {
         dataShadow.push(yMax);
       }
-
       let myChart = echarts.init(this.$refs.inChartContainer);
       let option = {
         grid: {
@@ -2589,7 +2575,6 @@ export default {
           },
         ],
       };
-
       const zoomSize = 6;
       myChart.on("click", function (params) {
         console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
@@ -2602,7 +2587,6 @@ export default {
             ],
         });
       });
-
       myChart.setOption(option);
     },
     loadData() {
@@ -2651,13 +2635,11 @@ export default {
           },
         ],
       };
-
       myChart.setOption(option);
     },
     initChart() {
       var chartContainer = document.getElementById("sevenContainer");
       var chart = echarts.init(chartContainer);
-
       // 图表配置
       var option = {
         xAxis: {
@@ -2694,7 +2676,6 @@ export default {
           },
         ],
       };
-
       // 使用配置项显示图表
       chart.setOption(option);
     },
@@ -2707,7 +2688,6 @@ export default {
           this.UndergraduateE = response.data.data.underEnrollment;
           this.GraduateC = response.data.data.postCount;
           this.GraduateE = response.data.data.postEnrollment;
-
           this.UndergraduateN = this.UndergraduateC - this.UndergraduateE;
           this.GraduateRN = this.GraduateC - this.GraduateE;
           // console.log(this.UndergraduateN);
@@ -2833,7 +2813,6 @@ export default {
     },
     // 完成任务排行榜
     getComRank(){},
-
     // 参与人数排行榜
     getJoinRank(){},
   },

@@ -1,21 +1,22 @@
 <template>
   <div class="app-main" style="position: relative">
-    <div style="position: relative; width: 90%; left: 5%; height: 10%">
-      <el-button
-        type="danger"
-        size="mini"
-        style="
-          background-color: #fa5e00;
-          border: none;
-          position: relative;
-          height: 50%;
-          width: 8%;
-          left: 92%;
-          top: 20%;
-          border-radius: 10px;
-        "
-        >广告设置</el-button
-      >
+    <div
+      style="
+        position: relative;
+        width: 90%;
+        left: 5%;
+        height: 10%;
+        display: flex;
+      "
+    >
+      <div style="position: relative; top: 35%; font-size: 18px; left: 2%">
+        广告列表更新了4条广告
+      </div>
+      <div style="position: relative; top: 35%; left: 10%">
+        <el-button type="danger" size="mini" style="border-radius: 10px"
+          >全部已读</el-button
+        >
+      </div>
     </div>
     <div
       style="
@@ -27,7 +28,7 @@
       "
     >
       <div style="position: relative; height: 8%; width: 100%; font-size: 20px">
-        广告列表——审核通过
+        广告列表——未审核
       </div>
       <div style="position: relative; height: 92%; width: 100%">
         <el-table :data="tableData" border>
@@ -85,19 +86,6 @@
             </template>
           </el-table-column>
           <el-table-column
-            prop="setTime"
-            label="投放时间"
-            min-width="70"
-            :align="'center'"
-          >
-            <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
-            </template>
-          </el-table-column>
-          <el-table-column
             prop="setLong"
             label="投放时长"
             min-width="70"
@@ -112,42 +100,22 @@
             </template>
           </el-table-column>
           <el-table-column
-            prop="charge"
-            label="收取费用/元"
-            min-width="70"
-            :align="'center'"
-          >
-            <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="status"
-            label="投放状态"
-            min-width="70"
-            :align="'center'"
-          >
-            <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
-            </template>
-          </el-table-column>
-          <el-table-column
             prop="operation"
             label="操作"
-            min-width="140"
+            min-width="100"
             :align="'center'"
           >
             <template slot-scope="scope">
-              <div style="display: flex">
-                <el-button type="danger" size="mini">投放</el-button>
-                <el-button type="danger" size="mini">暂停投放</el-button>
-                <el-button type="danger" size="mini" style="background-color:#FA5E00" @click="seeDetail">查看</el-button>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <el-button type="danger" size="mini" @click="examine" style="background-color:#fa5e00"
+                  >审核</el-button
+                >
               </div>
             </template>
           </el-table-column>
@@ -163,20 +131,21 @@
           border: none;
           position: relative;
           height: 50%;
-          width: 8%;
-          left: 92%;
+          width: 5%;
+          left: 95%;
           top: 20%;
           border-radius: 10px;
         "
-        @click="goNoPass"
-        >待审核列表</el-button
+        @click="goBack"
+        >返回</el-button
       >
     </div>
   </div>
 </template>
+  
   <style>
-@import "../../public/static/css/aside.css";
 </style>
+  
   <script>
 export default {
   data() {
@@ -187,20 +156,17 @@ export default {
           adType: "美食",
           meName: "烤匠",
           admitTime: "2024-08-28 10:16:23",
-          setTime: "2024-08-28 10:16:23",
           setLong: "3天",
-          charge: "2000",
-          status: "正常投放",
         },
       ],
     };
   },
-  methods:{
-    goNoPass(){
-      this.$router.push("/noPass");
+  methods: {
+    goBack() {
+      this.$router.push("/mainMenu/add/business");
     },
-    seeDetail(){
-      this.$router.push("/foodDetail");
+    examine() {
+      this.$router.push("/examineFood");
     },
   },
 };

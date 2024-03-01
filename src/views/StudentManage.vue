@@ -15,7 +15,6 @@
         >学生信息管理
       </el-button>
     </div>
-
     <!-- 筛选部分 -->
     <div
       style="
@@ -44,7 +43,6 @@
           </el-option>
         </el-select>
       </div>
-
       <div style="flex: 1; position: relative; height: 100%">
         <span>类别:</span>
         <el-select
@@ -61,7 +59,6 @@
           </el-option>
         </el-select>
       </div>
-
       <div style="flex: 1; position: relative; height: 100%">
         <span>任务完成度:</span>
         <el-input
@@ -72,7 +69,6 @@
         </el-input>
       </div>
     </div>
-
     <!-- 表格 -->
     <div
       style="width: 90%; left: 5%; height: 50%; position: relative; top: 10%"
@@ -241,7 +237,6 @@
         </el-table-column>
       </el-table>
     </div>
-
     <!-- 分页管理 -->
     <div
       style="
@@ -256,7 +251,6 @@
       <el-pagination small layout="prev, pager, next" :total="50">
       </el-pagination>
     </div>
-
     <!-- 操作按钮 -->
     <div
       style="
@@ -280,7 +274,6 @@
     </div>
   </div>
 </template>
-
 <style>
 @import "../../public/static/css/aside.css";
 .tableButton {
@@ -290,7 +283,6 @@
   border-radius: 10px !important;
 }
 </style>
-
 <script>
 import { MessageBox } from "element-ui";
 import axios from "axios";
@@ -379,19 +371,16 @@ export default {
       this.selectedIds = selection.map((item) => item.id);
       console.log(this.selectedIds);
     },
-
     // 单个重置
     singleReset(id) {
       this.selectedIds.push(id);
       this.codeReset();
     },
-
     // 单个删除
     singleDelete(id) {
       this.selectedIds.push(id);
       this.studentDelete();
     },
-
     // 获取表格数据
     getData() {
       // 构造查询字符串
@@ -400,7 +389,6 @@ export default {
       )}&category=${this.typeValue === "本科生" ? 0 : 1}&compDegree=${
         this.completeDegree
       }`;
-
       axios
         .get(`${this.$store.getters.getIp}/students/page${queryString}`)
         .then((response) => {
@@ -413,7 +401,6 @@ export default {
           console.error("获取数据时出错：", error);
         });
     },
-
     // 前往详细界面
     goToDetail(row) {
       this.$store.commit("setRowData", row);
@@ -422,11 +409,9 @@ export default {
         console.log("前往详细界面");
       });
     },
-
     arrayToQueryString(key, array) {
       return array.map((item) => `${key}=${item}`).join("&");
     },
-
     // 密码重置
     codeReset() {
       if (this.selectedIds.length === 0) {
@@ -448,7 +433,6 @@ export default {
       const url = `${
         this.$store.getters.getIp
       }/students/reset?ids=${this.selectedIds.join("&ids=")}`;
-
       axios
         .put(url)
         .then((response) => {
@@ -463,7 +447,6 @@ export default {
           this.$message.error("密码重置失败，请稍后重试");
         });
     },
-
     // 删除对象
     studentDelete() {
       if (this.selectedIds.length === 0) {
@@ -485,7 +468,6 @@ export default {
       const url = `${
         this.$store.getters.getIp
       }/students?ids=${this.selectedIds.join("&ids=")}`;
-
       axios
         .delete(url)
         .then((response) => {
@@ -502,7 +484,6 @@ export default {
           this.$message.error("删除失败，请稍后重试");
         });
     },
-
     // 格式转换
     formatGender(row) {
       return row.gender === 0 ? "女" : "男";

@@ -80,7 +80,6 @@
     </div>
   </div>
 </template>
-
 <style>
 /* 未选中按钮 */
 .select-button {
@@ -91,35 +90,29 @@
   font-size: 20px !important;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
 }
-
 .select-button:hover {
   background-color: #fa5e00 !important;
   color: #ffffff !important;
 }
-
 .select-button:focus {
   background-color: #fa5e00 !important;
   color: #ffffff !important;
 }
-
 /* 返回按钮 */
 .custom-button {
   background-color: #ffb27d !important;
   border: none !important;
   width: 100px !important;
 }
-
 .custom-button:hover {
   background-color: #fa5e00 !important;
   color: #ffffff !important;
 }
-
 .custom-button:focus {
   background-color: #fa5e00 !important;
   color: #ffffff !important;
 }
 </style>
-
 <script>
 import axios from "axios";
 import * as echarts from "echarts";
@@ -180,34 +173,28 @@ export default {
       for (let i = 6; i >= 0; i--) {
         const day = new Date(currentDate);
         day.setDate(currentDate.getDate() - i);
-
         // 将日期格式化为字符串，可以根据需要调整格式
         const formattedDate = `${day.getFullYear()}-${(day.getMonth() + 1)
           .toString()
           .padStart(2, "0")}-${day.getDate().toString().padStart(2, "0")}`;
-
         // 将日期添加到数组
         last7Days.push(formattedDate);
       }
       console.log(last7Days);
-
       last7Days.forEach((date, index) => {
         const enrollment = this.postEnrollment[index];
         // console.log(enrollment);
         this.data[index] = [date, enrollment];
       });
-
       const dateList = this.data.map(function (item) {
         return item[0];
       });
       const valueList = this.data.map(function (item) {
         return item[1];
       });
-
       const lineChart = echarts.init(
         document.getElementById("GraduateChartContainer")
       );
-
       const option = {
         title: {
           text: `${last7Days[0]} 至 ${last7Days[6]} 研究生累计注册情况折线图`,
@@ -265,7 +252,6 @@ export default {
           },
         ],
       };
-
       lineChart.setOption(option);
     },
     redirectToTotal() {
@@ -278,19 +264,16 @@ export default {
         this.$router.push("/underPrevious");
       }
     },
-
     redirectToGraduate() {
       if (this.$route.path !== "/graduatePrevious") {
         this.$router.push("/graduatePrevious");
       }
     },
-
     redirectToCollege() {
       if (this.$route.path !== "/collegePrevious") {
         this.$router.push("/collegePrevious");
       }
     },
-
     redirectToMain() {
       this.$router.push("/mainMenu/student/register");
     },
