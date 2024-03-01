@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    ip: "http://7405096a.r12.cpolar.top",
+    ip: "http://3274c009.r9.cpolar.top",
     // 学生导入信息
     importForm: {
       nameInput: "",

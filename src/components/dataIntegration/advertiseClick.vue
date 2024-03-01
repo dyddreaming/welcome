@@ -150,6 +150,7 @@ export default {
     this.loadData();
   },
   methods: {
+    // 获取当日广告点击情况
     loadData() {
       // 类型
       let category = null;

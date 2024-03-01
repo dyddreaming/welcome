@@ -93,6 +93,7 @@ export default {
     this.renderJoinChart();
   },
   methods: {
+    // 完成任务排行榜
     renderComChart() {
       // 时间格式化
       const date1 = new Date(this.dateValue1);
@@ -218,6 +219,7 @@ export default {
 
       myChart.setOption(option);
     },
+    // 参与人数排行榜
     renderJoinChart() {
       // 时间格式化
       const date1 = new Date(this.dateValue2);

@@ -103,6 +103,7 @@
               padding: 5px;
               border: none;
             "
+            @click="search"
           >
             <i
               class="el-icon-search"
@@ -155,13 +156,13 @@
             align="center"
           ></el-table-column>
           <el-table-column
-            prop="account"
+            prop="username"
             label="账号"
             width="140px"
             align="center"
           ></el-table-column>
           <el-table-column
-            prop="id"
+            prop="idNumber"
             label="身份证号"
             width="140px"
             align="center"
@@ -173,7 +174,7 @@
             align="center"
           ></el-table-column>
           <el-table-column
-            prop="grade"
+            prop="level"
             label="等级"
             width="140px"
             align="center"
@@ -236,6 +237,7 @@
 </style>
   
   <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -260,12 +262,8 @@ export default {
           label: "数学学院",
         },
         {
-          value: "经济学院",
-          label: "经济学院",
-        },
-        {
-          value: "无",
-          value: "无",
+          value: "经管学院",
+          label: "经管学院",
         },
       ],
       typeOptions: [
@@ -282,23 +280,29 @@ export default {
           label: "院级",
         },
       ],
-      tableData: [
-        {
-          name: "张三",
-          gender: "男",
-          college: "无",
-          account: "xxxxxxxx",
-          id: "xxxxxxxxxxxxxxxxxx",
-          phone: "xxxxxxxxxxx",
-          grade: "校级",
-        },
-      ],
+      // tableData: [
+      //   {
+      //     name: "张三",
+      //     gender: "男",
+      //     college: "无",
+      //     account: "xxxxxxxx",
+      //     id: "xxxxxxxxxxxxxxxxxx",
+      //     phone: "xxxxxxxxxxx",
+      //     grade: "校级",
+      //   },
+      // ],
+      totalData: [],
+      tableData: [],
     };
+  },
+  mounted() {
+    this.loadList();
   },
   methods: {
     resetValue() {
       this.college = "所有";
       this.type = "所有";
+      this.loadList();
     },
     add() {
       this.$router.push("/addManage");
@@ -309,6 +313,43 @@ export default {
         this.$router.push("/modifyManage");
         console.log("前往修改界面");
       });
+    },
+    loadList() {
+      axios
+        .get(`${this.$store.getters.getIp}/administrators/page`, {
+          params: {
+            page: 1,
+            pageSize: 6,
+            ...(this.college !== "所有" && { college: this.college }),
+            ...(this.type !== "所有" && {
+              // 根据 this.type 的值添加不同的 level 参数
+              level: this.type === "校级" ? 0 : this.type === "院级" ? 1 : null,
+            }),
+          },
+        })
+        .then((response) => {
+          this.totalData = response.data.data.records;
+          this.tableData = this.totalData.map((item) => {
+            return {
+              name: item.name,
+              username: item.username,
+              gender:
+                item.gender === 1 ? "男" : item.gender === 0 ? "女" : "其他",
+              college: item.college ? item.college : "无",
+              idNumber: item.idNumber,
+              phone: item.phone,
+              level:
+                item.level === 0 ? "校级" : item.level === 1 ? "院级" : "其他",
+            };
+          });
+          // console.log(this.totalData);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    },
+    search() {
+      this.loadList();
     },
   },
 };
