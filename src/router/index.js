@@ -48,10 +48,25 @@ import search from '../components/businessManage/search.vue'
 import partTime from '../components/businessManage/partTime.vue'
 import examinePart from '../components/businessManage/examinePart.vue'
 import examineFood from '../components/businessManage/examineFood.vue'
+import clubMessage from '../components/schoolMessage/clubMessage.vue'
+import market from '../components/schoolMessage/market.vue'
+import schoolImage from '../components/schoolMessage/schoolImage.vue'
+import schoolChat from '../components/schoolMessage/schoolChat.vue'
+import studentMessage from '../components/schoolMessage/studentMessage.vue'
+import clubExamine from '../components/schoolMessage/clubExamine.vue'
+import examineClub from '../components/schoolMessage/examineClub.vue'
 // 平台参数配置
 import Plan from '../views/Config.vue'
+import safety from '../components/configSet/safety.vue'
+import messageNote from '../components/configSet/messageNote.vue'
+import dataCopy from '../components/configSet/dataCopy.vue'
+import versionSelect from '../components/configSet/versionSelect.vue'
 // 帮助中心
 import Help from '../views/Help.vue'
+import helpFile from '../components/helpShow/helpFile.vue'
+import questionAnswer from '../components/helpShow/questionAnswer.vue'
+import technology from '../components/helpShow/technology.vue'
+import feedback from '../components/helpShow/feedback.vue'
 
 Vue.use(VueRouter)
 
@@ -129,15 +144,76 @@ const routes = [
       },
       {
         path: 'add/Message',
-        component: Message
+        component: Message,
+        redirect: '/mainMenu/add/Message/clubMessage',
+        children: [
+          {
+            path:'clubMessage',
+            component:clubMessage
+          },
+          {
+            path:'schoolImage',
+            component:schoolImage
+          },
+          {
+            path:'market',
+            component:market
+          },
+          {
+            path:'schoolChat',
+            component:schoolChat
+          },
+          {
+            path:'studentMessage',
+            component:studentMessage
+          },
+        ]
       },
       {
         path: 'config',
-        component: Plan
+        component: Plan,
+        redirect:'/mainMenu/config/safety',
+        children:[
+          {
+            path:'safety',
+            component:safety
+          },
+          {
+            path:'messageNote',
+            component:messageNote
+          },
+          {
+            path:'dataCopy',
+            component:dataCopy
+          },
+          {
+            path:'versionSelect',
+            component:versionSelect
+          },
+        ],
       },
       {
         path: 'help',
-        component: Help
+        component: Help,
+        redirect:"/mainMenu/help/helpFile",
+        children:[
+          {
+            path:"helpFile",
+            component:helpFile,
+          },
+          {
+            path:"questionAnswer",
+            component:questionAnswer,
+          },
+          {
+            path:"technology",
+            component:technology,
+          },
+          {
+            path:"feedback",
+            component:feedback,
+          },
+        ]
       },
     ]
   },
@@ -252,6 +328,14 @@ const routes = [
   {
     path: '/examineFood',
     component: examineFood
+  },
+  {
+    path: '/clubExamine',
+    component: clubExamine
+  },
+  {
+    path:'/examineClub',
+    component:examineClub
   },
 ]
 

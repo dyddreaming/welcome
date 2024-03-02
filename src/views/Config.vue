@@ -1,13 +1,164 @@
 <template>
-    <div class="app-main" style="position: relative">
-        <p>平台参数配置</p>
+  <div class="app-main" style="position: relative; display: flex">
+    <!-- 导航栏 -->
+    <div
+      style="
+        position: relative;
+        height: 80%;
+        top: 10%;
+        width: 15%;
+        background-color: #ffffff;
+        left: 2%;
+        border-radius:5px;
+      "
+    >
+      <div style="position: relative; height: 25%; width: 100%">
+        <div
+          style="
+            position: relative;
+            height: 60%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 20%;
+            font-size: 20px;
+          "
+          id="safety"
+        >
+        <template>
+            <div
+              v-if="isShowTriangle('/mainMenu/config/safety')"
+              class="triangle"
+              style="margin-right: 10px;"
+            ></div>
+          </template>
+          <router-link
+            to="/mainMenu/config/safety"
+            style="color: inherit; text-decoration: none"
+          >
+            账号安全</router-link
+          >
+        </div>
+      </div>
+      <div style="position: relative; height: 25%; width: 100%">
+        <div
+          style="
+            position: relative;
+            height: 60%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 20%;
+            font-size: 20px;
+           
+          "
+          id="message"
+        >
+        <template>
+            <div
+              v-if="isShowTriangle('/mainMenu/config/messageNote')"
+              class="triangle"
+              style="margin-right: 10px;"
+            ></div>
+          </template>
+          <router-link
+            to="/mainMenu/config/messageNote"
+            style="color: inherit; text-decoration: none"
+          >
+            消息提醒</router-link
+          >
+        </div>
+      </div>
+      <div style="position: relative; height: 25%; width: 100%">
+        <div
+          style="
+            position: relative;
+            height: 60%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 20%;
+            font-size: 20px;
+           
+          "
+          id="data"
+        >
+        <template>
+            <div
+              v-if="isShowTriangle('/mainMenu/config/dataCopy')"
+              class="triangle"
+              style="margin-right: 10px;"
+            ></div>
+          </template>
+          <router-link
+            to="/mainMenu/config/dataCopy"
+            style="color: inherit; text-decoration: none"
+          >
+            数据备份</router-link
+          >
+        </div>
+      </div>
+      <div style="position: relative; height: 25%; width: 100%">
+        <div
+          style="
+            position: relative;
+            height: 60%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 20%;
+            font-size: 20px;
+           
+          "
+          id="version"
+        >
+        <template>
+            <div
+              v-if="isShowTriangle('/mainMenu/config/versionSelect')"
+              class="triangle"
+              style="margin-right: 10px;"
+            ></div>
+          </template>
+          <router-link
+            to="/mainMenu/config/versionSelect"
+            style="color: inherit; text-decoration: none"
+          >
+            版本选择</router-link
+          >
+        </div>
+      </div>
     </div>
-  </template>
+    <!-- 数据部分 -->
+    <div
+      style="position: relative; height: 80%; top: 10%; width: 70%; left: 5%;"
+    >
+      <router-view></router-view>
+    </div>
+  </div>
+</template>
   
-  <style>
-  @import "../../public/static/css/aside.css";
-  </style>
+<style scoped>
+@import "../../public/static/css/aside.css";
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #FFDA9F;
+}
+</style>
   
   <script>
-  export default {};
-  </script>
+export default {
+  methods: {
+    isShowTriangle(route) {
+      // 根据当前路由判断是否显示圆形
+      return this.$route.path === `${route}`;
+    },
+  },
+};
+</script>
