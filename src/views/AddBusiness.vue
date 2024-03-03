@@ -1,10 +1,7 @@
 <template>
   <div class="app-main" style="position: relative">
     <div style="position: relative; width: 90%; left: 5%; height: 10%">
-      <el-button
-        type="danger"
-        size="mini"
-        style="
+      <el-button type="danger" size="mini" style="
           background-color: #fa5e00;
           border: none;
           position: relative;
@@ -14,139 +11,73 @@
           top: 20%;
           border-radius: 10px;
         "
-        >广告设置</el-button
-      >
+        @click="goToSet">广告设置</el-button>
     </div>
-    <div
-      style="
+    <div style="
         position: relative;
         height: 80%;
         width: 90%;
         left: 5%;
         background-color: #ffffff;
-      "
-    >
+      ">
       <div style="position: relative; height: 8%; width: 100%; font-size: 20px">
         广告列表——审核通过
       </div>
       <div style="position: relative; height: 92%; width: 100%">
         <el-table :data="tableData" border>
-          <el-table-column
-            prop="adName"
-            label="广告名称"
-            min-width="70"
-            :align="'center'"
-          >
+          <el-table-column prop="adName" label="广告名称" min-width="70" :align="'center'">
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="adType"
-            label="广告类型"
-            min-width="70"
-            :align="'center'"
-            :formatter="formatGender"
-          >
+          <el-table-column prop="adType" label="广告类型" min-width="70" :align="'center'">
+
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="meName"
-            label="商家名称"
-            min-width="70"
-            :align="'center'"
-          >
+          <el-table-column prop="meName" label="商家名称" min-width="70" :align="'center'">
+
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="admitTime"
-            label="提交时间"
-            min-width="70"
-            :align="'center'"
-          >
+          <el-table-column prop="admitTime" label="提交时间" min-width="70" :align="'center'">
+
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="setTime"
-            label="投放时间"
-            min-width="70"
-            :align="'center'"
-          >
+          <el-table-column prop="setTime" label="投放时间" min-width="70" :align="'center'">
+
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="setLong"
-            label="投放时长"
-            min-width="70"
-            :align="'center'"
-            :formatter="formatRegister"
-          >
+          <el-table-column prop="setLong" label="投放时长" min-width="70" :align="'center'">
+
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="charge"
-            label="收取费用/元"
-            min-width="70"
-            :align="'center'"
-          >
+          <el-table-column prop="charge" label="收取费用/元" min-width="70" :align="'center'">
+
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="status"
-            label="投放状态"
-            min-width="70"
-            :align="'center'"
-          >
+          <el-table-column prop="status" label="投放状态" min-width="70" :align="'center'">
+
             <template slot="header" slot-scope="scope">
-              <span
-                style="display: inline-block; width: 100%; text-align: center"
-                >{{ scope.column.label }}</span
-              >
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="operation"
-            label="操作"
-            min-width="140"
-            :align="'center'"
-          >
+          <el-table-column prop="operation" label="操作" min-width="140" :align="'center'">
+
             <template slot-scope="scope">
               <div style="display: flex">
-                <el-button type="danger" size="mini">投放</el-button>
-                <el-button type="danger" size="mini">暂停投放</el-button>
+                <el-button type="danger" size="mini" style="background-color:#cccccc;border:none">投放</el-button>
+                <el-button type="danger" size="mini" style="background-color:#FA5E00">暂停投放</el-button>
                 <el-button type="danger" size="mini" style="background-color:#FA5E00" @click="seeDetail">查看</el-button>
               </div>
             </template>
@@ -155,10 +86,7 @@
       </div>
     </div>
     <div style="position: relative; width: 90%; left: 5%; height: 10%">
-      <el-button
-        type="danger"
-        size="mini"
-        style="
+      <el-button type="danger" size="mini" style="
           background-color: #fa5e00;
           border: none;
           position: relative;
@@ -167,20 +95,21 @@
           left: 92%;
           top: 20%;
           border-radius: 10px;
-        "
-        @click="goNoPass"
-        >待审核列表</el-button
-      >
+        " @click="goNoPass">待审核列表</el-button>
     </div>
   </div>
 </template>
-  <style>
+
+<style>
 @import "../../public/static/css/aside.css";
 </style>
-  <script>
+
+<script>
+import axios from "axios";
 export default {
   data() {
     return {
+      totalData:null,
       tableData: [
         {
           adName: "不吃火锅就吃烤匠",
@@ -195,12 +124,30 @@ export default {
       ],
     };
   },
-  methods:{
-    goNoPass(){
+  mounted(){
+    this.getData();
+  },
+  methods: {
+    goNoPass() {
       this.$router.push("/noPass");
     },
-    seeDetail(){
+    seeDetail() {
       this.$router.push("/foodDetail");
+    },
+    getData() {
+      let queryString = `?page=1&pageSize=6&isExamine=true`;
+      axios
+        .get(`${this.$store.getters.getIp}/advertisements/examine/page${queryString}`)
+        .then((response) => {
+          this.totalData = response.data.data.records;
+          console.log("广告数据",this.totalData);
+        })
+        .catch((error) => {
+          console.error("获取数据时出错：", error);
+        });
+    },
+    goToSet(){
+      this.$router.push("/advertiseSet");
     },
   },
 };

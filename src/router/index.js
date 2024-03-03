@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import login from '../components/login.vue'
 import mainMenu from '../views/MainMenu.vue'
 // 学生管理
 import Register from '../views/StudentRegister.vue'
@@ -55,6 +56,14 @@ import schoolChat from '../components/schoolMessage/schoolChat.vue'
 import studentMessage from '../components/schoolMessage/studentMessage.vue'
 import clubExamine from '../components/schoolMessage/clubExamine.vue'
 import examineClub from '../components/schoolMessage/examineClub.vue'
+import advertiseSet from '@/components/businessManage/advertiseSet.vue'
+// 摄像头管理
+import video from '../views/video.vue'
+import position1 from '@/components/videoShow/position1.vue'
+import position2 from '@/components/videoShow/position2.vue'
+import position3 from '@/components/videoShow/position3.vue'
+import position4 from '@/components/videoShow/position4.vue'
+import position5 from '@/components/videoShow/position5.vue'
 // 平台参数配置
 import Plan from '../views/Config.vue'
 import safety from '../components/configSet/safety.vue'
@@ -73,7 +82,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/mainMenu/student/register',
+    redirect: '/login',
+  },
+  {
+    path:'/login',
+    component:login
   },
   {
     path: '/mainMenu',
@@ -167,6 +180,34 @@ const routes = [
             path:'studentMessage',
             component:studentMessage
           },
+        ]
+      },
+      {
+        path:"video",
+        component:video,
+        redirect: '/mainMenu/video/position1',
+        children:[
+          {
+            path:'position1',
+            component:position1
+          },
+          {
+            path:'position2',
+            component:position2
+          },
+          {
+            path:'position3',
+            component:position3
+          },
+          {
+            path:'position4',
+            component:position4
+          },
+          {
+            path:'position5',
+            component:position5
+          },
+
         ]
       },
       {
@@ -336,6 +377,10 @@ const routes = [
   {
     path:'/examineClub',
     component:examineClub
+  },
+  {
+    path:'/advertiseSet',
+    component:advertiseSet
   },
 ]
 

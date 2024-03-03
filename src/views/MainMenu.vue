@@ -159,9 +159,21 @@
                   >
                 </router-link>
               </el-submenu>
-              <router-link to="/mainMenu/config" tag="span">
+              <router-link to="/mainMenu/video" tag="span">
                 <el-menu-item
                   index="6"
+                  class="clickbutton"
+                  style="color: #ffff"
+                >
+                  <i class="el-icon-video-play" style="color: #ffff"></i>
+                  <span slot="title" style="margin-left: 5px"
+                    >摄像头管理</span
+                  >
+                </el-menu-item>
+              </router-link>
+              <router-link to="/mainMenu/config" tag="span">
+                <el-menu-item
+                  index="7"
                   class="clickbutton"
                   style="color: #ffff"
                 >
@@ -172,7 +184,7 @@
                 </el-menu-item>
               </router-link>
               <router-link to="/mainMenu/help" tag="span">
-              <el-menu-item index="7" class="clickbutton" style="color: #ffff">
+              <el-menu-item index="8" class="clickbutton" style="color: #ffff">
                 <i class="el-icon-service" style="color: #ffff"></i>
                 <span slot="title" style="margin-left: 5px">帮助中心</span>
               </el-menu-item>
@@ -194,6 +206,7 @@
           round
           id="quitregister"
           style="background-color: #fa5e00"
+          @click="quit"
           >退出登录</el-button
         >
       </div>
@@ -232,6 +245,22 @@ export default {
 
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    quit(){
+      axios
+        .post(`${this.$store.getters.getIp}/administrators/logout`)
+        .then((response) => {
+          if(response.data.code){
+            this.$message.success('退出成功');
+            this.$router.push('/login');
+          }
+          else{
+            this.$message.error(response.data.msg);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     },
   },
 };

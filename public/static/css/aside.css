@@ -145,6 +145,12 @@ body {
 .clickbutton.is-active .el-icon-service {
     color: #808080 !important;
 }
+.clickbutton:hover .el-icon-video-play {
+    color: #808080 !important;
+}
+.clickbutton.is-active .el-icon-video-play {
+    color: #808080 !important;
+}
 #reviewSituation {
     position: absolute;
     right: 2%;

@@ -104,6 +104,21 @@
     >
       最少5个字符
     </div>
+    <div style="position:relative;height:10%;width:100%;">
+      <el-button
+      type="danger"
+      size="mini"
+      style="
+      position:relative;
+        background-color: #fa5e00;
+        border: none;
+        height: 100%;
+        margin-left: 91%;
+        border-radius:8px;
+      "
+      >保存更改</el-button
+    >
+    </div>
   </div>
 </template>
   
