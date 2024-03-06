@@ -20,7 +20,7 @@
           position: relative;
           height: 100%;
           width: 30%;
-          background-image: url('/static/img/login1.png');
+          background-image: url('./static/img/login1.png');
           background-size: cover;
         ">
         <!-- 文字 -->

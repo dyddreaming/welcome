@@ -398,7 +398,7 @@
           </el-date-picker>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
-          <span style="margin-right: 20px; margin-left: 20px">任务对象*:</span>
+          <span style="margin-right: 20px; margin-left: 20px">任务形式*:</span>
           <el-radio v-model="radio" label="引导型">引导型</el-radio>
           <el-radio v-model="radio" label="交互型">交互型</el-radio>
         </div>

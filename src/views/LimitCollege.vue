@@ -1,34 +1,34 @@
 <template>
   <div class="app-main" style="position: relative">
-    <div
-      style="
+    <div style="
         position: relative;
         height: 10%;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-      "
-    >
-      <h2 style="text-align: center; flex: 1">当前学院列表</h2>
-      <el-button
-        type="primary"
-        style="
+      ">
+      <div style="position:relative;height:100%;width:20%;left:40%;">
+        <h2 style="text-align: center; flex: 1">当前学院列表</h2>
+      </div>
+      <el-button type="primary" style="
           background-color: #fa5e00;
           border: none;
           margin-right: 50px;
           border-radius: 5px;
           position: relative;
+          left:30%;
           width: 7%;
-        "
-        @click="showDialog"
-        >新增</el-button
-      >
-      <el-dialog
-        :visible.sync="dialogVisible"
-        width="30%"
-        :before-close="closeDialog"
-      >
+        " @click="showDialog">新增</el-button>
+      <el-button type="primary" style="
+          background-color: #fa5e00;
+          border: none;
+          margin-right: 50px;
+          border-radius: 5px;
+          position: relative;
+          width: 9%;
+        " @click="groupDelete">批量删除</el-button>
+      <el-dialog :visible.sync="dialogVisible" width="30%" :before-close="closeDialog">
         <el-form ref="form" label-width="100px" label-position="top">
           <el-form-item label="请输入新增学院名：">
             <el-input v-model="inputValue"></el-input>
@@ -40,11 +40,7 @@
           <el-button type="primary" @click="handleConfirm">确认</el-button>
         </span>
       </el-dialog>
-      <el-dialog
-        :visible.sync="editDialogVisible"
-        width="30%"
-        :before-close="closeEditDialog"
-      >
+      <el-dialog :visible.sync="editDialogVisible" width="30%" :before-close="closeEditDialog">
         <el-form ref="form" label-width="100px" label-position="top">
           <el-form-item label="学院名：">
             <el-input v-model="collegeName"></el-input>
@@ -54,45 +50,32 @@
         <span slot="footer" class="dialog-footer">
           <el-button @click="editDialogVisible = false">取消</el-button>
           <el-button type="primary" @click="handleModify">确认</el-button>
-        </span></el-dialog
-      >
+        </span></el-dialog>
     </div>
     <hr style="border: none; border-top: 2px solid #ffffff; margin-top: 10px" />
-    <div style="position: relative; height: 80%; width: 96%; left: 2%">
-      <div
-        v-for="(college, index) in collegeList"
-        :key="index"
-        style="
+    <div style="position: relative; height: 83%; width: 96%; left: 2%;overflow-y:auto">
+      <div v-for="(college, index) in collegeList" :key="index" style="
           position: relative;
           width: calc(100% / 7);
           height: 25%;
           float: left;
-        "
-      >
-        <div
-          class="showData"
-          style="position: relative; width: 100%; height: 100%"
-        >
-          <div
-            style="
+        ">
+        <div class="showData" style="position: relative; width: 100%; height: 100%">
+          <div style="
               position: absolute;
               top: 50%;
               left: 50%;
               transform: translate(-50%, -50%);
-            "
-          >
-            <div
-              style="
+            ">
+            <div style="
                 position: relative;
                 left: 8%;
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
                 background: linear-gradient(to bottom, #fa5e00, #f79400);
-              "
-            >
-              <span
-                style="
+              ">
+              <span style="
                   position: absolute;
                   top: 40%;
                   left: 50%;
@@ -100,72 +83,39 @@
                   color: white;
                   font-size: 14px;
                   white-space: nowrap;
-                "
-                >{{ college.name }}</span
-              >
-              <el-checkbox
-                v-model="college.selected"
-                style="
+                ">{{ college.name }}</span>
+              <el-checkbox v-model="college.selected" style="
                   position: absolute;
                   bottom: 25%;
                   left: 50%;
                   transform: translateX(-50%);
-                "
-              ></el-checkbox>
+                "></el-checkbox>
             </div>
-            <div
-              style="
+            <div style="
                 text-align: center;
                 margin-top: 10px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 left: 15%;
-              "
-            >
-              <el-button
-                type="success"
-                size="mini"
-                style="background-color: #f89300; border: none"
-                @click="handleDefine(college)"
-                >修改</el-button
-              >
-              <el-button
-                type="danger"
-                size="mini"
-                style="background-color: #fa5e00; border: none"
-                @click="handleDelete(college.id)"
-                >删除</el-button
-              >
+              ">
+              <el-button type="success" size="mini" style="background-color: #f89300; border: none"
+                @click="handleDefine(college)">修改</el-button>
+              <el-button type="danger" size="mini" style="background-color: #fa5e00; border: none"
+                @click="handleDelete(college.id)">删除</el-button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div style="position: relative; height: 10%; width: 96%; left: 2%">
-      <el-button
-        type="danger"
-        size="mini"
-        style="
-          background-color: #fa5e00;
-          border: none;
-          height: 50%;
-          border-radius: 5px;
-          position: relative;
-          left: 90%;
-        "
-        @click="groupDelete"
-        >批量删除</el-button
-      >
-    </div>
   </div>
 </template>
-  
-  <style>
+
+<style>
 @import "../../public/static/css/aside.css";
 </style>
-  
-  <script>
+
+<script>
 import axios from "axios";
 export default {
   data() {
@@ -266,14 +216,13 @@ export default {
             this.doDelete();
             this.selectedIds = [];
           })
-          .catch(() => {});
+          .catch(() => { });
       }
     },
     doDelete() {
       // 发送axios请求删除学院
-      const url = `${
-        this.$store.getters.getIp
-      }/colleges?ids=${this.selectedIds.join("&ids=")}`;
+      const url = `${this.$store.getters.getIp
+        }/colleges?ids=${this.selectedIds.join("&ids=")}`;
 
       axios
         .delete(url)
@@ -302,8 +251,16 @@ export default {
         });
     },
     handleDelete(id) {
-      this.selectedIds.push(id);
-      this.doDelete();
+      this.$confirm("确认删除吗？", "提示", {
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.selectedIds.push(id);
+          this.doDelete();
+        })
+        .catch(() => { });
     },
     // 修改学院
     handleDefine(college) {
