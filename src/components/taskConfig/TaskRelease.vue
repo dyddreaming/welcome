@@ -22,6 +22,8 @@
         background-color: #ffffff;
         border: 2px solid #fa5e00;
         display: flex;
+        border-radius:8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       ">
       <!-- 左侧 -->
       <div style="
@@ -37,7 +39,8 @@
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
           <span style="margin-right: 10px; margin-left: 20px">任务描述*:</span>
-          <el-input v-model="describe" placeholder="请输入" style="position: relative; height: 40px !important; width: 70%">
+          <el-input v-model="describe" placeholder="请输入"
+            style="position: relative; height: 40px !important; width: 70%">
           </el-input>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
@@ -76,10 +79,10 @@
             </el-option>
           </el-select>
         </div>
-        <div style="position: relative; height: 42%; width: 100%; top: 1%">
+        <div style="position: relative; height: 36%; width: 100%; top: 1%;">
           <div style="
               position: relative;
-              height: 8%;
+              height: 10%;
               width: 89%;
               top: 1%;
               margin-left: 20px;
@@ -88,9 +91,9 @@
           </div>
           <div style="
               position: relative;
-              height: 20%;
+              height: 22%;
               width: 89%;
-              top: 1%;
+              top: 2%;
               margin-left: 20px;
               display: flex;
             ">
@@ -101,7 +104,7 @@
                 display: flex;
               ">
               <span style="margin-right: 36px; margin-top: 10px">经验值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
                 text-color="#FA5E00" v-model="experience"></knob-control>
             </div>
             <div style="
@@ -111,15 +114,15 @@
                 display: flex;
               ">
               <span style="margin-right: 36px; margin-top: 10px">勇气值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
                 text-color="#FA5E00" v-model="courage"></knob-control>
             </div>
           </div>
           <div style="
               position: relative;
-              height: 20%;
+              height: 22%;
               width: 89%;
-              top: 1%;
+              top: 2%;
               margin-left: 20px;
               display: flex;
             ">
@@ -130,7 +133,7 @@
                 display: flex;
               ">
               <span style="margin-right: 36px; margin-top: 10px">热情值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
                 text-color="#FA5E00" v-model="enthusiasm"></knob-control>
             </div>
             <div style="
@@ -140,15 +143,15 @@
                 display: flex;
               ">
               <span style="margin-right: 36px; margin-top: 10px">友好值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
                 text-color="#FA5E00" v-model="friendly"></knob-control>
             </div>
           </div>
           <div style="
               position: relative;
-              height: 20%;
+              height: 22%;
               width: 89%;
-              top: 1%;
+              top: 2%;
               margin-left: 20px;
               display: flex;
             ">
@@ -159,7 +162,7 @@
                 display: flex;
               ">
               <span style="margin-right: 36px; margin-top: 10px">活力值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
                 text-color="#FA5E00" v-model="dynamism"></knob-control>
             </div>
             <div style="
@@ -169,142 +172,24 @@
                 display: flex;
               ">
               <span style="margin-right: 36px; margin-top: 10px">智慧值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
                 text-color="#FA5E00" v-model="intelligence"></knob-control>
             </div>
           </div>
           <div style="
               position: relative;
-              height: 20%;
+              height: 22%;
               width: 89%;
-              top: 1%;
+              top: 2%;
               margin-left: 20px;
               display: flex;
             ">
             <span style="margin-right: 20px; margin-top: 10px">探索精神</span>
-            <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
+            <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
               text-color="#FA5E00" v-model="explore"></knob-control>
           </div>
         </div>
-      </div>
-      <!-- 中间 -->
-      <div style="
-          position: relative;
-          width: 34%;
-          height: 100%;
-          border-right: 2px solid #fa5e00;
-        ">
-        <div style="position: relative; height: 42%; width: 100%; top: 1%">
-          <div style="
-              position: relative;
-              height: 8%;
-              width: 89%;
-              top: 1%;
-              margin-left: 20px;
-            ">
-            任务限制（多选）*
-          </div>
-          <div style="
-              position: relative;
-              height: 20%;
-              width: 89%;
-              top: 1%;
-              margin-left: 20px;
-              display: flex;
-            ">
-            <div style="
-                position: relative;
-                height: 100%;
-                width: 50%;
-                display: flex;
-              ">
-              <span style="margin-right: 51px; margin-top: 10px">等级</span>
-              <knob-control :min="0" :max="50" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
-                text-color="#FA5E00" v-model="degree"></knob-control>
-            </div>
-            <div style="
-                position: relative;
-                height: 100%;
-                width: 50%;
-                display: flex;
-              ">
-              <span style="margin-right: 36px; margin-top: 10px">勇气值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
-                text-color="#FA5E00" v-model="courage1"></knob-control>
-            </div>
-          </div>
-          <div style="
-              position: relative;
-              height: 20%;
-              width: 89%;
-              top: 1%;
-              margin-left: 20px;
-              display: flex;
-            ">
-            <div style="
-                position: relative;
-                height: 100%;
-                width: 50%;
-                display: flex;
-              ">
-              <span style="margin-right: 36px; margin-top: 10px">热情值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
-                text-color="#FA5E00" v-model="enthusiasm1"></knob-control>
-            </div>
-            <div style="
-                position: relative;
-                height: 100%;
-                width: 50%;
-                display: flex;
-              ">
-              <span style="margin-right: 36px; margin-top: 10px">友好值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
-                text-color="#FA5E00" v-model="friendly1"></knob-control>
-            </div>
-          </div>
-          <div style="
-              position: relative;
-              height: 20%;
-              width: 89%;
-              top: 1%;
-              margin-left: 20px;
-              display: flex;
-            ">
-            <div style="
-                position: relative;
-                height: 100%;
-                width: 50%;
-                display: flex;
-              ">
-              <span style="margin-right: 36px; margin-top: 10px">活力值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
-                text-color="#FA5E00" v-model="dynamism1"></knob-control>
-            </div>
-            <div style="
-                position: relative;
-                height: 100%;
-                width: 50%;
-                display: flex;
-              ">
-              <span style="margin-right: 36px; margin-top: 10px">智慧值</span>
-              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
-                text-color="#FA5E00" v-model="intelligence1"></knob-control>
-            </div>
-          </div>
-          <div style="
-              position: relative;
-              height: 20%;
-              width: 89%;
-              top: 1%;
-              margin-left: 20px;
-              display: flex;
-            ">
-            <span style="margin-right: 20px; margin-top: 10px">探索精神</span>
-            <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="#FFDA9F"
-              text-color="#FA5E00" v-model="explore1"></knob-control>
-          </div>
-        </div>
-        <div style="position: relative; height: 15%; width: 100%">
+        <div style="position: relative; height: 15%; width: 100%;top:2%;">
           <span style="margin-right: 10px; margin-left: 20px">任务地点:</span>
           <el-input type="textarea" :rows="4" placeholder="请输入地点(回车符分隔)" v-model="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }" style="
@@ -315,13 +200,132 @@
             ">
           </el-input>
         </div>
-        <div style="position: relative; height: 43%; width: 100%">
+      </div>
+      <!-- 中间 -->
+      <div style="
+          position: relative;
+          width: 34%;
+          height: 100%;
+          border-right: 2px solid #fa5e00;
+        ">
+        <div style="position: relative; height: 36%; width: 100%; top: 1%">
+          <div style="
+              position: relative;
+              height: 10%;
+              width: 89%;
+              top: 1%;
+              margin-left: 20px;
+            ">
+            任务限制（多选）*
+          </div>
+          <div style="
+              position: relative;
+              height: 22%;
+              width: 88%;
+              top: 2%;
+              margin-left: 20px;
+              display: flex;
+            ">
+            <div style="
+                position: relative;
+                height: 100%;
+                width: 50%;
+                display: flex;
+              ">
+              <span style="margin-right: 51px; margin-top: 10px">等级</span>
+              <knob-control :min="0" :max="50" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
+                text-color="#FA5E00" v-model="degree"></knob-control>
+            </div>
+            <div style="
+                position: relative;
+                height: 100%;
+                width: 50%;
+                display: flex;
+              ">
+              <span style="margin-right: 36px; margin-top: 10px">勇气值</span>
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
+                text-color="#FA5E00" v-model="courage1"></knob-control>
+            </div>
+          </div>
+          <div style="
+              position: relative;
+              height: 22%;
+              width: 89%;
+              top: 2%;
+              margin-left: 20px;
+              display: flex;
+            ">
+            <div style="
+                position: relative;
+                height: 100%;
+                width: 50%;
+                display: flex;
+              ">
+              <span style="margin-right: 36px; margin-top: 10px">热情值</span>
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
+                text-color="#FA5E00" v-model="enthusiasm1"></knob-control>
+            </div>
+            <div style="
+                position: relative;
+                height: 100%;
+                width: 50%;
+                display: flex;
+              ">
+              <span style="margin-right: 36px; margin-top: 10px">友好值</span>
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
+                text-color="#FA5E00" v-model="friendly1"></knob-control>
+            </div>
+          </div>
+          <div style="
+              position: relative;
+              height: 22%;
+              width: 89%;
+              top: 2%;
+              margin-left: 20px;
+              display: flex;
+            ">
+            <div style="
+                position: relative;
+                height: 100%;
+                width: 50%;
+                display: flex;
+              ">
+              <span style="margin-right: 36px; margin-top: 10px">活力值</span>
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
+                text-color="#FA5E00" v-model="dynamism1"></knob-control>
+            </div>
+            <div style="
+                position: relative;
+                height: 100%;
+                width: 50%;
+                display: flex;
+              ">
+              <span style="margin-right: 36px; margin-top: 10px">智慧值</span>
+              <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
+                text-color="#FA5E00" v-model="intelligence1"></knob-control>
+            </div>
+          </div>
+          <div style="
+              position: relative;
+              height: 22%;
+              width: 89%;
+              top: 2%;
+              margin-left: 20px;
+              display: flex;
+            ">
+            <span style="margin-right: 20px; margin-top: 10px">探索精神</span>
+            <knob-control :min="0" :max="20" :size="40" primary-color="#FA5E00" secondary-color="rgb(250, 49, 0,0.5)"
+              text-color="#FA5E00" v-model="explore1"></knob-control>
+          </div>
+        </div>
+        <div style="position: relative; height: 64%; width: 100%;">
           <div style="
               position: relative;
               height: 8%;
               width: 89%;
-              top: 1%;
+              top: 2%;
               margin-left: 20px;
+              text-align:center;
             ">
             打卡方式
           </div>
@@ -333,35 +337,86 @@
               background-color: #fa5e00;
               margin-top: 2%;
             " />
-          <div style="position: relative; height: 89%; width: 100%; display: flex">
+          <div style="position: relative; height: 90%; width: 100%; display: flex">
             <div style="
                 position: relative;
                 height: 100%;
                 width: 50%;
-                border-right: 2px solid #fa5e00;
+                border-right: 2px solid rgb(250, 49, 0,0.5);
               ">
               <div style="
-                  position: relative;
-                  height: 8%;
-                  width: 89%;
-                  top: 1%;
-                  margin-left: 20px;
-                  text-align: center;
-                ">
+              position: relative;
+              height: 5%;
+              width: 100%;
+              text-align: center;
+              background-color: rgb(250, 49, 0,0.5);
+              font-size: 14px;
+              color:#ffffff;
+          ">
                 拍照
               </div>
-              <div style="position: relative; height: 92%; width: 100%"></div>
+              <div style="position: relative; height: 94%; width: 100%;">
+                <span style="margin-right: 10px; margin-left: 20px;font-size:14px;">物品:</span>
+                <div style="position:relative;height:22%;width:100%;border-bottom: 2px solid rgb(250, 49, 0,0.5);overflow-y:auto;">
+                  <div class="tag-list">
+                    <el-tag v-for="(tag, index) in itemOptions" :key="index"
+                      :type="isPhotoSelected(tag) ? 'success' : 'info'" @click="togglePhotoTag(tag)"
+                      style="margin-right:10px;margin-bottom:5px;font-size:10px;">{{ tag.label }}</el-tag>
+                  </div>
+                </div>
+                <span style="margin-right: 10px; margin-left: 20px;">手势:</span>
+                <div style="position:relative;height:22%;width:100%;border-bottom: 2px solid rgb(250, 49, 0,0.5);overflow-y:auto;">
+                  <div class="tag-list">
+                    <el-tag v-for="(tag, index) in photoGestureOptions" :key="index"
+                      :type="isPhotoSelected(tag) ? 'success' : 'info'" @click="togglePhotoTag(tag)"
+                      style="margin-right:10px;margin-bottom:5px;font-size:10px;">{{ tag.label }}</el-tag>
+                  </div>
+                </div>
+                <span style="margin-right: 10px; margin-left: 20px;">已选:</span>
+                <div class="selected-tags"
+                  style="position:relative;overflow-y:auto;height:30%;width:83%;border: 2px solid rgb(250, 49, 0,0.5);box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);border-radius:8px;">
+                  <el-tag v-for="(tag, index) in selectedTags" :key="index" closable @close="removePhotoTag(index)"
+                    style="margin-right:10px;margin-bottom:5px;font-size:10px;">{{
+            tag.label }}</el-tag>
+                </div>
+              </div>
             </div>
             <div style="position: relative; height: 100%; width: 50%">
               <div style="
-                  position: relative;
-                  height: 8%;
-                  width: 89%;
-                  top: 1%;
-                  margin-left: 20px;
-                  text-align: center;
-                ">
+              position: relative;
+              height: 5%;
+              width: 100%;
+              text-align: center;
+              background-color: rgb(250, 49, 0,0.5);
+              font-size: 14px;
+              color:#ffffff;
+          ">
                 摄像头
+              </div>
+              <div style="position: relative; height: 94%; width: 100%;">
+                <span style="margin-right: 10px; margin-left: 20px;font-size:14px;">人脸识别:</span>
+                <div style="position:relative;height:22%;width:100%;border-bottom: 2px solid rgb(250, 49, 0,0.5);overflow-y:auto;">
+                  <div class="tag-list">
+                    <el-tag v-for="(tag, index) in faceOptions" :key="index"
+                      :type="isVideoSelected(tag) ? 'success' : 'info'" @click="toggleVideoTag(tag)"
+                      style="margin-right:10px;margin-bottom:5px;font-size:10px;">{{ tag.label }}</el-tag>
+                  </div>
+                </div>
+                <span style="margin-right: 10px; margin-left: 20px;">手势:</span>
+                <div style="position:relative;height:22%;width:100%;border-bottom: 2px solid rgb(250, 49, 0,0.5);overflow-y:auto;">
+                  <div class="tag-list">
+                    <el-tag v-for="(tag, index) in videoGestureOptions" :key="index"
+                      :type="isVideoSelected(tag) ? 'success' : 'info'" @click="toggleVideoTag(tag)"
+                      style="margin-right:10px;margin-bottom:5px;font-size:10px;">{{ tag.label }}</el-tag>
+                  </div>
+                </div>
+                <span style="margin-right: 10px; margin-left: 20px;">已选:</span>
+                <div class="selected-tags"
+                  style="position:relative;overflow-y:auto;height:30%;width:83%;border: 2px solid rgb(250, 49, 0,0.5); box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);border-radius:8px;">
+                  <el-tag v-for="(tag, index) in videoSelectedTags" :key="index" closable @close="removeVideoTag(index)"
+                    style="margin-right:10px;margin-bottom:5px;font-size:10px;">{{
+            tag.label }}</el-tag>
+                </div>
               </div>
             </div>
           </div>
@@ -409,7 +464,7 @@
             </el-option>
           </el-select>
         </div>
-        <div style="position: relative; height: 56%; width: 100%; top: 1%">
+        <div style="position: relative; height: 45%; width: 100%; top: 1%;">
           <span style="margin-right: 10px; margin-left: 20px">NPC文本:</span>
           <el-input type="textarea" :rows="15" placeholder="不超过800字" v-model="chatArea" maxlength="800" show-word-limit
             :autosize="{ minRows: 10, maxRows: 15 }" style="
@@ -419,6 +474,10 @@
               margin-top: 10px;
             ">
           </el-input>
+        </div>
+        <div style="position: relative; height: 10%; width: 100%; top: 1%;">
+          <span style="margin-right: 20px; margin-left: 20px">视频播放:</span>
+          <el-input v-model="video" placeholder="请输入视频播放链接" style="position: relative; height: 40px !important; width: 60%"></el-input>
         </div>
       </div>
     </div>
@@ -434,7 +493,7 @@
           background-color: #FA5E00;
           height: 35px;
           width: 80px;
-          radius: 5px;
+          border-radius: 5px;
           top: 10%;
           left: 78%;
           border: none;
@@ -442,10 +501,10 @@
       </el-button>
       <el-button type="danger" style="
           position: relative;
-          background-color: #f89300;
+          background-color: rgb(250, 49, 0,0.5);
           height: 35px;
           width: 95px;
-          radius: 5px;
+          border-radius: 5px;
           top: 10%;
           left: 78%;
           border: none;
@@ -456,26 +515,63 @@
           background-color: #A6A6A6;
           height: 35px;
           width: 80px;
-          radius: 5px;
+          border-radius: 5px;
           top: 10%;
           left: 78%;
           border: none;
-        "
-        @click="goBack"
-        >返回
+        " @click="goBack">返回
       </el-button>
     </div>
   </div>
 </template>
-  
+
 <style>
 @import "../../../public/static/css/aside.css";
+
+.tag-list {
+  margin-bottom: 5px;
+  position: relative;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.selected-tags {
+  margin-bottom: 5px;
+  position: relative;
+  margin-left: 20px;
+  margin-top: 5px;
+}
 </style>
-  
+
 <script>
 export default {
   data() {
     return {
+      selectedTags: [],
+      videoSelectedTags:[],
+      itemOptions: [
+        { label: '通知书', value: '通知书' },
+        { label: '身份证', value: '身份证' },
+        { label: '四级证书', value: '四级证书' },
+        { label: '六级证书', value: '六级证书' },
+        { label: '计算机二级', value: '计算机二级' },
+        { label: '二号教学楼', value: '二号教学楼' },
+      ],
+      photoGestureOptions: [
+        { label: 'OK', value: 'OK' },
+        { label: '数字1', value: '数字1' },
+        { label: '数字4', value: '数字4' },
+        { label: '数字5', value: '数字5' },
+      ],
+      videoGestureOptions: [
+        { label: 'OK', value: 'OK' },
+        { label: '数字1', value: '数字1' },
+        { label: '数字4', value: '数字4' },
+        { label: '数字5', value: '数字5' },
+      ],
+      faceOptions:[
+        { label: '人脸识别', value: '识别' },
+      ],
       name: "",
       describe: "",
       typeValue: "",
@@ -502,6 +598,8 @@ export default {
       radio: "",
       image: "",
       chatArea: "",
+      underGraduate:"",
+      Graduate:"",
       TypeOptions: [
         {
           value: "主线",
@@ -582,9 +680,35 @@ export default {
       ],
     };
   },
-  methods:{
-    goBack(){
+  methods: {
+    goBack() {
       this.$router.push("/mainMenu/task/config");
+    },
+    togglePhotoTag(tag) {
+      if (this.isPhotoSelected(tag)) {
+        this.selectedTags = this.selectedTags.filter(t => t.value !== tag.value);
+      } else {
+        this.selectedTags.push(tag);
+      }
+    },
+    isPhotoSelected(tag) {
+      return this.selectedTags.some(t => t.value === tag.value);
+    },
+    removePhotoTag(index) {
+      this.selectedTags.splice(index, 1);
+    },
+    toggleVideoTag(tag) {
+      if (this.isVideoSelected(tag)) {
+        this.videoSelectedTags = this.videoSelectedTags.filter(t => t.value !== tag.value);
+      } else {
+        this.videoSelectedTags.push(tag);
+      }
+    },
+    isVideoSelected(tag) {
+      return this.videoSelectedTags.some(t => t.value === tag.value);
+    },
+    removeVideoPhotoTag(index) {
+      this.videoSelectedTags.splice(index, 1);
     },
   },
 };

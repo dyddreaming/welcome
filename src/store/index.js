@@ -36,6 +36,8 @@ export default new Vuex.Store({
     seeAdID: null,
     // 审核广告ID
     examineID:null,
+    // 重置任务ID
+    resetTaskID:null,
   },
   getters: {
     getIp(state) {
@@ -70,7 +72,10 @@ export default new Vuex.Store({
     },
     getExamineID(state){
       return state.examineID;
-    }
+    },
+    getRestTaskID(state){
+      return state.resetTaskID;
+    },
   },
   mutations: {
     setRowData(state, data) {
@@ -106,6 +111,9 @@ export default new Vuex.Store({
     },
     setExamineID(state,id){
       state.examineID = id;
+    },
+    setRestTaskID(state,id){
+      state.resetTaskID = id;
     },
   },
   actions: {

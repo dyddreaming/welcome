@@ -132,7 +132,7 @@ export default {
   mounted() {
     this.fetchTotalData()
       .then(() => this.fetchTotalRegisterData())
-      .then(() => this.initLineChart());
+      .then(() => this.initPostChart());
   },
   methods: {
     // 获取总人数
@@ -164,7 +164,7 @@ export default {
           console.error("Error fetching data:", error);
         });
     },
-    initLineChart() {
+    initPostChart() {
       // 获取当前日期
       const currentDate = new Date();
       // 初始化日期数组，存放近 7 天的日期

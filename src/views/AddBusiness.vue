@@ -141,11 +141,10 @@ export default {
     seeDetail(ad) {
       this.$store.commit("setSeeAdID", ad.id);
       this.$nextTick(() => {
-        if(ad.status == "美食" || ad.status == "娱乐")
-        {
+        if (ad.status == "美食" || ad.status == "娱乐") {
           this.$router.push("/foodDetail");
         }
-        else{
+        else {
           this.$router.push("/workDetail");
         }
       });
@@ -158,11 +157,11 @@ export default {
         .then((response) => {
           this.totalData = response.data.data.records;
           this.totalData.forEach((item) => {
+            if (item.category === 0) {
+              return;
+            }
             let adTypeText = "";
             switch (item.category) {
-              case 0:
-                adTypeText = "社团";
-                break;
               case 1:
                 adTypeText = "兼职";
                 break;

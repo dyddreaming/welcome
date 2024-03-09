@@ -12,6 +12,7 @@ import graduatePrevious from '../components/registerSituation/GraduatePrevious.v
 import collegePrevious from '../components/registerSituation/CollegePrevious.vue'
 import detailInformation from '../components/studentManage/DetailInformation.vue'
 import editInformation from '../components/studentManage/EditInformation.vue'
+import studentIntegration from '@/components/registerSituation/Integration.vue'
 // 任务管理
 import Complete from '../views/TaskComplete.vue'
 import Config from '../views/TaskConfig.vue'
@@ -95,6 +96,10 @@ const routes = [
       {
         path: 'student/register',
         component: Register,
+      },
+      {
+        path:'student/integration',
+        component:studentIntegration,
       },
       {
         path: 'student/import',

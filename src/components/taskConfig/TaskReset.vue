@@ -1,7 +1,6 @@
 <template>
   <div class="app-main" style="position: relative">
-    <div
-      style="
+    <div style="
         position: relative;
         height: 92%;
         width: 98%;
@@ -11,214 +10,128 @@
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-      "
-    >
+      ">
       <!-- 标题部分 -->
       <div style="height: 5%">
         <h2 style="position: relative; left: 1%">任务进度列表</h2>
       </div>
       <!-- 搜索部分 -->
-      <div
-        style="
+      <div style="
           height: 10%;
           top: 2%;
           position: relative;
           width: 100%;
           display: flex;
           align-items: center;
-        "
-      >
-        <div
-          style="
+        ">
+        <div style="
             position: relative;
             width: 25%;
             height: 100%;
             display: flex;
             align-items: center;
-          "
-        >
-          <span style="position: relative; margin-right: 10px; left: 5%"
-            >学院：</span
-          >
+          ">
+          <span style="position: relative; margin-right: 10px; left: 5%">学院：</span>
           <el-select v-model="collegeValue" style="width: 60%">
-            <el-option
-              v-for="item in collegeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
+            <el-option v-for="item in collegeOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </div>
 
-        <div
-          style="
+        <div style="
             position: relative;
             width: 25%;
             height: 100%;
             display: flex;
             align-items: center;
-          "
-        >
-          <span style="position: relative; margin-right: 10px; left: 5%"
-            >任务进度：</span
-          >
-          <el-input
-            v-model="taskProcess"
-            placeholder="输入0-100"
-            style="width: 60%"
-          ></el-input>
+          ">
+          <span style="position: relative; margin-right: 10px; left: 5%">任务进度：</span>
+          <el-input v-model="taskProcess" placeholder="输入0-100" style="width: 60%"></el-input>
         </div>
 
-        <div
-          style="
+        <div style="
             position: relative;
             width: 16%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-          "
-        >
-          <el-button
-            class="search-button"
-            type="danger"
-            round
-            style="
+          ">
+          <el-button class="search-button" type="danger" round style="
               background-color: #f89300;
               border-radius: 5px;
               font-size: 14px;
               padding: 5px;
               border: none;
-            "
-          >
-            <i
-              class="el-icon-search"
-              style="margin-right: 3px; font-size: 14px"
-            ></i
-            >搜索
+            ">
+            <i class="el-icon-search" style="margin-right: 3px; font-size: 14px"></i>搜索
           </el-button>
-          <el-button
-            round
-            style="
+          <el-button round style="
               border-radius: 5px;
               border: none;
               font-size: 14px;
               padding: 5px;
               border: 1px solid #ccc;
-            "
-            @click="resetValue"
-          >
-            <i
-              class="el-icon-refresh-right"
-              style="margin-right: 3px; font-size: 14px"
-            ></i
-            >重置
+            " @click="resetValue">
+            <i class="el-icon-refresh-right" style="margin-right: 3px; font-size: 14px"></i>重置
           </el-button>
         </div>
       </div>
       <!-- 表格部分 -->
       <div style="width: 100%; height: 88%; position: relative">
-        <el-table
-          :data="tableData"
-          border
-          style="width: 90%; height: 94%; top: 4%; left: 5%"
-        >
-          <el-table-column
-            type="selection"
-            width="55"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="name"
-            label="姓名"
-            width="200px"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="id"
-            label="学号"
-            width="200px"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="major"
-            label="专业"
-            width="200px"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="enroll"
-            label="是否注册"
-            width="200px"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="process"
-            label="任务进度/% "
-            width="200px"
-            align="center"
-          ></el-table-column>
+        <el-table :data="tableData" border style="width: 90%; height: 94%; top: 4%; left: 5%">
+          <el-table-column type="selection" width="55" align="center"></el-table-column>
+          <el-table-column prop="name" label="姓名" width="200px" align="center"></el-table-column>
+          <el-table-column prop="id" label="学号" width="200px" align="center"></el-table-column>
+          <el-table-column prop="major" label="专业" width="200px" align="center"></el-table-column>
+          <el-table-column prop="enroll" label="是否注册" width="200px" align="center"></el-table-column>
+          <el-table-column prop="process" label="任务进度/% " width="200px" align="center"></el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
               <div style="items-align: center">
-                <el-button
-                  type="success"
-                  size="mini"
-                  style="background-color: #fa5e00; border: none"
-                  @click="handleReset(scope.row)"
-                  >重置</el-button
-                >
+                <el-button type="success" size="mini" style="background-color: #fa5e00; border: none"
+                  @click="handleReset(scope.row)">重置</el-button>
               </div>
             </template>
           </el-table-column>
         </el-table>
       </div>
       <!-- 下侧按钮部分 -->
-      <div
-        style="
+      <div style="
           position: relative;
           top: 6%;
           width: 100%;
           height: 6%;
           display: flex;
           justify-content: flex-end;
-        "
-      >
-        <el-button
-          type="success"
-          size="mini"
-          style="
+        ">
+        <el-button type="success" size="mini" style="
             background-color: #f89300;
             border: none;
             margin-right: 20px;
             width: 80px;
-          "
-          @click="goToList"
-        >
+          " @click="goToList">
           返回
         </el-button>
-        <el-button
-          type="success"
-          size="mini"
-          style="background-color: #fa5e00; border: none"
-          @click="handleReset"
-        >
+        <el-button type="success" size="mini" style="background-color: #fa5e00; border: none" @click="handleReset">
           批量重置
         </el-button>
       </div>
     </div>
   </div>
 </template>
-  
-  <style>
+
+<style>
 @import "../../../public/static/css/aside.css";
 </style>
-  
-  <script>
+
+<script>
+import axios from "axios";
 export default {
   data() {
     return {
+      id: null,
+      totalData:null,
       collegeValue: "",
       taskProcess: "",
       collegeOptions: [
@@ -246,6 +159,10 @@ export default {
       ],
     };
   },
+  create() {
+    this.id = this.$store.getters.getRestTaskID;
+    this.getList();
+  },
   methods: {
     resetValue() {
       this.collegeValue = "";
@@ -253,6 +170,18 @@ export default {
     },
     goToList() {
       this.$router.push("/mainMenu/task/config");
+    },
+    getList() {
+      let queryString = `?page=1&pageSize=6&taskId=${this.id}`;
+      axios
+        .get(`${this.$store.getters.getIp}/tasks/students/page${queryString}`)
+        .then((response) => {
+          this.totalData = response.data.data;
+          console.log("获取到的学院任务进度列表:",this.totalData);
+        })
+        .catch((error) => {
+          console.error("获取数据时出错：", error);
+        });
     },
     handleReset(row) {
       this.$confirm("确认重置吗？", "提示", {
@@ -269,7 +198,7 @@ export default {
             message: "重置成功！",
           });
         })
-        .catch(() => {});
+        .catch(() => { });
     },
   },
 };

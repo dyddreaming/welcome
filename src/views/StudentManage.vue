@@ -1,160 +1,193 @@
 <template>
-  <div class="app-main" style="position: relative">
-    <!-- 上侧提示框 -->
-    <div style="width: 90%; left: 5%; height: 7%; position: relative; top: 2%">
-      <el-button type="danger" round style="
-          background-color: #fa5e00;
-          border-radius: 5px;
-          width: 100%;
-          height: 100%;
-          font-size: 20px;
-        ">学生信息管理
-      </el-button>
+  <div class="app-main" style="position: relative;background-color: #f0f3f4;">
+    <div
+      style="position: relative; height: 8%; width: 100%; background-color: rgb(28, 43, 54); display: flex; align-items: center;">
+      <div
+        style="position:relative;width:20%;height:100%;display: flex; align-items: center;left:2%;background-color:rgb(28, 43, 54);">
+        <i class="el-icon-search" style="color: #ffff;margin-right:10px;"></i>
+        <el-input v-model="search" placeholder="搜索" id="searchPart"></el-input>
+      </div>
+      <router-link to="/mainMenu/help/helpFile"
+        style="color: inherit; text-decoration: none; margin-right: 20px; margin-left: auto; color: #ffffff;">
+        <span style="transition: color 0.3s;" class="hover-color">需要帮助吗？<span style="color: #209e91;">点击这里</span></span>
+      </router-link>
+      <i class="el-icon-s-home" style="color: #ffff;margin-right:10px; font-size: 24px;"></i>
     </div>
+    <div style="margin-top: 10px; width:100%;height:9%;display:flex;">
+      <h2 style="
+          color: #747474;
+          display: inline-block;
+          left: 2%;
+          position:relative;
+          width:98%;
+        ">
+        学生信息管理
+      </h2>
+      <div
+        style="position: relative; height: 100%; width: 30%;display: flex; align-items: center; justify-content: flex-end;right:2%;">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px;"
+            id="active-link">首页</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 17px; color: #747474;font-weight:600;"
+            id="current-link">学生信息管理</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+    </div>
+    <!-- 横线 -->
+    <hr style="
+        width: 99%;
+        border: 1px solid #ffffff;
+        margin-top: 5px;
+        position: relative;
+      " />
     <!-- 筛选部分 -->
     <div style="
-        width: 90%;
-        left: 5%;
+        width: 100%;
         height: 10%;
         position: relative;
-        top: 8%;
         display: flex;
+        top:1%;
+        align-items: center;
         justify-content: space-between;
       ">
-      <div style="flex: 1; position: relative; height: 100%; left: 1%">
+      <div style="flex: 1; position: relative; height: 100%; left: 2%;width:96%;top:20%;">
         <span>学院:</span>
         <el-select v-model="collegeValue" placeholder="请选择" style="left: 3%; position: relative; width: 70%">
           <el-option v-for="item in CollegeOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </div>
-      <div style="flex: 1; position: relative; height: 100%">
+      <div style="flex: 1; position: relative; height: 100%;top:20%;">
         <span>类别:</span>
         <el-select v-model="typeValue" placeholder="请选择" style="left: 3%; position: relative; width: 70%">
           <el-option v-for="item in TypeOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </div>
-      <div style="flex: 1; position: relative; height: 100%">
+      <div style="flex: 1; position: relative; height: 100%;top:20%;">
         <span>任务完成度:</span>
         <el-input v-model="completeDegree" placeholder="输入0-100" style="position: relative; left: 3%; width: 70%">
         </el-input>
       </div>
     </div>
     <!-- 表格 -->
-    <div style="width: 90%; left: 5%; height: 50%; position: relative; top: 10%">
-      <el-table :data="tableData" @selection-change="handleSelectionChange">
-        <el-table-column type="selection" label="选择" width="50" :align="centerAlign">
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="name" label="姓名" min-width="100" :align="centerAlign">
+    <div style="width: 96%;left:2%; height: 62%; position: relative; top: 1%;background-color:#ffffff;border-radius:8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
+      <div style="position:relative;width:98%;left:1%;height:98%;top:1%">
+        <el-table :data="tableData" @selection-change="handleSelectionChange">
+          <el-table-column type="selection" label="选择" width="50" :align="centerAlign">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="name" label="姓名" min-width="50" :align="centerAlign">
 
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="gender" label="性别" min-width="100" :align="centerAlign" :formatter="formatGender">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="gender" label="性别" min-width="50" :align="centerAlign" :formatter="formatGender">
 
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="id" label="学号" min-width="100" :align="centerAlign">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="id" label="学号" min-width="100" :align="centerAlign">
 
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="major" label="专业" min-width="100" :align="centerAlign">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="major" label="专业" min-width="160" :align="centerAlign">
 
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="username" label="用户名" min-width="100" :align="centerAlign">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="username" label="用户名" min-width="100" :align="centerAlign">
 
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="isRegistered" label="注册" min-width="100" :align="centerAlign"
-          :formatter="formatRegister">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="isRegistered" label="注册" min-width="100" :align="centerAlign"
+            :formatter="formatRegister">
 
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="completion" label="任务完成度/%" min-width="100" :align="centerAlign">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="completion" label="任务完成度/%" min-width="100" :align="centerAlign">
 
-          <template slot="header" slot-scope="scope">
-            <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="code" label="密码" min-width="100" :align="centerAlign">
+            <template slot="header" slot-scope="scope">
+              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="code" label="密码" min-width="100" :align="centerAlign">
 
-          <template slot-scope="scope">
-            <div style="text-align: center">
-              <!-- 按钮元素放在这里 -->
-              <el-button type="primary" class="tableButton" @click="singleReset(scope.row.id)">重置</el-button>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="operation" label="操作" min-width="100" :align="centerAlign">
+            <template slot-scope="scope">
+              <div style="text-align: center">
+                <!-- 按钮元素放在这里 -->
+                <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small"
+                  @click="singleReset(scope.row.id)">重置</el-button>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="operation" label="操作" min-width="100" :align="centerAlign">
 
-          <template slot-scope="scope">
-            <div style="text-align: center">
-              <!-- 按钮元素放在这里 -->
-              <el-button type="primary" class="tableButton" @click="singleDelete(scope.row.id)">删除</el-button>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="message" label="详细信息" min-width="100" :align="centerAlign">
+            <template slot-scope="scope">
+              <div style="text-align: center">
+                <!-- 按钮元素放在这里 -->
+                <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small"
+                  @click="singleDelete(scope.row.id)">删除</el-button>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="message" label="详细信息" min-width="100" :align="centerAlign">
 
-          <template slot-scope="scope">
-            <div style="text-align: center">
-              <!-- 按钮元素和图标放在一起 -->
-              <el-button type="primary" class="tableButton" @click="goToDetail(scope.row)">
-                <i class="el-icon-right"></i>
-              </el-button>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-    <!-- 分页管理 -->
-    <div style="
-        position: relative;
-        top: 21%;
-        width: 90%;
-        left: 5%;
-        display: flex;
-        justify-content: center;
-      ">
-      <el-pagination small layout="prev, pager, next" :total="50">
-      </el-pagination>
+            <template slot-scope="scope">
+              <div style="text-align: center">
+                <!-- 按钮元素和图标放在一起 -->
+                <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+                  @click="goToDetail(scope.row)"><i class="el-icon-right"></i></el-button>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
     <!-- 操作按钮 -->
-    <div style="
-        width: 90%;
-        left: 5%;
-        height: 11%;
-        position: relative;
-        top: 17%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-      ">
-      <el-button type="primary" class="tableButton" @click="codeReset">批量重置</el-button>
-      <el-button type="primary" class="tableButton" @click="studentDelete">批量删除</el-button>
-      <el-button type="primary" class="tableButton">批量提醒</el-button>
+    <div style="position:relative; height:7%; width:96%; top:1%; left:2%; display: flex; justify-content: flex-end; align-items: center;">
+      <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small" @click="codeReset">批量重置</el-button>
+      <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small" @click="studentDelete">批量删除</el-button>
+      <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small">批量提醒</el-button>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 @import "../../public/static/css/aside.css";
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474
+}
 
 .tableButton {
   background-color: #fa5e00 !important;
@@ -231,7 +264,7 @@ export default {
     // 获取表格数据
     getData() {
       // 构造查询字符串
-      let queryString = `?page=1&pageSize=6`;
+      let queryString = `?page=1&pageSize=7`;
       const category = this.typeValue === "本科生" ? 0 : 1;
       if (this.collegeValue == "所有") {
         queryString += `&category=${category}&compDegree=${this.completeDegree}`;

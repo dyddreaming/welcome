@@ -134,11 +134,11 @@ export default {
           this.totalData = response.data.data.records;
           // console.log(this.totalData);
           this.totalData.forEach((item) => {
+            if (item.category === 0) {
+              return;
+            }
             let adTypeText = "";
             switch (item.category) {
-              case 0:
-                adTypeText = "社团";
-                break;
               case 1:
                 adTypeText = "兼职";
                 break;
