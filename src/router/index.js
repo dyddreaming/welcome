@@ -110,6 +110,14 @@ const routes = [
         component: Manage,
       },
       {
+        path: 'student/detailInformation',
+        component: detailInformation,
+      },
+      {
+        path: 'student/editInformation',
+        component: editInformation,
+      },
+      {
         path: 'task/complete',
         component: Complete
       },
@@ -281,14 +289,6 @@ const routes = [
     component: collegePrevious,
   },
   // 学生信息管理路径
-  {
-    path: '/detailInformation',
-    component: detailInformation,
-  },
-  {
-    path: '/editInformation',
-    component: editInformation,
-  },
   // 任务完成情况路径
   {
     path: '/collegeTask',

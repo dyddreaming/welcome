@@ -1,479 +1,360 @@
 <template>
-  <div
-    class="body"
-    id="app"
-    style="
-      background-color: #ffda9f;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    "
-  >
-    <!-- 上侧提示框 -->
-    <div class="centered-button">
-      <el-button
-        type="danger"
-        round
-        style="
-          background-color: #fa5e00;
-          border-radius: 5px;
-          width: 50%; /* 调整宽度 */
-          height: 7%;
-          font-size: 20px;
-        "
-        >张三详细信息修改
-      </el-button>
-    </div>
-    <!-- 中间数据修改部分 -->
+  <div class="app-main" style="position: relative; background-color: #f0f3f4;">
     <div
-      style="
-        background-color: #ffffff;
-        width: 70%;
-        height: 75%;
-        margin-top: 3%;
-        left: 15%;
-        position: relative;
-      "
-    >
+      style="position: relative; height: 8%; width: 100%; background-color: rgb(28, 43, 54); display: flex; align-items: center;">
       <div
-        style="position: relative; width: 95%; top: 5%; height: 80%; left: 6%"
-      >
-        <div
-          style="
+        style="position:relative;width:20%;height:100%;display: flex; align-items: center;left:2%;background-color:rgb(28, 43, 54);">
+        <i class="el-icon-search" style="color: #ffff;margin-right:10px;"></i>
+        <el-input v-model="search" placeholder="搜索" id="searchPart"></el-input>
+      </div>
+      <router-link to="/mainMenu/help/helpFile"
+        style="color: inherit; text-decoration: none; margin-right: 20px; margin-left: auto; color: #ffffff;">
+        <span style="transition: color 0.3s;" class="hover-color">需要帮助吗？<span style="color: #209e91;">点击这里</span></span>
+      </router-link>
+      <i class="el-icon-s-home" style="color: #ffff;margin-right:10px; font-size: 24px;"></i>
+    </div>
+    <div style="margin-top: 10px; width:100%;height:9%;display:flex;">
+      <h2 style="
+          color: #747474;
+          display: inline-block;
+          left: 2%;
+          position:relative;
+          width:98%;
+        ">
+        {{ rowData.name }}详细信息修改
+      </h2>
+      <div
+        style="position: relative; height: 100%; width: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 2%;">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px;"
+            id="active-link">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/manage' }"
+            style="font-size: 17px; color: #747474; font-weight: 600;" id="pre-link">学生信息管理</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/detailInformation' }"
+            style="font-size: 17px; color: #747474; font-weight: 600;" id="pre-link">详细信息</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 17px; color: #747474; font-weight: 600;"
+            id="current-link">详细信息修改</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+    </div>
+    <hr style="
+    width: 99%;
+    border: 1px solid #ffffff;
+    margin-top: 5px;
+    position: relative;
+  " />
+    <!-- 中间数据修改部分 -->
+    <div style="
+        background-color: #ffffff;
+        color:#747474;
+        width: 96%;
+        height: 70%;
+        margin-top: 2%;
+        left: 2%;
+        position: relative;
+        border-radius:8px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      ">
+      <div style="position: relative; width: 95%; top: 5%; height: 80%; left: 6%">
+        <div style="
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             width: 90%;
             left: 5%;
-            top: 10px;
+            top: 5px;
             height: 95%;
-          "
-        >
+          ">
           <!-- 第一行 -->
           <div style="height: 7%; margin-bottom: 1%; display: flex">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px">姓名*:</span>
-              <el-input
-                v-model="nameInput"
-                placeholder="请输入"
-                style="position: relative; height: 40px !important; width: 70%"
-              >
+              <el-input v-model="nameInput" placeholder="请输入"
+                style="position: relative; height: 40px !important; width: 70%">
               </el-input>
             </div>
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">学号*:</span>
-              <el-input
-                v-model="idInput"
-                placeholder="请输入"
-                style="position: relative; height: 40px !important; width: 65%"
-              >
+              <el-input v-model="idInput" placeholder="请输入"
+                style="position: relative; height: 40px !important; width: 64%">
               </el-input>
             </div>
           </div>
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第二行 -->
           <div style="height: 7%; margin-bottom: 1%; display: flex">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">类别*:</span>
-              <el-select
-                v-model="typeValue"
-                placeholder="请选择"
-                style="position: relative; height: 40px !important; width: 70%"
-              >
-                <el-option
-                  v-for="item in TypeOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="typeValue" placeholder="请选择"
+                style="position: relative; height: 40px !important; width: 70%">
+                <el-option v-for="item in TypeOptions" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">身份证号*:</span>
-              <el-input
-                v-model="cardInput"
-                placeholder="请输入"
-                style="position: relative; height: 40px !important; width: 58%"
-              >
+              <el-input v-model="cardInput" placeholder="请输入"
+                style="position: relative; height: 40px !important; width: 58%">
               </el-input>
             </div>
           </div>
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第三行 -->
           <div style="height: 7%; margin-bottom: 1%; display: flex">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">性别*:</span>
               <div style="position: relative">
                 <el-radio v-model="radio" label="0">女</el-radio>
                 <el-radio v-model="radio" label="1">男</el-radio>
               </div>
             </div>
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">出生日期*:</span>
-              <el-date-picker
-                v-model="dateValue"
-                type="date"
-                placeholder="选择日期"
-                style="position: relative; height: 40px !important; width: 58%"
-              >
+              <el-date-picker v-model="dateValue" type="date" placeholder="选择日期"
+                style="position: relative; height: 40px !important; width: 58%">
               </el-date-picker>
             </div>
           </div>
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第四行 -->
           <div style="height: 7%; margin-bottom: 1%; display: flex">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px">民族:</span>
-              <el-input
-                v-model="nationInput"
-                placeholder="请输入"
-                style="position: relative; height: 40px !important; width: 72%"
-              >
+              <el-input v-model="nationInput" placeholder="请输入"
+                style="position: relative; height: 40px !important; width: 72%">
               </el-input>
             </div>
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">当前年级*:</span>
-              <el-select
-                v-model="gradeValue"
-                placeholder="请选择"
-                style="position: relative; height: 40px !important; width: 58%"
-              >
-                <el-option
-                  v-for="item in YearOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="gradeValue" placeholder="请选择"
+                style="position: relative; height: 40px !important; width: 58%">
+                <el-option v-for="item in YearOptions" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
           </div>
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第五行 -->
           <div style="height: 7%; margin-bottom: 1%; display: flex">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px">所在地*:</span>
               <div style="width: 80%; left: 10px">
-                <el-cascader
-                  :options="locationOptions"
-                  v-model="addressOptions"
-                  style="width: 83%"
-                  @change="handleAddressChange"
-                ></el-cascader>
+                <el-cascader :options="locationOptions" v-model="addressOptions" style="width: 84%"
+                  @change="handleAddressChange"></el-cascader>
               </div>
             </div>
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">联系电话*:</span>
-              <el-input
-                v-model="phoneInput"
-                placeholder="请输入"
-                style="position: relative; height: 40px !important; width: 58%"
-              >
+              <el-input v-model="phoneInput" placeholder="请输入"
+                style="position: relative; height: 40px !important; width: 58%">
               </el-input>
             </div>
           </div>
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第六行 -->
           <div style="height: 7%; margin-bottom: 1%">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 100%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">专业学院*:</span>
-              <el-select
-                v-model="collegeValue"
-                placeholder="请选择"
-                :popper-class="'scrollable-dropdown'"
-                style="position: relative; height: 30px; width: 79%"
-              >
-                <el-option
-                  v-for="item in CollegeOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="collegeValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
+                style="position: relative; height: 30px; width: 79%">
+                <el-option v-for="item in CollegeOptions" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
           </div>
           <!-- 分割线 -->
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第七行 -->
           <div style="height: 7%; margin-bottom: 1%">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 100%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">就读专业*:</span>
-              <el-select
-                v-model="majorValue"
-                placeholder="请选择"
-                :popper-class="'scrollable-dropdown'"
-                style="position: relative; height: 30px; width: 79%"
-              >
-                <el-option
-                  v-for="item in MajorOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="majorValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
+                style="position: relative; height: 30px; width: 79%">
+                <el-option v-for="item in MajorOptions" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
           </div>
           <!-- 分割线 -->
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第八行 -->
           <div style="height: 7%; margin-bottom: 1%">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 100%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">专业班级*:</span>
-              <el-select
-                v-model="classValue"
-                placeholder="请选择"
-                :popper-class="'scrollable-dropdown'"
-                style="position: relative; height: 30px; width: 79%"
-              >
-                <el-option
-                  v-for="item in ClassOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="classValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
+                style="position: relative; height: 30px; width: 79%">
+                <el-option v-for="item in ClassOptions" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
           </div>
           <!-- 分割线 -->
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第九行 -->
           <div style="height: 7%; margin-bottom: 1%">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 100%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px; left: 7%">所在校区*:</span>
-              <el-select
-                v-model="campusValue"
-                placeholder="请选择"
-                :popper-class="'scrollable-dropdown'"
-                style="position: relative; height: 30px; width: 79%"
-              >
-                <el-option
-                  v-for="item in CampusOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="campusValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
+                style="position: relative; height: 30px; width: 79%">
+                <el-option v-for="item in CampusOptions" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
           </div>
-          <hr
-            style="
+          <hr style="
               width: 95%;
               border: 1px solid #ffffff;
               margin-left: 0%;
               margin-top: 2px;
               position: relative;
-            "
-          />
+            " />
           <!-- 第十行 -->
           <div style="height: 7%; margin-bottom: 1%; display: flex">
-            <div
-              style="
+            <div style="
                 position: relative;
                 width: 50%;
                 display: flex;
                 align-items: center;
-              "
-            >
+              ">
               <span style="margin-right: 10px">人脸信息*:</span>
-              <el-button
-                type="primary"
-                style="
+              <el-button type="primary" style="
                   height: 30px;
                   width: 20%;
                   font-size: 10px;
                   text-align: center;
                   line-height: 30px;
-                  background-color: #fa5e00;
+                  background-color: #209e91;
                   border: none;
-                "
-                @click="handleImageClick"
-              >
-                <div
-                  style="
+                " @click="handleImageClick">
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     height: 100%;
-                  "
-                >
+                  ">
                   上传 <i class="el-icon-upload2" style="color: #fff"></i>
                   <!-- 添加文件选择框 -->
-                  <input
-                    type="file"
-                    ref="imageFileInput"
-                    style="display: none"
-                    accept=".zip"
-                    @change="handleImageUpload"
-                  />
+                  <input type="file" ref="imageFileInput" style="display: none" accept=".zip"
+                    @change="handleImageUpload" />
                 </div>
               </el-button>
               <p style="font-size: 10px; margin-left: 10px; color: #808080">
@@ -485,38 +366,45 @@
       </div>
     </div>
     <!--  下侧操作键 -->
-    <div style="width: 100%; display: flex; margin-top: 1%">
-      <el-button
-        type="danger"
-        round
-        style="
-          background-color: #fa5e00;
-          border-radius: 5px;
-          width: 7%; /* 调整宽度 */
-          height: 5%;
-          font-size: 16px;
-          margin-left: 80%;
-          margin-right: 2%;
-        "
-        @click="MakeSure"
-        >确认
-      </el-button>
-      <el-button
-        type="danger"
-        round
-        style="
-          background-color: #fa5e00;
-          border-radius: 5px;
-          width: 7%; /* 调整宽度 */
-          height: 5%;
-          font-size: 16px;
-        "
-        @click="GoToJust"
-        >返回
-      </el-button>
+    <div style="width: 96%;left:2%; display: flex; margin-top: 1%;justify-content: flex-end; align-items: center;position:relative;">
+      <el-button type="primary" style="background-color: #2dacd1; border: #2dacd1;" size="small"
+        @click="MakeSure">确认</el-button>
+      <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+        @click="GoToJust">返回</el-button>
     </div>
   </div>
 </template>
+<style scoped>
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474
+}
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+#pre-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+/deep/.el-input__inner {
+  color: #747474
+}
+</style>
 <script>
 import { regionData } from "element-china-area-data";
 import axios from "axios";
@@ -524,6 +412,7 @@ import { MessageBox } from "element-ui";
 export default {
   data() {
     return {
+      search: "",
       rowData: {},
       // 类别
       TypeOptions: [
@@ -781,7 +670,7 @@ export default {
     this.classValue = this.rowData.majorClass;
     this.campusValue = this.rowData.campus;
     this.addressOptions = this.convertAddressToCode(this.rowData.address);
-    // console.log(this.selectedAddressCode);
+    console.log("地址",this.addressOptions);
   },
   methods: {
     handleImageClick() {
@@ -844,6 +733,7 @@ export default {
         }
       }
       this.addressText = selectedAddress;
+      // console.log("所在地文字",this.addressText);
     },
     // 确认功能
     MakeSure() {
@@ -946,7 +836,7 @@ export default {
     },
     // 返回功能
     GoToJust() {
-      this.$router.push('/detailInformation');
+      this.$router.push('/mainMenu/student/detailInformation');
       console.log("返回详细界面");
     },
     // 将文字转换为编码

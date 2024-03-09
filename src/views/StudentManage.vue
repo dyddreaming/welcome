@@ -288,7 +288,7 @@ export default {
     goToDetail(row) {
       this.$store.commit("setRowData", row);
       this.$nextTick(() => {
-        this.$router.push("/detailInformation");
+        this.$router.push("/mainMenu/student/detailInformation");
         console.log("前往详细界面");
       });
     },
