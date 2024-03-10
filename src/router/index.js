@@ -122,12 +122,24 @@ const routes = [
         component: Complete
       },
       {
+        path: 'task/collegeTask',
+        component: collegeTask,
+      },
+      {
+        path: 'task/taskReset',
+        component: taskReset
+      },
+      {
         path: 'task/config',
         component: Config
       },
       {
         path: 'task/examine',
         component: Examine
+      },
+      {
+        path: 'task/taskInspect',
+        component: taskInspect
       },
       {
         path: 'data/integration',
@@ -290,10 +302,6 @@ const routes = [
   },
   // 学生信息管理路径
   // 任务完成情况路径
-  {
-    path: '/collegeTask',
-    component: collegeTask,
-  },
   // 学生任务设置路径
   {
     path: '/taskRelease',
@@ -303,15 +311,7 @@ const routes = [
     path: '/taskRefine',
     component: taskRefine
   },
-  {
-    path: '/taskReset',
-    component: taskReset
-  },
   // 手动任务审核路径
-  {
-    path: '/taskInspect',
-    component: taskInspect
-  },
   // 数据大屏路径
   {
     path: '/sevenClick',

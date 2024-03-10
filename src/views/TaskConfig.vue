@@ -1,37 +1,52 @@
 <template>
-  <div class="app-main" style="position: relative">
-    <div style="
-        position: relative;
-        height: 98%;
-        width: 90%;
-        left: 5%;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-      ">
-      <!-- 标题部分 -->
-      <div style="
-          height: 5%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          position: relative;
-          top: 1%;
-        ">
-        <h2 style="margin-left: 1%">任务发布列表</h2>
+  <div class="app-main" style="position: relative;background-color: #f0f3f4;">
+    <div
+      style="position: relative; height: 8%; width: 100%; background-color: rgb(28, 43, 54); display: flex; align-items: center;">
+      <div
+        style="position:relative;width:20%;height:100%;display: flex; align-items: center;left:2%;background-color:rgb(28, 43, 54);">
+        <i class="el-icon-search" style="color: #ffff;margin-right:10px;"></i>
+        <el-input v-model="searchWord" placeholder="搜索" id="searchPart"></el-input>
       </div>
-
-      <!-- 数据部分 -->
-      <div style="
-          height: 85%;
+      <router-link to="/mainMenu/help/helpFile"
+        style="color: inherit; text-decoration: none; margin-right: 20px; margin-left: auto; color: #ffffff;">
+        <span style="transition: color 0.3s;" class="hover-color">需要帮助吗？<span style="color: #209e91;">点击这里</span></span>
+      </router-link>
+      <i class="el-icon-s-home" style="color: #ffff;margin-right:10px; font-size: 24px;"></i>
+    </div>
+    <div style="margin-top: 10px; width:100%;height:9%;display:flex;">
+      <h2 style="
+        color: #747474;
+        display: inline-block;
+        left: 2%;
+        position:relative;
+        width:98%;
+      ">
+        任务发布列表
+      </h2>
+      <div
+        style="position: relative; height: 100%; width: 30%;display: flex; align-items: center; justify-content: flex-end;right:2%;">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px;"
+            id="active-link">首页</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 17px; color: #747474;font-weight:600;"
+            id="current-link">任务发布列表</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+    </div>
+    <!-- 数据部分 -->
+    <div style="
+          height: 73%;
+          top:1%;
           background-color: #ffffff;
           position: relative;
-          top: 4%;
           border-radius:8px;
+          width:96%;
+          left:2%;
+          color:#747474;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         ">
-        <!-- 搜索部分 -->
-        <div style="
+      <!-- 搜索部分 -->
+      <div style="
             height: 10%;
             position: relative;
             width: 100%;
@@ -39,43 +54,43 @@
             align-items: center;
             top: 2%;
           ">
-          <div style="
+        <div style="
               position: relative;
               width: 25%;
               height: 100%;
               display: flex;
               align-items: center;
             ">
-            <span style="position: relative; margin-right: 10px; left: 5%">任务名称：</span>
-            <el-input v-model="nameInput" placeholder="请输入任务名称" style="width: 60%"></el-input>
-          </div>
-          <div style="
+          <span style="position: relative; margin-right: 10px; left: 5%">任务名称：</span>
+          <el-input v-model="nameInput" placeholder="请输入任务名称" style="width: 60%"></el-input>
+        </div>
+        <div style="
               position: relative;
               width: 25%;
               height: 100%;
               display: flex;
               align-items: center;
             ">
-            <span style="position: relative; margin-right: 10px; left: 5%">任务状态：</span>
-            <el-select v-model="statusValue" placeholder="请选择任务状态" style="width: 60%">
-              <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </div>
-          <div style="
+          <span style="position: relative; margin-right: 10px; left: 5%">任务状态：</span>
+          <el-select v-model="statusValue" placeholder="请选择任务状态" style="width: 60%">
+            <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+        <div style="
               position: relative;
               width: 25%;
               height: 100%;
               display: flex;
               align-items: center;
             ">
-            <span style="position: relative; margin-right: 10px; left: 5%">任务级别：</span>
-            <el-select v-model="taskLevel" placeholder="请选择任务级别" style="width: 60%">
-              <el-option v-for="item in levelOptions" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </div>
-          <div style="
+          <span style="position: relative; margin-right: 10px; left: 5%">任务级别：</span>
+          <el-select v-model="taskLevel" placeholder="请选择任务级别" style="width: 60%">
+            <el-option v-for="item in levelOptions" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+        <div style="
               position: relative;
               width: 16%;
               height: 100%;
@@ -83,84 +98,80 @@
               justify-content: center;
               align-items: center;
             ">
-            <el-button class="search-button" type="danger" round style="
-                background-color: #f89300;
-                border-radius: 5px;
-                font-size: 14px;
-                padding: 5px;
-                border: none;
-              ">
-              <i class="el-icon-search" style="margin-right: 3px; font-size: 14px"></i>搜索
-            </el-button>
-            <el-button round style="
-                border-radius: 5px;
-                border: none;
-                font-size: 14px;
-                padding: 5px;
-                border: 1px solid #ccc;
-              " @click="resetValue">
-              <i class="el-icon-refresh-right" style="margin-right: 3px; font-size: 14px"></i>重置
-            </el-button>
-          </div>
+          <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="mini" @click="search"><i
+              class="el-icon-search" style="margin-right: 3px; font-size: 14px"></i>搜索</el-button>
+          <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="mini" @click="resetValue">
+            <i class="el-icon-refresh-right" style="margin-right: 3px; font-size: 14px"></i>重置</el-button>
         </div>
-        <!-- 表格部分 -->
-        <div style="
-            height: 87%;
+      </div>
+      <!-- 表格部分 -->
+      <div style="
+            height: 86%;
             position: relative;
-            width: 100%;
+            width: 98%;
             display: flex;
+            left:1%;
             align-items: center;
             top: 3%;
           ">
-          <el-table :data="tableData" border style="width: 100%; height: 100%">
-            <el-table-column type="selection" width="55" align="center"></el-table-column>
-            <el-table-column prop="name" label="任务名称" width="140px" align="center"></el-table-column>
-            <el-table-column prop="target" label="任务对象" width="140px" align="center"></el-table-column>
-            <el-table-column prop="level" label="任务级别" width="140px" align="center"></el-table-column>
-            <el-table-column prop="category" label="任务类型" width="140px" align="center"></el-table-column>
-            <el-table-column prop="taskStatus" label="任务状态" width="140px" align="center"></el-table-column>
-            <el-table-column prop="createUser" label="任务发布者" width="140px" align="center"></el-table-column>
-            <el-table-column label="操作" align="center">
-              <template slot-scope="scope">
-                <div style="display: flex; justify-content: space-between">
-                  <el-button type="primary" size="mini" style="background-color: #ffc300; border: none"
-                    @click="handleEdit(scope.row)">修改</el-button>
-                  <el-button type="success" size="mini" style="background-color: #f89300; border: none"
-                    @click="handleReset(scope.row)">重置</el-button>
-                  <el-button type="danger" size="mini" style="background-color: #fa5e00; border: none"
-                    @click="handleDelete(scope.row)">删除</el-button>
-                </div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
+        <el-table :data="tableData" border style="width: 100%; height: 100%">
+          <el-table-column type="selection" width="55" align="center"></el-table-column>
+          <el-table-column prop="name" label="任务名称" width="150px" align="center"></el-table-column>
+          <el-table-column prop="target" label="任务对象" width="150px" align="center"></el-table-column>
+          <el-table-column prop="level" label="任务级别" width="150px" align="center"></el-table-column>
+          <el-table-column prop="category" label="任务类型" width="150px" align="center"></el-table-column>
+          <el-table-column prop="taskStatus" label="任务状态" width="150px" align="center"></el-table-column>
+          <el-table-column prop="createUser" label="任务发布者" width="150px" align="center"></el-table-column>
+          <el-table-column label="操作" align="center">
+            <template slot-scope="scope">
+              <div style="display: flex; justify-content: space-between">
+                <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+                  @click="handleEdit(scope.row)">修改</el-button>
+                <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small"
+                  @click="handleReset(scope.row)">重置</el-button>
+                <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small"
+                  @click="handleDelete(scope.row)">删除</el-button>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
+    </div>
 
-      <!-- 批量删除按钮 -->
-      <div style="position: relative; height: 5%; top: 6%; width: 100%;display:flex;">
-        <el-button type="danger" size="mini" style="
-            background-color: #fa5e00;
-            border: none;
-            height: 80%;
-            position: relative;
-            top: 15%;
-            left: 85%;
-          " @click="taskRelease">发布任务</el-button>
-        <el-button type="danger" size="mini" style="
-            background-color: #fa5e00;
-            border: none;
-            height: 80%;
-            position: relative;
-            top: 15%;
-            left: 85%;
-          " @click="handleDelete">批量删除</el-button>
-      </div>
+    <!-- 批量删除按钮 -->
+    <div
+      style="position: relative; height: 5%; top: 2%; width: 96%; display: flex; justify-content: flex-end; align-items: center;left:2%;">
+      <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+        @click="taskRelease">发布任务</el-button>
+      <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small"
+        @click="handleDelete">批量删除</el-button>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 @import "../../public/static/css/aside.css";
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474
+}
 </style>
 
 <script>
@@ -311,7 +322,7 @@ export default {
     handleReset(row) {
       this.$store.commit("setRestTaskID", row.id);
       this.$nextTick(() => {
-        this.$router.push("/taskReset");
+        this.$router.push("/mainMenu/task/taskReset");
       });
     },
     handleDelete(row) {

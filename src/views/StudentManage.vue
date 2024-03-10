@@ -189,12 +189,6 @@
   color: #747474
 }
 
-.tableButton {
-  background-color: #fa5e00 !important;
-  color: #ffffff !important;
-  border: none !important;
-  border-radius: 10px !important;
-}
 </style>
 
 <script>
