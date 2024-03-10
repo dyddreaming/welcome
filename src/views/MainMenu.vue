@@ -50,7 +50,7 @@
                   <i class="el-icon-document" style="color: #ffff"></i>
                   <span style="color: #ffff; margin-left: 5px">数据管理</span>
                 </template>
-                <router-link to="/mainMenu/data/integration" tag="span">
+                <router-link to="/mainMenu/data/defineIntegration" tag="span">
                   <el-menu-item index="3-1" class="mbutton" style="color: #ffffff">数据调取集成</el-menu-item></router-link>
                 <router-link to="/mainMenu/data/screen" tag="span">
                   <el-menu-item index="3-2" class="mbutton" style="color: #ffffff">大屏数据设置</el-menu-item></router-link>

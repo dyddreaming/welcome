@@ -35,6 +35,7 @@ import studentPart from '../components/dataScreen/studentPart.vue'
 import studentRank from '../components/dataScreen/studentRank.vue'
 import advertisePart from '../components/dataScreen/advertisePart.vue'
 import taskPart from '../components/dataScreen/taskPart.vue'
+import dataDefineIntegration from '../components/dataIntegration/defineIntegration.vue'
 // 权限管理
 import Manager from '../views/LimitManage.vue'
 import College from '../views/LimitCollege.vue'
@@ -141,32 +142,36 @@ const routes = [
         path: 'task/taskInspect',
         component: taskInspect
       },
-      {
-        path: 'data/integration',
-        component: Integration,
-        redirect: '/mainMenu/data/integration/registerMap',
-        children: [
-          {
-            path: 'registerMap',
-            component: registerMap
-          },
-          {
-            path: 'dayTask',
-            component: dayTask
-          },
-          {
-            path: 'advertiseClick',
-            component: advertiseClick
-          },
-          {
-            path: 'wordSearch',
-            component: wordSearch
-          }
-        ]
-      },
+      // {
+      //   path: 'data/integration',
+      //   component: Integration,
+      //   redirect: '/mainMenu/data/integration/registerMap',
+      //   children: [
+      //     {
+      //       path: 'registerMap',
+      //       component: registerMap
+      //     },
+      //     {
+      //       path: 'dayTask',
+      //       component: dayTask
+      //     },
+      //     {
+      //       path: 'advertiseClick',
+      //       component: advertiseClick
+      //     },
+      //     {
+      //       path: 'wordSearch',
+      //       component: wordSearch
+      //     }
+      //   ]
+      // },
       {
         path: 'data/screen',
         component: Screen
+      },
+      {
+        path:'data/defineIntegration',
+        component:dataDefineIntegration
       },
       {
         path: 'limit/manager',

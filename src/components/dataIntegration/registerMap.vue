@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       map: null,
-      totalData: {},
+      totalData9: {},
       areaName: [],
       areaNumber: [],
     };
@@ -29,10 +29,10 @@ export default {
       return axios
         .get(`${this.$store.getters.getIp}/students/register/location`)
         .then((response) => {
-          this.totalData = response.data.data;
-          // console.log(this.totalData);
-          this.areaName = this.totalData.addresses;
-          this.areaNumber = this.totalData.addressCounts;
+          this.totalData9 = response.data.data;
+          // console.log(this.totalData9);
+          this.areaName = this.totalData9.addresses;
+          this.areaNumber = this.totalData9.addressCounts;
           // console.log("注册地:", this.areaName);
           // console.log("注册人数:", this.areaNumber);
         })

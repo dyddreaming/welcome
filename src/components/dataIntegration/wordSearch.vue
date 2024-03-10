@@ -11,11 +11,11 @@
   <div style="height: 8%; display: flex; align-items: center;">
     <div style="display: flex; justify-content: center; align-items: center; width: 50%;">
       <span style="margin-right: 10px;">时间:</span>
-      <el-date-picker v-model="dateValue" type="date" placeholder="选择日期" style="height: 40px !important; width: 38%;"></el-date-picker>
+      <el-date-picker v-model="dateValue5" type="date" placeholder="选择日期" style="height: 40px !important; width: 38%;"></el-date-picker>
     </div>
     <div style="display: flex; justify-content: center; align-items: center; width: 50%;">
       <span style="margin-right: 10px;">点击次数下限:</span>
-      <el-input v-model="threshold" placeholder="请输入" style="position: relative; height: 40px !important; width: 38%;"></el-input>
+      <el-input v-model="threshold2" placeholder="请输入" style="position: relative; height: 40px !important; width: 38%;"></el-input>
     </div>
   </div>
 
@@ -35,8 +35,8 @@ export default {
   data() {
     return {
       totalData6:{},
-      threshold:"",
-      dateValue: "",
+      threshold2:"",
+      dateValue5: "",
       keywords:[],
       timesList:[],
       wordData: [
@@ -141,7 +141,7 @@ export default {
   },
   mounted() {
     let currentDate = new Date();
-    this.dateValue = currentDate.toISOString();
+    this.dateValue5 = currentDate.toISOString();
     this.initChart();
   },
   methods: {
@@ -157,7 +157,7 @@ export default {
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
-      var dateParts = this.dateValue.split("T")[0].split("-");
+      var dateParts = this.dateValue5.split("T")[0].split("-");
       var year = dateParts[0];
       var month = dateParts[1];
       var day = dateParts[2];
