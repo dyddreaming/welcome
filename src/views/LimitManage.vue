@@ -1,26 +1,103 @@
 <template>
-  <div class="app-main" style="position: relative">
+  <div class="app-main" style="position: relative; background-color: #f0f3f4">
     <div
       style="
-        height: 90%;
-        top: 3%;
         position: relative;
-        width: 96%;
-        left: 2%;
-        background: #ffffff;
+        height: 8%;
+        width: 100%;
+        background-color: rgb(28, 43, 54);
+        display: flex;
+        align-items: center;
       "
     >
       <div
         style="
-          height: 5%;
           position: relative;
-          width: 100%;
-          font-size: 24px;
-          font-weight: 600;
+          width: 20%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          left: 2%;
+          background-color: rgb(28, 43, 54);
+        "
+      >
+        <i class="el-icon-search" style="color: #ffff; margin-right: 10px"></i>
+        <el-input
+          v-model="searchWord"
+          placeholder="搜索"
+          id="searchPart"
+        ></el-input>
+      </div>
+      <router-link
+        to="/mainMenu/help/helpFile"
+        style="
+          color: inherit;
+          text-decoration: none;
+          margin-right: 20px;
+          margin-left: auto;
+          color: #ffffff;
+        "
+      >
+        <span style="transition: color 0.3s" class="hover-color"
+          >需要帮助吗？<span style="color: #209e91">点击这里</span></span
+        >
+      </router-link>
+      <i
+        class="el-icon-s-home"
+        style="color: #ffff; margin-right: 10px; font-size: 24px"
+      ></i>
+    </div>
+    <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
+      <h2
+        style="
+          color: #747474;
+          display: inline-block;
+          left: 2%;
+          position: relative;
+          width: 98%;
         "
       >
         管理员列表
+      </h2>
+      <div
+        style="
+          position: relative;
+          height: 100%;
+          width: 30%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          right: 2%;
+        "
+      >
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item
+            :to="{ path: '/mainMenu/student/register' }"
+            style="font-size: 17px"
+            id="active-link"
+            >首页</el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            style="font-size: 17px; color: #747474; font-weight: 600"
+            id="current-link"
+            >管理员列表</el-breadcrumb-item
+          >
+        </el-breadcrumb>
       </div>
+    </div>
+    <div
+      style="
+        height: 75%;
+        top: 1%;
+        position: relative;
+        width: 96%;
+        left: 2%;
+        background: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      "
+    >
+      <!-- 搜索部分 -->
       <div
         style="
           height: 10%;
@@ -93,44 +170,32 @@
           "
         >
           <el-button
-            class="search-button"
-            type="danger"
-            round
-            style="
-              background-color: #f89300;
-              border-radius: 5px;
-              font-size: 14px;
-              padding: 5px;
-              border: none;
-            "
+            type="primary"
+            style="background-color: #209e91; border: #209e91"
+            size="mini"
             @click="search"
-          >
-            <i
+            ><i
               class="el-icon-search"
               style="margin-right: 3px; font-size: 14px"
             ></i
-            >搜索
-          </el-button>
+            >搜索</el-button
+          >
           <el-button
-            round
-            style="
-              border-radius: 5px;
-              border: none;
-              font-size: 14px;
-              padding: 5px;
-              border: 1px solid #ccc;
-            "
+            type="primary"
+            style="background-color: #dfb81c; border: #dfb81c"
+            size="mini"
             @click="resetValue"
           >
             <i
               class="el-icon-refresh-right"
               style="margin-right: 3px; font-size: 14px"
             ></i
-            >重置
-          </el-button>
+            >重置</el-button
+          >
         </div>
       </div>
-      <div style="height: 85%; width: 100%; position: relative">
+      <!-- 数据部分 -->
+      <div style="height: 87%; width: 100%; position: relative;">
         <el-table :data="tableData" border style="width: 100%; height: 100%">
           <el-table-column
             type="selection"
@@ -183,15 +248,15 @@
             <template slot-scope="scope">
               <el-button
                 type="primary"
-                size="mini"
-                style="background-color: #ffc300; border: none"
+                style="background-color: #209e91; border: #209e91"
+                size="small"
                 @click="handleEdit(scope.row)"
                 >修改</el-button
               >
               <el-button
-                type="danger"
-                size="mini"
-                style="background-color: #fa5e00; border: none"
+                type="primary"
+                style="background-color: #e85656; border: #e85656"
+                size="small"
                 @click="singleDelete(scope.row.id)"
                 >删除</el-button
               >
@@ -204,27 +269,23 @@
           height: 6%;
           position: relative;
           width: 100%;
+          top: 4%;
           display: flex;
           justify-content: flex-end;
           align-items: center;
         "
       >
         <el-button
-          type="danger"
-          size="mini"
-          style="background-color: #fa5e00; border: none; height: 80%"
+          type="primary"
+          style="background-color: #209e91; border: #209e91"
+          size="small"
           @click="add"
           >新增</el-button
         >
         <el-button
-          type="danger"
-          size="mini"
-          style="
-            background-color: #fa5e00;
-            border: none;
-            height: 80%;
-            margin-left: 10px;
-          "
+          type="primary"
+          style="background-color: #e85656; border: #e85656"
+          size="small"
           @click="manageDelete"
           >批量删除</el-button
         >
@@ -232,14 +293,36 @@
     </div>
   </div>
 </template>
-  <style>
+<style scoped>
 @import "../../public/static/css/aside.css";
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474;
+}
 </style>
-  <script>
+<script>
 import axios from "axios";
 export default {
   data() {
     return {
+      searchWord: "",
       dialogVisible: false,
       college: "所有",
       type: "所有",
@@ -311,7 +394,7 @@ export default {
     },
     // 删除对象
     manageDelete() {
-      console.log("选择的管理员ID值",this.selectedIds);
+      console.log("选择的管理员ID值", this.selectedIds);
       if (this.selectedIds.length === 0) {
         this.$message.warning("请先选择要操作的项");
       } else {
@@ -354,7 +437,7 @@ export default {
     handleEdit(row) {
       this.$store.commit("setManageRow", row);
       this.$nextTick(() => {
-        this.$router.push("/modifyManage");
+        this.$router.push("/mainMenu/limit/modifyManage");
         // console.log("前往修改界面");
       });
     },
@@ -363,7 +446,7 @@ export default {
         .get(`${this.$store.getters.getIp}/administrators/page`, {
           params: {
             page: 1,
-            pageSize: 7,
+            pageSize: 6,
             ...(this.college !== "所有" && { college: this.college }),
             ...(this.type !== "所有" && {
               // 根据 this.type 的值添加不同的 level 参数

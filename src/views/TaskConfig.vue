@@ -179,6 +179,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      searchWord:"",
       nameInput: "",
       statusValue: "",
       taskLevel: "",

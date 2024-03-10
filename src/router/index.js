@@ -178,6 +178,10 @@ const routes = [
         component: Manager
       },
       {
+        path: 'limit/modifyManage',
+        component: modifyManage
+      },
+      {
         path: 'limit/college',
         component: College
       },
@@ -346,10 +350,6 @@ const routes = [
   {
     path: '/addManage',
     component: addManage
-  },
-  {
-    path: '/modifyManage',
-    component: modifyManage
   },
   // 附加功能管理路径
   {
