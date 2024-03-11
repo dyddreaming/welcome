@@ -98,10 +98,13 @@
             justify-content: center;
             align-items: center;
           ">
-          <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="mini" @click="search"><i
-              class="el-icon-search" style="margin-right: 3px; font-size: 14px"></i>搜索</el-button>
-          <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="mini" @click="resetValue">
-            <i class="el-icon-refresh-right" style="margin-right: 3px; font-size: 14px"></i>重置</el-button>
+          <el-button type="primary" style="background-color: #209e91; border-color: #209e91; color: #ffffff;" size="mini" @click="search">
+            <i class="el-icon-search" style="margin-right: 3px; font-size: 14px"></i>搜索
+          </el-button>
+          
+          <el-button type="primary" style="background-color: #ffffff; border-color: #e0e0e0; color: #808080;" size="mini" @click="resetValue">
+            <i class="el-icon-refresh-right" style="margin-right: 3px; font-size: 14px"></i>重置
+          </el-button>
         </div>
       </div>
       <!-- 数据表格部分 -->

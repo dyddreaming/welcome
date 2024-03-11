@@ -509,12 +509,12 @@
           width: 100%;
           height: 10%;
         ">
-        <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+        <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small"
         @click="storeForm">暂存</el-button>
+        <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small"
+        @click="resetForm">重置</el-button>
         <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
         @click="handleSubmit">提交</el-button>
-        <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
-        @click="resetForm">重置</el-button>
       </div>
     </div>
   </div>

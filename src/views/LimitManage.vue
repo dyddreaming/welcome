@@ -432,7 +432,7 @@ export default {
         });
     },
     add() {
-      this.$router.push("/addManage");
+      this.$router.push("/mainMenu/limit/addManage");
     },
     handleEdit(row) {
       this.$store.commit("setManageRow", row);

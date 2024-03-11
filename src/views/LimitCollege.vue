@@ -1,34 +1,190 @@
 <template>
-  <div class="app-main" style="position: relative">
-    <div style="
+  <div class="app-main" style="position: relative; background-color: #f0f3f4">
+    <div
+      style="
         position: relative;
-        height: 10%;
+        height: 8%;
         width: 100%;
+        background-color: rgb(28, 43, 54);
         display: flex;
         align-items: center;
-        justify-content: space-between;
-      ">
-      <div style="position:relative;height:100%;width:20%;left:40%;">
-        <h2 style="text-align: center; flex: 1">当前学院列表</h2>
+      "
+    >
+      <div
+        style="
+          position: relative;
+          width: 20%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          left: 2%;
+          background-color: rgb(28, 43, 54);
+        "
+      >
+        <i class="el-icon-search" style="color: #ffff; margin-right: 10px"></i>
+        <el-input
+          v-model="searchWord"
+          placeholder="搜索"
+          id="searchPart"
+        ></el-input>
       </div>
-      <el-button type="primary" style="
-          background-color: #fa5e00;
-          border: none;
-          margin-right: 50px;
-          border-radius: 5px;
+      <router-link
+        to="/mainMenu/help/helpFile"
+        style="
+          color: inherit;
+          text-decoration: none;
+          margin-right: 20px;
+          margin-left: auto;
+          color: #ffffff;
+        "
+      >
+        <span style="transition: color 0.3s" class="hover-color"
+          >需要帮助吗？<span style="color: #209e91">点击这里</span></span
+        >
+      </router-link>
+      <i
+        class="el-icon-s-home"
+        style="color: #ffff; margin-right: 10px; font-size: 24px"
+      ></i>
+    </div>
+    <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
+      <h2
+        style="
+          color: #747474;
+          display: inline-block;
+          left: 2%;
           position: relative;
-          left:30%;
-          width: 7%;
-        " @click="showDialog">新增</el-button>
-      <el-button type="primary" style="
-          background-color: #fa5e00;
-          border: none;
-          margin-right: 50px;
-          border-radius: 5px;
+          width: 98%;
+        "
+      >
+        学院列表
+      </h2>
+      <div
+        style="
           position: relative;
-          width: 9%;
-        " @click="groupDelete">批量删除</el-button>
-      <el-dialog :visible.sync="dialogVisible" width="30%" :before-close="closeDialog">
+          height: 100%;
+          width: 30%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          right: 2%;
+        "
+      >
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item
+            :to="{ path: '/mainMenu/student/register' }"
+            style="font-size: 17px"
+            id="active-link"
+            >首页</el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            style="font-size: 17px; color: #747474; font-weight: 600"
+            id="current-link"
+            >学院列表</el-breadcrumb-item
+          >
+        </el-breadcrumb>
+      </div>
+    </div>
+    <hr style="border: none; border-top: 2px solid #ffffff; margin-top: 10px" />
+    <div
+      style="
+        position: relative;
+        height: 74%;
+        width: 96%;
+        left: 2%;
+        overflow-y: auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      "
+    >
+      <div
+        v-for="(college, index) in collegeList"
+        :key="index"
+        style="
+          position: relative;
+          width: calc(100% / 7);
+          height: 25%;
+          float: left;
+        "
+      >
+        <div
+          class="showData"
+          style="position: relative; width: 100%; height: 100%"
+        >
+          <div
+            style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            "
+          >
+            <div
+              style="
+                position: relative;
+                left: 8%;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background: #2dacd1;
+              "
+            >
+              <span
+                style="
+                  position: absolute;
+                  top: 40%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  color: white;
+                  font-size: 14px;
+                  white-space: nowrap;
+                "
+                >{{ college.name }}</span
+              >
+              <el-checkbox
+                v-model="college.selected"
+                style="
+                  position: absolute;
+                  bottom: 25%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                "
+              ></el-checkbox>
+            </div>
+            <div
+              style="
+                text-align: center;
+                margin-top: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                left: 15%;
+              "
+            >
+              <el-button
+                type="success"
+                size="mini"
+                style="background-color: #209e91; border: none"
+                @click="handleDefine(college)"
+                >修改</el-button
+              >
+              <el-button
+                type="danger"
+                size="mini"
+                style="background-color: #e85656; border: none"
+                @click="handleDelete(college.id)"
+                >删除</el-button
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <el-dialog
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="closeDialog"
+      >
         <el-form ref="form" label-width="100px" label-position="top">
           <el-form-item label="请输入新增学院名：">
             <el-input v-model="inputValue"></el-input>
@@ -40,7 +196,11 @@
           <el-button type="primary" @click="handleConfirm">确认</el-button>
         </span>
       </el-dialog>
-      <el-dialog :visible.sync="editDialogVisible" width="30%" :before-close="closeEditDialog">
+      <el-dialog
+        :visible.sync="editDialogVisible"
+        width="30%"
+        :before-close="closeEditDialog"
+      >
         <el-form ref="form" label-width="100px" label-position="top">
           <el-form-item label="学院名：">
             <el-input v-model="collegeName"></el-input>
@@ -50,69 +210,61 @@
         <span slot="footer" class="dialog-footer">
           <el-button @click="editDialogVisible = false">取消</el-button>
           <el-button type="primary" @click="handleModify">确认</el-button>
-        </span></el-dialog>
+        </span></el-dialog
+      >
     </div>
-    <hr style="border: none; border-top: 2px solid #ffffff; margin-top: 10px" />
-    <div style="position: relative; height: 83%; width: 96%; left: 2%;overflow-y:auto">
-      <div v-for="(college, index) in collegeList" :key="index" style="
-          position: relative;
-          width: calc(100% / 7);
-          height: 25%;
-          float: left;
-        ">
-        <div class="showData" style="position: relative; width: 100%; height: 100%">
-          <div style="
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            ">
-            <div style="
-                position: relative;
-                left: 8%;
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
-                background: linear-gradient(to bottom, #fa5e00, #f79400);
-              ">
-              <span style="
-                  position: absolute;
-                  top: 40%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  color: white;
-                  font-size: 14px;
-                  white-space: nowrap;
-                ">{{ college.name }}</span>
-              <el-checkbox v-model="college.selected" style="
-                  position: absolute;
-                  bottom: 25%;
-                  left: 50%;
-                  transform: translateX(-50%);
-                "></el-checkbox>
-            </div>
-            <div style="
-                text-align: center;
-                margin-top: 10px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                left: 15%;
-              ">
-              <el-button type="success" size="mini" style="background-color: #f89300; border: none"
-                @click="handleDefine(college)">修改</el-button>
-              <el-button type="danger" size="mini" style="background-color: #fa5e00; border: none"
-                @click="handleDelete(college.id)">删除</el-button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div
+      style="
+        position: relative;
+        height: 5%;
+        width: 96%;
+        left: 2%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      "
+    >
+      <el-button
+        type="primary"
+        style="background-color: #209e91; border: #209e91"
+        size="small"
+        @click="showDialog"
+        >新增</el-button
+      >
+      <el-button
+        type="primary"
+        style="background-color: #e85656; border: #e85656"
+        size="small"
+        @click="groupDelete"
+        >批量删除</el-button
+      >
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 @import "../../public/static/css/aside.css";
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474;
+}
 </style>
 
 <script>
@@ -120,6 +272,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      searchWord: "",
       select: "",
       dialogVisible: false,
       editDialogVisible: false,
@@ -216,13 +369,14 @@ export default {
             this.doDelete();
             this.selectedIds = [];
           })
-          .catch(() => { });
+          .catch(() => {});
       }
     },
     doDelete() {
       // 发送axios请求删除学院
-      const url = `${this.$store.getters.getIp
-        }/colleges?ids=${this.selectedIds.join("&ids=")}`;
+      const url = `${
+        this.$store.getters.getIp
+      }/colleges?ids=${this.selectedIds.join("&ids=")}`;
 
       axios
         .delete(url)
@@ -260,7 +414,7 @@ export default {
           this.selectedIds.push(id);
           this.doDelete();
         })
-        .catch(() => { });
+        .catch(() => {});
     },
     // 修改学院
     handleDefine(college) {

@@ -23,7 +23,7 @@
         background-color: #ffffff;
       "
     >
-      <el-table :data="tableData" border style="width: 100%; height: 100%">
+      <el-table :data="tableData3" border style="width: 100%; height: 100%">
         <el-table-column
           type="selection"
           width="80"
@@ -114,7 +114,7 @@
 export default {
   data() {
     return {
-      tableData: [
+      tableData3: [
         {
           name: "衣架",
           sName: "张三",

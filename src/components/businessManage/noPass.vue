@@ -1,94 +1,246 @@
 <template>
-  <div class="app-main" style="position: relative">
-    <div style="
+  <div class="app-main" style="position: relative; background-color: #f0f3f4">
+    <div
+      style="
         position: relative;
-        width: 90%;
-        left: 5%;
-        height: 10%;
+        height: 8%;
+        width: 100%;
+        background-color: rgb(28, 43, 54);
         display: flex;
-      ">
-      <div style="position: relative; top: 35%; font-size: 18px;">
-        广告列表更新了4条广告
-      </div>
-      <div style="position: relative; top: 35%; left: 10%">
-        <el-button type="danger" size="mini" style="border-radius: 10px">全部已读</el-button>
-      </div>
-      <div style="position:relative;height:100%;width:20%;left:60%;">
-        <el-button type="danger" size="mini" style="
-          background-color: #fa5e00;
-          border: none;
+        align-items: center;
+      "
+    >
+      <div
+        style="
           position: relative;
-          height: 50%;
+          width: 20%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          left: 2%;
+          background-color: rgb(28, 43, 54);
+        "
+      >
+        <i class="el-icon-search" style="color: #ffff; margin-right: 10px"></i>
+        <el-input
+          v-model="searchWord"
+          placeholder="搜索"
+          id="searchPart"
+        ></el-input>
+      </div>
+      <router-link
+        to="/mainMenu/help/helpFile"
+        style="
+          color: inherit;
+          text-decoration: none;
+          margin-right: 20px;
+          margin-left: auto;
+          color: #ffffff;
+        "
+      >
+        <span style="transition: color 0.3s" class="hover-color"
+          >需要帮助吗？<span style="color: #209e91">点击这里</span></span
+        >
+      </router-link>
+      <i
+        class="el-icon-s-home"
+        style="color: #ffff; margin-right: 10px; font-size: 24px"
+      ></i>
+    </div>
+    <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
+      <h2
+        style="
+          color: #747474;
+          display: inline-block;
+          left: 2%;
+          position: relative;
+          width: 98%;
+        "
+      >
+        广告未通过列表
+      </h2>
+      <div
+        style="
+          position: relative;
+          height: 100%;
           width: 30%;
-          left:70%;
-          top: 30%;
-          border-radius: 10px;
-        " @click="goBack">返回</el-button>
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          right: 2%;
+        "
+      >
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item
+            :to="{ path: '/mainMenu/student/register' }"
+            style="font-size: 17px"
+            id="active-link"
+            >首页</el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            :to="{ path: '/mainMenu/add/business' }"
+            style="font-size: 17px; color: #747474; font-weight: 600"
+            id="pre-link"
+            >通过列表</el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            style="font-size: 17px; color: #747474; font-weight: 600"
+            id="current-link"
+            >未通过列表</el-breadcrumb-item
+          >
+        </el-breadcrumb>
       </div>
     </div>
-    <div style="
+    <div
+      style="
         position: relative;
-        height: 85%;
-        width: 90%;
-        left: 5%;
+        height: 75%;
+        width: 96%;
+        left: 2%;
+        top: 1%;
         background-color: #ffffff;
-        border-radius:8px;
+        color: #747474;
+        border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      ">
-      <div style="position: relative; height: 8%; width: 100%; font-size: 20px">
-        广告列表——未审核
-      </div>
-      <div style="position: relative; height: 92%; width: 100%">
-        <el-table :data="tableData" border>
-          <el-table-column prop="adName" label="广告名称" min-width="70" :align="'center'">
+      "
+    >
+      <div style="position: relative; height: 98%; width: 100%; top: 1%">
+        <el-table :data="tableData" border style="color: #747474">
+          <el-table-column
+            prop="adName"
+            label="广告名称"
+            min-width="70"
+            :align="'center'"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="adType" label="广告类型" min-width="70" :align="'center'">
-
+          <el-table-column
+            prop="adType"
+            label="广告类型"
+            min-width="70"
+            :align="'center'"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="meName" label="商家名称" min-width="70" :align="'center'">
-
+          <el-table-column
+            prop="meName"
+            label="商家名称"
+            min-width="70"
+            :align="'center'"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="admitTime" label="提交时间" min-width="70" :align="'center'">
-
+          <el-table-column
+            prop="admitTime"
+            label="提交时间"
+            min-width="70"
+            :align="'center'"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="setLong" label="投放时长" min-width="70" :align="'center'">
-
+          <el-table-column
+            prop="setLong"
+            label="投放时长"
+            min-width="70"
+            :align="'center'"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="operation" label="操作" min-width="100" :align="'center'">
-
+          <el-table-column
+            prop="operation"
+            label="操作"
+            min-width="100"
+            :align="'center'"
+          >
             <template slot-scope="scope">
-              <div style="
+              <div
+                style="
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                ">
-                <el-button type="danger" size="mini" @click="examine(scope.row)"
-                  style="background-color:#fa5e00">审核</el-button>
+                "
+              >
+                <el-button
+                  type="primary"
+                  style="background-color: #dfb81c; border: #dfb81c"
+                  size="small"
+                  @click="examine(scope.row)"
+                  >审核</el-button
+                >
               </div>
             </template>
           </el-table-column>
         </el-table>
       </div>
+      <div style="position:relative;height:5%;width:100%;top:3%;justify-content: flex-end;display: flex;
+      align-items: center;">
+        <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+          @click="goBack">返回</el-button>
+      </div>
     </div>
   </div>
 </template>
 
-<style></style>
+<style scoped>
+@import "../../../public/static/css/aside.css";
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+#pre-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#pre-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474;
+}
+</style>
+
 
 <script>
 import axios from "axios";
@@ -119,8 +271,7 @@ export default {
       this.$nextTick(() => {
         if (ad.status == "美食" || ad.status == "娱乐") {
           this.$router.push("/examineFood");
-        }
-        else {
+        } else {
           this.$router.push("/examinePart");
         }
       });
@@ -129,7 +280,9 @@ export default {
     getData() {
       let queryString = `?page=1&pageSize=6&isExamine=false`;
       axios
-        .get(`${this.$store.getters.getIp}/advertisements/examine/page${queryString}`)
+        .get(
+          `${this.$store.getters.getIp}/advertisements/examine/page${queryString}`
+        )
         .then((response) => {
           this.totalData = response.data.data.records;
           // console.log(this.totalData);

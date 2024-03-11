@@ -23,7 +23,7 @@
         background-color: #ffffff;
       "
     >
-      <el-table :data="tableData" border style="width: 100%; height: 100%">
+      <el-table :data="tableData1" border style="width: 100%; height: 100%">
         <el-table-column
           type="selection"
           width="80"
@@ -107,7 +107,7 @@
 export default {
   data() {
     return {
-      tableData: [
+      tableData1: [
         {
           name: "科赛获奖",
           admit: "2024-08-28 10:16:23",

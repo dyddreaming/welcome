@@ -72,7 +72,7 @@
                 </template>
                 <router-link to="/mainMenu/add/business" tag="span">
                   <el-menu-item index="5-1" class="mbutton" style="color: #ffff">商家广告管理</el-menu-item></router-link>
-                <router-link to="/mainMenu/add/message" tag="span">
+                <router-link to="/mainMenu/add/messageIntegration" tag="span">
                   <el-menu-item index="5-2" class="mbutton" style="color: #ffff">校园资讯管理</el-menu-item>
                 </router-link>
               </el-submenu>

@@ -59,6 +59,7 @@ import studentMessage from '../components/schoolMessage/studentMessage.vue'
 import clubExamine from '../components/schoolMessage/clubExamine.vue'
 import examineClub from '../components/schoolMessage/examineClub.vue'
 import advertiseSet from '@/components/businessManage/advertiseSet.vue'
+import messageIntegration from '@/components/schoolMessage/messageIntegration.vue'
 // 摄像头管理
 import video from '../views/video.vue'
 import position1 from '@/components/videoShow/position1.vue'
@@ -87,8 +88,8 @@ const routes = [
     redirect: '/login',
   },
   {
-    path:'/login',
-    component:login
+    path: '/login',
+    component: login
   },
   {
     path: '/mainMenu',
@@ -99,8 +100,8 @@ const routes = [
         component: Register,
       },
       {
-        path:'student/integration',
-        component:studentIntegration,
+        path: 'student/integration',
+        component: studentIntegration,
       },
       {
         path: 'student/import',
@@ -170,8 +171,8 @@ const routes = [
         component: Screen
       },
       {
-        path:'data/defineIntegration',
-        component:dataDefineIntegration
+        path: 'data/defineIntegration',
+        component: dataDefineIntegration
       },
       {
         path: 'limit/manager',
@@ -182,6 +183,10 @@ const routes = [
         component: modifyManage
       },
       {
+        path: 'limit/addManage',
+        component: addManage
+      },
+      {
         path: 'limit/college',
         component: College
       },
@@ -190,56 +195,68 @@ const routes = [
         component: Business
       },
       {
+        path: 'add/advertiseSet',
+        component: advertiseSet
+      },
+      {
+        path: 'add/noPass',
+        component: noPass
+      },
+      {
         path: 'add/Message',
         component: Message,
         redirect: '/mainMenu/add/Message/clubMessage',
         children: [
           {
-            path:'clubMessage',
-            component:clubMessage
+            path: 'clubMessage',
+            component: clubMessage
           },
           {
-            path:'schoolImage',
-            component:schoolImage
+            path: 'schoolImage',
+            component: schoolImage
           },
           {
-            path:'market',
-            component:market
+            path: 'market',
+            component: market
           },
           {
-            path:'schoolChat',
-            component:schoolChat
+            path: 'schoolChat',
+            component: schoolChat
           },
           {
-            path:'studentMessage',
-            component:studentMessage
+            path: 'studentMessage',
+            component: studentMessage
           },
         ]
       },
       {
-        path:"video",
-        component:video,
+        path:'add/messageIntegration',
+        component:messageIntegration
+      },
+      {
+        path: "video",
+        component: video,
         redirect: '/mainMenu/video/position1',
-        children:[
+        children: [
           {
-            path:'position1',
-            component:position1
+            path: 'position1',
+            component: position1
           },
           {
-            path:'position2',
-            component:position2
+            path: 'position2',
+            component: position2
           },
           {
-            path:'position3',
-            component:position3
+            path: 'position3',
+            component: position3
           },
           {
-            path:'position4',
-            component:position4
+            path: 'position4',
+            component: position4
           },
           {
-            path:'position5',
-            component:position5
+            path: 'position5',
+            component: position5
           },
 
         ]
@@ -247,46 +264,46 @@ const routes = [
       {
         path: 'config',
         component: Plan,
-        redirect:'/mainMenu/config/safety',
-        children:[
+        redirect: '/mainMenu/config/safety',
+        children: [
           {
-            path:'safety',
-            component:safety
+            path: 'safety',
+            component: safety
           },
           {
-            path:'messageNote',
-            component:messageNote
+            path: 'messageNote',
+            component: messageNote
           },
           {
-            path:'dataCopy',
-            component:dataCopy
+            path: 'dataCopy',
+            component: dataCopy
           },
           {
-            path:'versionSelect',
-            component:versionSelect
+            path: 'versionSelect',
+            component: versionSelect
           },
         ],
       },
       {
         path: 'help',
         component: Help,
-        redirect:"/mainMenu/help/helpFile",
-        children:[
+        redirect: "/mainMenu/help/helpFile",
+        children: [
           {
-            path:"helpFile",
-            component:helpFile,
+            path: "helpFile",
+            component: helpFile,
           },
           {
-            path:"questionAnswer",
-            component:questionAnswer,
+            path: "questionAnswer",
+            component: questionAnswer,
           },
           {
-            path:"technology",
-            component:technology,
+            path: "technology",
+            component: technology,
           },
           {
-            path:"feedback",
-            component:feedback,
+            path: "feedback",
+            component: feedback,
           },
         ]
       },
@@ -347,15 +364,7 @@ const routes = [
     component: taskPart
   },
   // 权限管理路径
-  {
-    path: '/addManage',
-    component: addManage
-  },
   // 附加功能管理路径
-  {
-    path: '/noPass',
-    component: noPass
-  },
   {
     path: '/foodDetail',
     component: foodDetail
@@ -385,12 +394,8 @@ const routes = [
     component: clubExamine
   },
   {
-    path:'/examineClub',
-    component:examineClub
-  },
-  {
-    path:'/advertiseSet',
-    component:advertiseSet
+    path: '/examineClub',
+    component: examineClub
   },
 ]
 

@@ -1,78 +1,129 @@
 <template>
-  <div class="app-main" style="position: relative">
+  <div class="app-main" style="position: relative; background-color: #f0f3f4">
     <div style="
         position: relative;
-        height: 87%;
+        height: 8%;
+        width: 100%;
+        background-color: rgb(28, 43, 54);
+        display: flex;
+        align-items: center;
+      ">
+      <div style="
+          position: relative;
+          width: 20%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          left: 2%;
+          background-color: rgb(28, 43, 54);
+        ">
+        <i class="el-icon-search" style="color: #ffff; margin-right: 10px"></i>
+        <el-input v-model="searchWord" placeholder="搜索" id="searchPart"></el-input>
+      </div>
+      <router-link to="/mainMenu/help/helpFile" style="
+          color: inherit;
+          text-decoration: none;
+          margin-right: 20px;
+          margin-left: auto;
+          color: #ffffff;
+        ">
+        <span style="transition: color 0.3s" class="hover-color">需要帮助吗？<span style="color: #209e91">点击这里</span></span>
+      </router-link>
+      <i class="el-icon-s-home" style="color: #ffff; margin-right: 10px; font-size: 24px"></i>
+    </div>
+    <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
+      <h2 style="
+          color: #747474;
+          display: inline-block;
+          left: 2%;
+          position: relative;
+          width: 98%;
+        ">
+        广告通过列表
+      </h2>
+      <div style="
+          position: relative;
+          height: 100%;
+          width: 30%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          right: 2%;
+        ">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px"
+            id="active-link">首页</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 17px; color: #747474; font-weight: 600"
+            id="current-link">通过列表</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+    </div>
+    <div style="
+        position: relative;
+        height: 74%;
         width: 96%;
         left: 2%;
-        top:5%;
+        top: 1%;
         background-color: #ffffff;
-        border-radius:8px;
+        border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       ">
-      <div style="position: relative; height: 8%; width: 100%; font-size: 20px">
-        广告列表——审核通过
-      </div>
-      <div style="position: relative; height: 92%; width: 100%">
-        <el-table :data="tableData" border>
+      <div style="position: relative; height: 92%; width: 100%; top: 1%">
+        <el-table :data="tableData" border style="position: relative; color: #747474">
           <el-table-column prop="adName" label="广告名称" min-width="70" :align="'center'">
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="adType" label="广告类型" min-width="70" :align="'center'">
-
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="meName" label="商家名称" min-width="70" :align="'center'">
-
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="admitTime" label="提交时间" min-width="70" :align="'center'">
-
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="setTime" label="投放时间" min-width="70" :align="'center'">
-
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="setLong" label="投放时长" min-width="70" :align="'center'">
-
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="charge" label="收取费用/元" min-width="70" :align="'center'">
-
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="status" label="投放状态" min-width="70" :align="'center'">
-
             <template slot="header" slot-scope="scope">
               <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="operation" label="操作" min-width="140" :align="'center'">
-
             <template slot-scope="scope">
               <div style="display: flex">
-                <el-button type="danger" size="mini"
-                  :style="{ backgroundColor: scope.row.status === '正常投放' ? '#cccccc' : '#FA5E00', border: 'none' }"
-                  @click="putAd(scope.row)">投放</el-button>
-                <el-button type="danger" size="mini"
-                  :style="{ backgroundColor: scope.row.status === '暂停投放' ? '#cccccc' : '#FA5E00', border: 'none' }"
-                  @click="pauseAd(scope.row)">暂停投放</el-button>
-                <el-button type="danger" size="mini" style="background-color:#FA5E00"
+                <el-button type="danger" size="mini" :style="{
+          backgroundColor:
+            scope.row.status === '正常投放' ? '#cccccc' : '#e85656',
+          border: 'none',
+        }" @click="putAd(scope.row)">投放</el-button>
+                <el-button type="danger" size="mini" :style="{
+          backgroundColor:
+            scope.row.status === '暂停投放' ? '#cccccc' : '#e85656',
+          border: 'none',
+        }" @click="pauseAd(scope.row)">暂停投放</el-button>
+                <el-button type="danger" size="mini" style="background-color: #209e91;border:none;"
                   @click="seeDetail(scope.row)">查看</el-button>
               </div>
             </template>
@@ -80,33 +131,47 @@
         </el-table>
       </div>
     </div>
-    <div style="position: relative; width: 90%; left: 5%; height: 10%;display:flex;top:5%;">
-      <el-button type="danger" size="mini" style="
-            background-color: #fa5e00;
-            border: none;
-            position: relative;
-            height: 50%;
-            width: 8%;
-            left: 86%;
-            top: 20%;
-            border-radius: 10px;
-          " @click="goToSet">广告设置</el-button>
-      <el-button type="danger" size="mini" style="
-          background-color: #fa5e00;
-          border: none;
-          position: relative;
-          height: 50%;
-          width: 8%;
-          left: 86%;
-          top: 20%;
-          border-radius: 10px;
-        " @click="goNoPass">待审核列表</el-button>
+    <div style="
+        position: relative;
+        width: 96%;
+        left: 2%;
+        height: 6%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        top: 2%;
+      ">
+      <el-button type="primary" style="background-color: #209e91; border: #209e91" size="small"
+        @click="goToSet">广告设置</el-button>
+        <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c" size="small"
+        @click="goNoPass">待审核列表</el-button>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 @import "../../public/static/css/aside.css";
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474;
+}
 </style>
 
 <script>
@@ -114,6 +179,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      searchWord: "",
       totalData: null,
       tableData: [
         // {
@@ -135,16 +201,15 @@ export default {
   methods: {
     // 查看未通过列表
     goNoPass() {
-      this.$router.push("/noPass");
+      this.$router.push("/mainMenu/add/noPass");
     },
     // 查看详情界面
     seeDetail(ad) {
       this.$store.commit("setSeeAdID", ad.id);
       this.$nextTick(() => {
-        if (ad.status == "美食" || ad.status == "娱乐") {
+        if (ad.adType == "美食" || ad.adType == "娱乐") {
           this.$router.push("/foodDetail");
-        }
-        else {
+        } else {
           this.$router.push("/workDetail");
         }
       });
@@ -153,7 +218,9 @@ export default {
     getData() {
       let queryString = `?page=1&pageSize=6&isExamine=true`;
       axios
-        .get(`${this.$store.getters.getIp}/advertisements/examine/page${queryString}`)
+        .get(
+          `${this.$store.getters.getIp}/advertisements/examine/page${queryString}`
+        )
         .then((response) => {
           this.totalData = response.data.data.records;
           this.totalData.forEach((item) => {
@@ -194,7 +261,7 @@ export default {
     },
     // 广告设置
     goToSet() {
-      this.$router.push("/advertiseSet");
+      this.$router.push("/mainMenu/add/advertiseSet");
     },
     // 投放广告
     putAd(ad) {
@@ -209,10 +276,15 @@ export default {
             status: 1,
           };
           const queryString = Object.keys(data)
-            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-            .join('&');
+            .map(
+              (key) =>
+                `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+            )
+            .join("&");
           axios
-            .put(`${this.$store.getters.getIp}/advertisements/status?${queryString}`)
+            .put(
+              `${this.$store.getters.getIp}/advertisements/status?${queryString}`
+            )
             .then((response) => {
               // console.log(response.data);
               if (response.data.code) {
@@ -231,44 +303,50 @@ export default {
     },
     // 暂停投放广告
     pauseAd(ad) {
-      this.$prompt('请输入暂停投放原因', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        inputPlaceholder: '请输入暂停投放原因',
-      }).then(({ value }) => {
-        if (value == null) {
-          this.$message.error("请输入暂停投放原因");
-        }
-        else {
-          let data = {
-            id: parseInt(ad.id),
-            status: 1,
-            feedback: value
-          };
+      this.$prompt("请输入暂停投放原因", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        inputPlaceholder: "请输入暂停投放原因",
+      })
+        .then(({ value }) => {
+          if (value == null) {
+            this.$message.error("请输入暂停投放原因");
+          } else {
+            let data = {
+              id: parseInt(ad.id),
+              status: 1,
+              feedback: value,
+            };
 
-          const queryString = Object.keys(data)
-            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-            .join('&');
+            const queryString = Object.keys(data)
+              .map(
+                (key) =>
+                  `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+              )
+              .join("&");
 
-          axios
-            .put(`${this.$store.getters.getIp}/advertisements/status?${queryString}`)
-            .then((response) => {
-              // console.log(response.data);
-              if (response.data.code) {
-                this.$message({
-                  message: "暂停投放成功",
-                  type: "success",
-                });
-                ad.status = "暂停投放";
-              }
-            })
-            .catch((error) => {
-              console.error("修改错误:", error);
-            });
-        }
-      }).catch(() => {
-        console.log('取消暂停投放');
-      });
+            axios
+              .put(
+                `${this.$store.getters.getIp}/advertisements/status?${queryString}`
+              )
+              .then((response) => {
+                // console.log(response.data);
+                if (response.data.code) {
+                  this.$message({
+                    message: "暂停投放成功",
+                    type: "success",
+                  });
+                  ad.status = "暂停投放";
+                }
+              })
+              .catch((error) => {
+                console.error("修改错误:", error);
+              });
+          }
+        })
+        .catch(() => {
+          console.log("取消暂停投放");
+        });
     },
   },
 };
