@@ -4,9 +4,10 @@
     style="
       position: relative;
       background-color: #ffffff;
-      height: 50%;
+      border-radius: 8px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      height: 65%;
       width: 100%;
-      border-radius: 5px;
     "
   >
     <div
@@ -53,18 +54,18 @@
         display: flex;
       "
     >
-    <input
-    type="password"
-    style="
-      width: 50%;
-      height: 80%;
-      box-sizing: border-box;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    "
-    v-model="oldPassWord"
-  />
+      <input
+        type="password"
+        style="
+          width: 50%;
+          height: 80%;
+          box-sizing: border-box;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        "
+        v-model="oldPassWord"
+      />
     </div>
     <div
       style="
@@ -104,20 +105,23 @@
     >
       最少5个字符
     </div>
-    <div style="position:relative;height:10%;width:100%;">
-      <el-button
-      type="danger"
-      size="mini"
+    <div
       style="
-      position:relative;
-        background-color: #fa5e00;
-        border: none;
-        height: 100%;
-        margin-left: 91%;
-        border-radius:8px;
+        position: relative;
+        height: 10%;
+        width: 96%;
+        left: 2%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
       "
-      >保存更改</el-button
     >
+      <el-button
+        type="primary"
+        style="background-color: #209e91; border: #209e91"
+        size="small"
+        >保存更改</el-button
+      >
     </div>
   </div>
 </template>
@@ -129,8 +133,8 @@
 export default {
   data() {
     return {
-      oldPassword:"",
-      newPassword:"",
+      oldPassWord: "",
+      newPassWord: "",
     };
   },
   methods: {},

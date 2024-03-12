@@ -563,7 +563,7 @@
       <div
         style="
           position: relative;
-          height: 33%;
+          height: 22%;
           width: 100%;
           background-color: #ffffff;
           border-radius: 8px;
@@ -627,7 +627,7 @@
             <el-table-column
               prop="admit"
               label="提交时间"
-              width="130px"
+              width="180px"
               align="center"
             ></el-table-column>
             <el-table-column label="操作" align="center">
@@ -672,6 +672,57 @@
           >
         </div>
       </div>
+      <!-- 学生留言 -->
+      <div
+        style="
+        top:1%;
+          position: relative;
+          height: 10%;
+          width: 100%;
+          background-color: #ffffff;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        "
+      >
+      <div
+          style="
+            position: relative;
+            height: 10%;
+            width: 98%;
+            left: 1%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            color: #747474;
+            font-size: 18px;
+          "
+        >
+          学生留言
+        </div>
+         <div
+          style="position: relative; height: 86%; top: 1%; width: 98%; left: 1%;background-color:#209e91"
+        >
+        <el-table :data="tableData16" border style="width: 100%; height: 100%">
+          <el-table-column
+            prop="inName"
+            label="留言者昵称"
+            width="130px"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="admit"
+            label="留言时间"
+            width="180px"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="content"
+            label="留言内容"
+            align="center"
+          ></el-table-column>
+        </el-table>
+        </div>
+    </div>
     </div>
   </div>
 </template>
@@ -779,6 +830,18 @@ export default {
             ID: "2021111111",
             admit: "2024-08-28 10:16:23",
           },
+        ],
+        tableData16:[
+          {
+            inName:"张三",
+            admit:"2023-03-11 12:34:56",
+            content:"处理较慢，影响体验感",
+          }, 
+          {
+            inName:"张三",
+            admit:"2023-03-11 12:34:56",
+            content:"处理较慢，影响体验感",
+          },        
         ],
     };
   },
