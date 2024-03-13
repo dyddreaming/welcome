@@ -1,166 +1,400 @@
 <template>
-  <div class="app-main" style="position: relative;background-color: #f0f3f4;">
+  <div class="app-main" style="position: relative; background-color: #f0f3f4">
     <div
-      style="position: relative; height: 8%; width: 100%; background-color: rgb(28, 43, 54); display: flex; align-items: center;">
+      style="
+        position: relative;
+        height: 8%;
+        width: 100%;
+        background-color: rgb(28, 43, 54);
+        display: flex;
+        align-items: center;
+      "
+    >
       <div
-        style="position:relative;width:20%;height:100%;display: flex; align-items: center;left:2%;background-color:rgb(28, 43, 54);">
-        <i class="el-icon-search" style="color: #ffff;margin-right:10px;"></i>
-        <el-input v-model="search" placeholder="搜索" id="searchPart"></el-input>
+        style="
+          position: relative;
+          width: 20%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          left: 2%;
+          background-color: rgb(28, 43, 54);
+        "
+      >
+        <i class="el-icon-search" style="color: #ffff; margin-right: 10px"></i>
+        <el-input
+          v-model="search"
+          placeholder="搜索"
+          id="searchPart"
+        ></el-input>
       </div>
-      <router-link to="/mainMenu/help/helpFile"
-        style="color: inherit; text-decoration: none; margin-right: 20px; margin-left: auto; color: #ffffff;">
-        <span style="transition: color 0.3s;" class="hover-color">需要帮助吗？<span style="color: #209e91;">点击这里</span></span>
+      <router-link
+        to="/mainMenu/help/helpFile"
+        style="
+          color: inherit;
+          text-decoration: none;
+          margin-right: 20px;
+          margin-left: auto;
+          color: #ffffff;
+        "
+      >
+        <span style="transition: color 0.3s" class="hover-color"
+          >需要帮助吗？<span style="color: #209e91">点击这里</span></span
+        >
       </router-link>
-      <i class="el-icon-s-home" style="color: #ffff;margin-right:10px; font-size: 24px;"></i>
+      <i
+        class="el-icon-s-home"
+        style="color: #ffff; margin-right: 10px; font-size: 24px"
+      ></i>
     </div>
-    <div style="margin-top: 10px; width:100%;height:9%;display:flex;">
-      <h2 style="
+    <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
+      <h2
+        style="
           color: #747474;
           display: inline-block;
           left: 2%;
-          position:relative;
-          width:98%;
-        ">
+          position: relative;
+          width: 98%;
+        "
+      >
         学生信息管理
       </h2>
       <div
-        style="position: relative; height: 100%; width: 30%;display: flex; align-items: center; justify-content: flex-end;right:2%;">
+        style="
+          position: relative;
+          height: 100%;
+          width: 30%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          right: 2%;
+        "
+      >
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px;"
-            id="active-link">首页</el-breadcrumb-item>
-          <el-breadcrumb-item style="font-size: 17px; color: #747474;font-weight:600;"
-            id="current-link">学生信息管理</el-breadcrumb-item>
+          <el-breadcrumb-item
+            :to="{ path: '/mainMenu/student/register' }"
+            style="font-size: 17px"
+            id="active-link"
+            >首页</el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            style="font-size: 17px; color: #747474; font-weight: 600"
+            id="current-link"
+            >学生信息管理</el-breadcrumb-item
+          >
         </el-breadcrumb>
       </div>
     </div>
     <!-- 横线 -->
-    <hr style="
+    <hr
+      style="
         width: 99%;
         border: 1px solid #ffffff;
         margin-top: 5px;
         position: relative;
-      " />
+      "
+    />
     <!-- 筛选部分 -->
-    <div style="
+    <div
+      style="
         width: 100%;
         height: 10%;
         position: relative;
         display: flex;
-        top:1%;
+        top: 1%;
         align-items: center;
         justify-content: space-between;
-      ">
-      <div style="flex: 1; position: relative; height: 100%; left: 2%;width:96%;top:20%;">
+      "
+    >
+      <div
+        style="
+          flex: 1;
+          position: relative;
+          height: 100%;
+          left: 2%;
+          width: 96%;
+          top: 20%;
+        "
+      >
         <span>学院:</span>
-        <el-select v-model="collegeValue" placeholder="请选择" style="left: 3%; position: relative; width: 70%">
-          <el-option v-for="item in CollegeOptions" :key="item.value" :label="item.label" :value="item.value">
+        <el-select
+          v-model="collegeValue"
+          placeholder="请选择"
+          style="left: 3%; position: relative; width: 70%"
+        >
+          <el-option
+            v-for="item in CollegeOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
           </el-option>
         </el-select>
       </div>
-      <div style="flex: 1; position: relative; height: 100%;top:20%;">
+      <div style="flex: 1; position: relative; height: 100%; top: 20%">
         <span>类别:</span>
-        <el-select v-model="typeValue" placeholder="请选择" style="left: 3%; position: relative; width: 70%">
-          <el-option v-for="item in TypeOptions" :key="item.value" :label="item.label" :value="item.value">
+        <el-select
+          v-model="typeValue"
+          placeholder="请选择"
+          style="left: 3%; position: relative; width: 70%"
+        >
+          <el-option
+            v-for="item in TypeOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
           </el-option>
         </el-select>
       </div>
-      <div style="flex: 1; position: relative; height: 100%;top:20%;">
+      <div style="flex: 1; position: relative; height: 100%; top: 20%">
         <span>任务完成度:</span>
-        <el-input v-model="completeDegree" placeholder="输入0-100" style="position: relative; left: 3%; width: 70%">
+        <el-input
+          v-model="completeDegree"
+          placeholder="输入0-100"
+          style="position: relative; left: 3%; width: 70%"
+        >
         </el-input>
       </div>
     </div>
     <!-- 表格 -->
-    <div style="width: 96%;left:2%; height: 62%; position: relative; top: 1%;background-color:#ffffff;border-radius:8px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
-      <div style="position:relative;width:98%;left:1%;height:98%;top:1%">
+    <div
+      style="
+        width: 96%;
+        left: 2%;
+        height: 62%;
+        position: relative;
+        top: 1%;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      "
+    >
+      <div
+        style="position: relative; width: 98%; left: 1%; height: 98%; top: 1%"
+      >
         <el-table :data="tableData" @selection-change="handleSelectionChange">
-          <el-table-column type="selection" label="选择" width="50" :align="centerAlign">
+          <el-table-column
+            type="selection"
+            label="选择"
+            width="50"
+            :align="centerAlign"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="name" label="姓名" min-width="50" :align="centerAlign">
-
+          <el-table-column
+            prop="name"
+            label="姓名"
+            min-width="50"
+            :align="centerAlign"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="gender" label="性别" min-width="50" :align="centerAlign" :formatter="formatGender">
-
+          <el-table-column
+            prop="gender"
+            label="性别"
+            min-width="50"
+            :align="centerAlign"
+            :formatter="formatGender"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="id" label="学号" min-width="100" :align="centerAlign">
-
+          <el-table-column
+            prop="id"
+            label="学号"
+            min-width="100"
+            :align="centerAlign"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="major" label="专业" min-width="160" :align="centerAlign">
-
+          <el-table-column
+            prop="major"
+            label="专业"
+            min-width="160"
+            :align="centerAlign"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="username" label="用户名" min-width="100" :align="centerAlign">
-
+          <el-table-column
+            prop="username"
+            label="用户名"
+            min-width="100"
+            :align="centerAlign"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="isRegistered" label="注册" min-width="100" :align="centerAlign"
-            :formatter="formatRegister">
-
+          <el-table-column
+            prop="isRegistered"
+            label="注册"
+            min-width="100"
+            :align="centerAlign"
+            :formatter="formatRegister"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="completion" label="任务完成度/%" min-width="100" :align="centerAlign">
-
+          <el-table-column
+            prop="completion"
+            label="任务完成度/%"
+            min-width="100"
+            :align="centerAlign"
+          >
             <template slot="header" slot-scope="scope">
-              <span style="display: inline-block; width: 100%; text-align: center">{{ scope.column.label }}</span>
+              <span
+                style="display: inline-block; width: 100%; text-align: center"
+                >{{ scope.column.label }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column prop="code" label="密码" min-width="100" :align="centerAlign">
-
+          <el-table-column
+            prop="code"
+            label="密码"
+            min-width="100"
+            :align="centerAlign"
+          >
             <template slot-scope="scope">
               <div style="text-align: center">
                 <!-- 按钮元素放在这里 -->
-                <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small"
-                  @click="singleReset(scope.row.id)">重置</el-button>
+                <el-button
+                  type="primary"
+                  style="background-color: #dfb81c; border: #dfb81c"
+                  size="small"
+                  @click="singleReset(scope.row.id)"
+                  >重置</el-button
+                >
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="operation" label="操作" min-width="100" :align="centerAlign">
-
+          <el-table-column
+            prop="operation"
+            label="操作"
+            min-width="100"
+            :align="centerAlign"
+          >
             <template slot-scope="scope">
               <div style="text-align: center">
                 <!-- 按钮元素放在这里 -->
-                <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small"
-                  @click="singleDelete(scope.row.id)">删除</el-button>
+                <el-button
+                  type="primary"
+                  style="background-color: #e85656; border: #e85656"
+                  size="small"
+                  @click="singleDelete(scope.row.id)"
+                  >删除</el-button
+                >
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="message" label="详细信息" min-width="100" :align="centerAlign">
-
+          <el-table-column
+            prop="message"
+            label="详细信息"
+            min-width="100"
+            :align="centerAlign"
+          >
             <template slot-scope="scope">
               <div style="text-align: center">
                 <!-- 按钮元素和图标放在一起 -->
-                <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
-                  @click="goToDetail(scope.row)"><i class="el-icon-right"></i></el-button>
+                <el-button
+                  type="primary"
+                  style="background-color: #209e91; border: #209e91"
+                  size="small"
+                  @click="goToDetail(scope.row)"
+                  ><i class="el-icon-right"></i
+                ></el-button>
               </div>
             </template>
           </el-table-column>
         </el-table>
       </div>
     </div>
-    <!-- 操作按钮 -->
-    <div style="position:relative; height:7%; width:96%; top:1%; left:2%; display: flex; justify-content: flex-end; align-items: center;">
-      <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small" @click="codeReset">批量重置</el-button>
-      <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small" @click="studentDelete">批量删除</el-button>
-      <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small">批量提醒</el-button>
+    <div
+      style="
+        position: relative;
+        height: 7%;
+        width: 96%;
+        top: 1%;
+        left: 2%;
+        display: flex;
+      "
+    >
+      <!-- 分页 -->
+      <div style="position:relative;height:100%;width:50%; display: flex;
+      justify-content: flex-start;
+      align-items: center;">
+        <!-- 上一页按钮 -->
+        <button class="changePage" @click="goToPrevPage" :disabled="currentPage === 1" style="position:relative;margin-right:10px">上一页</button>
+        <!-- 显示页码的部分 -->
+        <button v-for="pageNumber in displayedPages" :key="pageNumber" @click="goToPage(pageNumber)" :class="{ 'active': pageNumber === currentPage, 'pagination': true }"
+        >
+          {{ pageNumber }}
+        </button>
+        <!-- 下一页按钮 -->
+        <button class="changePage" @click="goToNextPage" :disabled="currentPage === totalPages" style="position:relative;margin-left:10px">下一页</button>
+      </div>
+      <div
+        style="
+          position: relative;
+          height: 100%;
+          width: 50%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        "
+      >
+        <el-button
+          type="primary"
+          style="background-color: #dfb81c; border: #dfb81c"
+          size="small"
+          @click="codeReset"
+          >批量重置</el-button
+        >
+        <el-button
+          type="primary"
+          style="background-color: #e85656; border: #e85656"
+          size="small"
+          @click="studentDelete"
+          >批量删除</el-button
+        >
+        <el-button
+          type="primary"
+          style="background-color: #209e91; border: #209e91"
+          size="small"
+          >批量提醒</el-button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -186,9 +420,27 @@
 /deep/ #searchPart {
   background-color: rgb(28, 43, 54);
   border: none;
-  color: #747474
+  color: #747474;
+}
+/deep/ .pagination{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:40px;
+  height:30px;
+}
+/deep/ .changePage{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:60px;
+  height:30px;
 }
 
+/deep/ .active {
+  background-color: #209e91;
+  color: #ffffff;
+}
 </style>
 
 <script>
@@ -202,8 +454,8 @@ export default {
       CollegeOptions: [
         {
           value: "所有",
-          label: "所有"
-        }
+          label: "所有",
+        },
       ],
       TypeOptions: [
         {
@@ -223,11 +475,47 @@ export default {
       selectedIds: [],
       ids: [],
       CollegeList: [],
+      currentPage: 1,
+      pageSize: 7,
+      totalPages: 10,
     };
+  },
+  computed: {
+    displayedPages() {
+      const maxDisplayedPages = 5; // 最多显示的页码数量
+      const pages = [];
+      let startPage = Math.max(1, this.currentPage - Math.floor(maxDisplayedPages / 2));
+      let endPage = Math.min(this.totalPages, startPage + maxDisplayedPages - 1);
+      
+      if (endPage - startPage < maxDisplayedPages - 1) {
+        startPage = Math.max(1, endPage - maxDisplayedPages + 1);
+      }
+      
+      if (startPage > 1) {
+        pages.push(1); // 添加第一页
+        if (startPage > 2) {
+          pages.push('...'); // 添加省略号
+        }
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      
+      if (endPage < this.totalPages) {
+        if (endPage < this.totalPages - 1) {
+          pages.push('...'); // 添加省略号
+        }
+        pages.push(this.totalPages); // 添加最后一页
+      }
+      
+      return pages;
+    }
   },
   created() {
     this.fetchCollegesData();
-    this.getData();
+    // this.getData();
+    this.goToPage(1);
   },
   watch: {
     collegeValue() {
@@ -258,7 +546,7 @@ export default {
     // 获取表格数据
     getData() {
       // 构造查询字符串
-      let queryString = `?page=1&pageSize=7`;
+      let queryString = `?page=${this.currentPage}&pageSize=${this.pageSize}`;
       const category = this.typeValue === "本科生" ? 0 : 1;
       if (this.collegeValue == "所有") {
         queryString += `&category=${category}&compDegree=${this.completeDegree}`;
@@ -303,12 +591,13 @@ export default {
           .then(() => {
             this.doReset();
           })
-          .catch(() => { });
+          .catch(() => {});
       }
     },
     doReset() {
-      const url = `${this.$store.getters.getIp
-        }/students/reset?ids=${this.selectedIds.join("&ids=")}`;
+      const url = `${
+        this.$store.getters.getIp
+      }/students/reset?ids=${this.selectedIds.join("&ids=")}`;
       axios
         .put(url)
         .then((response) => {
@@ -336,13 +625,14 @@ export default {
           .then(() => {
             this.doDelete();
           })
-          .catch(() => { });
+          .catch(() => {});
       }
     },
     doDelete() {
       // 发送axios请求删除学生
-      const url = `${this.$store.getters.getIp
-        }/students?ids=${this.selectedIds.join("&ids=")}`;
+      const url = `${
+        this.$store.getters.getIp
+      }/students?ids=${this.selectedIds.join("&ids=")}`;
       axios
         .delete(url)
         .then((response) => {
@@ -373,7 +663,7 @@ export default {
         .then((response) => {
           this.CollegeList = response.data.data;
           console.log("学院数据:", this.CollegeList);
-          this.CollegeList.forEach(college => {
+          this.CollegeList.forEach((college) => {
             this.CollegeOptions.push({
               value: college.name,
               label: college.name,
@@ -384,6 +674,23 @@ export default {
           console.error("Error fetching data:", error);
           console.log(this.$store.getters.getIp);
         });
+    },
+    // 获取分页数据
+    goToPage(pageNumber) {
+      this.currentPage = pageNumber;
+      this.getData();
+    },
+    goToPrevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.getData();
+      }
+    },
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.getData();
+      }
     },
   },
 };

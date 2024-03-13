@@ -122,7 +122,6 @@
                 <!-- 任务名称和ID -->
                 <div>
                   <div style="color: #747474">{{ scope.row.name }}</div>
-                  <div>ID: {{ scope.row.id }}</div>
                 </div>
               </div>
             </template>
@@ -154,6 +153,31 @@
             </template></el-table-column></el-table>
       </div>
     </div>
+    <div
+      style="
+        position: relative;
+        height: 5%;
+        width: 96%;
+        top: 1%;
+        left: 2%;
+        display: flex;
+      "
+    >
+      <!-- 分页 -->
+      <div style="position:relative;height:100%;width:50%; 
+      left:50%;display: flex;
+      justify-content: flex-end;
+      align-items: center;">
+        <!-- 上一页按钮 -->
+        <button class="changePage" @click="goToPrevPage" :disabled="currentPage === 1" style="position:relative;margin-right:10px">上一页</button>
+        <!-- 显示页码的部分 -->
+        <button v-for="pageNumber in displayedPages" :key="pageNumber" @click="goToPage(pageNumber)" :class="{ 'active': pageNumber === currentPage, 'pagination': true }"
+        >
+          {{ pageNumber }}
+        </button>
+        <!-- 下一页按钮 -->
+        <button class="changePage" @click="goToNextPage" :disabled="currentPage === totalPages" style="position:relative;margin-left:10px">下一页</button>
+      </div></div>
   </div>
 </template>
 </el-table-column>
@@ -185,6 +209,26 @@
   border: none;
   color: #747474
 }
+
+/deep/ .pagination{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:40px;
+  height:30px;
+}
+/deep/ .changePage{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:60px;
+  height:30px;
+}
+
+/deep/ .active {
+  background-color: #209e91;
+  color: #ffffff;
+}
 </style>
 <script>
 import axios from "axios";
@@ -197,6 +241,10 @@ export default {
       startTime: "",
       endTime: "",
       nameInput: "",
+      CollegeList: [],
+      currentPage: 1,
+      pageSize: 7,
+      totalPages: 10,
       statusOptions: [
         {
           value: "",
@@ -215,8 +263,40 @@ export default {
       totalData: {},
     };
   },
+  computed: {
+    displayedPages() {
+      const maxDisplayedPages = 5; // 最多显示的页码数量
+      const pages = [];
+      let startPage = Math.max(1, this.currentPage - Math.floor(maxDisplayedPages / 2));
+      let endPage = Math.min(this.totalPages, startPage + maxDisplayedPages - 1);
+      
+      if (endPage - startPage < maxDisplayedPages - 1) {
+        startPage = Math.max(1, endPage - maxDisplayedPages + 1);
+      }
+      
+      if (startPage > 1) {
+        pages.push(1); // 添加第一页
+        if (startPage > 2) {
+          pages.push('...'); // 添加省略号
+        }
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      
+      if (endPage < this.totalPages) {
+        if (endPage < this.totalPages - 1) {
+          pages.push('...'); // 添加省略号
+        }
+        pages.push(this.totalPages); // 添加最后一页
+      }
+      
+      return pages;
+    }
+  },
   created() {
-    this.loadData();
+    this.goToPage(1);
   },
   methods: {
     seeDetail(row) {
@@ -234,7 +314,7 @@ export default {
     loadData() {
       // 每次请求前进行清空
       this.tableData = [];
-      let queryString = `?page=1&pageSize=6`;
+      let queryString = `?page=${this.currentPage}&pageSize=${this.pageSize}`;
       if (this.nameInput != "") {
         queryString += `&name=${this.nameInput}`;
       }
@@ -303,8 +383,25 @@ export default {
       }
     },
     search() {
+      this.goToPage(1);
+    },
+    // 获取分页数据
+    goToPage(pageNumber) {
+      this.currentPage = pageNumber;
       this.loadData();
-    }
+    },
+    goToPrevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.loadData();
+      }
+    },
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.loadData();
+      }
+    },
   },
 };
 </script>

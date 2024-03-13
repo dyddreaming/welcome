@@ -198,7 +198,6 @@
               color: #ffffff;
             "
             size="mini"
-            @click="search"
           >
             <i
               class="el-icon-search"
@@ -314,34 +313,81 @@
         </el-table>
       </div>
     </div>
-
-    <!-- 批量删除按钮 -->
     <div
       style="
         position: relative;
-        height: 5%;
-        top: 2%;
+        height: 7%;
         width: 96%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        top: 1%;
         left: 2%;
+        display: flex;
       "
     >
-      <el-button
-        type="primary"
-        style="background-color: #209e91; border: #209e91"
-        size="small"
-        @click="taskRelease"
-        >发布任务</el-button
+      <!-- 分页 -->
+      <div
+        style="
+          position: relative;
+          height: 100%;
+          width: 50%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        "
       >
-      <el-button
-        type="primary"
-        style="background-color: #e85656; border: #e85656"
-        size="small"
-        @click="taskDelete"
-        >批量删除</el-button
+        <!-- 上一页按钮 -->
+        <button
+          class="changePage"
+          @click="goToPrevPage"
+          :disabled="currentPage === 1"
+          style="position: relative; margin-right: 10px"
+        >
+          上一页
+        </button>
+        <!-- 显示页码的部分 -->
+        <button
+          v-for="pageNumber in displayedPages"
+          :key="pageNumber"
+          @click="goToPage(pageNumber)"
+          :class="{ active: pageNumber === currentPage, pagination: true }"
+        >
+          {{ pageNumber }}
+        </button>
+        <!-- 下一页按钮 -->
+        <button
+          class="changePage"
+          @click="goToNextPage"
+          :disabled="currentPage === totalPages"
+          style="position: relative; margin-left: 10px"
+        >
+          下一页
+        </button>
+      </div>
+      <!-- 操作按钮 -->
+      <div
+        style="
+          position: relative;
+          height: 100%;
+          width: 50%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        "
       >
+        <el-button
+          type="primary"
+          style="background-color: #209e91; border: #209e91"
+          size="small"
+          @click="taskRelease"
+          >发布任务</el-button
+        >
+        <el-button
+          type="primary"
+          style="background-color: #e85656; border: #e85656"
+          size="small"
+          @click="taskDelete"
+          >批量删除</el-button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -368,6 +414,25 @@
   background-color: rgb(28, 43, 54);
   border: none;
   color: #747474;
+}
+/deep/ .pagination{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:40px;
+  height:30px;
+}
+/deep/ .changePage{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:60px;
+  height:30px;
+}
+
+/deep/ .active {
+  background-color: #209e91;
+  color: #ffffff;
 }
 </style>
 
@@ -420,14 +485,52 @@ export default {
         // },
       ],
       totalData: null,
+      currentPage: 1,
+      pageSize: 8,
+      totalPages: 10,
     };
+  },
+  created(){
+    this.goToPage(1);
   },
   mounted() {
     this.getList();
   },
+  computed: {
+    displayedPages() {
+      const maxDisplayedPages = 5; // 最多显示的页码数量
+      const pages = [];
+      let startPage = Math.max(1, this.currentPage - Math.floor(maxDisplayedPages / 2));
+      let endPage = Math.min(this.totalPages, startPage + maxDisplayedPages - 1);
+      
+      if (endPage - startPage < maxDisplayedPages - 1) {
+        startPage = Math.max(1, endPage - maxDisplayedPages + 1);
+      }
+      
+      if (startPage > 1) {
+        pages.push(1); // 添加第一页
+        if (startPage > 2) {
+          pages.push('...'); // 添加省略号
+        }
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      
+      if (endPage < this.totalPages) {
+        if (endPage < this.totalPages - 1) {
+          pages.push('...'); // 添加省略号
+        }
+        pages.push(this.totalPages); // 添加最后一页
+      }
+      
+      return pages;
+    }
+  },
   methods: {
     getList() {
-      let queryString = `?page=1&pageSize=6`;
+      let queryString = `?page=${this.currentPage}&pageSize=${this.pageSize}`;
       axios
         .get(`${this.$store.getters.getIp}/tasks/page${queryString}`)
         .then((response) => {
@@ -571,8 +674,7 @@ export default {
             });
             // 成功删除后刷新页面
             location.reload();
-          }
-          else{
+          } else {
             const errorMessage = response.data.msg;
             this.$message.error(errorMessage);
           }
@@ -581,6 +683,23 @@ export default {
           console.error("删除失败", error);
           this.$message.error("删除失败，请稍后重试");
         });
+    },
+    // 获取分页数据
+    goToPage(pageNumber) {
+      this.currentPage = pageNumber;
+      this.getList();
+    },
+    goToPrevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.getList();
+      }
+    },
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.getList();
+      }
     },
   },
 };

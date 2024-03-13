@@ -195,7 +195,7 @@
         </div>
       </div>
       <!-- 数据部分 -->
-      <div style="height: 87%; width: 100%; position: relative;">
+      <div style="height: 87%; width: 100%; position: relative">
         <el-table :data="tableData" border style="width: 100%; height: 100%">
           <el-table-column
             type="selection"
@@ -266,29 +266,77 @@
       </div>
       <div
         style="
-          height: 6%;
           position: relative;
+          height: 7%;
           width: 100%;
-          top: 4%;
+          top: 3%;
           display: flex;
-          justify-content: flex-end;
-          align-items: center;
         "
       >
-        <el-button
-          type="primary"
-          style="background-color: #209e91; border: #209e91"
-          size="small"
-          @click="add"
-          >新增</el-button
+        <!-- 分页 -->
+        <div
+          style="
+            position: relative;
+            height: 100%;
+            width: 50%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+          "
         >
-        <el-button
-          type="primary"
-          style="background-color: #e85656; border: #e85656"
-          size="small"
-          @click="manageDelete"
-          >批量删除</el-button
+          <!-- 上一页按钮 -->
+          <button
+            class="changePage"
+            @click="goToPrevPage"
+            :disabled="currentPage === 1"
+            style="position: relative; margin-right: 10px"
+          >
+            上一页
+          </button>
+          <!-- 显示页码的部分 -->
+          <button
+            v-for="pageNumber in displayedPages"
+            :key="pageNumber"
+            @click="goToPage(pageNumber)"
+            :class="{ active: pageNumber === currentPage, pagination: true }"
+          >
+            {{ pageNumber }}
+          </button>
+          <!-- 下一页按钮 -->
+          <button
+            class="changePage"
+            @click="goToNextPage"
+            :disabled="currentPage === totalPages"
+            style="position: relative; margin-left: 10px"
+          >
+            下一页
+          </button>
+        </div>
+        <div
+          style="
+            position: relative;
+            height: 100%;
+            width: 50%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          "
         >
+          <el-button
+            type="primary"
+            style="background-color: #209e91; border: #209e91"
+            size="small"
+            @click="add"
+            >新增</el-button
+          >
+          <el-button
+            type="primary"
+            style="background-color: #e85656; border: #e85656"
+            size="small"
+            @click="manageDelete"
+            >批量删除</el-button
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -315,6 +363,26 @@
   background-color: rgb(28, 43, 54);
   border: none;
   color: #747474;
+}
+
+/deep/ .pagination{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:40px;
+  height:30px;
+}
+/deep/ .changePage{
+  background-color:#ffffff;
+  border:1px solid #e0e0e0;
+  color:#747474;
+  width:60px;
+  height:30px;
+}
+
+/deep/ .active {
+  background-color: #209e91;
+  color: #ffffff;
 }
 </style>
 <script>
@@ -376,10 +444,45 @@ export default {
       totalData: [],
       tableData: [],
       selectedIds: [],
+      currentPage: 1,
+      pageSize: 6,
+      totalPages: 10,
     };
   },
-  mounted() {
-    this.loadList();
+  computed: {
+    displayedPages() {
+      const maxDisplayedPages = 5; // 最多显示的页码数量
+      const pages = [];
+      let startPage = Math.max(1, this.currentPage - Math.floor(maxDisplayedPages / 2));
+      let endPage = Math.min(this.totalPages, startPage + maxDisplayedPages - 1);
+      
+      if (endPage - startPage < maxDisplayedPages - 1) {
+        startPage = Math.max(1, endPage - maxDisplayedPages + 1);
+      }
+      
+      if (startPage > 1) {
+        pages.push(1); // 添加第一页
+        if (startPage > 2) {
+          pages.push('...'); // 添加省略号
+        }
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      
+      if (endPage < this.totalPages) {
+        if (endPage < this.totalPages - 1) {
+          pages.push('...'); // 添加省略号
+        }
+        pages.push(this.totalPages); // 添加最后一页
+      }
+      
+      return pages;
+    }
+  },
+  created() {
+    this.goToPage(1);
   },
   methods: {
     resetValue() {
@@ -445,8 +548,8 @@ export default {
       axios
         .get(`${this.$store.getters.getIp}/administrators/page`, {
           params: {
-            page: 1,
-            pageSize: 6,
+            page: this.currentPage,
+            pageSize: this.pageSize,
             ...(this.college !== "所有" && { college: this.college }),
             ...(this.type !== "所有" && {
               // 根据 this.type 的值添加不同的 level 参数
@@ -477,7 +580,24 @@ export default {
         });
     },
     search() {
+      this.goToPage(1);
+    },
+    // 获取分页数据
+    goToPage(pageNumber) {
+      this.currentPage = pageNumber;
       this.loadList();
+    },
+    goToPrevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.loadList();
+      }
+    },
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.loadList();
+      }
     },
   },
 };
