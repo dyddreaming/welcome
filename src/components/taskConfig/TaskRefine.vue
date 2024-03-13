@@ -56,7 +56,7 @@
         border-radius: 8px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         color: #747474;
-        border:2px solid #209e91;
+        border: 2px solid #209e91;
       "
     >
       <!-- 左侧 -->
@@ -88,8 +88,19 @@
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
           <span style="margin-right: 10px; margin-left: 20px">任务对象*:</span>
-          <el-checkbox v-model="underGraduate">本科生</el-checkbox>
-          <el-checkbox v-model="Graduate">研究生</el-checkbox>
+          <el-select
+            v-model="targetGrade"
+            placeholder="请选择"
+            style="position: relative; height: 40px !important; width: 70%"
+          >
+            <el-option
+              v-for="item in statusOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
           <span style="margin-right: 10px; margin-left: 20px">任务类型*:</span>
@@ -540,7 +551,7 @@
             size="mini"
             >上传图片</el-button
           >
-          
+
           <span
             style="
               margin-right: 20px;
@@ -645,7 +656,7 @@
                   height: 7%;
                   width: 100%;
                   text-align: center;
-                  background-color:#209e91;
+                  background-color: #209e91;
                   font-size: 14px;
                   color: #ffffff;
                 "
@@ -856,7 +867,7 @@
                 >视频播放:</span
               >
               <el-input
-                v-model="video"
+                v-model="videoPlay"
                 placeholder="请输入视频播放链接"
                 style="position: relative; height: 40px !important; width: 60%"
               ></el-input>
@@ -889,10 +900,37 @@
       </div>
     </div>
     <!-- 操作按钮 -->
-    <div style="position: relative; height: 8%; width: 96%; top: 1%; left: 2%;display: flex; justify-content: flex-end; align-items: center;">
-      <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small">提交</el-button>
-      <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small">存为草稿</el-button>
-      <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"  @click="goBack">返回</el-button>
+    <div
+      style="
+        position: relative;
+        height: 8%;
+        width: 96%;
+        top: 1%;
+        left: 2%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      "
+    >
+      <el-button
+        type="primary"
+        style="background-color: #e85656; border: #e85656"
+        size="small"
+        >提交</el-button
+      >
+      <el-button
+        type="primary"
+        style="background-color: #dfb81c; border: #dfb81c"
+        size="small"
+        >存为草稿</el-button
+      >
+      <el-button
+        type="primary"
+        style="background-color: #209e91; border: #209e91"
+        size="small"
+        @click="goBack"
+        >返回</el-button
+      >
     </div>
   </div>
 </template>
@@ -941,6 +979,7 @@
 </style>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -966,11 +1005,12 @@ export default {
         { label: "数字4", value: "数字4" },
         { label: "数字5", value: "数字5" },
       ],
-      faceOptions: [{ label: "人脸识别", value: "识别" }],
+      faceOptions: [{ label: "人脸识别", value: "人脸识别" }],
       name: "",
       describe: "",
       typeValue: "",
       beforeTask: "",
+      targetGrade: "",
       grade: "",
       targetCollege: "",
       experience: "",
@@ -995,6 +1035,7 @@ export default {
       chatArea: "",
       underGraduate: "",
       Graduate: "",
+      videoPlay: "",
       TypeOptions: [
         {
           value: "主线",
@@ -1026,18 +1067,23 @@ export default {
         // },
       ],
       taskOptions: [
-        {
-          value: "无",
-          label: "无",
-        },
-        {
-          value: "1-新生倒计时",
-          label: "1-新生倒计时",
-        },
-        {
-          value: "2-新生报到",
-          label: "2-新生报到",
-        },
+        // {
+        //   value: 0,
+        //   label: "无",
+        // },
+        // {
+        //   value: 1,
+        //   label: "1-新生倒计时",
+        // },
+        // {
+        //   value: 2,
+        //   label: "2-新生报到",
+        // },
+      ],
+      statusOptions: [
+        { value: 0, label: "本科生" },
+        { value: 1, label: "研究生" },
+        { value: 2, label: "全体" },
       ],
       // mainOptions: [
       //   {
@@ -1107,6 +1153,12 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.id = this.$store.getters.getSeeTaskID;
+    // console.log("查询任务ID为:", this.id);
+    this.getDetail();
+    this.getTotalMainTask();
+  },
   methods: {
     goBack() {
       this.$router.push("/mainMenu/task/config");
@@ -1121,6 +1173,9 @@ export default {
       }
     },
     isPhotoSelected(tag) {
+      if (!Array.isArray(this.selectedTags)) {
+        this.selectedTags = [];
+      }
       return this.selectedTags.some((t) => t.value === tag.value);
     },
     removePhotoTag(index) {
@@ -1136,10 +1191,114 @@ export default {
       }
     },
     isVideoSelected(tag) {
+      if (!Array.isArray(this.videoSelectedTags)) {
+        this.videoSelectedTags = [];
+      }
       return this.videoSelectedTags.some((t) => t.value === tag.value);
     },
     removeVideoPhotoTag(index) {
       this.videoSelectedTags.splice(index, 1);
+    },
+    // 获取所有主线任务
+    getTotalMainTask() {
+      axios
+        .get(`${this.$store.getters.getIp}/tasks/principal/list`)
+        .then((response) => {
+          let totalData = response.data.data;
+          this.taskOptions = totalData.map((item) => {
+            return {
+              value: item.id,
+              label: `${item.id}-${item.name}`,
+            };
+          });
+        })
+        .catch((error) => {
+          console.error("获取数据时出错：", error);
+        });
+    },
+    // 获取任务详细信息
+    getDetail() {
+      axios
+        .get(`${this.$store.getters.getIp}/tasks/${this.id}`)
+        .then((response) => {
+          let detailData = response.data.data;
+          this.name = detailData.name;
+          this.describe = detailData.msg;
+          this.typeValue = detailData.category == 0 ? "主线" : "支线";
+          this.grade = detailData.level == 0 ? "校级" : "院级";
+          if (detailData.level) {
+            this.targetCollege == detailData.targetCollege;
+          }
+          this.startTime = detailData.releaseTime;
+          this.endTime = detailData.endTime;
+          this.targetGrade = detailData.target;
+          this.contactType = detailData.mode;
+          detailData.details.forEach((item) => {
+            // 提取奖励
+            if (item.category) {
+              this.getReward(item.name, item.num);
+            }
+            // 提取限制
+            else {
+              this.getLimit(item.name, item.num);
+            }
+          });
+          this.getText(detailData.mode, detailData.text, detailData.npc);
+          console.log("拆解成功");
+        })
+        .catch((error) => {
+          console.error("获取数据时出错：", error);
+        });
+    },
+    getReward(name, num) {
+      if (name == "经验值") {
+        this.experience = num;
+      } else if (name == "勇气值") {
+        this.courage = num;
+      } else if (name == "热情值") {
+        this.enthusiasm = num;
+      } else if (name == "友好值") {
+        this.friendly = num;
+      } else if (name == "活力值") {
+        this.dynamism = num;
+      } else if (name == "智慧值") {
+        this.intelligence = num;
+      } else if (name == "探索精神") {
+        this.explore = num;
+      }
+    },
+    getLimit(itemName, num) {
+      if (itemName == "经验值") {
+        this.experience1 = num;
+      } else if (itemName == "勇气值") {
+        this.courage1 = num;
+      } else if (itemName == "热情值") {
+        this.enthusiasm1 = num;
+      } else if (itemName == "友好值") {
+        this.friendly1 = num;
+      } else if (itemName == "活力值") {
+        this.dynamism1 = num;
+      } else if (itemName == "智慧值") {
+        this.intelligence1 = num;
+      } else if (itemName == "探索精神") {
+        this.explore1 = num;
+      }
+    },
+    // 根据任务形式拆分任务内容
+    getText(mode, text, npc) {
+      this.contactType = mode;
+      if (mode == 0) {
+        this.videoPlay = text;
+      } else if (mode == 1) {
+        this.image = npc;
+        this.chatArea = text;
+      } else if (mode == 2) {
+        this.selectedTags = text;
+      } else if (mode == 3) {
+        this.textarea = text;
+      } else if (mode == 4) {
+        this.videoSelectedTags = text;
+      }
     },
   },
 };

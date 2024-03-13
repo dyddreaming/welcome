@@ -56,7 +56,7 @@
         border-radius: 8px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         color: #747474;
-        border:2px solid #209e91;
+        border: 2px solid #209e91;
       "
     >
       <!-- 左侧 -->
@@ -88,8 +88,19 @@
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
           <span style="margin-right: 10px; margin-left: 20px">任务对象*:</span>
-          <el-checkbox v-model="underGraduate">本科生</el-checkbox>
-          <el-checkbox v-model="Graduate">研究生</el-checkbox>
+          <el-select
+            v-model="targetGrade"
+            placeholder="请选择"
+            style="position: relative; height: 40px !important; width: 70%"
+          >
+            <el-option
+              v-for="item in statusOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
           <span style="margin-right: 10px; margin-left: 20px">任务类型*:</span>
@@ -161,7 +172,23 @@
             </el-option>
           </el-select>
         </div>
-        <div style="position: relative; height: 30%; width: 100%; top: 1%">
+        <div style="position: relative; height: 8%; width: 100%; top: 2%">
+          <span style="margin-right: 10px; margin-left: 20px">任务形式*:</span>
+          <el-select
+            v-model="contactType"
+            placeholder="请选择"
+            style="position: relative; height: 40px !important; width: 70%"
+          >
+            <el-option
+              v-for="item in contactOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div style="position: relative; height: 30%; width: 100%; top: 2%">
           <div
             style="
               position: relative;
@@ -330,22 +357,6 @@
               v-model="explore"
             ></knob-control>
           </div>
-        </div>
-        <div style="position: relative; height: 8%; width: 100%; top: 2%">
-          <span style="margin-right: 10px; margin-left: 20px">任务形式*:</span>
-          <el-select
-            v-model="contactType"
-            placeholder="请选择"
-            style="position: relative; height: 40px !important; width: 70%"
-          >
-            <el-option
-              v-for="item in contactOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
         </div>
       </div>
       <!-- 中间 -->
@@ -537,10 +548,17 @@
               border-color: #209e91;
               color: #ffffff;
             "
+            @click="handleImageClick"
             size="mini"
-            >上传图片</el-button
+            ><input
+              type="file"
+              ref="imageFileInput"
+              style="display: none"
+              accept=".jpg, .png"
+              @change="handleImageUpload"
+            />上传图片</el-button
           >
-          
+
           <span
             style="
               margin-right: 20px;
@@ -645,7 +663,7 @@
                   height: 7%;
                   width: 100%;
                   text-align: center;
-                  background-color:#209e91;
+                  background-color: #209e91;
                   font-size: 14px;
                   color: #ffffff;
                 "
@@ -856,7 +874,7 @@
                 >视频播放:</span
               >
               <el-input
-                v-model="video"
+                v-model="videoPlay"
                 placeholder="请输入视频播放链接"
                 style="position: relative; height: 40px !important; width: 60%"
               ></el-input>
@@ -889,10 +907,38 @@
       </div>
     </div>
     <!-- 操作按钮 -->
-    <div style="position: relative; height: 8%; width: 96%; top: 1%; left: 2%;display: flex; justify-content: flex-end; align-items: center;">
-      <el-button type="primary" style="background-color: #e85656; border: #e85656;" size="small">提交</el-button>
-      <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="small">存为草稿</el-button>
-      <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"  @click="goBack">返回</el-button>
+    <div
+      style="
+        position: relative;
+        height: 8%;
+        width: 96%;
+        top: 1%;
+        left: 2%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      "
+    >
+      <el-button
+        type="primary"
+        style="background-color: #e85656; border: #e85656"
+        size="small"
+        @click="admit"
+        >提交</el-button
+      >
+      <el-button
+        type="primary"
+        style="background-color: #dfb81c; border: #dfb81c"
+        size="small"
+        >存为草稿</el-button
+      >
+      <el-button
+        type="primary"
+        style="background-color: #209e91; border: #209e91"
+        size="small"
+        @click="goBack"
+        >返回</el-button
+      >
     </div>
   </div>
 </template>
@@ -941,6 +987,7 @@
 </style>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -966,11 +1013,12 @@ export default {
         { label: "数字4", value: "数字4" },
         { label: "数字5", value: "数字5" },
       ],
-      faceOptions: [{ label: "人脸识别", value: "识别" }],
+      faceOptions: [{ label: "人脸识别", value: "人脸识别" }],
       name: "",
       describe: "",
       typeValue: "",
       beforeTask: "",
+      targetGrade: "",
       grade: "",
       targetCollege: "",
       experience: "",
@@ -995,6 +1043,7 @@ export default {
       chatArea: "",
       underGraduate: "",
       Graduate: "",
+      videoPlay:"",
       TypeOptions: [
         {
           value: "主线",
@@ -1026,18 +1075,23 @@ export default {
         // },
       ],
       taskOptions: [
-        {
-          value: "无",
-          label: "无",
-        },
-        {
-          value: "1-新生倒计时",
-          label: "1-新生倒计时",
-        },
-        {
-          value: "2-新生报到",
-          label: "2-新生报到",
-        },
+        // {
+        //   value: 0,
+        //   label: "无",
+        // },
+        // {
+        //   value: 1,
+        //   label: "1-新生倒计时",
+        // },
+        // {
+        //   value: 2,
+        //   label: "2-新生报到",
+        // },
+      ],
+      statusOptions: [
+        { value: 0, label: "本科生" },
+        { value: 1, label: "研究生" },
+        { value: 2, label: "全体" },
       ],
       // mainOptions: [
       //   {
@@ -1107,6 +1161,9 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.getTotalMainTask();
+  },
   methods: {
     goBack() {
       this.$router.push("/mainMenu/task/config");
@@ -1141,6 +1198,218 @@ export default {
     removeVideoPhotoTag(index) {
       this.videoSelectedTags.splice(index, 1);
     },
+    // 提交任务
+    admit() {
+      // console.log(this.selectedTags);
+      let totalDetails = this.makeReward();
+      let totalText = this.makeText();
+      let  name = this.name;
+      let  msg = this.describe;
+      let  target = this.targetGrade;
+      let  category = this.typeValue == "主线" ? 0 : 1;
+      let  preTask = this.beforeTask;
+      let  level = this.grade == "校级" ? 0 : 1;
+      let  img = "任务1.jpg";
+      let  releaseTime = this.convertTime(this.startTime);
+      let  endTime = this.convertTime(this.endTime);
+      let  mode = this.contactType;
+      let  text = totalText;
+      let  status = 1;
+      let  details = totalDetails;
+      // console.log(admitData);
+      axios
+        .post(`${this.$store.getters.getIp}/tasks`, {
+          name,
+          msg,
+          target,
+          category,
+          preTask,
+          level,
+          img,
+          releaseTime,
+          endTime,
+          mode,
+          text,
+          status,
+          details,
+        })
+        .then((response) => {
+          if (response.data.code) {
+            console.log("提交成功:", response.data);
+            this.$message.success("提交成功");
+          } else {
+            const errorMessage = response.data.msg;
+            this.$message.error(errorMessage);
+          }
+        })
+        .catch((error) => {
+          console.error("提交失败:", error);
+        });
+    },
+    // 转换时间格式
+    convertTime(originalDate) {
+      if (originalDate) {
+        // 转换为所需格式的字符串
+        const year = originalDate.getFullYear();
+        const month = (originalDate.getMonth() + 1).toString().padStart(2, "0");
+        const day = originalDate.getDate().toString().padStart(2, "0");
+        const hours = originalDate.getHours().toString().padStart(2, "0");
+        const minutes = originalDate.getMinutes().toString().padStart(2, "0");
+        const seconds = originalDate.getSeconds().toString().padStart(2, "0");
+
+        const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+        return formattedDate;
+      }
+      else{
+        return;
+      }
+    },
+    // 获取奖励和限制条件
+    makeReward() {
+      let rewardDetails = [];
+      if (this.experience) {
+        rewardDetails.push({
+          name: "经验值",
+          num: this.experience,
+          category: 0,
+        });
+      }
+      if (this.courage) {
+        rewardDetails.push({ name: "勇气值", num: this.courage, category: 0 });
+      }
+
+      if (this.enthusiasm) {
+        rewardDetails.push({
+          name: "热情值",
+          num: this.enthusiasm,
+          category: 0,
+        });
+      }
+
+      if (this.friendly) {
+        rewardDetails.push({ name: "友好值", num: this.friendly, category: 0 });
+      }
+
+      if (this.explore) {
+        rewardDetails.push({
+          name: "探索精神",
+          num: this.explore,
+          category: 0,
+        });
+      }
+
+      if (this.dynamism) {
+        rewardDetails.push({ name: "活力值", num: this.dynamism, category: 0 });
+      }
+
+      if (this.intelligence) {
+        rewardDetails.push({
+          name: "智慧值",
+          num: this.intelligence,
+          category: 0,
+        });
+      }
+
+      if (this.degree) {
+        rewardDetails.push({
+          name: "等级",
+          num: this.degree,
+          category: 1,
+        });
+      }
+      if (this.courage1) {
+        rewardDetails.push({ name: "勇气值", num: this.courage1, category: 1 });
+      }
+
+      if (this.enthusiasm1) {
+        rewardDetails.push({
+          name: "热情值",
+          num: this.enthusiasm1,
+          category: 1,
+        });
+      }
+
+      if (this.friendly1) {
+        rewardDetails.push({
+          name: "友好值",
+          num: this.friendly1,
+          category: 1,
+        });
+      }
+
+      if (this.explore1) {
+        rewardDetails.push({
+          name: "探索精神",
+          num: this.explore1,
+          category: 1,
+        });
+      }
+
+      if (this.dynamism1) {
+        rewardDetails.push({
+          name: "活力值",
+          num: this.dynamism1,
+          category: 1,
+        });
+      }
+
+      if (this.intelligence1) {
+        rewardDetails.push({
+          name: "智慧值",
+          num: this.intelligence1,
+          category: 1,
+        });
+      }
+      return rewardDetails;
+    },
+    // 获取所有主线任务
+    getTotalMainTask() {
+      axios
+        .get(`${this.$store.getters.getIp}/tasks/principal/list`)
+        .then((response) => {
+          let totalData = response.data.data;
+          this.taskOptions = totalData.map((item) => {
+            return {
+              value: item.id,
+              label: `${item.id}-${item.name}`,
+            };
+          });
+        })
+        .catch((error) => {
+          console.error("获取数据时出错：", error);
+        });
+    },
+    // 获取任务图标
+    handleImageClick() {
+      this.$refs.imageFileInput.click();
+    },
+    handleImageUpload(event) {
+      const file = event.target.files[0];
+      console.log("上传的图片:", file);
+    },
+    // 获取任务内容
+    makeText(){
+      if(this.contactType == 0)
+      {
+        return this.videoPlay;
+      }
+      else if(this.contactType == 1)
+      {
+        return this.chatArea;
+      }
+      else if(this.contactType == 2)
+      {
+        return this.selectedTags[0].value;
+      }
+      else if(this.contactType == 3)
+      {
+        return this.textarea;
+      }
+      else{
+        return this.videoSelectedTags[0].value;
+      }
+    }
   },
 };
 </script>

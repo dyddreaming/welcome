@@ -237,7 +237,12 @@
           top: 3%;
         "
       >
-        <el-table :data="tableData" border style="width: 100%; height: 100%">
+        <el-table
+          :data="tableData"
+          @selection-change="handleSelectionChange"
+          border
+          style="width: 100%; height: 100%"
+        >
           <el-table-column
             type="selection"
             width="55"
@@ -300,7 +305,7 @@
                   type="primary"
                   style="background-color: #e85656; border: #e85656"
                   size="small"
-                  @click="handleDelete(scope.row)"
+                  @click="singleDelete(scope.row.id)"
                   >删除</el-button
                 >
               </div>
@@ -334,7 +339,7 @@
         type="primary"
         style="background-color: #e85656; border: #e85656"
         size="small"
-        @click="handleDelete"
+        @click="taskDelete"
         >批量删除</el-button
       >
     </div>
@@ -375,6 +380,7 @@ export default {
       nameInput: "",
       statusValue: "",
       taskLevel: "",
+      selectedIds: [],
       statusOptions: [
         {
           value: "草稿",
@@ -458,7 +464,8 @@ export default {
               case 0:
                 status = "草稿";
                 break;
-              case 1: { // 需要根据时间细化状态
+              case 1: {
+                // 需要根据时间细化状态
                 var currentTime = new Date();
                 var releaseTime = new Date(item.releaseTime);
                 var endTime = new Date(item.endTime);
@@ -490,6 +497,7 @@ export default {
                 category = "未知";
             }
             return {
+              id: parseInt(item.id),
               name: item.name,
               target: target,
               taskStatus: status,
@@ -512,7 +520,11 @@ export default {
       this.$router.push("/taskRelease");
     },
     handleEdit(row) {
-      this.$router.push("/taskRefine");
+      this.$store.commit("setSeeTaskID", row.id);
+      // console.log("修改任务ID值",row.id);
+      this.$nextTick(() => {
+        this.$router.push("/taskRefine");
+      });
     },
     handleReset(row) {
       this.$store.commit("setRestTaskID", row.id);
@@ -520,22 +532,55 @@ export default {
         this.$router.push("/mainMenu/task/taskReset");
       });
     },
-    handleDelete(row) {
-      this.$confirm("确认删除该条数据吗？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          // 发起axios请求删除数据
-
-          // 删除成功后，弹出删除成功提示框
-          this.$message({
-            type: "success",
-            message: "删除成功！",
-          });
+    handleSelectionChange(selection) {
+      this.selectedIds = selection.map((item) => item.id);
+      // console.log(this.selectedIds);
+    },
+    singleDelete(id) {
+      this.selectedIds.push(id);
+      this.taskDelete();
+    },
+    taskDelete() {
+      if (this.selectedIds.length === 0) {
+        this.$message.warning("请先选择要操作的项");
+      } else {
+        this.$confirm("确认删除吗？", "提示", {
+          confirmButtonText: "确认",
+          cancelButtonText: "取消",
+          type: "warning",
         })
-        .catch(() => {});
+          .then(() => {
+            this.doDelete();
+          })
+          .catch(() => {});
+      }
+    },
+    doDelete() {
+      // 发送axios请求删除学生
+      const url = `${
+        this.$store.getters.getIp
+      }/tasks?ids=${this.selectedIds.join("&ids=")}`;
+      axios
+        .delete(url)
+        .then((response) => {
+          if (response.data.code) {
+            console.log("删除成功", response.data);
+            this.$message({
+              message: "删除成功",
+              type: "success",
+            });
+            // 成功删除后刷新页面
+            location.reload();
+          }
+          else{
+            const errorMessage = response.data.msg;
+            this.$message.error(errorMessage);
+          }
+        })
+        .catch((error) => {
+          console.error("删除失败", error);
+          this.$message.error("删除失败，请稍后重试");
+        });
     },
   },
 };

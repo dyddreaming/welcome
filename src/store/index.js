@@ -38,6 +38,7 @@ export default new Vuex.Store({
     examineID:null,
     // 重置任务ID
     resetTaskID:null,
+    seeTaskID:null,
   },
   getters: {
     getIp(state) {
@@ -75,6 +76,9 @@ export default new Vuex.Store({
     },
     getRestTaskID(state){
       return state.resetTaskID;
+    },
+    getSeeTaskID(state){
+      return state.seeTaskID;
     },
   },
   mutations: {
@@ -114,6 +118,10 @@ export default new Vuex.Store({
     },
     setRestTaskID(state,id){
       state.resetTaskID = id;
+      // console.log("传输的广告ID为:",state.resetTaskID);
+    },
+    setSeeTaskID(state,id){
+      state.seeTaskID = id;
     },
   },
   actions: {

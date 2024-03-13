@@ -73,25 +73,14 @@
 
         <div style="
             position: relative;
-            width: 25%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-          ">
-          <span style="position: relative; margin-right: 10px; left: 5%">任务进度：</span>
-          <el-input v-model="taskProcess" placeholder="输入0-100" style="width: 60%"></el-input>
-        </div>
-
-        <div style="
-            position: relative;
             width: 16%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
           ">
-          <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="mini"><i
-              class="el-icon-search" style="margin-right: 3px; font-size: 14px"></i>搜索</el-button>
+          <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="mini" @click="search"><i
+              class="el-icon-search" style="margin-right: 3px; font-size: 14px" ></i>搜索</el-button>
           <el-button type="primary" style="background-color: #dfb81c; border: #dfb81c;" size="mini" @click="resetValue">
             <i class="el-icon-refresh-right" style="margin-right: 3px; font-size: 14px"></i>重置</el-button>
         </div>
@@ -102,9 +91,9 @@
           <el-table-column type="selection" width="55" align="center"></el-table-column>
           <el-table-column prop="name" label="姓名" width="200px" align="center"></el-table-column>
           <el-table-column prop="id" label="学号" width="200px" align="center"></el-table-column>
+          <el-table-column prop="college" label="学院" width="200px" align="center"></el-table-column>
           <el-table-column prop="major" label="专业" width="200px" align="center"></el-table-column>
           <el-table-column prop="enroll" label="是否注册" width="200px" align="center"></el-table-column>
-          <el-table-column prop="process" label="任务进度/% " width="200px" align="center"></el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
               <div style="items-align: center">
@@ -177,7 +166,6 @@ export default {
       id: null,
       totalData: null,
       collegeValue: "",
-      taskProcess: "",
       collegeOptions: [
         {
           value: "计算机学院",
@@ -217,20 +205,27 @@ export default {
       ],
     };
   },
-  create() {
+  mounted() {
     this.id = this.$store.getters.getRestTaskID;
+    // console.log("查询任务ID为:",this.id);
     this.getList();
   },
   methods: {
+    search(){
+      this.getList();
+    },
     resetValue() {
       this.collegeValue = "";
-      this.taskProcess = "";
     },
     goToList() {
       this.$router.push("/mainMenu/task/config");
     },
     getList() {
       let queryString = `?page=1&pageSize=6&taskId=${this.id}`;
+      if(this.collegeValue)
+      {
+        queryString += `&college=${this.collegeValue}`;
+      }
       axios
         .get(`${this.$store.getters.getIp}/tasks/students/page${queryString}`)
         .then((response) => {
