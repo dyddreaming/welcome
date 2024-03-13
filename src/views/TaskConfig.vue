@@ -198,6 +198,7 @@
               color: #ffffff;
             "
             size="mini"
+            @click="search"
           >
             <i
               class="el-icon-search"
@@ -443,34 +444,34 @@ export default {
     return {
       searchWord: "",
       nameInput: "",
-      statusValue: "",
-      taskLevel: "",
+      statusValue: null,
+      taskLevel: null,
       selectedIds: [],
       statusOptions: [
         {
-          value: "草稿",
+          value: 0,
           label: "草稿",
         },
         {
-          value: "未发布",
+          value: 1,
           label: "未发布",
         },
         {
-          value: "进行中",
+          value: 2,
           label: "进行中",
         },
         {
-          value: "已结束",
+          value: 3,
           label: "已结束",
         },
       ],
       levelOptions: [
         {
-          value: "校级",
+          value: 0,
           label: "校级",
         },
         {
-          value: "院级",
+          value: 1,
           label: "院级",
         },
       ],
@@ -529,13 +530,28 @@ export default {
     }
   },
   methods: {
+    search(){
+      this.getList();
+    },
     getList() {
       let queryString = `?page=${this.currentPage}&pageSize=${this.pageSize}`;
+      if(this.nameInput)
+      {
+        queryString += `&name=${this.nameInput}`;
+      }
+      if(this.statusValue == 0 | this.statusValue == 1 | this.statusValue == 2 | this.statusValue == 3)
+      {
+        queryString += `&status=${this.statusValue}`;
+      }
+      if(this.taskLevel == 0 | this.taskLevel == 1)
+      {
+        queryString += `&level=${this.taskLevel}`;
+      }
       axios
         .get(`${this.$store.getters.getIp}/tasks/page${queryString}`)
         .then((response) => {
           this.totalData = response.data.data.records;
-          // console.log("获取到的任务列表:", this.totalData);
+          console.log("获取到的任务列表:", this.totalData);
           this.tableData = this.totalData.map((item) => {
             let target = "";
             switch (item.target) {
@@ -599,8 +615,9 @@ export default {
               default:
                 category = "未知";
             }
+            // console.log(item.id);
             return {
-              id: parseInt(item.id),
+              id: item.id,
               name: item.name,
               target: target,
               taskStatus: status,
@@ -618,6 +635,7 @@ export default {
       this.nameInput = "";
       this.statusValue = "";
       this.taskLevel = "";
+      this.getList();
     },
     taskRelease() {
       this.$router.push("/taskRelease");
@@ -641,6 +659,7 @@ export default {
     },
     singleDelete(id) {
       this.selectedIds.push(id);
+      // console.log(this.selectedIds);
       this.taskDelete();
     },
     taskDelete() {
@@ -673,7 +692,7 @@ export default {
               type: "success",
             });
             // 成功删除后刷新页面
-            location.reload();
+            this.getList();
           } else {
             const errorMessage = response.data.msg;
             this.$message.error(errorMessage);

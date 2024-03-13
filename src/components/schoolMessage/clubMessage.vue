@@ -163,40 +163,64 @@
     <div
       style="
         position: relative;
-        height: 8%;
-        width: 100%;
-        font-size: 20px;
-        top: 2%;
+        height: 7%;
+        width: 96%;
+        top: 1%;
+        left: 2%;
         display: flex;
       "
     >
-      <el-button
-        type="danger"
-        size="mini"
-        style="
-          background-color: #fa5e00;
-          position: relative;
-          left: 85%;
-          border-radius: 10px;
-          height: 75%;
-        "
-        @click="chargeSet"
-        >费用设置</el-button
+    <!-- 分页 -->
+    <div style="position:relative;height:100%;width:50%; display: flex;
+    justify-content: flex-start;
+    align-items: center;">
+      <!-- 上一页按钮 -->
+      <button class="changePage" @click="goToPrevPage" :disabled="currentPage === 1" style="position:relative;margin-right:10px">上一页</button>
+      <!-- 显示页码的部分 -->
+      <button v-for="pageNumber in displayedPages" :key="pageNumber" @click="goToPage(pageNumber)" :class="{ 'active': pageNumber === currentPage, 'pagination': true }"
       >
-      <el-button
-        type="danger"
-        size="mini"
-        style="
-          background-color: #fa5e00;
-          position: relative;
-          left: 85%;
-          border-radius: 10px;
-          height: 75%;
-        "
-        @click="clubExamine"
-        >待审核列表</el-button
-      >
+        {{ pageNumber }}
+      </button>
+      <!-- 下一页按钮 -->
+      <button class="changePage" @click="goToNextPage" :disabled="currentPage === totalPages" style="position:relative;margin-left:10px">下一页</button>
     </div>
+    <div
+        style="
+          position: relative;
+          height: 100%;
+          width: 50%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        "
+      >
+      <el-button
+      type="danger"
+      size="mini"
+      style="
+        background-color: #fa5e00;
+        position: relative;
+        left: 85%;
+        border-radius: 10px;
+        height: 75%;
+      "
+      @click="chargeSet"
+      >费用设置</el-button
+    >
+    <el-button
+      type="danger"
+      size="mini"
+      style="
+        background-color: #fa5e00;
+        position: relative;
+        left: 85%;
+        border-radius: 10px;
+        height: 75%;
+      "
+      @click="clubExamine"
+      >待审核列表</el-button
+    ></div>
+  </div>
     <el-dialog
       title="收费设置"
       :visible.sync="showDialog"

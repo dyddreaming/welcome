@@ -1244,7 +1244,7 @@ export default {
             }
           });
           this.getText(detailData.mode, detailData.text, detailData.npc);
-          console.log("拆解成功");
+          // console.log("拆解成功");
         })
         .catch((error) => {
           console.error("获取数据时出错：", error);

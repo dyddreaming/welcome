@@ -930,6 +930,7 @@
         type="primary"
         style="background-color: #dfb81c; border: #dfb81c"
         size="small"
+        @click="save"
         >存为草稿</el-button
       >
       <el-button
@@ -1043,7 +1044,7 @@ export default {
       chatArea: "",
       underGraduate: "",
       Graduate: "",
-      videoPlay:"",
+      videoPlay: "",
       TypeOptions: [
         {
           value: "主线",
@@ -1118,14 +1119,14 @@ export default {
         },
       ],
       collegeOptions: [
-        {
-          value: "计算机学院",
-          label: "计算机学院",
-        },
-        {
-          value: "建筑学院",
-          label: "建筑学院",
-        },
+        // {
+        //   value: "计算机学院",
+        //   label: "计算机学院",
+        // },
+        // {
+        //   value: "建筑学院",
+        //   label: "建筑学院",
+        // },
       ],
       imageOptions: [
         {
@@ -1163,6 +1164,7 @@ export default {
   },
   mounted() {
     this.getTotalMainTask();
+    this.getCollege();
   },
   methods: {
     goBack() {
@@ -1200,22 +1202,84 @@ export default {
     },
     // 提交任务
     admit() {
+      // 检查是否有未填写项
+      if (
+        !this.name ||
+        !this.describe ||
+        !this.targetGrade ||
+        !this.startTime ||
+        !this.typeValue ||
+        !this.grade ||
+        !this.endTime ||
+        !this.contactType
+      ) {
+        // 提示用户填写完整信息
+        this.$message.error("请填写完整信息");
+        return; // 停止提交
+      }
       // console.log(this.selectedTags);
       let totalDetails = this.makeReward();
       let totalText = this.makeText();
-      let  name = this.name;
-      let  msg = this.describe;
-      let  target = this.targetGrade;
-      let  category = this.typeValue == "主线" ? 0 : 1;
-      let  preTask = this.beforeTask;
-      let  level = this.grade == "校级" ? 0 : 1;
-      let  img = "任务1.jpg";
-      let  releaseTime = this.convertTime(this.startTime);
-      let  endTime = this.convertTime(this.endTime);
-      let  mode = this.contactType;
-      let  text = totalText;
-      let  status = 1;
-      let  details = totalDetails;
+      let name = this.name;
+      let msg = this.describe;
+      let target = this.targetGrade;
+      let category = this.typeValue == "主线" ? 0 : 1;
+      let preTask = this.beforeTask;
+      let level = this.grade == "校级" ? 0 : 1;
+      let img = "任务1.jpg";
+      let releaseTime = this.convertTime(this.startTime);
+      let endTime = this.convertTime(this.endTime);
+      let mode = this.contactType;
+      let text = totalText;
+      let status = 1;
+      let details = totalDetails;
+      // console.log(admitData);
+      axios
+        .post(`${this.$store.getters.getIp}/tasks`, {
+          name,
+          msg,
+          target,
+          category,
+          preTask,
+          level,
+          img,
+          releaseTime,
+          endTime,
+          mode,
+          text,
+          status,
+          details,
+        })
+        .then((response) => {
+          if (response.data.code) {
+            console.log("提交成功:", response.data);
+            this.$message.success("提交成功");
+          } else {
+            const errorMessage = response.data.msg;
+            this.$message.error(errorMessage);
+          }
+        })
+        .catch((error) => {
+          console.error("提交失败:", error);
+        });
+    },
+    // 存为草稿
+    save(){
+      let totalDetails = this.makeReward();
+      let totalText = this.makeText();
+      let name = this.name;
+      let msg = this.describe;
+      let target = this.targetGrade;
+      let category = this.typeValue == "主线" ? 0 : 1;
+      let preTask = this.beforeTask;
+      let level = this.grade == "校级" ? 0 : 1;
+      let img = "任务1.jpg";
+      let releaseTime = this.convertTime(this.startTime);
+      let endTime = this.convertTime(this.endTime);
+      let mode = this.contactType;
+      let text = totalText;
+      let status = 0;
+      let details = totalDetails;
       // console.log(admitData);
       axios
         .post(`${this.$store.getters.getIp}/tasks`, {
@@ -1260,8 +1324,7 @@ export default {
         const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
         return formattedDate;
-      }
-      else{
+      } else {
         return;
       }
     },
@@ -1389,27 +1452,34 @@ export default {
       console.log("上传的图片:", file);
     },
     // 获取任务内容
-    makeText(){
-      if(this.contactType == 0)
-      {
+    makeText() {
+      if (this.contactType == 0) {
         return this.videoPlay;
-      }
-      else if(this.contactType == 1)
-      {
+      } else if (this.contactType == 1) {
         return this.chatArea;
-      }
-      else if(this.contactType == 2)
-      {
+      } else if (this.contactType == 2) {
         return this.selectedTags[0].value;
-      }
-      else if(this.contactType == 3)
-      {
+      } else if (this.contactType == 3) {
         return this.textarea;
-      }
-      else{
+      } else {
         return this.videoSelectedTags[0].value;
       }
-    }
+    },
+    // 获取学院名
+    getCollege() {
+      this.collegeOptions = [];
+      axios
+        .get(`${this.$store.getters.getIp}/colleges/list`)
+        .then((response) => {
+          let collegeData = response.data.data;
+          collegeData.forEach((college) => {
+            this.collegeOptions.push({value:college.name,label:college.name});
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    },
   },
 };
 </script>

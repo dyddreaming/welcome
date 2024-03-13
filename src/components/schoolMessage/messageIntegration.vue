@@ -121,7 +121,7 @@
           社团资讯列表
         </div>
         <div
-          style="position: relative; height: 86%; top: 1%; width: 98%; left: 1%"
+          style="position: relative; height: 86%; top: 1%; width: 98%; left: 1%;overflow-y:auto;"
         >
           <el-table :data="tableData" border style="color: #747474">
             <el-table-column
@@ -335,6 +335,7 @@
                 width: 98%;
                 left: 1%;
                 background-color: #209e91;
+                overflow-y:auto;
               "
             >
               <el-table
@@ -461,6 +462,7 @@
                 top: 1%;
                 width: 98%;
                 left: 1%;
+                overflow-y:auto;
               "
             >
               <el-table
@@ -586,7 +588,7 @@
           学校论坛列表
         </div>
         <div
-          style="position: relative; height: 86%; top: 1%; width: 98%; left: 1%"
+          style="position: relative; height: 86%; top: 1%; width: 98%; left: 1%;overflow-y:auto;"
         >
           <el-table :data="tableData4" border style="width: 100%; height: 100%">
             <el-table-column
@@ -700,7 +702,7 @@
           学生留言
         </div>
          <div
-          style="position: relative; height: 86%; top: 1%; width: 98%; left: 1%;background-color:#209e91"
+          style="position: relative; height: 86%; top: 1%; width: 98%; left: 1%;background-color:#209e91;overflow-y:auto;"
         >
         <el-table :data="tableData16" border style="width: 100%; height: 100%">
           <el-table-column
