@@ -41,6 +41,7 @@ import Manager from '../views/LimitManage.vue'
 import College from '../views/LimitCollege.vue'
 import addManage from '../components/manageLimit/addManage.vue'
 import modifyManage from '../components/manageLimit/modifyManage.vue'
+import collegeManage from '../views/collegeManage.vue'
 // 附加功能管理
 import Business from '../views/AddBusiness.vue'
 import Message from '../views/AddMessage.vue'
@@ -82,8 +83,7 @@ import feedback from '../components/helpShow/feedback.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     redirect: '/login',
   },
@@ -94,8 +94,7 @@ const routes = [
   {
     path: '/mainMenu',
     component: mainMenu,
-    children: [
-      {
+    children: [{
         path: 'student/register',
         component: Register,
       },
@@ -191,6 +190,10 @@ const routes = [
         component: College
       },
       {
+        path: 'college/manage',
+        component: collegeManage
+      },
+      {
         path: 'add/business',
         component: Business
       },
@@ -206,8 +209,7 @@ const routes = [
         path: 'add/Message',
         component: Message,
         redirect: '/mainMenu/add/Message/clubMessage',
-        children: [
-          {
+        children: [{
             path: 'clubMessage',
             component: clubMessage
           },
@@ -230,15 +232,14 @@ const routes = [
         ]
       },
       {
-        path:'add/messageIntegration',
-        component:messageIntegration
+        path: 'add/messageIntegration',
+        component: messageIntegration
       },
       {
         path: "video",
         component: video,
         redirect: '/mainMenu/video/position1',
-        children: [
-          {
+        children: [{
             path: 'position1',
             component: position1
           },
@@ -265,8 +266,7 @@ const routes = [
         path: 'config',
         component: Plan,
         redirect: '/mainMenu/config/safety',
-        children: [
-          {
+        children: [{
             path: 'safety',
             component: safety
           },
@@ -288,8 +288,7 @@ const routes = [
         path: 'help',
         component: Help,
         redirect: "/mainMenu/help/helpFile",
-        children: [
-          {
+        children: [{
             path: "helpFile",
             component: helpFile,
           },

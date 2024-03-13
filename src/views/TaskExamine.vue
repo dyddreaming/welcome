@@ -50,7 +50,7 @@
       <div class="exam-content">
         <div class="exam-date">{{ item.updateTime }}</div>
         <div class="exam-detail" style="position:relative;width:100%;">
-          <div style="position:relative;width:85%;"><p>{{ item.stuCollege }}的报到倒计时任务审核存在问题，点击审核查看详细信息。</p></div>
+          <div style="position:relative;width:85%;"><p>{{ item.stuCollege }}张三的任务审核存在问题，点击审核查看详细信息。</p></div>
           <div style="position:relative;width:15%;">
             <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
           @click="taskExamine(item)">审核</el-button>
@@ -179,8 +179,12 @@ export default {
       ];
   },
   methods: {
-    taskExamine() {
-      this.$router.push("/mainMenu/task/taskInspect");
+    taskExamine(item) {
+      this.$store.commit("setExamineTaskID", item.taskId);
+      this.$store.commit("setExamineStuID", item.studentId);
+      this.$nextTick(() => {
+        this.$router.push("/mainMenu/task/taskInspect");
+      });
     },
     getExamineList(){
       axios

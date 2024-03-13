@@ -39,6 +39,8 @@ export default new Vuex.Store({
     // 重置任务ID
     resetTaskID:null,
     seeTaskID:null,
+    examineTaskID:null,
+    examineStuID:null,
   },
   getters: {
     getIp(state) {
@@ -79,6 +81,12 @@ export default new Vuex.Store({
     },
     getSeeTaskID(state){
       return state.seeTaskID;
+    },
+    getExamineTaskID(state){
+      return state.examineTaskID;
+    },
+    getExamineStuID(state){
+      return state.examineStuID;
     },
   },
   mutations: {
@@ -123,6 +131,15 @@ export default new Vuex.Store({
     setSeeTaskID(state,id){
       state.seeTaskID = id;
     },
+    setExamineTaskID(state,id)
+    {
+      state.examineTaskID = id;
+    },
+    setExamineStuID(state,id)
+    {
+      state.examineStuID = id;
+    }
+
   },
   actions: {
   },

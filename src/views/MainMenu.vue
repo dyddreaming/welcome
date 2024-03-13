@@ -62,7 +62,7 @@
                 </template>
                 <router-link to="/mainMenu/limit/manager" tag="span">
                   <el-menu-item index="4-1" class="mbutton" style="color: #ffffff">管理员管理</el-menu-item></router-link>
-                <router-link to="/mainMenu/limit/college" tag="span">
+                <router-link to="/mainMenu/college/manage" tag="span">
                   <el-menu-item index="4-2" class="mbutton" style="color: #ffffff">学院管理</el-menu-item></router-link>
               </el-submenu>
               <el-submenu index="5" style="background-color: rgb(28, 43, 54)">

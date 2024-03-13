@@ -144,6 +144,8 @@ export default {
     return {
       resultValue: "",
       searchWord: "",
+      taskId:"",
+      studentId:"",
       resultOptions: [
         {
           value: "审核通过",
@@ -155,6 +157,12 @@ export default {
         },
       ],
     };
+  },
+  created(){
+    this.taskId = this.$store.getters.getExamineTaskID;
+    this.studentId = this.$store.getters.getExamineStuID;
+    // console.log("studentId",this.studentId);
+    // console.log("taskId:",this.taskId);
   },
   methods: {
     submit() {
