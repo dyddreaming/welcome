@@ -77,9 +77,9 @@
             >
               各学院注册情况
             </div>
-            <div style="position: relative; height: 95%; width: 100%">
+            <div style="position: relative; height: 95%; width: 100%;">
               <div
-                v-for="(college, index) in CollegeList"
+                v-for="(college, index) in showCollegeList"
                 :key="index"
                 class="college-item"
               >
@@ -1950,6 +1950,7 @@ export default {
       customColor: "#18DBFD",
       // CollegeList: ["计算机学院", "信息学院"],
       CollegeList: [],
+      showCollegeList:[],
       taskData: [
         {
           name: "校史学习",
@@ -2717,6 +2718,7 @@ export default {
         .get(`${this.$store.getters.getIp}/colleges/list`)
         .then((response) => {
           this.CollegeList = response.data.data;
+          this.showCollegeList = this.CollegeList.slice(0, 9);
           // console.log(this.CollegeList);
         })
         .catch((error) => {

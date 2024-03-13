@@ -115,9 +115,8 @@
       <div style="
         position: relative;
         height: 7%;
-        width: 96%;
-        top: 1%;
-        left: 2%;
+        width: 100%;
+        top: 2%;
         display: flex;
       ">
         <!-- 分页 -->
