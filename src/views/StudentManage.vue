@@ -477,7 +477,7 @@ export default {
       CollegeList: [],
       currentPage: 1,
       pageSize: 7,
-      totalPages: 10,
+      totalPages: 1,
     };
   },
   computed: {
@@ -560,6 +560,7 @@ export default {
           this.fetchData = response.data.data;
           // console.log("响应数据：", this.fetchData);
           this.tableData = this.fetchData.records;
+          this.totalPages = this.fetchData.pages;
           console.log("表格数据：", this.tableData);
         })
         .catch((error) => {
@@ -642,7 +643,8 @@ export default {
             type: "success",
           });
           // 成功删除后刷新页面
-          location.reload();
+          // location.reload();
+          this.getData();
         })
         .catch((error) => {
           console.error("删除失败", error);

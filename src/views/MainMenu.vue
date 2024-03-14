@@ -14,7 +14,7 @@
         style="background-color: rgb(28, 43, 54);border-top: 2px solid rgb(23, 35, 43);">
         <el-row class="tac">
           <el-col :span="12">
-            <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+            <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :unique-opened="true">
               <el-submenu index="1" style="background-color: rgb(28, 43, 54)" id="student">
                 <template slot="title">
                   <i class="el-icon-user" style="color: #ffff"></i>

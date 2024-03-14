@@ -538,7 +538,7 @@
             ></knob-control>
           </div>
         </div>
-        <div style="position: relative; height: 8%; width: 100%; top: 2%">
+        <!-- <div style="position: relative; height: 8%; width: 100%; top: 2%">
           <span style="margin-right: 20px; margin-left: 20px">任务图标*:</span>
           <el-button
             icon="el-icon-upload2"
@@ -568,7 +568,7 @@
             "
             >图片命名格式为：任务名称.jpg</span
           >
-        </div>
+        </div> -->
         <div style="position: relative; height: 8%; width: 100%; top: 2%">
           <span style="margin-right: 20px; margin-left: 20px">开始时间*:</span>
           <el-date-picker
@@ -646,7 +646,7 @@
                 </el-input>
               </div>
             </div>
-            <!-- 任务类型2 -->
+            <!-- 地点拍照打卡 -->
             <div
               style="
                 position: relative;
@@ -656,6 +656,84 @@
                 border-bottom: 2px solid #209e91;
               "
               v-if="contactType === 2"
+            >
+              <div
+                style="
+                  position: relative;
+                  height: 7%;
+                  width: 100%;
+                  text-align: center;
+                  background-color: #209e91;
+                  font-size: 14px;
+                  color: #ffffff;
+                "
+              >
+                拍照
+              </div>
+              <div style="position: relative; height: 94%; width: 100%">
+                <span style="margin-right: 10px; margin-left: 20px">手势:</span>
+                <div
+                  style="
+                    position: relative;
+                    height: 19%;
+                    width: 100%;
+                    border-bottom: 2px solid #209e91;
+                    overflow-y: auto;
+                  "
+                >
+                  <div class="tag-list">
+                    <el-tag
+                      v-for="(tag, index) in photoGestureOptions"
+                      :key="index"
+                      :type="isPhotoSelected(tag) ? 'success' : 'info'"
+                      @click="togglePhotoTag(tag)"
+                      style="
+                        margin-right: 10px;
+                        margin-bottom: 5px;
+                        font-size: 10px;
+                      "
+                      >{{ tag.label }}</el-tag
+                    >
+                  </div>
+                </div>
+                <span style="margin-right: 10px; margin-left: 20px">已选:</span>
+                <div
+                  class="selected-tags"
+                  style="
+                    position: relative;
+                    overflow-y: auto;
+                    height: 50%;
+                    width: 83%;
+                    border: 2px solid #209e91;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    border-radius: 8px;
+                  "
+                >
+                  <el-tag
+                    v-for="(tag, index) in selectedTags"
+                    :key="index"
+                    closable
+                    @close="removePhotoTag(index)"
+                    style="
+                      margin-right: 10px;
+                      margin-bottom: 5px;
+                      font-size: 10px;
+                    "
+                    >{{ tag.label }}</el-tag
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- 物品拍照打卡 -->
+            <div
+              style="
+                position: relative;
+                height: 100%;
+                width: 100%;
+                border-right: 2px solid #209e91;
+                border-bottom: 2px solid #209e91;
+              "
+              v-if="contactType === 3"
             >
               <div
                 style="
@@ -699,38 +777,13 @@
                     >
                   </div>
                 </div>
-                <span style="margin-right: 10px; margin-left: 20px">手势:</span>
-                <div
-                  style="
-                    position: relative;
-                    height: 19%;
-                    width: 100%;
-                    border-bottom: 2px solid #209e91;
-                    overflow-y: auto;
-                  "
-                >
-                  <div class="tag-list">
-                    <el-tag
-                      v-for="(tag, index) in photoGestureOptions"
-                      :key="index"
-                      :type="isPhotoSelected(tag) ? 'success' : 'info'"
-                      @click="togglePhotoTag(tag)"
-                      style="
-                        margin-right: 10px;
-                        margin-bottom: 5px;
-                        font-size: 10px;
-                      "
-                      >{{ tag.label }}</el-tag
-                    >
-                  </div>
-                </div>
                 <span style="margin-right: 10px; margin-left: 20px">已选:</span>
                 <div
                   class="selected-tags"
                   style="
                     position: relative;
                     overflow-y: auto;
-                    height: 30%;
+                    height: 50%;
                     width: 83%;
                     border: 2px solid #209e91;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -761,7 +814,7 @@
                 border-bottom: 2px solid #209e91;
                 border-right: 2px solid #209e91;
               "
-              v-if="contactType === 4"
+              v-if="contactType === 5"
             >
               <div
                 style="
@@ -776,40 +829,12 @@
               >
                 摄像头
               </div>
-              <div style="position: relative; height: 94%; width: 100%">
-                <span
-                  style="margin-right: 10px; margin-left: 20px; font-size: 14px"
-                  >人脸识别:</span
-                >
-                <div
-                  style="
-                    position: relative;
-                    height: 19%;
-                    width: 100%;
-                    border-bottom: 2px solid #209e91;
-                    overflow-y: auto;
-                  "
-                >
-                  <div class="tag-list">
-                    <el-tag
-                      v-for="(tag, index) in faceOptions"
-                      :key="index"
-                      :type="isVideoSelected(tag) ? 'success' : 'info'"
-                      @click="toggleVideoTag(tag)"
-                      style="
-                        margin-right: 10px;
-                        margin-bottom: 5px;
-                        font-size: 10px;
-                      "
-                      >{{ tag.label }}</el-tag
-                    >
-                  </div>
-                </div>
+              <div style="position: relative; height: 93%; width: 100%">
                 <span style="margin-right: 10px; margin-left: 20px">手势:</span>
                 <div
                   style="
                     position: relative;
-                    height: 19%;
+                    height: 25%;
                     width: 100%;
                     border-bottom: 2px solid #209e91;
                     overflow-y: auto;
@@ -836,7 +861,7 @@
                   style="
                     position: relative;
                     overflow-y: auto;
-                    height: 30%;
+                    height:50%;
                     width: 83%;
                     border: 2px solid #209e91;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -882,7 +907,7 @@
             <!-- 任务类型5 -->
             <div
               style="position: relative; height: 12%; width: 100%; top: 5%"
-              v-if="contactType === 3"
+              v-if="(contactType === 4) | (contactType === 2)"
             >
               <span style="margin-right: 10px; margin-left: 20px"
                 >任务地点:</span
@@ -901,6 +926,27 @@
                 "
               >
               </el-input>
+            </div>
+            <div
+              style="position: relative; height: 12%; width: 100%; top: 5%"
+              v-if="contactType === 5"
+            >
+              <span style="margin-right: 22px; margin-left: 20px"
+                >摄像头编号:</span
+              >
+              <el-select
+                v-model="cameraId"
+                placeholder="请选择"
+                style="position: relative; height: 40px !important; width: 70%"
+              >
+                <el-option
+                  v-for="item in cameraOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
             </div>
           </div>
         </div>
@@ -1003,16 +1049,46 @@ export default {
         { label: "二号教学楼", value: "二号教学楼" },
       ],
       photoGestureOptions: [
-        { label: "OK", value: "OK" },
-        { label: "数字1", value: "数字1" },
-        { label: "数字4", value: "数字4" },
-        { label: "数字5", value: "数字5" },
+        { label: "OK", value: "left" },
+        { label: "love", value: "back" },
+        { label: "数字1", value: "up" },
+        { label: "数字2", value: "front" },
+        { label: "数字4", value: "right" },
+        { label: "数字5", value: "down" },
+        { label: "数字6", value: "clockwise" },
+        { label: "数字7", value: "anticlockwise" },
       ],
       videoGestureOptions: [
-        { label: "OK", value: "OK" },
-        { label: "数字1", value: "数字1" },
-        { label: "数字4", value: "数字4" },
-        { label: "数字5", value: "数字5" },
+        { label: "OK", value: "left" },
+        { label: "love", value: "back" },
+        { label: "数字1", value: "up" },
+        { label: "数字2", value: "front" },
+        { label: "数字4", value: "right" },
+        { label: "数字5", value: "down" },
+        { label: "数字6", value: "clockwise" },
+        { label: "数字7", value: "anticlockwise" },
+      ],
+      cameraOptions:[
+        {
+          value:1,
+          label:"camera-1",
+        },
+        {
+          value:2,
+          label:"camera-2",
+        },
+        {
+          value:3,
+          label:"camera-3",
+        },
+        {
+          value:4,
+          label:"camera-4",
+        },
+        {
+          value:5,
+          label:"camera-5",
+        }
       ],
       faceOptions: [{ label: "人脸识别", value: "人脸识别" }],
       name: "",
@@ -1045,6 +1121,7 @@ export default {
       underGraduate: "",
       Graduate: "",
       videoPlay: "",
+      cameraId:null,
       TypeOptions: [
         {
           value: "主线",
@@ -1149,14 +1226,18 @@ export default {
         },
         {
           value: 2,
-          label: "拍照打卡",
+          label: "地点拍照打卡",
         },
         {
           value: 3,
-          label: "导航引导",
+          label: "物品拍照打卡",
         },
         {
           value: 4,
+          label: "导航引导",
+        },
+        {
+          value: 5,
           label: "摄像头打卡",
         },
       ],
@@ -1197,7 +1278,7 @@ export default {
     isVideoSelected(tag) {
       return this.videoSelectedTags.some((t) => t.value === tag.value);
     },
-    removeVideoPhotoTag(index) {
+    removeVideoTag(index) {
       this.videoSelectedTags.splice(index, 1);
     },
     // 提交任务
@@ -1226,13 +1307,16 @@ export default {
       let category = this.typeValue == "主线" ? 0 : 1;
       let preTask = this.beforeTask;
       let level = this.grade == "校级" ? 0 : 1;
-      let img = "任务1.jpg";
+      let targetCollege = this.targetCollege;
+      // let img = "任务1.jpg";
       let releaseTime = this.convertTime(this.startTime);
       let endTime = this.convertTime(this.endTime);
       let mode = this.contactType;
+      let npc = this.image.value;
       let text = totalText;
       let status = 1;
       let details = totalDetails;
+      let cameraId = this.cameraId;
       // console.log(admitData);
       axios
         .post(`${this.$store.getters.getIp}/tasks`, {
@@ -1242,18 +1326,21 @@ export default {
           category,
           preTask,
           level,
-          img,
+          targetCollege,
           releaseTime,
           endTime,
           mode,
+          npc,
           text,
           status,
+          cameraId,
           details,
         })
         .then((response) => {
           if (response.data.code) {
             console.log("提交成功:", response.data);
             this.$message.success("提交成功");
+            location.reload();
           } else {
             const errorMessage = response.data.msg;
             this.$message.error(errorMessage);
@@ -1264,7 +1351,7 @@ export default {
         });
     },
     // 存为草稿
-    save(){
+    save() {
       let totalDetails = this.makeReward();
       let totalText = this.makeText();
       let name = this.name;
@@ -1273,7 +1360,7 @@ export default {
       let category = this.typeValue == "主线" ? 0 : 1;
       let preTask = this.beforeTask;
       let level = this.grade == "校级" ? 0 : 1;
-      let img = "任务1.jpg";
+      // let img = "任务1.jpg";
       let releaseTime = this.convertTime(this.startTime);
       let endTime = this.convertTime(this.endTime);
       let mode = this.contactType;
@@ -1289,7 +1376,6 @@ export default {
           category,
           preTask,
           level,
-          img,
           releaseTime,
           endTime,
           mode,
@@ -1434,8 +1520,8 @@ export default {
           let totalData = response.data.data;
           this.taskOptions = totalData.map((item) => {
             return {
-              value: item.id,
-              label: `${item.id}-${item.name}`,
+              value: item.priNum,
+              label: `${item.priNum}-${item.name}`,
             };
           });
         })
@@ -1443,14 +1529,14 @@ export default {
           console.error("获取数据时出错：", error);
         });
     },
-    // 获取任务图标
-    handleImageClick() {
-      this.$refs.imageFileInput.click();
-    },
-    handleImageUpload(event) {
-      const file = event.target.files[0];
-      console.log("上传的图片:", file);
-    },
+    // // 获取任务图标
+    // handleImageClick() {
+    //   this.$refs.imageFileInput.click();
+    // },
+    // handleImageUpload(event) {
+    //   const file = event.target.files[0];
+    //   console.log("上传的图片:", file);
+    // },
     // 获取任务内容
     makeText() {
       if (this.contactType == 0) {
@@ -1458,8 +1544,10 @@ export default {
       } else if (this.contactType == 1) {
         return this.chatArea;
       } else if (this.contactType == 2) {
-        return this.selectedTags[0].value;
+        return this.selectedTags[0].value + "," + this.textarea;
       } else if (this.contactType == 3) {
+        return this.selectedTags[0].value;
+      } else if (this.contactType == 4) {
         return this.textarea;
       } else {
         return this.videoSelectedTags[0].value;
@@ -1473,7 +1561,10 @@ export default {
         .then((response) => {
           let collegeData = response.data.data;
           collegeData.forEach((college) => {
-            this.collegeOptions.push({value:college.name,label:college.name});
+            this.collegeOptions.push({
+              value: college.name,
+              label: college.name,
+            });
           });
         })
         .catch((error) => {

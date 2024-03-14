@@ -196,7 +196,7 @@
       </div>
       <!-- 数据部分 -->
       <div style="height: 87%; width: 100%; position: relative">
-        <el-table :data="tableData" border style="width: 100%; height: 100%">
+        <el-table :data="tableData" border style="width: 100%; height: 100%" @selection-change="handleSelectionChange">
           <el-table-column
             type="selection"
             width="55"
@@ -446,7 +446,7 @@ export default {
       selectedIds: [],
       currentPage: 1,
       pageSize: 6,
-      totalPages: 10,
+      totalPages: 1,
     };
   },
   computed: {
@@ -485,6 +485,10 @@ export default {
     this.goToPage(1);
   },
   methods: {
+    handleSelectionChange(selection) {
+      this.selectedIds = selection.map((item) => item.id);
+      console.log(this.selectedIds);
+    },
     resetValue() {
       this.college = "所有";
       this.type = "所有";
@@ -559,6 +563,7 @@ export default {
         })
         .then((response) => {
           this.totalData = response.data.data.records;
+          this.totalPages = response.data.data.pages;
           this.tableData = this.totalData.map((item) => {
             return {
               id: item.id,

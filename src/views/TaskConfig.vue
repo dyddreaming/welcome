@@ -488,7 +488,7 @@ export default {
       totalData: null,
       currentPage: 1,
       pageSize: 8,
-      totalPages: 10,
+      totalPages: 1,
     };
   },
   created(){
@@ -552,6 +552,7 @@ export default {
         .then((response) => {
           this.totalData = response.data.data.records;
           console.log("获取到的任务列表:", this.totalData);
+          this.totalPages = response.data.data.pages;
           this.tableData = this.totalData.map((item) => {
             let target = "";
             switch (item.target) {

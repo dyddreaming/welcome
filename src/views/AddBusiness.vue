@@ -382,7 +382,7 @@ export default {
       totalData: null,
       currentPage: 1,
       pageSize: 7,
-      totalPages: 10,
+      totalPages: 1,
       tableData: [
         // {
         //   adName: "不吃火锅就吃烤匠",
@@ -458,6 +458,7 @@ export default {
         )
         .then((response) => {
           this.totalData = response.data.data.records;
+          this.totalPages = response.data.data.pages;
           this.totalData.forEach((item) => {
             if (item.category === 0) {
               return;

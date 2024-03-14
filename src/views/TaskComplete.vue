@@ -244,7 +244,7 @@ export default {
       CollegeList: [],
       currentPage: 1,
       pageSize: 7,
-      totalPages: 10,
+      totalPages: 1,
       statusOptions: [
         {
           value: "",
@@ -346,6 +346,7 @@ export default {
           this.totalData = response.data.data.taskPage;
           console.log("响应数据：", this.totalData);
           const records = this.totalData.records;
+          this.totalPages = this.totalData.pages;
           records.forEach((task, index) => {
             this.tableData.push({
               img: require(`@/assets/${task.name}.png`),
