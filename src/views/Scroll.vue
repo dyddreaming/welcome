@@ -559,6 +559,7 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                  v-if="roles.length>0"
                     style="
                       position: relative;
                       width: 35%;
@@ -570,7 +571,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                  {{ roles[5].username }}
                   </div>
                 </div>
                 <div
@@ -583,7 +584,8 @@
                   "
                 >
                   <el-progress
-                    :percentage="50"
+                  v-if="progresses.length > 0"
+                  :percentage="progresses[5]"
                     text-color="white"
                   ></el-progress>
                 </div>
@@ -610,6 +612,7 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                  v-if="roles.length>0"
                     style="
                       position: relative;
                       width: 35%;
@@ -621,7 +624,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                  {{ roles[6].username }}
                   </div>
                 </div>
                 <div
@@ -634,13 +637,15 @@
                   "
                 >
                   <el-progress
-                    :percentage="50"
+                  v-if="progresses.length > 0"
+                  :percentage="progresses[6]"
                     text-color="white"
                   ></el-progress>
                 </div>
               </div>
               <!-- 第八 -->
               <div
+              v-if="roles.length>0"
                 style="
                   position: relative;
                   width: 100%;
@@ -672,7 +677,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                  {{ roles[7].username }}
                   </div>
                 </div>
                 <div
@@ -685,7 +690,8 @@
                   "
                 >
                   <el-progress
-                    :percentage="50"
+                  v-if="progresses.length > 0"
+                  :percentage="progresses[7]"
                     text-color="white"
                   ></el-progress>
                 </div>
@@ -1023,7 +1029,7 @@
                       color: #ffffff;
                     "
                   >
-                    张三
+                  {{ records[5].username }}
                   </div>
                   <div
                     v-if="records.length != 0"
@@ -1037,7 +1043,7 @@
                       color: #ffffff;
                     "
                   >
-                    1120
+                  {{ records[5].integral }}
                   </div>
                 </div>
                 <div
@@ -1058,6 +1064,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1068,9 +1075,10 @@
                       color: #ffffff;
                     "
                   >
-                    张三
+                  {{ records[6].username }}
                   </div>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1081,7 +1089,7 @@
                       color: #ffffff;
                     "
                   >
-                    1120
+                  {{ records[6].integral }}
                   </div>
                 </div>
                 <div
@@ -1102,6 +1110,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1112,9 +1121,10 @@
                       color: #ffffff;
                     "
                   >
-                    张三
+                  {{ records[7].username }}
                   </div>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1125,7 +1135,7 @@
                       color: #ffffff;
                     "
                   >
-                    1120
+                  {{ records[7].integral }}
                   </div>
                 </div>
                 <div
@@ -1146,6 +1156,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1156,9 +1167,10 @@
                       color: #ffffff;
                     "
                   >
-                    张三
+                  {{ records[8].username }}
                   </div>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1169,7 +1181,7 @@
                       color: #ffffff;
                     "
                   >
-                    1120
+                  {{ records[8].integral }}
                   </div>
                 </div>
                 <div
@@ -1190,6 +1202,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1200,9 +1213,10 @@
                       color: #ffffff;
                     "
                   >
-                    张三
+                  {{ records[9].username }}
                   </div>
                   <div
+                  v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1213,7 +1227,7 @@
                       color: #ffffff;
                     "
                   >
-                    1120
+                  {{ records[9].integral }}
                   </div>
                 </div>
               </div>
@@ -1274,9 +1288,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 35%;
                       text-align: center;
@@ -1285,7 +1300,7 @@
                       color: yellow;
                     "
                   >
-                    张三
+                    {{ roles2[0].username }}
                   </div>
                 </div>
                 <div
@@ -1299,7 +1314,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                  {{ minuteList[0] }}分{{ secondsList[0] }}秒
                 </div>
               </div>
               <!-- 第二 -->
@@ -1335,9 +1350,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 35%;
                       text-align: center;
@@ -1346,7 +1362,7 @@
                       color: yellow;
                     "
                   >
-                    李四
+                    {{ roles2[1].username }}
                   </div>
                 </div>
                 <div
@@ -1360,7 +1376,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                {{ minuteList[1] }}分{{ secondsList[1] }}秒
                 </div>
               </div>
               <!-- 第三 -->
@@ -1396,9 +1412,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 35%;
                       text-align: center;
@@ -1407,7 +1424,7 @@
                       color: yellow;
                     "
                   >
-                    王五
+                    {{ roles2[2].username }}
                   </div>
                 </div>
                 <div
@@ -1421,7 +1438,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                {{ minuteList[2] }}分{{ secondsList[2] }}秒
                 </div>
               </div>
               <!-- 第四 -->
@@ -1446,9 +1463,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -1457,7 +1475,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                    {{ roles2[3].username }}
                   </div>
                 </div>
                 <div
@@ -1471,7 +1489,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                {{ minuteList[3] }}分{{ secondsList[3] }}秒
                 </div>
               </div>
               <!-- 第五 -->
@@ -1496,9 +1514,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -1507,7 +1526,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                    {{ roles2[4].username }}
                   </div>
                 </div>
                 <div
@@ -1521,7 +1540,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                {{ minuteList[4] }}分{{ secondsList[4] }}秒
                 </div>
               </div>
               <!-- 第六 -->
@@ -1546,9 +1565,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -1557,7 +1577,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                    {{ roles2[5].username }}
                   </div>
                 </div>
                 <div
@@ -1571,7 +1591,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                {{ minuteList[5] }}分{{ secondsList[5] }}秒
                 </div>
               </div>
               <!-- 第七 -->
@@ -1596,9 +1616,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -1607,7 +1628,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                    {{ roles2[6].username }}
                   </div>
                 </div>
                 <div
@@ -1621,7 +1642,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                {{ minuteList[6] }}分{{ secondsList[6] }}秒
                 </div>
               </div>
               <!-- 第八 -->
@@ -1646,9 +1667,10 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
+                    v-if="roles2.length != 0"
                     style="
                       position: relative;
-                      width: 28%;
+                      width: 50%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -1657,7 +1679,7 @@
                       color: #ffffff;
                     "
                   >
-                    王五
+                    {{ roles2[7].username }}
                   </div>
                 </div>
                 <div
@@ -1671,7 +1693,7 @@
                     color: #ffffff;
                   "
                 >
-                  30min
+                {{ minuteList[7] }}分{{ secondsList[7] }}秒
                 </div>
               </div>
             </div>
@@ -1753,7 +1775,7 @@
                   top: 2%;
                 "
               >
-                {{dateString}}完成任务排行榜
+                {{ dateString }}完成任务排行榜
               </div>
               <div
                 style="position: relative; height: 95%; width: 98%"
@@ -1771,7 +1793,7 @@
                   top: 2%;
                 "
               >
-              {{dateString}}参与人数排行榜
+                {{ dateString }}参与人数排行榜
               </div>
               <div
                 style="position: relative; width: 98%; height: 95%"
@@ -2012,14 +2034,16 @@ export default {
       roles2: [],
       consumeList: [],
       hotTaskData: [],
-      totalData2:null,
-      studentIds:null,
-      compCount:null,
-      totalData3:null,
-      taskNames:null,
-      parCount:null,
-      dateString:null,
-      taskId:null,
+      totalData2: null,
+      studentIds: null,
+      compCount: null,
+      totalData3: null,
+      taskNames: null,
+      parCount: null,
+      dateString: null,
+      taskId: null,
+      minuteList: [],
+      secondsList: [],
     };
   },
   created() {
@@ -2031,9 +2055,7 @@ export default {
       $("#dowebok").fullpage({});
     });
     let date = new Date();
-    this.dateString = `${
-      date.getMonth() + 1
-    }月${date.getDate()}日`;
+    this.dateString = `${date.getMonth() + 1}月${date.getDate()}日`;
     this.getData1().then(() => {
       this.initUnderChart();
       this.initGraduateChart();
@@ -2317,13 +2339,14 @@ export default {
         item.value = 0;
       });
       this.areaName = this.areaName.map((name) => {
-        if(name.substring(0, 2) == "内蒙" | name.substring(0, 2) == "黑龙"){
+        if (
+          (name.substring(0, 2) == "内蒙") |
+          (name.substring(0, 2) == "黑龙")
+        ) {
           return name.substring(0, 3);
-        }
-        else if(name.substring(0, 2) == "内蒙"){
+        } else if (name.substring(0, 2) == "内蒙") {
           return name.substring(0, 4);
-        }
-        else{
+        } else {
           return name.substring(0, 2);
         }
       });
@@ -2769,9 +2792,9 @@ export default {
         return "#2dacd1";
       } else if (percentage < 75) {
         return "#18dbfd";
-      } else if(percentage < 85){
+      } else if (percentage < 85) {
         return "#0c7fe9";
-      }else{
+      } else {
         return "#0444ab";
       }
     },
@@ -2812,11 +2835,13 @@ export default {
     },
     // 单项任务完成速度排行榜
     getSingleComRank() {
+      this.minuteList = [];
+      this.secondsList = [];
       let taskId = this.taskId;
       axios
         .get(`${this.$store.getters.getIp}/tasks/students/speed/rank`, {
           params: {
-            taskId
+            taskId,
           },
         })
         .then((response) => {
@@ -2824,10 +2849,12 @@ export default {
           this.roles2 = this.rolesData3.roles;
           this.consumeList = this.rolesData3.consumeList;
           console.log("角色", this.roles2);
-          this.consumeList = this.consumeList.map((seconds) =>
-            Math.floor(seconds / 60)
-          );
-          console.log("时间", this.consumeList);
+          this.consumeList.forEach((item) => {
+            this.minuteList.push(Math.floor(item / 60));
+            this.secondsList.push(Math.floor(item % 60));
+          });
+          console.log("分钟", this.minuteList);
+          console.log("秒数", this.secondsList);
           // console.log(this.rolesData3);
         })
         .catch((error) => {
@@ -2842,9 +2869,9 @@ export default {
         .then((response) => {
           this.hotTaskData = response.data.data;
           // console.log("热点任务数据", this.hotTaskData);
-          this.hotTaskData.slice(0, 12).forEach((item)=>{
-            this.taskData.push({name:item.name,value:item.popularity});
-          })
+          this.hotTaskData.slice(0, 12).forEach((item) => {
+            this.taskData.push({ name: item.name, value: item.popularity });
+          });
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
@@ -2882,35 +2909,35 @@ export default {
       });
     },
     // 获取参与人数排行榜
-    getList2(){
+    getList2() {
       return new Promise((resolve, reject) => {
-      // 时间格式化
-      const date1 = new Date();
-      const year = date1.getFullYear();
-      const month = (date1.getMonth() + 1).toString().padStart(2, "0");
-      const day = date1.getDate().toString().padStart(2, "0");
-      const formattedDate = `${year}-${month}-${day} 00:00:00`;
-      // console.log("dateValue2:",formattedDate);
+        // 时间格式化
+        const date1 = new Date();
+        const year = date1.getFullYear();
+        const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+        const day = date1.getDate().toString().padStart(2, "0");
+        const formattedDate = `${year}-${month}-${day} 00:00:00`;
+        // console.log("dateValue2:",formattedDate);
 
-      axios
-        .get(`${this.$store.getters.getIp}/tasks/students/participant/rank`, {
-          params: {
-            time: formattedDate,
-          },
-        })
-        .then((response) => {
-          this.totalData3 = response.data.data;
-          this.taskNames = this.totalData3.taskNames;
-          this.parCount = this.totalData3.parCount;
-          // console.log(this.studentIds);
-          // console.log(this.compCount);
-          resolve(); // 异步操作完成后 resolve
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          reject(error); // 出错时 reject
-        });
-      })
+        axios
+          .get(`${this.$store.getters.getIp}/tasks/students/participant/rank`, {
+            params: {
+              time: formattedDate,
+            },
+          })
+          .then((response) => {
+            this.totalData3 = response.data.data;
+            this.taskNames = this.totalData3.taskNames;
+            this.parCount = this.totalData3.parCount;
+            // console.log(this.studentIds);
+            // console.log(this.compCount);
+            resolve(); // 异步操作完成后 resolve
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            reject(error); // 出错时 reject
+          });
+      });
     },
   },
 };
