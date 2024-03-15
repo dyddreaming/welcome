@@ -1952,46 +1952,46 @@ export default {
       CollegeList: [],
       showCollegeList: [],
       taskData: [
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
-        {
-          name: "校史学习",
-          value: 1760,
-        },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
+        // {
+        //   name: "校史学习",
+        //   value: 1760,
+        // },
       ],
       circleUrl:
         "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
@@ -2019,7 +2019,12 @@ export default {
       taskNames:null,
       parCount:null,
       dateString:null,
+      taskId:null,
     };
+  },
+  created() {
+    this.taskId = this.$store.getters.getSelectedTaskId;
+    console.log("接收到的任务ID:", this.taskId);
   },
   mounted() {
     $(document).ready(function () {
@@ -2329,7 +2334,7 @@ export default {
           dataList[areaIndex].value = this.areaNumber[index];
         }
       });
-      console.log(dataList);
+      // console.log(dataList);
       let myChart = echarts.init(this.$refs.mapChart);
       let options = {
         title: {
@@ -2807,10 +2812,11 @@ export default {
     },
     // 单项任务完成速度排行榜
     getSingleComRank() {
+      let taskId = this.taskId;
       axios
         .get(`${this.$store.getters.getIp}/tasks/students/speed/rank`, {
           params: {
-            taskId: 1,
+            taskId
           },
         })
         .then((response) => {
@@ -2830,11 +2836,15 @@ export default {
     },
     // 热点任务
     getHotTask() {
+      this.taskData = [];
       axios
         .get(`${this.$store.getters.getIp}/tasks/popularity/rank`)
         .then((response) => {
           this.hotTaskData = response.data.data;
-          console.log("热点任务数据", this.hotTaskData);
+          // console.log("热点任务数据", this.hotTaskData);
+          this.hotTaskData.slice(0, 12).forEach((item)=>{
+            this.taskData.push({name:item.name,value:item.popularity});
+          })
         })
         .catch((error) => {
           console.error("Error fetching data:", error);

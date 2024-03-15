@@ -22,7 +22,7 @@ export default new Vuex.Store({
       majorValue: "",
       classValue: "",
       campusValue: "",
-      addressOptions: []
+      addressOptions: [],
     },
     rowData: null,
     taskId: null,
@@ -41,6 +41,8 @@ export default new Vuex.Store({
     seeTaskID:null,
     examineTaskID:null,
     examineStuID:null,
+    // 选择主线任务ID
+    selectedTaskId:null,
   },
   getters: {
     getIp(state) {
@@ -87,6 +89,9 @@ export default new Vuex.Store({
     },
     getExamineStuID(state){
       return state.examineStuID;
+    },
+    getSelectedTaskId(state){
+      return state.selectedTaskId;
     },
   },
   mutations: {
@@ -138,6 +143,9 @@ export default new Vuex.Store({
     setExamineStuID(state,id)
     {
       state.examineStuID = id;
+    },
+    setSelectedTaskId(state,id){
+      state.selectedTaskId = id;
     }
 
   },

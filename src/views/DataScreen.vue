@@ -381,6 +381,8 @@ export default {
       cClick: null,
       sevenClick: null,
       adType: null,
+      taskId:null,
+      idList:[],
       taskOptions: [
         // {
         //   value: "校史学习",
@@ -452,11 +454,16 @@ export default {
   mounted() {
     if (this.value) {
       this.getScreenSet();
-    }
+      this.getTotalMainTask();
+    };
   },
   methods: {
     screenPreview() {
-      this.$router.push("/dataScroll");
+      this.getTaskId(this.selectTask);
+      this.$store.commit("setSelectedTaskId", this.taskId);
+      this.$nextTick(() => {
+        this.$router.push("/dataScroll");
+      });
     },
     getScreenSet() {
       axios
@@ -522,8 +529,37 @@ export default {
           console.error("提交失败:", error);
         });
     },
-    // 获取所有任务信息
-    
+    // 获取所有主线任务
+    getTotalMainTask() {
+      this.idList = [];
+      axios
+        .get(`${this.$store.getters.getIp}/tasks/principal/list`)
+        .then((response) => {
+          let totalData = response.data.data;
+          this.taskOptions = totalData.map((item) => {
+            // console.log(item.name,item.priNum);
+            this.idList.push(item.id);
+            return {
+              value: item.name,
+              label: item.name,
+            };
+          });
+        })
+        .catch((error) => {
+          console.error("获取数据时出错：", error);
+        });
+    },
+    // 获取选择主线任务的ID值
+    getTaskId(value){
+      // console.log(this.idList);
+      this.taskOptions.forEach((item, index)=>{
+        if(item.value == value)
+        {
+          this.taskId = this.idList[index];
+        }
+      });
+      // console.log("选中任务ID值",this.taskId);
+    },
   },
 };
 </script>
