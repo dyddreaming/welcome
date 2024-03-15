@@ -349,7 +349,7 @@ export default {
           this.totalPages = this.totalData.pages;
           records.forEach((task, index) => {
             this.tableData.push({
-              img: require(`@/assets/任务1.png`),
+              img: require(`../../public/static/img/任务1.png`),
               name: task.name,
               id: task.id,
               date: task.releaseTime.replace("T", " "),
