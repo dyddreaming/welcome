@@ -1,144 +1,241 @@
 <template>
-  <div class="app-main" style="position: relative; background-color: #f0f3f4;">
+  <div class="app-main" style="position: relative; background-color: #f0f3f4">
     <div
-      style="position: relative; height: 8%; width: 100%; background-color: rgb(28, 43, 54); display: flex; align-items: center;">
+      style="
+        position: relative;
+        height: 8%;
+        width: 100%;
+        background-color: rgb(28, 43, 54);
+        display: flex;
+        align-items: center;
+      "
+    >
       <div
-        style="position:relative;width:20%;height:100%;display: flex; align-items: center;left:2%;background-color:rgb(28, 43, 54);">
-        <i class="el-icon-search" style="color: #ffff;margin-right:10px;"></i>
+        style="
+          position: relative;
+          width: 20%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          left: 2%;
+          background-color: rgb(28, 43, 54);
+        "
+      >
+        <i class="el-icon-search" style="color: #ffff; margin-right: 10px"></i>
         <el-input v-model="search" placeholder="搜索"></el-input>
       </div>
-      <router-link to="/mainMenu/help/helpFile"
-        style="color: inherit; text-decoration: none; margin-right: 20px; margin-left: auto; color: #ffffff;">
-        <span style="transition: color 0.3s;" class="hover-color">需要帮助吗？<span style="color: #209e91;">点击这里</span></span>
+      <router-link
+        to="/mainMenu/help/helpFile"
+        style="
+          color: inherit;
+          text-decoration: none;
+          margin-right: 20px;
+          margin-left: auto;
+          color: #ffffff;
+        "
+      >
+        <span style="transition: color 0.3s" class="hover-color"
+          >需要帮助吗？<span style="color: #209e91">点击这里</span></span
+        >
       </router-link>
-      <i class="el-icon-s-home" style="color: #ffff;margin-right:10px; font-size: 24px;"></i>
+      <i
+        class="el-icon-s-home"
+        style="color: #ffff; margin-right: 10px; font-size: 24px"
+      ></i>
     </div>
-    <div style="margin-top: 10px; width:100%;height:9%;display:flex;">
-      <h2 style="
+    <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
+      <h2
+        style="
           color: #747474;
           display: inline-block;
           left: 2%;
-          position:relative;
-          width:98%;
-        ">
+          position: relative;
+          width: 98%;
+        "
+      >
         学生注册情况
       </h2>
       <div
-        style="position: relative; height: 100%; width: 20%;display: flex; align-items: center; justify-content: flex-end;right:2%;">
+        style="
+          position: relative;
+          height: 100%;
+          width: 20%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          right: 2%;
+        "
+      >
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px;"
-            id="active-link">首页</el-breadcrumb-item>
-          <el-breadcrumb-item style="font-size: 17px; color: #747474;font-weight:600;"
-            id="current-link">学生注册情况</el-breadcrumb-item>
+          <el-breadcrumb-item
+            :to="{ path: '/mainMenu/student/register' }"
+            style="font-size: 17px"
+            id="active-link"
+            >首页</el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            style="font-size: 17px; color: #747474; font-weight: 600"
+            id="current-link"
+            >学生注册情况</el-breadcrumb-item
+          >
         </el-breadcrumb>
       </div>
     </div>
     <!-- 横线 -->
-    <hr style="
+    <hr
+      style="
         width: 99%;
         border: 1px solid #ffffff;
         margin-top: 5px;
         position: relative;
-      " />
+      "
+    />
     <!-- 竖线 -->
-    <div style="
+    <div
+      style="
         position: absolute;
         left: 50%;
         top: 148px;
         bottom: 0;
         height: calc(100%);
         border-left: 2px solid #ffffff;
-      "></div>
-    <!-- 左侧内容 -->
-    <div style="
+      "
+    ></div>
+    <div
+      style="
         position: relative;
+        height: 77%;
+        width: 96%;
         left: 2%;
-        top:2%;
-        height:75%;
-        bottom: 0;
-        width: 46%;
-        border-right: 2px solid #ffffff;
-        background-color:#ffffff;
-        border-radius:8px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      ">
-      <!-- 上方环形进度图 -->
-      <div ref="chartContainer" style="width: 100%; height: 50%"></div>
-      <!-- 下侧进度条 -->
-      <div style="width: 100%; height: 40%">
-        <div id="UndergraduateR" style="width: 100%; height: 50%">
-          <div>
-            <p style="
+        top: 1%;
+        display: flex;
+      "
+    >
+      <!-- 左侧内容 -->
+      <div
+        style="
+          position: relative;
+          height: 100%;
+          bottom: 0;
+          width: 48%;
+          border-right: 2px solid #ffffff;
+          background-color: #ffffff;
+          border-radius: 8px;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        "
+      >
+        <!-- 上方环形进度图 -->
+        <div ref="chartContainer" style="width: 100%; height: 50%"></div>
+        <!-- 下侧进度条 -->
+        <div style="width: 100%; height: 40%">
+          <div id="UndergraduateR" style="width: 100%; height: 50%">
+            <div>
+              <p
+                style="
+                  display: inline;
+                  margin-left: 20px;
+                  margin-right: 440px;
+                  font-size: 14px;
+                "
+              >
+                本科生注册情况
+              </p>
+              <p style="display: inline; font-size: 14px">人数</p>
+            </div>
+            <div style="margin-left: 20px; width: 95%">
+              <el-progress
+                :percentage="calculateTotalRate(UndergraduateC, UndergraduateE)"
+                :color="customColor"
+                :stroke-width="13"
+                :show-text="false"
+              ></el-progress>
+            </div>
+            <div style="margin-left: 20px">
+              <p style="display: inline; font-size: 12px; margin-right: 520px">
+                {{ UndergraduateE }}
+              </p>
+              <p style="display: inline; font-size: 12px">
+                {{ UndergraduateC }}
+              </p>
+            </div>
+          </div>
+          <div id="GraduateR" style="width: 100%; height: 50%">
+            <p
+              style="
                 display: inline;
                 margin-left: 20px;
                 margin-right: 440px;
                 font-size: 14px;
-              ">
-              本科生注册情况
+              "
+            >
+              研究生注册情况
             </p>
             <p style="display: inline; font-size: 14px">人数</p>
+            <div style="margin-left: 20px; width: 95%">
+              <el-progress
+                :percentage="calculateTotalRate(GraduateC, GraduateE)"
+                :color="customColor"
+                :stroke-width="13"
+                :show-text="false"
+              ></el-progress>
+            </div>
+            <div style="margin-left: 20px">
+              <p style="display: inline; font-size: 12px; margin-right: 520px">
+                {{ GraduateE }}
+              </p>
+              <p style="display: inline; font-size: 12px">{{ GraduateC }}</p>
+            </div>
           </div>
-          <div style="margin-left: 20px; width: 95%">
-            <el-progress :percentage="calculateTotalRate(UndergraduateC, UndergraduateE)" :color="customColor"
-              :stroke-width="13" :show-text="false"></el-progress>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+              height: 10%;
+              width: 100%;
+            "
+          >
+            <el-button
+              type="primary"
+              style="background-color: #209e91; border: #209e91"
+              size="small"
+              @click="redirectToPrevious"
+              >往日注册情况</el-button
+            >
           </div>
-          <div style="margin-left: 20px">
-            <p style="display: inline; font-size: 12px; margin-right: 540px">
-              {{ UndergraduateE }}
-            </p>
-            <p style="display: inline; font-size: 12px">
-              {{ UndergraduateC }}
-            </p>
-          </div>
-        </div>
-        <div id="GraduateR" style="width: 100%; height: 50%">
-          <p style="
-              display: inline;
-              margin-left: 20px;
-              margin-right: 440px;
-              font-size: 14px;
-            ">
-            研究生注册情况
-          </p>
-          <p style="display: inline; font-size: 14px">人数</p>
-          <div style="margin-left: 20px; width: 95%">
-            <el-progress :percentage="calculateTotalRate(GraduateC, GraduateE)" :color="customColor" :stroke-width="13"
-              :show-text="false"></el-progress>
-          </div>
-          <div style="margin-left: 20px">
-            <p style="display: inline; font-size: 12px; margin-right: 540px">
-              {{ GraduateE }}
-            </p>
-            <p style="display: inline; font-size: 12px">{{ GraduateC }}</p>
-          </div>
-        </div>
-        <div
-          style="display: flex; justify-content: center; align-items: center; position: relative; height: 10%; width: 100%;">
-          <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
-            @click="redirectToPrevious">往日注册情况</el-button>
         </div>
       </div>
-    </div>
-    <!-- 右侧内容 -->
-    <!-- 各学院累计注册情况 -->
-    <div style="
-        position: absolute;
-        left: 52%;
-        top: 169px;
-        bottom: 20px;
-        width: 46%;
-        background-color: #ffffff;
-        border-radius: 8px;
-        overflow-y: auto;
-        max-height: 570px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      ">
-      <h3 style="margin-left: 20px">学院</h3>
-      <div v-for="(college, index) in CollegeList" :key="index" class="college-item">
-        <p style="margin-left: 20px; font-size: 14px">{{ college.name }}</p>
-        <div style="margin-left: 20px; width: 95%">
-          <el-progress :percentage="calculateRegistrationRate(index)" :stroke-width="10" :color="customColorMethod">
-          </el-progress>
+      <!-- 右侧内容 -->
+      <div
+        style="
+          position: relative;
+          height: 100%;
+          bottom: 0;
+          width: 48%;
+          left:4%;
+          border-right: 2px solid #ffffff;
+          background-color: #ffffff;
+          border-radius: 8px;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+          overflow-y:auto;
+        "
+      >
+        <h3 style="margin-left: 20px">学院</h3>
+        <div
+          v-for="(college, index) in CollegeList"
+          :key="index"
+          class="college-item"
+        >
+          <p style="margin-left: 20px; font-size: 14px">{{ college.name }}</p>
+          <div style="margin-left: 20px; width: 95%">
+            <el-progress
+              :percentage="calculateRegistrationRate(index)"
+              :stroke-width="10"
+              :color="customColorMethod"
+            >
+            </el-progress>
+          </div>
         </div>
       </div>
     </div>
@@ -165,7 +262,7 @@
 /deep/.el-input__inner {
   background-color: rgb(28, 43, 54);
   border: none;
-  color: #747474
+  color: #747474;
 }
 </style>
 <script>
@@ -242,7 +339,7 @@ export default {
           this.TotalRegisterRate = Math.floor(
             ((this.UndergraduateE + this.GraduateE) /
               (this.UndergraduateC + this.GraduateC)) *
-            100
+              100
           );
           this.TotalUnRegisterRate = 100 - this.TotalRegisterRate;
           console.log(this.TotalRegisterRate);
@@ -278,7 +375,7 @@ export default {
               {
                 value: this.TotalRegisterRate,
                 itemStyle: {
-                  color: "#FA5E00",
+                  color: "#0da699",
                 },
               },
               {

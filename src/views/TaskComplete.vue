@@ -114,15 +114,15 @@
             <template slot-scope="scope">
               <div style="
                   display: flex;
-                  align-items: center;
-                  justify-content: center;
+                  margin-left:30px;
+                  position:relative;
                 ">
                 <!-- 任务图片 -->
-                <img :src="scope.row.img" style="margin-right: 10px; width: 40px; height: 40px" />
+                <img :src="scope.row.img" style="margin-right: 0px; width: 40px; height: 40px" />
                 <!-- 任务名称和ID -->
-                <div>
-                  <div style="color: #747474">{{ scope.row.name }}</div>
-                </div>
+                  <div style="color: #747474;position:relative;height:100%;height: 40px;display: flex;
+                  align-items: center;
+                  justify-content: center;">{{ scope.row.name }}</div>
               </div>
             </template>
           </el-table-column>
@@ -243,7 +243,7 @@ export default {
       nameInput: "",
       CollegeList: [],
       currentPage: 1,
-      pageSize: 7,
+      pageSize: 6,
       totalPages: 1,
       statusOptions: [
         {
@@ -349,7 +349,7 @@ export default {
           this.totalPages = this.totalData.pages;
           records.forEach((task, index) => {
             this.tableData.push({
-              img: require(`@/assets/${task.name}.png`),
+              img: require(`@/assets/任务1.png`),
               name: task.name,
               id: task.id,
               date: task.releaseTime.replace("T", " "),

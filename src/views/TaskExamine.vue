@@ -50,8 +50,8 @@
       <div class="exam-content">
         <div class="exam-date">{{ item.updateTime }}</div>
         <div class="exam-detail" style="position:relative;width:100%;">
-          <div style="position:relative;width:85%;"><p>{{ item.stuCollege }}张三的任务审核存在问题，点击审核查看详细信息。</p></div>
-          <div style="position:relative;width:15%;">
+          <div style="position:relative;width:90%;font-size:14px;"><p>{{ item.stuCollege }}{{item.name}}的{{item.taskName}}审核存在问题，点击审核查看详细信息。</p></div>
+          <div style="position:relative;width:10%;">
             <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
           @click="taskExamine(item)">审核</el-button>
           </div>
@@ -145,36 +145,107 @@ export default {
     this.examineList = [
         {
           "id": 1,
+          "name":"高致德",
           "studentId": 1,
           "taskId": 1,
-          "stuCollege": "计算机学院",
+          "stuCollege": "土木工程学院",
           "status": 100,
           "completeTime": null,
           "examine": 1,
           "createTime": null,
-          "updateTime": "2024-02-21 11:57:00"
+          "updateTime": "2024-03-15 11:57:00",
+          "taskName":"新生报到①",
         },
         {
           "id": 4,
           "studentId": 2,
+          "name":"颜茗希",
           "taskId": 1,
-          "stuCollege": "建筑学院",
+          "stuCollege": "计算机与人工智能学院",
           "status": 0,
           "completeTime": null,
           "examine": 1,
           "createTime": null,
-          "updateTime": "2024-02-21 11:57:51"
+          "updateTime": "2024-03-11 11:57:51",
+          "taskName":"新生报到①",
         },
         {
           "id": 3,
           "studentId": 1,
+          "name":"尹梓涵",
           "taskId": 3,
-          "stuCollege": "计算机学院",
+          "stuCollege": "生命科学与工程学院",
           "status": 0,
           "completeTime": null,
           "examine": 1,
           "createTime": null,
-          "updateTime": "2024-02-21 11:59:00"
+          "updateTime": "2024-03-09 11:59:00",
+          "taskName":"新生报到②",
+        },
+        {
+          "id": 3,
+          "studentId": 1,
+          "name":"傅天宇",
+          "taskId": 3,
+          "stuCollege": "生命科学与工程学院",
+          "status": 0,
+          "completeTime": null,
+          "examine": 1,
+          "createTime": null,
+          "updateTime": "2024-03-09 11:59:00",
+          "taskName":"校史学习②",
+        },
+        {
+          "id": 3,
+          "studentId": 1,
+          "name":"裴子轩",
+          "taskId": 3,
+          "stuCollege": "化学学院",
+          "status": 0,
+          "completeTime": null,
+          "examine": 1,
+          "createTime": null,
+          "updateTime": "2024-03-09 11:59:00",
+          "taskName":"校史学习②",
+        },
+        {
+          "id": 3,
+          "studentId": 1,
+          "name":"贾天宇",
+          "taskId": 3,
+          "stuCollege": "化学学院",
+          "status": 0,
+          "completeTime": null,
+          "examine": 1,
+          "createTime": null,
+          "updateTime": "2024-03-09 11:59:00",
+          "taskName":"校史学习②",
+        },
+        {
+          "id": 3,
+          "studentId": 1,
+          "name":"元韵真",
+          "taskId": 3,
+          "stuCollege": "计算机与人工智能学院",
+          "status": 0,
+          "completeTime": null,
+          "examine": 1,
+          "createTime": null,
+          "updateTime": "2024-03-09 11:59:00",
+          "taskName":"校史学习①",
+        },
+        {
+          "id": 3,
+          "studentId": 1,
+          "name":"刁蕊启",
+          "taskId": 3,
+          "stuCollege": "计算机与人工智能学院",
+          "status": 0,
+          "completeTime": null,
+          "examine": 1,
+          "createTime": null,
+          "updateTime": "2024-03-09 11:59:00",
+          "taskName":"新生报到②",
         },
       ];
   },

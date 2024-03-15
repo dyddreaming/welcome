@@ -2689,8 +2689,10 @@ export default {
           this.UndergraduateE = response.data.data.underEnrollment;
           this.GraduateC = response.data.data.postCount;
           this.GraduateE = response.data.data.postEnrollment;
+          // console.log(this.GraduateC);
+          // console.log(this.GraduateE);
           this.UndergraduateN = this.UndergraduateC - this.UndergraduateE;
-          this.GraduateRN = this.GraduateC - this.GraduateE;
+          this.GraduateN = this.GraduateC - this.GraduateE;
           // console.log(this.UndergraduateN);
           // console.log(this.GraduateRN);
         })

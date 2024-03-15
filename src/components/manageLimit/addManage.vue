@@ -360,26 +360,26 @@ export default {
       radio: "",
       collegeValue: "",
       CollegeOptions: [
-        {
-          value: "计算机学院",
-          label: "计算机学院",
-        },
-        {
-          value: "建筑学院",
-          label: "建筑学院",
-        },
-        {
-          value: "数学学院",
-          label: "数学学院",
-        },
-        {
-          value: "经管学院",
-          label: "经管学院",
-        },
-        {
-          value: "无",
-          value: "无",
-        },
+        // {
+        //   value: "计算机学院",
+        //   label: "计算机学院",
+        // },
+        // {
+        //   value: "建筑学院",
+        //   label: "建筑学院",
+        // },
+        // {
+        //   value: "数学学院",
+        //   label: "数学学院",
+        // },
+        // {
+        //   value: "经管学院",
+        //   label: "经管学院",
+        // },
+        // {
+        //   value: "无",
+        //   value: "无",
+        // },
       ],
       accountInput: "",
       cardInput: "",
@@ -399,9 +399,31 @@ export default {
     };
   },
   mounted() {
-    this.loadData();
+    // this.loadData();
+    this.fetchCollegesRegisterData();
   },
   methods: {
+    // 获取学院数据
+    fetchCollegesRegisterData() {
+      this.CollegeOptions = [];
+      axios
+        .get(`${this.$store.getters.getIp}/colleges/list`)
+        .then((response) => {
+          this.totalData = response.data.data;
+          // console.log(this.totalData);
+          this.totalData.forEach((item) => {
+            this.CollegeOptions.push({
+              value : item.name,
+              label : item.name,
+            });
+          });
+          console.log(this.CollegeOptions);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          // console.log(this.$store.getters.getIp);
+        });
+    },
     loadData() {
       this.newManage = this.$store.getters.getNewManage;
       if (this.newManage != null) {
@@ -462,7 +484,8 @@ export default {
           let message = response.data.msg;
           if (message == "success") {
             this.$message.success("添加成功");
-            this.putData();
+            this.reset();
+            // this.putData();
           } else if (message == "账号重复") {
             this.$message.error("账号重复");
           } else {
@@ -486,7 +509,7 @@ export default {
       this.cardInput = "";
       this.phoneInput = "";
       this.grade = "";
-      this.putData();
+      // this.putData();
     },
   },
 };

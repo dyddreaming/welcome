@@ -378,7 +378,7 @@
               margin-left: 20px;
             "
           >
-            任务限制（多选）*
+            任务限制（多选）
           </div>
           <div
             style="
@@ -927,6 +927,7 @@
               >
               </el-input>
             </div>
+            <!-- 任务类型6 -->
             <div
               style="position: relative; height: 12%; width: 100%; top: 5%"
               v-if="contactType === 5"
@@ -1090,7 +1091,7 @@ export default {
           label:"camera-5",
         }
       ],
-      faceOptions: [{ label: "人脸识别", value: "人脸识别" }],
+      // faceOptions: [{ label: "人脸识别", value: "人脸识别" }],
       name: "",
       describe: "",
       typeValue: "",
@@ -1287,12 +1288,9 @@ export default {
       if (
         !this.name ||
         !this.describe ||
-        !this.targetGrade ||
         !this.startTime ||
-        !this.typeValue ||
         !this.grade ||
-        !this.endTime ||
-        !this.contactType
+        !this.endTime
       ) {
         // 提示用户填写完整信息
         this.$message.error("请填写完整信息");
@@ -1340,7 +1338,8 @@ export default {
           if (response.data.code) {
             console.log("提交成功:", response.data);
             this.$message.success("提交成功");
-            location.reload();
+            // location.reload();
+            this.$router.push("/mainMenu/task/config");
           } else {
             const errorMessage = response.data.msg;
             this.$message.error(errorMessage);
@@ -1387,6 +1386,7 @@ export default {
           if (response.data.code) {
             console.log("提交成功:", response.data);
             this.$message.success("提交成功");
+            this.$router.push("/mainMenu/task/config");
           } else {
             const errorMessage = response.data.msg;
             this.$message.error(errorMessage);
@@ -1519,9 +1519,10 @@ export default {
         .then((response) => {
           let totalData = response.data.data;
           this.taskOptions = totalData.map((item) => {
+            console.log(item.name,item.priNum);
             return {
               value: item.priNum,
-              label: `${item.priNum}-${item.name}`,
+              label: item.name,
             };
           });
         })
