@@ -484,98 +484,98 @@ export default {
         },
       ],
       wordData: [
-        {
-          name: "十九大精神",
-          value: 15000,
-        },
-        {
-          name: "两学一做",
-          value: 10081,
-        },
-        {
-          name: "中华民族",
-          value: 9386,
-        },
-        {
-          name: "马克思主义",
-          value: 7500,
-        },
-        {
-          name: "民族复兴",
-          value: 7500,
-        },
-        {
-          name: "社会主义制度",
-          value: 6500,
-        },
-        {
-          name: "国防白皮书",
-          value: 6500,
-        },
-        {
-          name: "创新",
-          value: 6000,
-        },
-        {
-          name: "民主革命",
-          value: 4500,
-        },
-        {
-          name: "文化强国",
-          value: 3800,
-        },
-        {
-          name: "国家主权",
-          value: 3000,
-        },
-        {
-          name: "伟大复兴",
-          value: 2500,
-        },
-        {
-          name: "领土完整",
-          value: 2300,
-        },
-        {
-          name: "安全",
-          value: 2000,
-        },
-        {
-          name: "从严治党",
-          value: 1900,
-        },
-        {
-          name: "现代化经济体系",
-          value: 1800,
-        },
-        {
-          name: "国防动员",
-          value: 1700,
-        },
-        {
-          name: "信息化战争",
-          value: 1600,
-        },
-        {
-          name: "局部战争",
-          value: 1500,
-        },
-        {
-          name: "教育",
-          value: 1200,
-        },
-        {
-          name: "中国梦",
-          value: 1100,
-        },
-        {
-          name: "孙子兵法",
-          value: 900,
-        },
-        {
-          name: "一国两制",
-          value: 800,
-        },
+        // {
+        //   name: "十九大精神",
+        //   value: 15000,
+        // },
+        // {
+        //   name: "两学一做",
+        //   value: 10081,
+        // },
+        // {
+        //   name: "中华民族",
+        //   value: 9386,
+        // },
+        // {
+        //   name: "马克思主义",
+        //   value: 7500,
+        // },
+        // {
+        //   name: "民族复兴",
+        //   value: 7500,
+        // },
+        // {
+        //   name: "社会主义制度",
+        //   value: 6500,
+        // },
+        // {
+        //   name: "国防白皮书",
+        //   value: 6500,
+        // },
+        // {
+        //   name: "创新",
+        //   value: 6000,
+        // },
+        // {
+        //   name: "民主革命",
+        //   value: 4500,
+        // },
+        // {
+        //   name: "文化强国",
+        //   value: 3800,
+        // },
+        // {
+        //   name: "国家主权",
+        //   value: 3000,
+        // },
+        // {
+        //   name: "伟大复兴",
+        //   value: 2500,
+        // },
+        // {
+        //   name: "领土完整",
+        //   value: 2300,
+        // },
+        // {
+        //   name: "安全",
+        //   value: 2000,
+        // },
+        // {
+        //   name: "从严治党",
+        //   value: 1900,
+        // },
+        // {
+        //   name: "现代化经济体系",
+        //   value: 1800,
+        // },
+        // {
+        //   name: "国防动员",
+        //   value: 1700,
+        // },
+        // {
+        //   name: "信息化战争",
+        //   value: 1600,
+        // },
+        // {
+        //   name: "局部战争",
+        //   value: 1500,
+        // },
+        // {
+        //   name: "教育",
+        //   value: 1200,
+        // },
+        // {
+        //   name: "中国梦",
+        //   value: 1100,
+        // },
+        // {
+        //   name: "孙子兵法",
+        //   value: 900,
+        // },
+        // {
+        //   name: "一国两制",
+        //   value: 800,
+        // },
       ],
       map: null,
       totalData9: {},
@@ -623,7 +623,9 @@ export default {
     // 加载图表
     this.loadData();
     this.dateValue5 = currentDate.toISOString();
-    this.initChart();
+    this.getWord().then(() => {
+      this.initChart();
+    });
     this.getData().then(() => {
       this.initMap(); // 初始化地图
       this.addArea(Array.from(areaGeo)); // 添加四川省的边界描边和填充
@@ -1000,19 +1002,30 @@ export default {
         // console.log("查看7日点击情况");
       });
     },
-    // 生成搜索词云
-    initChart() {
+    // 获取关键词
+    getWord(){
+      return new Promise((resolve, reject) => {
+        this.wordData = [];
       axios
         .get(`${this.$store.getters.getIp}/keywords/times/daily`)
         .then((response) => {
           this.totalData5 = response.data.data;
-          console.log(this.totalData5);
+          // console.log(this.totalData5);
           this.keywords = this.totalData5.keywords;
           this.timesList = this.totalData5.timesList;
+          this.keywords.forEach((item,index)=>{
+            this.wordData.push({name:this.keywords[index],value:this.timesList[index]});
+          });
+          resolve(); // 异步操作完成后 resolve
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
+          reject(error); // 出错时 reject
         });
+      });
+    },
+    // 生成搜索词云
+    initChart() {
       var dateParts = this.dateValue5.split("T")[0].split("-");
       var year = dateParts[0];
       var month = dateParts[1];
