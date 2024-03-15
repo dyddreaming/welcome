@@ -213,12 +213,12 @@
           height: 100%;
           bottom: 0;
           width: 48%;
-          left:4%;
+          left: 4%;
           border-right: 2px solid #ffffff;
           background-color: #ffffff;
           border-radius: 8px;
           box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-          overflow-y:auto;
+          overflow-y: auto;
         "
       >
         <h3 style="margin-left: 20px">学院</h3>

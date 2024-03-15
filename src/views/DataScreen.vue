@@ -382,18 +382,18 @@ export default {
       sevenClick: null,
       adType: null,
       taskOptions: [
-        {
-          value: "校史学习",
-          label: "校史学习",
-        },
-        {
-          value: "报到倒计时",
-          label: "报到倒计时",
-        },
-        {
-          value: "新生报到",
-          label: "新生报到",
-        },
+        // {
+        //   value: "校史学习",
+        //   label: "校史学习",
+        // },
+        // {
+        //   value: "报到倒计时",
+        //   label: "报到倒计时",
+        // },
+        // {
+        //   value: "新生报到",
+        //   label: "新生报到",
+        // },
       ],
       typeOptions: [
         {
@@ -509,12 +509,21 @@ export default {
           data,
         })
         .then((response) => {
-          console.log(response.data);
+          if(response.data.code)
+          {
+            this.$message({
+            message: "修改成功",
+            type: "success",
+          });
+          }
+          // console.log(response.data);
         })
         .catch((error) => {
           console.error("提交失败:", error);
         });
     },
+    // 获取所有任务信息
+    
   },
 };
 </script>

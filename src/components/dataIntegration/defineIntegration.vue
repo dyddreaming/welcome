@@ -376,7 +376,7 @@
         >
           <!-- 首次注册地图 -->
           <div
-            style="position: relative; height: 100%; width: 100%;"
+            style="position: relative; height: 100%; width: 100%"
             id="Map"
             ref="map"
           ></div>
@@ -585,10 +585,14 @@ export default {
   },
   watch: {
     dateValue1() {
+      this.getList1().then(() => {
       this.renderComChart();
+    });
     },
     dateValue2() {
+      this.getList2().then(() => {
       this.renderJoinChart();
+    });
     },
     threshold() {
       this.loadData();
@@ -604,8 +608,12 @@ export default {
     let currentDate = new Date();
     this.dateValue1 = currentDate;
     this.dateValue2 = currentDate;
-    this.renderComChart();
-    this.renderJoinChart();
+    this.getList1().then(() => {
+      this.renderComChart();
+    });
+    this.getList2().then(() => {
+      this.renderJoinChart();
+    });
     this.dateValue = currentDate;
     // console.log(this.dateValue);
     let date = new Date(this.dateValue);
@@ -623,34 +631,72 @@ export default {
     });
   },
   methods: {
-    // 完成任务排行榜
-    renderComChart() {
+    // 获取完成任务排行榜
+    getList1() {
+      return new Promise((resolve, reject) => {
+        // 时间格式化
+        const date1 = new Date(this.dateValue1);
+        const year = date1.getFullYear();
+        const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+        const day = date1.getDate().toString().padStart(2, "0");
+        const formattedDate = `${year}-${month}-${day} 00:00:00`;
+
+        axios
+          .get(`${this.$store.getters.getIp}/tasks/students/completion/rank`, {
+            params: {
+              time: formattedDate,
+            },
+          })
+          .then((response) => {
+            this.totalData2 = response.data.data;
+            this.studentIds = this.totalData2.studentIds;
+            this.compCount = this.totalData2.compCount;
+            // console.log(this.studentIds);
+            // console.log(this.compCount);
+            resolve(); // 异步操作完成后 resolve
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            reject(error); // 出错时 reject
+          });
+      });
+    },
+    // 获取参与人数排行榜
+    getList2(){
+      return new Promise((resolve, reject) => {
       // 时间格式化
-      const date1 = new Date(this.dateValue1);
+      const date1 = new Date(this.dateValue2);
       const year = date1.getFullYear();
       const month = (date1.getMonth() + 1).toString().padStart(2, "0");
       const day = date1.getDate().toString().padStart(2, "0");
       const formattedDate = `${year}-${month}-${day} 00:00:00`;
-      // console.log("dateValue1:",formattedDate);
+      // console.log("dateValue2:",formattedDate);
 
       axios
-        .get(`${this.$store.getters.getIp}/tasks/students/completion/rank`, {
+        .get(`${this.$store.getters.getIp}/tasks/students/participant/rank`, {
           params: {
             time: formattedDate,
           },
         })
         .then((response) => {
-          this.totalData2 = response.data.data;
-          this.studentIds = this.totalData2.studentIds;
-          this.compCount = this.totalData2.compCount;
+          this.totalData3 = response.data.data;
+          this.taskNames = this.totalData3.taskNames;
+          this.parCount = this.totalData3.parCount;
           // console.log(this.studentIds);
           // console.log(this.compCount);
+          resolve(); // 异步操作完成后 resolve
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
+          reject(error); // 出错时 reject
         });
-
+      })
+    },
+    // 完成任务排行榜
+    renderComChart() {
       let dataAxis = this.studentIds;
+      console.log(this.studentIds);
+      console.log(dataAxis);
       let data = this.compCount;
       let yMax = 100;
       let dataShadow = [];
@@ -677,7 +723,7 @@ export default {
           },
         },
         xAxis: {
-          name: "用户名",
+          name: "学号",
           data: dataAxis,
           axisLabel: {
             inside: false,
@@ -755,31 +801,6 @@ export default {
     },
     // 参与人数排行榜
     renderJoinChart() {
-      // 时间格式化
-      const date1 = new Date(this.dateValue2);
-      const year = date1.getFullYear();
-      const month = (date1.getMonth() + 1).toString().padStart(2, "0");
-      const day = date1.getDate().toString().padStart(2, "0");
-      const formattedDate = `${year}-${month}-${day} 00:00:00`;
-      // console.log("dateValue2:",formattedDate);
-
-      axios
-        .get(`${this.$store.getters.getIp}/tasks/students/participant/rank`, {
-          params: {
-            time: formattedDate,
-          },
-        })
-        .then((response) => {
-          this.totalData3 = response.data.data;
-          this.taskNames = this.totalData3.taskNames;
-          this.parCount = this.totalData3.parCount;
-          // console.log(this.studentIds);
-          // console.log(this.compCount);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-
       let dataAxis = this.taskNames;
       let data = this.parCount;
       let yMax = 500;
@@ -975,7 +996,7 @@ export default {
     seeDetail() {
       this.$store.commit("setAdvertiseTime", this.dateValue);
       this.$nextTick(() => {
-        this.$router.push("/sevenClick");
+        this.$router.push("/mainMenu/data/sevenClick");
         // console.log("查看7日点击情况");
       });
     },
@@ -1161,7 +1182,7 @@ export default {
     },
     // 添加热力图
     addHeatMap() {
-      let colors = ["#2200FF", "#16D9CC", "#4DEE12", "#E8D225", "#EF1616"];
+      let colors = ["#E8D225", "#16D9CC", "#4DEE12", "#2200FF", "#0e8174"];
       let hatmapData = [];
       for (let i = 0; i < this.areaName.length; i++) {
         const name = this.areaName[i];
@@ -1209,7 +1230,7 @@ export default {
       this.layer = new HeatmapLayer({
         source: new VectorSource(),
         blur: 30,
-        radius: 15,
+        radius: 4.5,
         gradient: colors,
       });
       this.map.addLayer(this.layer);

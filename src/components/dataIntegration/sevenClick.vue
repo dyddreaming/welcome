@@ -1,42 +1,91 @@
 <template>
-  <div style="height: 100%; width: 100%; background-color: #ffda9f">
-    <div style="position: relative; width: 90%; height: 8%; top: 5%; left: 5%">
-      <div style="text-align: center; font-size: 24px; font-weight: 600">
-        {{ lastDays[0] }}至{{ lastDays[6] }}广告总点击情况
+  <div class="app-main" style="position: relative; background-color: #f0f3f4;">
+    <div
+      style="position: relative; height: 8%; width: 100%; background-color: rgb(28, 43, 54); display: flex; align-items: center;">
+      <div
+        style="position:relative;width:20%;height:100%;display: flex; align-items: center;left:2%;background-color:rgb(28, 43, 54);">
+        <i class="el-icon-search" style="color: #ffff;margin-right:10px;"></i>
+        <el-input v-model="search" placeholder="搜索" id="searchPart"></el-input>
+      </div>
+      <router-link to="/mainMenu/help/helpFile"
+        style="color: inherit; text-decoration: none; margin-right: 20px; margin-left: auto; color: #ffffff;">
+        <span style="transition: color 0.3s;" class="hover-color">需要帮助吗？<span style="color: #209e91;">点击这里</span></span>
+      </router-link>
+      <i class="el-icon-s-home" style="color: #ffff;margin-right:10px; font-size: 24px;"></i>
+    </div>
+    <div style="margin-top: 10px; width:100%;height:9%;display:flex;">
+      <h2 style="
+          color: #747474;
+          display: inline-block;
+          left: 2%;
+          position:relative;
+          width:98%;
+        ">
+        7日点击情况
+      </h2>
+      <div
+        style="position: relative; height: 100%; width: 30%;display: flex; align-items: center; justify-content: flex-end;right:2%;">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px;"
+            id="active-link">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/mainMenu/data/defineIntegration' }"
+            style="font-size: 17px; color: #747474;font-weight:600;" id="pre-link">数据调取集成</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 17px; color: #747474;font-weight:600;"
+            id="current-link">7日点击情况</el-breadcrumb-item>
+        </el-breadcrumb>
       </div>
     </div>
     <div
       style="
         position: relative;
-        height: 78%;
-        top: 5%;
-        width: 90%;
-        left: 5%;
+        height: 73%;
+        top: 1%;
+        width: 96%;
+        left: 2%;
         background-color: #ffffff;
+        border-radius:8px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
       "
       id="chartContainer"
     ></div>
-    <div style="position: relative; height: 9%; width: 90%; left: 5%; top: 5%">
-      <el-button
-        type="danger"
-        size="mini"
-        style="
-          background-color: #fa5e00;
-          border: none;
-          height: 60%;
-          position: relative;
-          top: 15%;
-          border-radius: 10px;
-          font-size: 14px;
-          left: 92%;
-          width: 8%;
-        "
-        @click="goHome"
-        >返回</el-button
-      >
+    <div style="position: relative; height: 9%; width: 96%; left: 2%; top: 1%;display: flex; justify-content: flex-end; align-items: center;">
+      <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+        @click="goHome">返回</el-button>
     </div>
   </div>
 </template>
+<style scoped>
+/deep/ #searchPart {
+  background-color: rgb(28, 43, 54);
+  border: none;
+  color: #747474
+}
+
+#active-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#active-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#current-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #747474;
+}
+
+#pre-link /deep/ .el-breadcrumb__inner:hover {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+
+#pre-link /deep/ .el-breadcrumb__inner {
+  font-weight: 600 !important;
+  color: #209e91;
+}
+</style>
 <script>
 import * as echarts from "echarts";
 import axios from "axios";
@@ -110,7 +159,7 @@ export default {
       chart.setOption(option);
     },
     goHome() {
-      this.$router.push("/mainMenu/data/integration/advertiseClick");
+      this.$router.push("/mainMenu/data/defineIntegration");
     },
   },
 };

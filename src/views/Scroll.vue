@@ -77,7 +77,7 @@
             >
               各学院注册情况
             </div>
-            <div style="position: relative; height: 95%; width: 100%;">
+            <div style="position: relative; height: 95%; width: 100%">
               <div
                 v-for="(college, index) in showCollegeList"
                 :key="index"
@@ -460,7 +460,7 @@
                       text-align: center;
                       display: flex;
                       align-items: center;
-                      color: yellow;
+                      color: #ffffff;
                     "
                   >
                     {{ roles[3].username }}
@@ -514,7 +514,7 @@
                       text-align: center;
                       display: flex;
                       align-items: center;
-                      color: yellow;
+                      color: #ffffff;
                     "
                   >
                     {{ roles[4].username }}
@@ -1753,7 +1753,7 @@
                   top: 2%;
                 "
               >
-                9月1日完成任务排行榜
+                {{dateString}}完成任务排行榜
               </div>
               <div
                 style="position: relative; height: 95%; width: 98%"
@@ -1771,7 +1771,7 @@
                   top: 2%;
                 "
               >
-                9月1日参与人数排行榜
+              {{dateString}}参与人数排行榜
               </div>
               <div
                 style="position: relative; width: 98%; height: 95%"
@@ -1950,7 +1950,7 @@ export default {
       customColor: "#18DBFD",
       // CollegeList: ["计算机学院", "信息学院"],
       CollegeList: [],
-      showCollegeList:[],
+      showCollegeList: [],
       taskData: [
         {
           name: "校史学习",
@@ -2012,12 +2012,23 @@ export default {
       roles2: [],
       consumeList: [],
       hotTaskData: [],
+      totalData2:null,
+      studentIds:null,
+      compCount:null,
+      totalData3:null,
+      taskNames:null,
+      parCount:null,
+      dateString:null,
     };
   },
   mounted() {
     $(document).ready(function () {
       $("#dowebok").fullpage({});
     });
+    let date = new Date();
+    this.dateString = `${
+      date.getMonth() + 1
+    }月${date.getDate()}日`;
     this.getData1().then(() => {
       this.initUnderChart();
       this.initGraduateChart();
@@ -2033,8 +2044,12 @@ export default {
     this.getSingleComRank();
     this.updateTime();
     setInterval(this.updateTime, 1000);
-    this.renderComChart();
-    this.renderJoinChart();
+    this.getList1().then(() => {
+      this.renderComChart();
+    });
+    this.getList2().then(() => {
+      this.renderJoinChart();
+    });
     this.loadData();
     this.initChart();
   },
@@ -2296,14 +2311,25 @@ export default {
       dataList.forEach((item) => {
         item.value = 0;
       });
-      this.areaName = this.areaName.map((name) => name.replace(/省|市/g, ""));
+      this.areaName = this.areaName.map((name) => {
+        if(name.substring(0, 2) == "内蒙" | name.substring(0, 2) == "黑龙"){
+          return name.substring(0, 3);
+        }
+        else if(name.substring(0, 2) == "内蒙"){
+          return name.substring(0, 4);
+        }
+        else{
+          return name.substring(0, 2);
+        }
+      });
+      // console.log(this.areaName);
       this.areaName.forEach((name, index) => {
         let areaIndex = dataList.findIndex((item) => item.name === name);
         if (areaIndex !== -1) {
           dataList[areaIndex].value = this.areaNumber[index];
         }
       });
-      // console.log(dataList);
+      console.log(dataList);
       let myChart = echarts.init(this.$refs.mapChart);
       let options = {
         title: {
@@ -2330,20 +2356,20 @@ export default {
           },
           pieces: [
             {
-              gt: 10,
-              label: "> 10 人",
+              gt: 50,
+              label: "> 50 人",
               color: "#044480",
             },
             {
-              gte: 5,
-              lte: 10,
-              label: "5 - 10 人",
+              gte: 10,
+              lte: 50,
+              label: "10 - 50 人",
               color: "#0444ab",
             },
             {
               gte: 1,
-              lt: 5,
-              label: "1 - 5 人",
+              lt: 10,
+              label: "1 - 10 人",
               color: "#0d7fe9",
             },
             {
@@ -2394,9 +2420,10 @@ export default {
       };
       myChart.setOption(options);
     },
+    // 完成任务排行榜
     renderComChart() {
-      let dataAxis = ["张三", "李四", "王五", "xx", "yy", "zz", "ww"];
-      let data = [20, 18, 17, 15, 10, 9, 5];
+      let dataAxis = this.studentIds;
+      let data = this.compCount;
       let yMax = 100;
       let dataShadow = [];
       for (let i = 0; i < data.length; i++) {
@@ -2408,7 +2435,7 @@ export default {
           top: "30%",
         },
         xAxis: {
-          name: "用户名",
+          name: "学号",
           nameTextStyle: {
             color: "#ffffff",
           },
@@ -2488,17 +2515,10 @@ export default {
       });
       myChart.setOption(option);
     },
+    // 参与人数排行榜
     renderJoinChart() {
-      let dataAxis = [
-        "校史学习",
-        "新生报到",
-        "食堂打卡",
-        "xxx",
-        "yyx",
-        "zzz",
-        "www",
-      ];
-      let data = [200, 180, 170, 150, 100, 90, 50];
+      let dataAxis = this.taskNames;
+      let data = this.parCount;
       let yMax = 500;
       let dataShadow = [];
       for (let i = 0; i < data.length; i++) {
@@ -2702,17 +2722,21 @@ export default {
     },
     // 获取注册地图数据
     getData2() {
-      return axios
-        .get(`${this.$store.getters.getIp}/students/register/location`)
-        .then((response) => {
-          this.areaName = response.data.data.addresses;
-          this.areaNumber = response.data.data.addressCounts;
-          // console.log("注册地:", this.areaName);
-          // console.log("注册人数:", this.areaNumber);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${this.$store.getters.getIp}/students/register/location`)
+          .then((response) => {
+            this.areaName = response.data.data.addresses;
+            this.areaNumber = response.data.data.addressCounts;
+            // console.log("注册地:", this.areaName);
+            // console.log("注册人数:", this.areaNumber);
+            resolve(); // 异步操作完成后 resolve
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            reject(error); // 出错时 reject
+          });
+      });
     },
     // 获取各学院情况
     fetchCollegesRegisterData() {
@@ -2737,10 +2761,12 @@ export default {
     // 进度条颜色
     customColorMethod(percentage) {
       if (percentage < 30) {
-        return "#2dc3f4";
-      } else if (percentage < 70) {
-        return "#0d7fe9";
-      } else {
+        return "#2dacd1";
+      } else if (percentage < 75) {
+        return "#18dbfd";
+      } else if(percentage < 85){
+        return "#0c7fe9";
+      }else{
         return "#0444ab";
       }
     },
@@ -2808,17 +2834,74 @@ export default {
         .get(`${this.$store.getters.getIp}/tasks/popularity/rank`)
         .then((response) => {
           this.hotTaskData = response.data.data;
-          console.log("热点任务数据",this.hotTaskData);
+          console.log("热点任务数据", this.hotTaskData);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
           // console.log(this.$store.getters.getIp);
         });
     },
-    // 完成任务排行榜
-    getComRank(){},
-    // 参与人数排行榜
-    getJoinRank(){},
+    // 获取完成任务排行榜
+    getList1() {
+      return new Promise((resolve, reject) => {
+        // 时间格式化
+        const date1 = new Date();
+        const year = date1.getFullYear();
+        const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+        const day = date1.getDate().toString().padStart(2, "0");
+        const formattedDate = `${year}-${month}-${day} 00:00:00`;
+
+        axios
+          .get(`${this.$store.getters.getIp}/tasks/students/completion/rank`, {
+            params: {
+              time: formattedDate,
+            },
+          })
+          .then((response) => {
+            this.totalData2 = response.data.data;
+            this.studentIds = this.totalData2.studentIds;
+            this.compCount = this.totalData2.compCount;
+            // console.log(this.studentIds);
+            // console.log(this.compCount);
+            resolve(); // 异步操作完成后 resolve
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            reject(error); // 出错时 reject
+          });
+      });
+    },
+    // 获取参与人数排行榜
+    getList2(){
+      return new Promise((resolve, reject) => {
+      // 时间格式化
+      const date1 = new Date();
+      const year = date1.getFullYear();
+      const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+      const day = date1.getDate().toString().padStart(2, "0");
+      const formattedDate = `${year}-${month}-${day} 00:00:00`;
+      // console.log("dateValue2:",formattedDate);
+
+      axios
+        .get(`${this.$store.getters.getIp}/tasks/students/participant/rank`, {
+          params: {
+            time: formattedDate,
+          },
+        })
+        .then((response) => {
+          this.totalData3 = response.data.data;
+          this.taskNames = this.totalData3.taskNames;
+          this.parCount = this.totalData3.parCount;
+          // console.log(this.studentIds);
+          // console.log(this.compCount);
+          resolve(); // 异步操作完成后 resolve
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          reject(error); // 出错时 reject
+        });
+      })
+    },
   },
 };
 </script>

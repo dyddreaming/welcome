@@ -174,6 +174,10 @@ const routes = [{
         component: dataDefineIntegration
       },
       {
+        path: 'data/sevenClick',
+        component: sevenClick
+      },
+      {
         path: 'limit/manager',
         component: Manager
       },
