@@ -298,6 +298,7 @@ export default {
           this.$router.push("/examineFood");
         } else {
           this.$router.push("/examinePart");
+          console.log("跳转到兼职审核界面");
         }
       });
     },

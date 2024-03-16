@@ -3,7 +3,8 @@
       width: 100%;
       height: 100%;
       position: relative;
-      background-color: #f4f9fd;
+      background-size: cover;
+      background-image: url('./static/img/login.png');
     ">
     <div style="
         position: relative;
@@ -11,32 +12,31 @@
         top: 2%;
         width: 96%;
         left: 2%;
-        background-color: #ffffff;
         border-radius: 8px;
         display:flex;
       ">
       <!-- 右侧 -->
-      <div style="
+      <!-- <div style="
           position: relative;
           height: 100%;
-          width: 30%;
-          background-image: url('./static/img/login1.png');
+          width: 50%;
           background-size: cover;
         ">
-        <!-- 文字 -->
         <div
-          style="position: relative;height:20%;top:15%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffffff;font-size:22px;">
+          style="position: relative;height:60%;top:15%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffffff;font-size:22px;">
           <p style="margin: 10px;">Hi,你好</p>
           <p style="margin: 0;">欢迎进入welcome迎新管理平台</p>
         </div>
-      </div>
+      </div> -->
       <!-- 左侧 -->
-      <div style="position:relative;height:60%;width:50%;top:20%;left:10%;">
-        <div style="position:relative;height:10%;width:100%;text-align:center;font-size:25px;font-weight:600;">欢迎回来
+      <!-- <div style="position:absolute;height:5%;width:40%;color:#ffffff;font-size:22px;">Hi,你好!</div>
+      <div style="position:absolute;height:5%;width:40%;color:#ffffff;font-size:22px;top:5%;">欢迎进入welcome迎新管理平台~</div> -->
+      <div style="position:absolute;height:60%;width:40%;top:35%;left:50%;background-color:rgb(98, 187, 178,0.2);border-radius:8px;">
+        <div style="position:relative;height:10%;width:100%;text-align:center;font-size:25px;font-weight:600;color:#747474">欢迎回来
         </div>
-        <div style="position:relative;height:10%;width:90%;font-size:18px;left:10%;top:5%;">
+        <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#747474">
           账号</div>
-        <div style="position: relative; height: 15%; width: 90%;left:10%;top:5%;">
+        <div style="position: relative; height: 15%; width: 90%;left:14%;top:5%;">
           <input style="
             width: 80%;
             height: 70%;
@@ -44,11 +44,13 @@
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
-          " v-model="account" />
+            color:#747474;
+          " v-model="account" 
+          id="account"/>
         </div>
-        <div style="position:relative;height:10%;width:90%;font-size:18px;left:10%;top:5%;">
+        <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#747474">
           密码</div>
-        <div style="position: relative; height: 15%; width: 90%;left:10%;top:5%;">
+        <div style="position: relative; height: 15%; width: 90%;left:14%;top:5%;">
           <input type="password" style="
                 width: 80%;
                 height: 70%;
@@ -56,32 +58,51 @@
                 padding: 5px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
-              " v-model="passWord" />
+                color:#747474;
+              " 
+              id="password"
+              v-model="passWord" />
         </div>
-        <div style="position:relative;height:10%;width:72%;left:10%;top:5%;display:flex;">
+        <div style="position:relative;height:10%;width:72%;left:14%;top:5%;display:flex;">
           <div style="position:relative;height:100%;width:50%;">
-            <el-checkbox v-model="remember" style="color:black">记住我</el-checkbox>
+            <el-checkbox v-model="remember" style="color:#747474">记住我</el-checkbox>
           </div>
-          <div style="position:relative;height:100%;width:20%;left:30%;text-align:right;">
+          <div style="position:relative;height:100%;width:20%;left:32%;text-align:right;color:#747474">
             忘记密码？
           </div>
         </div>
-        <div style="position:relative;height:15%;width:72%;left:10%;top:8%;">
+        <div style="position:relative;height:15%;width:72%;left:14%;top:8%;">
           <el-button type="danger" size="mini" style="
       position:relative;
-        background-color: rgba(248, 147, 0, 0.8);;
-        border: none;
+        border: 2px solid rgb(98, 187, 178,0.6);;
         height: 68%;
         width:100%;
         border-radius:8px;
         font-size:20px;
         top:10px;
+        background-color:transparent;
+        color:#747474;
       " @click="login">立即登录</el-button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+input[id="account"]:focus {
+  /* 添加选中时的样式 */
+  outline: none; /* 可以去除默认的聚焦边框 */
+  border-color: #747474; /* 修改边框颜色为红色 */
+  box-shadow: 0 0 1px #747474; /* 添加阴影效果 */
+}
+input[id="password"]:focus {
+  /* 添加选中时的样式 */
+  outline: none; /* 可以去除默认的聚焦边框 */
+  border-color: #747474; /* 修改边框颜色为红色 */
+  box-shadow: 0 0 1px #747474; /* 添加阴影效果 */
+}
+</style>
 
 <script>
 import axios from "axios";

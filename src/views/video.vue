@@ -98,17 +98,17 @@
       <!-- 实时人流量 -->
       <div style="position:relative;height:100%;width:32%;background-color:#ffffff;box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);border-radius:8px;color:#747474;">
         <div style="position:relative;height:15%;width:100%;text-align:center;">当日实时人流量</div>
-        <div style="position:relative;height:85%;width:100%;">折线图</div>
+        <div style="position:relative;height:85%;width:100%;"></div>
       </div>
       <!-- 人脸识别结果 -->
       <div style="position:relative;height:100%;width:32%;background-color:#ffffff;box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);border-radius:8px;left:2%;color:#747474;">
         <div style="position:relative;height:15%;width:100%;text-align:center;">人脸识别结果</div>
-        <div style="position:relative;height:85%;width:100%;">结果列表</div>
+        <!-- <div style="position:relative;height:85%;width:100%;">结果列表</div> -->
       </div>
       <!-- 手势识别结果 -->
       <div style="position:relative;height:100%;width:32%;background-color:#ffffff;box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);border-radius:8px;left:4%;color:#747474;">
         <div style="position:relative;height:15%;width:100%;text-align:center;">手势识别结果</div>
-        <div style="position:relative;height:85%;width:100%;">结果列表</div>
+        <!-- <div style="position:relative;height:85%;width:100%;">结果列表</div>s -->
       </div>
     </div>
   </div>

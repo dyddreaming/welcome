@@ -290,11 +290,15 @@ export default {
   },
   methods: {
     customColorMethod(percentage) {
-      if (percentage < 30) {
-        return "#5d9e77";
-      } else if (percentage < 70) {
-        return "#10c4b5";
-      } else {
+      if (percentage < 15) {
+        return "#d1ffcc";
+      }else if(percentage <30){
+        return "#b9f2a1";
+      } else if (percentage < 50) {
+        return "#6eba8c";
+      } else if(percentage < 70){
+        return "#0e8174";
+      }else{
         return "#0b6d62";
       }
     },

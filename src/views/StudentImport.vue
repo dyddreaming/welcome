@@ -592,46 +592,46 @@ export default {
       ],
       // 专业学院
       CollegeOptions: [
-        {
-          value: "计算机学院",
-          label: "计算机学院",
-        },
-        {
-          value: "建筑学院",
-          label: "建筑学院",
-        },
-        {
-          value: "数学学院",
-          label: "数学学院",
-        },
-        {
-          value: "电气工程学院",
-          label: "电气工程学院",
-        },
-        {
-          value: "经济管理学院",
-          label: "经济管理学院",
-        },
-        {
-          value: "交通运输与物流学院",
-          label: "交通运输与物流学院",
-        },
-        {
-          value: "材料科学与工程学院",
-          label: "材料科学与工程学院",
-        },
-        {
-          value: "智慧城市与交通学院",
-          label: "智慧城市与交通学院",
-        },
-        {
-          value: "设计艺术学院",
-          label: "设计艺术学院",
-        },
-        {
-          value: "物理科学与技术学院",
-          label: "物理科学与技术学院",
-        },
+        // {
+        //   value: "计算机学院",
+        //   label: "计算机学院",
+        // },
+        // {
+        //   value: "建筑学院",
+        //   label: "建筑学院",
+        // },
+        // {
+        //   value: "数学学院",
+        //   label: "数学学院",
+        // },
+        // {
+        //   value: "电气工程学院",
+        //   label: "电气工程学院",
+        // },
+        // {
+        //   value: "经济管理学院",
+        //   label: "经济管理学院",
+        // },
+        // {
+        //   value: "交通运输与物流学院",
+        //   label: "交通运输与物流学院",
+        // },
+        // {
+        //   value: "材料科学与工程学院",
+        //   label: "材料科学与工程学院",
+        // },
+        // {
+        //   value: "智慧城市与交通学院",
+        //   label: "智慧城市与交通学院",
+        // },
+        // {
+        //   value: "设计艺术学院",
+        //   label: "设计艺术学院",
+        // },
+        // {
+        //   value: "物理科学与技术学院",
+        //   label: "物理科学与技术学院",
+        // },
       ],
       // 就读专业
       MajorOptions: [],
@@ -697,7 +697,7 @@ export default {
   watch: {
 
     collegeValue(newVal) {
-      if (newVal === "计算机学院") {
+      if (newVal === "计算机与人工智能学院") {
         this.MajorOptions = [
           {
             value: "软件工程",
@@ -826,6 +826,7 @@ export default {
 
   mounted() {
     this.loadImportFormData();
+    this.fetchCollegesRegisterData();
   },
 
   methods: {
@@ -1145,6 +1146,27 @@ export default {
       this.addressOptions = [];
       this.updateImportForm();
       this.$message.success('重置成功');
+    },
+    // 获取学院数据
+    fetchCollegesRegisterData() {
+      this.CollegeOptions = [];
+      axios
+        .get(`${this.$store.getters.getIp}/colleges/list`)
+        .then((response) => {
+          let collegeData = response.data.data;
+          // console.log(this.totalData);
+          collegeData.forEach((item) => {
+            this.CollegeOptions.push({
+              value : item.name,
+              label : item.name,
+            });
+          });
+          console.log(this.CollegeOptions);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          // console.log(this.$store.getters.getIp);
+        });
     },
   },
 };
