@@ -399,19 +399,23 @@ export default {
       ],
       typeOptions: [
         {
-          value: "社团",
+          value: 4,
+          label: "所有",
+        },
+        {
+          value: 0,
           label: "社团",
         },
         {
-          value: "兼职",
+          value: 1,
           label: "兼职",
         },
         {
-          value: "美食",
+          value: 2,
           label: "美食",
         },
         {
-          value: "娱乐",
+          value: 3,
           label: "娱乐",
         },
       ],

@@ -247,7 +247,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -270,7 +270,7 @@
                     v-if="roles.length > 0 && roles[0].username"
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 35%;
                       text-align: center;
@@ -287,9 +287,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -312,7 +312,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -335,7 +335,7 @@
                     v-if="roles.length > 0 && roles[1].username"
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 35%;
                       text-align: center;
@@ -352,9 +352,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -377,7 +377,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -400,7 +400,7 @@
                     v-if="roles.length > 0 && roles[2].username"
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 35%;
                       text-align: center;
@@ -417,9 +417,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -442,7 +442,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -454,7 +454,7 @@
                     v-if="roles.length > 0 && roles[3].username"
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -471,9 +471,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -496,7 +496,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -508,7 +508,7 @@
                     v-if="roles.length > 0 && roles[4].username"
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -525,9 +525,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -550,7 +550,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -562,7 +562,7 @@
                   v-if="roles.length>0"
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -578,9 +578,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -603,7 +603,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -615,7 +615,7 @@
                   v-if="roles.length>0"
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -631,9 +631,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -657,7 +657,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 35%;
                     height: 100%;
                     display: flex;
                   "
@@ -668,7 +668,7 @@
                   <div
                     style="
                       position: relative;
-                      width: 35%;
+                      width: 55%;
                       height: 100%;
                       left: 72%;
                       text-align: center;
@@ -684,9 +684,9 @@
                   style="
                     position: relative;
                     top: 40%;
-                    width: 60%;
+                    width: 55%;
                     height: 30%;
-                    left: 5%;
+                    left: 10%;
                   "
                 >
                   <el-progress
@@ -1268,7 +1268,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1308,7 +1308,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -1330,7 +1330,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1370,7 +1370,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -1392,7 +1392,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1432,7 +1432,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -1454,7 +1454,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1468,7 +1468,7 @@
                       position: relative;
                       width: 50%;
                       height: 100%;
-                      left: 72%;
+                      left: 66%;
                       text-align: center;
                       display: flex;
                       align-items: center;
@@ -1483,7 +1483,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -1505,7 +1505,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1519,7 +1519,7 @@
                       position: relative;
                       width: 50%;
                       height: 100%;
-                      left: 72%;
+                      left: 66%;
                       text-align: center;
                       display: flex;
                       align-items: center;
@@ -1534,7 +1534,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -1556,7 +1556,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1570,7 +1570,7 @@
                       position: relative;
                       width: 50%;
                       height: 100%;
-                      left: 72%;
+                      left: 66%;
                       text-align: center;
                       display: flex;
                       align-items: center;
@@ -1585,7 +1585,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -1607,7 +1607,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1621,7 +1621,7 @@
                       position: relative;
                       width: 50%;
                       height: 100%;
-                      left: 72%;
+                      left: 66%;
                       text-align: center;
                       display: flex;
                       align-items: center;
@@ -1636,7 +1636,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -1658,7 +1658,7 @@
                 <div
                   style="
                     position: relative;
-                    width: 30%;
+                    width: 40%;
                     height: 100%;
                     display: flex;
                   "
@@ -1672,7 +1672,7 @@
                       position: relative;
                       width: 50%;
                       height: 100%;
-                      left: 72%;
+                      left: 66%;
                       text-align: center;
                       display: flex;
                       align-items: center;
@@ -1687,7 +1687,7 @@
                     position: relative;
                     width: 20%;
                     height: 100%;
-                    left: 50%;
+                    left: 40%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
@@ -2044,6 +2044,7 @@ export default {
       taskId: null,
       minuteList: [],
       secondsList: [],
+      source:null,
     };
   },
   created() {
@@ -2077,7 +2078,9 @@ export default {
     this.getList2().then(() => {
       this.renderJoinChart();
     });
-    this.loadData();
+    this.loadSource().then(() => {
+        this.loadData();
+      });
     this.initChart();
   },
   methods: {
@@ -2638,40 +2641,93 @@ export default {
       });
       myChart.setOption(option);
     },
+    // 获取广告数据
+    loadSource(){
+      return new Promise((resolve, reject) => {
+      // 类型
+      // let category = 0;
+      // if (this.type !== "全部") {
+      //   if (this.type === "社团") {
+      //     category = 0;
+      //   } else if (this.type === "兼职") {
+      //     category = 1;
+      //   } else if (this.type === "美食") {
+      //     category = 2;
+      //   } else if (this.type === "娱乐") {
+      //     category = 3;
+      //   }
+      // }
+
+      // 时间格式化
+      // const date1 = new Date("2024-03-16");
+      // const year = date1.getFullYear();
+      // const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+      // const day = date1.getDate().toString().padStart(2, "0");
+      // const formattedDate = `${year}-${month}-${day}`;
+      // console.log("dateValue1:",formattedDate);
+
+      let url = `${this.$store.getters.getIp}/ads/clicks/daily?`;
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.totalData4 = response.data.data;
+          this.adNames = this.totalData4.adNames;
+          this.clicks = this.totalData4.clicks;
+          // console.log(this.totalData4);
+          // console.log("广告名称",this.adNames);
+          // console.log("点击次数",this.clicks);
+          this.source = [
+            ["heat", "amount", "advertise"],
+            // [89.3, 58212, "Matcha Latte"],
+            // [57.1, 78254, "Milk Tea"],
+            // [44.4, 41032, "Cheese Cocoa"],
+            // [20.1, 12755, "Cheese Brownie"],
+            // [89.7, 56667, "Matcha Cocoa"],
+            // [68.1, 79146, "Tea"],
+            // [89.6, 91852, "Orange Juice"],
+            // [90.6, 101852, "Lemon Juice"],
+            // [32.7, 20112, "Walnut Brownie"],
+          ];
+          for (let i = 0; i < this.adNames.length; i++) {
+            let heat =
+              10 +
+              ((this.clicks[i] - Math.min(...this.clicks)) /
+                (Math.max(...this.clicks) - Math.min(...this.clicks))) *
+                90;
+            let item = [heat, this.clicks[i], this.adNames[i]];
+            this.source.push(item);
+          }
+          resolve(); // 异步操作完成后 resolve
+          // console.log(this.source);
+        })
+        .catch((error) => {
+          reject(error); // 出错时 reject
+          console.error("Error fetching data:", error);
+        });
+      })
+    },
+    // 获取当日广告点击情况
     loadData() {
+      console.log(this.source);
       var chartContainer = document.getElementById("chartContainer");
       var myChart = echarts.init(chartContainer);
       let option = {
         dataset: {
-          source: [
-            ["heat", "amount", "advertise"],
-            [89.3, 58212, "Matcha Latte"],
-            [57.1, 78254, "Milk Tea"],
-            [44.4, 41032, "Cheese Cocoa"],
-            [20.1, 12755, "Cheese Brownie"],
-            [89.7, 56667, "Matcha Cocoa"],
-            [68.1, 79146, "Tea"],
-            [89.6, 91852, "Orange Juice"],
-            [90.6, 101852, "Lemon Juice"],
-            [32.7, 20112, "Walnut Brownie"],
-          ],
+          source: this.source,
         },
         grid: { containLabel: true },
         xAxis: { name: "次数", min: 0, max: 120000 },
         yAxis: { type: "category", name: "广告" },
-        textStyle: { color: "white" },
         visualMap: {
           orient: "horizontal",
           left: "center",
           min: 10,
           max: 100,
           text: ["High Click", "Low Click"],
-          textStyle: {
-            color: "white",
-          },
           dimension: 0,
           inRange: {
-            color: ["#6BE8CF", "#9FE0FF", "#0F5DC0"],
+            color: ["#1af0ff", "#6cc4de", "#18cafd"],
           },
         },
         series: [
@@ -2684,8 +2740,57 @@ export default {
           },
         ],
       };
+
       myChart.setOption(option);
     },
+    // loadData() {
+    //   var chartContainer = document.getElementById("chartContainer");
+    //   var myChart = echarts.init(chartContainer);
+    //   let option = {
+    //     dataset: {
+    //       source: [
+    //         ["heat", "amount", "advertise"],
+    //         [89.3, 58212, "Matcha Latte"],
+    //         [57.1, 78254, "Milk Tea"],
+    //         [44.4, 41032, "Cheese Cocoa"],
+    //         [20.1, 12755, "Cheese Brownie"],
+    //         [89.7, 56667, "Matcha Cocoa"],
+    //         [68.1, 79146, "Tea"],
+    //         [89.6, 91852, "Orange Juice"],
+    //         [90.6, 101852, "Lemon Juice"],
+    //         [32.7, 20112, "Walnut Brownie"],
+    //       ],
+    //     },
+    //     grid: { containLabel: true },
+    //     xAxis: { name: "次数", min: 0, max: 120000 },
+    //     yAxis: { type: "category", name: "广告" },
+    //     textStyle: { color: "white" },
+    //     visualMap: {
+    //       orient: "horizontal",
+    //       left: "center",
+    //       min: 10,
+    //       max: 100,
+    //       text: ["High Click", "Low Click"],
+    //       textStyle: {
+    //         color: "white",
+    //       },
+    //       dimension: 0,
+    //       inRange: {
+    //         color: ["#6BE8CF", "#9FE0FF", "#0F5DC0"],
+    //       },
+    //     },
+    //     series: [
+    //       {
+    //         type: "bar",
+    //         encode: {
+    //           x: "amount",
+    //           y: "advertise",
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   myChart.setOption(option);
+    // },
     initChart() {
       var chartContainer = document.getElementById("sevenContainer");
       var chart = echarts.init(chartContainer);

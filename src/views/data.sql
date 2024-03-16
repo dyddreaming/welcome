@@ -159,6 +159,11 @@
       "beginTime": "09:00:00",
       "endTime": "17:00:00"
   },
+  "partTime": {
+        "description": "无经验、本科、兼职、临时",
+        "workWay": "月结",
+        "salary": "40元每时"
+   },
   "keywords": [
     {
         "keyword": "兼职",
@@ -241,6 +246,11 @@
       "beginTime": "09:00:00",
       "endTime": "17:00:00"
   },
+   "partTime": {
+        "description": "学历大专、不限经验、兼职、临时",
+        "workWay": "月结",
+        "salary": "200元每时"
+   },
   "keywords": [
     {
         "keyword": "兼职",

@@ -93,9 +93,9 @@
         </el-breadcrumb>
       </div>
     </div>
-    <div style="position: relative; height: 260%; top: 1%;width:100%;">
+    <div style="position: relative; height: 260%; top: 1%; width: 100%">
       <!-- 第一行 -->
-      <div style="position: relative; height: 34%;width:100%;">
+      <div style="position: relative; height: 34%; width: 100%">
         <div
           style="
             position: relative;
@@ -175,7 +175,7 @@
         </div>
       </div>
       <!-- 第二行 -->
-      <div style="position: relative; height: 33%; display: flex;width:100%;">
+      <div style="position: relative; height: 33%; display: flex; width: 100%">
         <!-- 广告点击情况 -->
         <div
           style="
@@ -361,8 +361,11 @@
           </div>
         </div>
       </div>
+      <div style="position:relative;height:2%;width:100%;display: flex;
+      justify-content: center;color:#747474;
+      align-items: center;"><h3>首次注册地图</h3></div>
       <!-- 第三行 -->
-      <div style="position: relative; height: 33%;width:100%">
+      <div style="position: relative; height: 33%; width: 100%">
         <div
           style="
             position: relative;
@@ -374,12 +377,9 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           "
         >
-        <div style="position:relative;height:5%;width:100%;color:#747474;display: flex;
-        justify-content: center;font-weight:600;font-size:18px;
-        align-items: center;">首次注册地图</div>
           <!-- 首次注册地图 -->
           <div
-            style="position: relative; height:95%; width: 100%"
+            style="position: relative; height: 100%; width: 100%"
             id="Map"
             ref="map"
           ></div>
@@ -584,32 +584,39 @@ export default {
       totalData9: {},
       areaName: [],
       areaNumber: [],
+      source:null,
     };
   },
   watch: {
     dateValue1() {
-      console.log("dateValue1",this.dateValue1);
+      console.log("dateValue1", this.dateValue1);
       this.getList1().then(() => {
         this.renderComChart();
       });
     },
     dateValue2() {
-      console.log("dateValue2",this.dateValue2);
+      console.log("dateValue2", this.dateValue2);
       this.getList2().then(() => {
         this.renderJoinChart();
       });
     },
     threshold() {
-      this.loadData();
+      this.loadSource().then(() => {
+        this.loadData();
+      });
     },
     dateValue() {
-      this.loadData();
+      this.loadSource().then(() => {
+        this.loadData();
+      });
     },
     type() {
-      this.loadData();
+      this.loadSource().then(() => {
+        this.loadData();
+      });
     },
     dateValue5() {
-      console.log("dateValue5",this.dateValue5);
+      console.log("dateValue5", this.dateValue5);
       this.getWord().then(() => {
         this.initChart();
       });
@@ -639,7 +646,9 @@ export default {
     this.dateString = `${date.getFullYear()}年${
       date.getMonth() + 1
     }月${date.getDate()}日`;
-    this.loadData();
+    // this.loadSource().then(() => {
+    //     this.loadData();
+    //   });
     this.getData().then(() => {
       this.initMap();
       this.addArea(Array.from(areaGeo));
@@ -920,8 +929,8 @@ export default {
 
       myChart.setOption(option);
     },
-    // 获取当日广告点击情况
-    loadData() {
+    loadSource(){
+      return new Promise((resolve, reject) => {
       // 类型
       let category = null;
       if (this.type !== "全部") {
@@ -957,29 +966,46 @@ export default {
           this.adNames = this.totalData4.adNames;
           this.clicks = this.totalData4.clicks;
           // console.log(this.totalData4);
-          // console.log(this.adNames);
-          // console.log(this.clicks);
+          // console.log("广告名称",this.adNames);
+          // console.log("点击次数",this.clicks);
+          this.source = [
+            ["heat", "amount", "advertise"],
+            // [89.3, 58212, "Matcha Latte"],
+            // [57.1, 78254, "Milk Tea"],
+            // [44.4, 41032, "Cheese Cocoa"],
+            // [20.1, 12755, "Cheese Brownie"],
+            // [89.7, 56667, "Matcha Cocoa"],
+            // [68.1, 79146, "Tea"],
+            // [89.6, 91852, "Orange Juice"],
+            // [90.6, 101852, "Lemon Juice"],
+            // [32.7, 20112, "Walnut Brownie"],
+          ];
+          for (let i = 0; i < this.adNames.length; i++) {
+            let heat =
+              10 +
+              ((this.clicks[i] - Math.min(...this.clicks)) /
+                (Math.max(...this.clicks) - Math.min(...this.clicks))) *
+                90;
+            let item = [heat, this.clicks[i], this.adNames[i]];
+            this.source.push(item);
+          }
+          resolve(); // 异步操作完成后 resolve
+          // console.log(this.source);
         })
         .catch((error) => {
+          reject(error); // 出错时 reject
           console.error("Error fetching data:", error);
         });
-
+      })
+    },
+    // 获取当日广告点击情况
+    loadData() {
+      console.log(this.source);
       var chartContainer = document.getElementById("chartContainer");
       var myChart = echarts.init(chartContainer);
       let option = {
         dataset: {
-          source: [
-            ["heat", "amount", "advertise"],
-            [89.3, 58212, "Matcha Latte"],
-            [57.1, 78254, "Milk Tea"],
-            [44.4, 41032, "Cheese Cocoa"],
-            [20.1, 12755, "Cheese Brownie"],
-            [89.7, 56667, "Matcha Cocoa"],
-            [68.1, 79146, "Tea"],
-            [89.6, 91852, "Orange Juice"],
-            [90.6, 101852, "Lemon Juice"],
-            [32.7, 20112, "Walnut Brownie"],
-          ],
+          source: this.source,
         },
         grid: { containLabel: true },
         xAxis: { name: "次数", min: 0, max: 120000 },
@@ -1027,15 +1053,14 @@ export default {
         const formattedDate = `${year}-${month}-${day}`;
         this.wordData = [];
         let floor = 0;
-        if(this.threshold2)
-        {
+        if (this.threshold2) {
           floor = this.threshold2;
         }
         axios
-          .get(`${this.$store.getters.getIp}/keywords/times/daily`,{
+          .get(`${this.$store.getters.getIp}/keywords/times/daily`, {
             params: {
               time: "2024-03-15",
-              floor:floor,
+              floor: floor,
             },
           })
           .then((response) => {
