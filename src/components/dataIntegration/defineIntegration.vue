@@ -374,9 +374,12 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           "
         >
+        <div style="position:relative;height:5%;width:100%;color:#747474;display: flex;
+        justify-content: center;font-weight:600;font-size:18px;
+        align-items: center;">首次注册地图</div>
           <!-- 首次注册地图 -->
           <div
-            style="position: relative; height: 100%; width: 100%"
+            style="position: relative; height:95%; width: 100%"
             id="Map"
             ref="map"
           ></div>
@@ -456,7 +459,7 @@ export default {
       adNames: [],
       clicks: [],
       totalData6: {},
-      threshold2: "",
+      threshold2: null,
       dateValue5: "",
       keywords: [],
       timesList: [],
@@ -585,14 +588,16 @@ export default {
   },
   watch: {
     dateValue1() {
+      console.log("dateValue1",this.dateValue1);
       this.getList1().then(() => {
-      this.renderComChart();
-    });
+        this.renderComChart();
+      });
     },
     dateValue2() {
+      console.log("dateValue2",this.dateValue2);
       this.getList2().then(() => {
-      this.renderJoinChart();
-    });
+        this.renderJoinChart();
+      });
     },
     threshold() {
       this.loadData();
@@ -603,33 +608,42 @@ export default {
     type() {
       this.loadData();
     },
+    dateValue5() {
+      console.log("dateValue5",this.dateValue5);
+      this.getWord().then(() => {
+        this.initChart();
+      });
+    },
+    threshold2() {
+      this.getWord().then(() => {
+        this.initChart();
+      });
+    },
   },
   mounted() {
-    let currentDate = new Date();
+    let currentDate = new Date("2024-03-15");
     this.dateValue1 = currentDate;
     this.dateValue2 = currentDate;
-    this.getList1().then(() => {
-      this.renderComChart();
-    });
-    this.getList2().then(() => {
-      this.renderJoinChart();
-    });
-    this.dateValue = currentDate;
-    // console.log(this.dateValue);
+    this.dateValue5 = currentDate;
+    // this.getList1().then(() => {
+    //   this.renderComChart();
+    // });
+    // this.getList2().then(() => {
+    //   this.renderJoinChart();
+    // });
+    // this.getWord().then(() => {
+    //   this.initChart();
+    // });
+    this.dateValue = new Date("2024-03-16");
     let date = new Date(this.dateValue);
     this.dateString = `${date.getFullYear()}年${
       date.getMonth() + 1
     }月${date.getDate()}日`;
-    // 加载图表
     this.loadData();
-    this.dateValue5 = currentDate.toISOString();
-    this.getWord().then(() => {
-      this.initChart();
-    });
     this.getData().then(() => {
-      this.initMap(); // 初始化地图
-      this.addArea(Array.from(areaGeo)); // 添加四川省的边界描边和填充
-      this.addHeatMap(); // 添加热力图数据
+      this.initMap();
+      this.addArea(Array.from(areaGeo));
+      this.addHeatMap();
     });
   },
   methods: {
@@ -646,7 +660,7 @@ export default {
         axios
           .get(`${this.$store.getters.getIp}/tasks/students/completion/rank`, {
             params: {
-              time: formattedDate,
+              time: "2024-03-15 00:00:00",
             },
           })
           .then((response) => {
@@ -664,41 +678,41 @@ export default {
       });
     },
     // 获取参与人数排行榜
-    getList2(){
+    getList2() {
       return new Promise((resolve, reject) => {
-      // 时间格式化
-      const date1 = new Date(this.dateValue2);
-      const year = date1.getFullYear();
-      const month = (date1.getMonth() + 1).toString().padStart(2, "0");
-      const day = date1.getDate().toString().padStart(2, "0");
-      const formattedDate = `${year}-${month}-${day} 00:00:00`;
-      // console.log("dateValue2:",formattedDate);
+        // 时间格式化
+        const date1 = new Date(this.dateValue2);
+        const year = date1.getFullYear();
+        const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+        const day = date1.getDate().toString().padStart(2, "0");
+        const formattedDate = `${year}-${month}-${day} 00:00:00`;
+        // console.log("dateValue2:",formattedDate);
 
-      axios
-        .get(`${this.$store.getters.getIp}/tasks/students/participant/rank`, {
-          params: {
-            time: formattedDate,
-          },
-        })
-        .then((response) => {
-          this.totalData3 = response.data.data;
-          this.taskNames = this.totalData3.taskNames;
-          this.parCount = this.totalData3.parCount;
-          // console.log(this.studentIds);
-          // console.log(this.compCount);
-          resolve(); // 异步操作完成后 resolve
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          reject(error); // 出错时 reject
-        });
-      })
+        axios
+          .get(`${this.$store.getters.getIp}/tasks/students/participant/rank`, {
+            params: {
+              time: "2024-03-15 00:00:00",
+            },
+          })
+          .then((response) => {
+            this.totalData3 = response.data.data;
+            this.taskNames = this.totalData3.taskNames;
+            this.parCount = this.totalData3.parCount;
+            // console.log(this.studentIds);
+            // console.log(this.compCount);
+            resolve(); // 异步操作完成后 resolve
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            reject(error); // 出错时 reject
+          });
+      });
     },
     // 完成任务排行榜
     renderComChart() {
       let dataAxis = this.studentIds;
-      console.log(this.studentIds);
-      console.log(dataAxis);
+      // console.log(this.studentIds);
+      // console.log(dataAxis);
       let data = this.compCount;
       let yMax = 100;
       let dataShadow = [];
@@ -1003,39 +1017,59 @@ export default {
       });
     },
     // 获取关键词
-    getWord(){
+    getWord() {
       return new Promise((resolve, reject) => {
+        // 时间格式化
+        const date1 = new Date(this.dateValue5);
+        const year = date1.getFullYear();
+        const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+        const day = date1.getDate().toString().padStart(2, "0");
+        const formattedDate = `${year}-${month}-${day}`;
         this.wordData = [];
-      axios
-        .get(`${this.$store.getters.getIp}/keywords/times/daily`)
-        .then((response) => {
-          this.totalData5 = response.data.data;
-          // console.log(this.totalData5);
-          this.keywords = this.totalData5.keywords;
-          this.timesList = this.totalData5.timesList;
-          this.keywords.forEach((item,index)=>{
-            this.wordData.push({name:this.keywords[index],value:this.timesList[index]});
+        let floor = 0;
+        if(this.threshold2)
+        {
+          floor = this.threshold2;
+        }
+        axios
+          .get(`${this.$store.getters.getIp}/keywords/times/daily`,{
+            params: {
+              time: "2024-03-15",
+              floor:floor,
+            },
+          })
+          .then((response) => {
+            this.totalData5 = response.data.data;
+            // console.log(this.totalData5);
+            this.keywords = this.totalData5.keywords;
+            this.timesList = this.totalData5.timesList;
+            // console.log(this.keywords);
+            // console.log(this.timesList);
+            this.keywords.forEach((item, index) => {
+              this.wordData.push({
+                name: this.keywords[index],
+                value: this.timesList[index],
+              });
+            });
+            resolve(); // 异步操作完成后 resolve
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            reject(error); // 出错时 reject
           });
-          resolve(); // 异步操作完成后 resolve
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          reject(error); // 出错时 reject
-        });
       });
     },
     // 生成搜索词云
     initChart() {
-      var dateParts = this.dateValue5.split("T")[0].split("-");
-      var year = dateParts[0];
-      var month = dateParts[1];
-      var day = dateParts[2];
-      var formattedDate = year + "年" + month + "月" + day + "日";
+      let date = new Date(this.dateValue5);
+      let dateString = `${date.getFullYear()}年${
+        date.getMonth() + 1
+      }月${date.getDate()}日`;
 
       this.chart = echarts.init(document.getElementById("wordCloud"));
       const option = {
         title: {
-          text: `${formattedDate}搜索关键词云`,
+          text: `${dateString}搜索关键词云`,
           x: "center",
           textStyle: {
             color: "#747474", // 设置字体颜色
@@ -1204,7 +1238,7 @@ export default {
           hatmapData.push({ name: name });
         }
       }
-      console.log(hatmapData);
+      // console.log(hatmapData);
       let codeList = {
         四川省: { center: { lng: 104.061902, lat: 30.609503 } },
         云南省: { center: { lng: 101.592433, lat: 24.864212 } },

@@ -238,7 +238,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px">姓名*:</span>
+            <span style="margin-right: 10px">姓名<lable style="color:#e85656">*</lable>:</span>
             <el-input v-model="nameInput" placeholder="请输入"
               style="position: relative; height: 40px !important; width: 70%" id="studentImport">
             </el-input>
@@ -249,7 +249,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">学号*:</span>
+            <span style="margin-right: 10px; left: 7%">学号<lable style="color:#e85656">*</lable>:</span>
             <el-input v-model="idInput" placeholder="请输入"
               style="position: relative; height: 40px !important; width: 70%" id="idImport">
             </el-input>
@@ -270,7 +270,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">类别*:</span>
+            <span style="margin-right: 10px; left: 7%">类别<lable style="color:#e85656">*</lable>:</span>
             <el-select v-model="typeValue" placeholder="请选择"
               style="position: relative; height: 40px !important; width: 70%" id="typeImport">
               <el-option v-for="item in TypeOptions" :key="item.value" :label="item.label" :value="item.value">
@@ -283,7 +283,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">身份证号*:</span>
+            <span style="margin-right: 10px; left: 7%">身份证号<lable style="color:#e85656">*</lable>:</span>
             <el-input v-model="cardInput" placeholder="请输入"
               style="position: relative; height: 40px !important; width: 58%" id="statusImport">
             </el-input>
@@ -304,7 +304,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">性别*:</span>
+            <span style="margin-right: 10px; left: 7%">性别<lable style="color:#e85656">*</lable>:</span>
             <div style="position: relative">
               <el-radio v-model="radio" label="0">女</el-radio>
               <el-radio v-model="radio" label="1">男</el-radio>
@@ -316,7 +316,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">出生日期*:</span>
+            <span style="margin-right: 10px; left: 7%">出生日期<lable style="color:#e85656">*</lable>:</span>
             <el-date-picker v-model="dateValue" type="date" placeholder="选择日期"
               style="position: relative; height: 40px !important; width: 58%"
               id="dateImport">
@@ -350,7 +350,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">当前年级*:</span>
+            <span style="margin-right: 10px; left: 7%">当前年级<lable style="color:#e85656">*</lable>:</span>
             <el-select v-model="gradeValue" placeholder="请选择"
               style="position: relative; height: 40px !important; width: 58%"
               id="gradeImport">
@@ -374,7 +374,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px">所在地*:</span>
+            <span style="margin-right: 10px">所在地<lable style="color:#e85656">*</lable>:</span>
             <div style="width: 167px; left: 10px">
               <el-cascader :options="locationOptions" 
               v-model="addressOptions"
@@ -388,7 +388,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">联系电话*:</span>
+            <span style="margin-right: 10px; left: 7%">联系电话<lable style="color:#e85656">*</lable>:</span>
             <el-input v-model="phoneInput" placeholder="请输入"
               style="position: relative; height: 40px !important; width: 58%"
               id="phoneImport">
@@ -410,7 +410,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">专业学院*:</span>
+            <span style="margin-right: 10px; left: 7%">专业学院<lable style="color:#e85656">*</lable>:</span>
             <el-select v-model="collegeValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
               style="position: relative; height: 30px; width: 79%"
               id="collegeImport">
@@ -435,7 +435,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">就读专业*:</span>
+            <span style="margin-right: 10px; left: 7%">就读专业<lable style="color:#e85656">*</lable>:</span>
             <el-select v-model="majorValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
               style="position: relative; height: 30px; width: 79%"
               id="majorImport">
@@ -460,7 +460,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">专业班级*:</span>
+            <span style="margin-right: 10px; left: 7%">专业班级<lable style="color:#e85656">*</lable>:</span>
             <el-select v-model="classValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
               style="position: relative; height: 30px; width: 79%"
               id="classImport">
@@ -485,7 +485,7 @@
               display: flex;
               align-items: center;
             ">
-            <span style="margin-right: 10px; left: 7%">所在校区*:</span>
+            <span style="margin-right: 10px; left: 7%">所在校区<lable style="color:#e85656">*</lable>:</span>
             <el-select v-model="campusValue" placeholder="请选择" :popper-class="'scrollable-dropdown'"
               style="position: relative; height: 30px; width: 79%"
               id="campusImport">

@@ -69,7 +69,7 @@
         "
       >
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
-          <span style="margin-right: 10px; margin-left: 20px">任务名称*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">任务名称<lable style="color:#e85656">*</lable>:</span>
           <el-input
             v-model="name"
             placeholder="请输入"
@@ -78,7 +78,7 @@
           </el-input>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
-          <span style="margin-right: 10px; margin-left: 20px">任务描述*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">任务描述<lable style="color:#e85656">*</lable>:</span>
           <el-input
             v-model="describe"
             placeholder="请输入"
@@ -87,7 +87,7 @@
           </el-input>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
-          <span style="margin-right: 10px; margin-left: 20px">任务对象*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">任务对象<lable style="color:#e85656">*</lable>:</span>
           <el-select
             v-model="targetGrade"
             placeholder="请选择"
@@ -103,7 +103,7 @@
           </el-select>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
-          <span style="margin-right: 10px; margin-left: 20px">任务类型*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">任务类型<lable style="color:#e85656">*</lable>:</span>
           <el-select
             v-model="typeValue"
             placeholder="请选择"
@@ -122,7 +122,7 @@
           style="position: relative; height: 8%; width: 100%; top: 1%"
           v-if="typeValue === '主线'"
         >
-          <span style="margin-right: 10px; margin-left: 20px">前置任务*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">前置任务<lable style="color:#e85656">*</lable>:</span>
           <el-select
             v-model="beforeTask"
             placeholder="请选择"
@@ -138,7 +138,7 @@
           </el-select>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 1%">
-          <span style="margin-right: 10px; margin-left: 20px">任务级别*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">任务级别<lable style="color:#e85656">*</lable>:</span>
           <el-select
             v-model="grade"
             placeholder="请选择"
@@ -157,7 +157,7 @@
           style="position: relative; height: 8%; width: 100%; top: 1%"
           v-if="grade === '院级'"
         >
-          <span style="margin-right: 10px; margin-left: 20px">任务学院*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">任务学院<lable style="color:#e85656">*</lable>:</span>
           <el-select
             v-model="targetCollege"
             placeholder="请选择"
@@ -173,7 +173,7 @@
           </el-select>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 2%">
-          <span style="margin-right: 10px; margin-left: 20px">任务形式*:</span>
+          <span style="margin-right: 10px; margin-left: 20px">任务形式<lable style="color:#e85656">*</lable>:</span>
           <el-select
             v-model="contactType"
             placeholder="请选择"
@@ -198,7 +198,7 @@
               margin-left: 20px;
             "
           >
-            任务奖励（多选）*
+            任务奖励（多选）<lable style="color:#e85656">*</lable>
           </div>
           <div
             style="
@@ -570,7 +570,7 @@
           >
         </div> -->
         <div style="position: relative; height: 8%; width: 100%; top: 2%">
-          <span style="margin-right: 20px; margin-left: 20px">开始时间*:</span>
+          <span style="margin-right: 20px; margin-left: 20px">开始时间<lable style="color:#e85656">*</lable>:</span>
           <el-date-picker
             v-model="startTime"
             type="date"
@@ -580,7 +580,7 @@
           </el-date-picker>
         </div>
         <div style="position: relative; height: 8%; width: 100%; top: 4%">
-          <span style="margin-right: 20px; margin-left: 20px">结束时间*:</span>
+          <span style="margin-right: 20px; margin-left: 20px">结束时间<lable style="color:#e85656">*</lable>:</span>
           <el-date-picker
             v-model="endTime"
             type="date"
@@ -632,7 +632,7 @@
                 "
               >
                 <span style="margin-right: 22px; margin-left: 20px"
-                  >NPC文本:</span
+                  >NPC文本<lable style="color:#e85656">*</lable>:</span
                 >
                 <el-input
                   type="textarea"
@@ -671,7 +671,7 @@
                 拍照
               </div>
               <div style="position: relative; height: 94%; width: 100%">
-                <span style="margin-right: 10px; margin-left: 20px">手势:</span>
+                <span style="margin-right: 10px; margin-left: 20px">手势<lable style="color:#e85656">*</lable>:</span>
                 <div
                   style="
                     position: relative;
@@ -751,7 +751,7 @@
               <div style="position: relative; height: 94%; width: 100%">
                 <span
                   style="margin-right: 10px; margin-left: 20px; font-size: 14px"
-                  >物品:</span
+                  >物品<lable style="color:#e85656">*</lable>:</span
                 >
                 <div
                   style="
@@ -830,7 +830,7 @@
                 摄像头
               </div>
               <div style="position: relative; height: 93%; width: 100%">
-                <span style="margin-right: 10px; margin-left: 20px">手势:</span>
+                <span style="margin-right: 10px; margin-left: 20px">手势<lable style="color:#e85656">*</lable>:</span>
                 <div
                   style="
                     position: relative;
@@ -896,7 +896,7 @@
               v-if="contactType === 0"
             >
               <span style="margin-right: 20px; margin-left: 20px"
-                >视频播放:</span
+                >视频播放<lable style="color:#e85656">*</lable>:</span
               >
               <el-input
                 v-model="videoPlay"
@@ -910,7 +910,7 @@
               v-if="(contactType === 4) | (contactType === 2)"
             >
               <span style="margin-right: 10px; margin-left: 20px"
-                >任务地点:</span
+                >任务地点<lable style="color:#e85656">*</lable>:</span
               >
               <el-input
                 type="textarea"
@@ -933,7 +933,7 @@
               v-if="contactType === 5"
             >
               <span style="margin-right: 22px; margin-left: 20px"
-                >摄像头编号:</span
+                >摄像头编号<lable style="color:#e85656">*</lable>:</span
               >
               <el-select
                 v-model="cameraId"

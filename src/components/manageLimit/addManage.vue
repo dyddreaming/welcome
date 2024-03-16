@@ -123,7 +123,7 @@
             align-items: center;
           "
         >
-          <span style="margin-right: 10px">姓名*:</span>
+          <span style="margin-right: 10px">姓名<lable style="color:#e85656">*</lable>:</span>
           <el-input
             v-model="nameInput"
             placeholder="请输入"
@@ -139,7 +139,7 @@
             align-items: center;
           "
         >
-          <span style="margin-right: 10px; left: 7%">性别*:</span>
+          <span style="margin-right: 10px; left: 7%">性别<lable style="color:#e85656">*</lable>:</span>
           <div style="position: relative">
             <el-radio v-model="radio" label="0">女</el-radio>
             <el-radio v-model="radio" label="1">男</el-radio>
@@ -165,7 +165,7 @@
             align-items: center;
           "
         >
-          <span style="margin-right: 10px; left: 7%">专业学院*:</span>
+          <span style="margin-right: 10px; left: 7%">专业学院:</span>
           <el-select
             v-model="collegeValue"
             placeholder="请选择"
@@ -189,7 +189,7 @@
             align-items: center;
           "
         >
-          <span style="margin-right: 10px">账号*:</span>
+          <span style="margin-right: 10px">账号<lable style="color:#e85656">*</lable>:</span>
           <el-input
             v-model="accountInput"
             placeholder="请输入"
@@ -217,7 +217,7 @@
             align-items: center;
           "
         >
-          <span style="margin-right: 10px; left: 7%">身份证号*:</span>
+          <span style="margin-right: 10px; left: 7%">身份证号<lable style="color:#e85656">*</lable>:</span>
           <el-input
             v-model="cardInput"
             placeholder="请输入"
@@ -233,7 +233,7 @@
             align-items: center;
           "
         >
-          <span style="margin-right: 10px; left: 7%">手机号*:</span>
+          <span style="margin-right: 10px; left: 7%">手机号<lable style="color:#e85656">*</lable>:</span>
           <el-input
             v-model="phoneInput"
             placeholder="请输入"
@@ -261,7 +261,7 @@
             align-items: center;
           "
         >
-          <span style="margin-right: 10px; left: 7%">等级*:</span>
+          <span style="margin-right: 10px; left: 7%">等级<lable style="color:#e85656">*</lable>:</span>
           <el-select
             v-model="grade"
             placeholder="请选择"

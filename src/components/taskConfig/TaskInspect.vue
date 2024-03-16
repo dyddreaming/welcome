@@ -79,7 +79,7 @@
           border-radius:8px;
         "></div>
       <div style="position: relative; height: 5%; left: 2%; width: 96%; top: 10%">
-        <h3 style="margin-top: 0;color:#747474;">审核结果</h3>
+        <h3 style="margin-top: 0;color:#747474;">审核结果<lable style="color:#e85656;font-weight:600">*</lable></h3>
         <el-select v-model="resultValue" placeholder="请选择">
           <el-option v-for="item in resultOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
