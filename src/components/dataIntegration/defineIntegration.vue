@@ -93,9 +93,9 @@
         </el-breadcrumb>
       </div>
     </div>
-    <div style="position: relative; height: 260%; top: 1%">
+    <div style="position: relative; height: 260%; top: 1%;width:100%;">
       <!-- 第一行 -->
-      <div style="position: relative; height: 34%">
+      <div style="position: relative; height: 34%;width:100%;">
         <div
           style="
             position: relative;
@@ -175,7 +175,7 @@
         </div>
       </div>
       <!-- 第二行 -->
-      <div style="position: relative; height: 33%; display: flex">
+      <div style="position: relative; height: 33%; display: flex;width:100%;">
         <!-- 广告点击情况 -->
         <div
           style="
@@ -362,7 +362,7 @@
         </div>
       </div>
       <!-- 第三行 -->
-      <div style="position: relative; height: 33%">
+      <div style="position: relative; height: 33%;width:100%">
         <div
           style="
             position: relative;

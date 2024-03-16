@@ -214,6 +214,7 @@ export default {
       currentPage: 1,
       pageSize: 7,
       totalPages: 1,
+      searchWord:"",
       tableData: [
         // {
         //   adName: "不吃火锅就吃烤匠",
@@ -222,6 +223,32 @@ export default {
         //   admitTime: "2024-08-28 10:16:23",
         //   setLong: "3天",
         // },
+        {
+          adName: "周末兼职",
+          adType: "兼职",
+          meName: "临时剧组",
+          admitTime: "2024-02-28 10:16:23",
+          setLong: "20天",
+        },{
+          adName: "荣胜和火锅自助",
+          adType: "美食",
+          meName: "荣胜和",
+          admitTime: "2024-02-28 10:16:23",
+          setLong: "30天",
+        },
+        {
+          adName: "欢乐蛋糕",
+          adType: "美食",
+          meName: "每日蛋糕",
+          admitTime: "2024-02-28 10:16:23",
+          setLong: "20天",
+        },{
+          adName: "经典密室逃脱",
+          adType: "娱乐",
+          meName: "明天密室",
+          admitTime: "2024-02-28 10:16:23",
+          setLong: "20天",
+        },
       ],
     };
   },
@@ -258,7 +285,7 @@ export default {
     }
   },
   created() {
-    this.goToPage(1);
+    // this.goToPage(1);
   },
   methods: {
     goBack() {

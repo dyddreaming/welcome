@@ -251,14 +251,23 @@
                 <div style="display: flex">
                   <el-button
                     type="primary"
-                    style="background-color: #e85656; border: #e85656"
                     size="small"
+                    :style="{
+                      backgroundColor:
+                        scope.row.status === '正常投放' ? '#cccccc' : '#e85656',
+                      border: 'none',
+                    }"
                     >投放</el-button
                   >
                   <el-button
                     type="primary"
                     style="background-color: #e85656; border: #e85656"
                     size="small"
+                    :style="{
+                      backgroundColor:
+                        scope.row.status === '暂停投放' ? '#cccccc' : '#e85656',
+                      border: 'none',
+                    }"
                     >暂停投放</el-button
                   >
                   <el-button
@@ -773,14 +782,26 @@ export default {
       tableData1: [
         {
           name: "科赛获奖",
-          admit: "2024-08-28 10:16:23",
-          start: "2024-08-28 10:16:23",
+          admit: "2024-02-28 10:16:23",
+          start: "2024-03-28 10:16:23",
           end: "2024-08-28 10:16:23",
         },
         {
-          name: "科赛获奖",
-          admit: "2024-08-28 10:16:23",
-          start: "2024-08-28 10:16:23",
+          name: "新增院士",
+          admit: "2024-02-28 10:16:23",
+          start: "2024-03-25 10:16:23",
+          end: "2024-08-28 10:16:23",
+        },
+        {
+          name: "校园风景",
+          admit: "2024-02-28 10:16:23",
+          start: "2024-03-25 10:16:23",
+          end: "2024-08-28 10:16:23",
+        },
+        {
+          name: "活动特色",
+          admit: "2024-02-28 10:16:23",
+          start: "2024-03-25 10:16:23",
           end: "2024-08-28 10:16:23",
         },
       ],
@@ -789,29 +810,86 @@ export default {
           clubName: "广播社",
           title: "广播社招新啦",
           type: "招新",
-          connectName: "张三",
-          admitTime: "2024-08-28 10:16:23",
-          setTime: "2024-08-28 10:16:23",
+          connectName: "颜茗希",
+          admitTime: "2024-02-28 10:16:23",
+          setTime: "2024-03-28 10:16:23",
           setLong: "3天",
-          charge: "2000",
+          charge: "200",
+          status: "正常投放",
+        },
+        {
+          clubName: "动漫社",
+          title: "紫罗兰永恒花园主题活动",
+          type: "活动",
+          connectName: "元韵真",
+          admitTime: "2024-02-28 10:16:23",
+          setTime: "2024-03-28 10:16:23",
+          setLong: "6天",
+          charge: "500",
+          status: "暂停投放",
+        },
+        {
+          clubName: "宣传部",
+          title: "宣传部等你来",
+          type: "招新",
+          connectName: "钱瑶风",
+          admitTime: "2024-03-01 10:16:23",
+          setTime: "2024-03-28 10:16:23",
+          setLong: "5天",
+          charge: "300",
+          status: "正常投放",
+        },
+        {
+          clubName: "摄影部",
+          title: "摄影部等加入",
+          type: "招新",
+          connectName: "宋漩泽",
+          admitTime: "2024-03-01 10:16:23",
+          setTime: "2024-03-20 10:16:23",
+          setLong: "4天",
+          charge: "200",
           status: "正常投放",
         },
       ],
       tableData3: [
         {
           name: "衣架",
-          sName: "张三",
-          sID: "2021111111",
-          admit: "2024-08-28 10:16:23",
+          sName: "宋漩泽",
+          sID: "2021110004",
+          admit: "2024-02-28 10:16:23",
           type: "日用品",
           out: "是",
         },
         {
-          name: "衣架",
-          sName: "张三",
-          sID: "2021111111",
-          admit: "2024-08-28 10:16:23",
+          name: "水壶",
+          sName: "莫琛泓",
+          sID: "2021110007",
+          admit: "2024-02-28 10:16:23",
           type: "日用品",
+          out: "是",
+        },
+        {
+          name: "六级词典",
+          sName: "莫琛泓",
+          sID: "2021110006",
+          admit: "2024-02-28 10:16:23",
+          type: "学习用品",
+          out: "否",
+        },
+        {
+          name: "四级听力",
+          sName: "莫琛泓",
+          sID: "2021110016",
+          admit: "2024-02-28 10:16:23",
+          type: "学习用品",
+          out: "否",
+        },
+        {
+          name: "垃圾袋",
+          sName: "莫琛泓",
+          sID: "2021110116",
+          admit: "2024-02-28 10:16:23",
+          type: "生活用品",
           out: "是",
         },
       ],
@@ -820,28 +898,36 @@ export default {
             name: "六级学习",
             type: "学习",
             inName: "谢谢小星星",
-            outName:"张三",
-            ID: "2021111111",
-            admit: "2024-08-28 10:16:23",
+            outName:"杨瑛竹",
+            ID: "2021110018",
+            admit: "2024-02-28 10:16:23",
           },
           {
-            name: "六级学习",
+            name: "四级听力",
             type: "学习",
-            inName: "谢谢小星星",
+            inName: "星空漫步者",
             outName:"张三",
-            ID: "2021111111",
-            admit: "2024-08-28 10:16:23",
+            ID: "2021110020",
+            admit: "2024-02-28 10:16:23",
+          },
+          {
+            name: "第二次选课",
+            type: "学习",
+            inName: "温柔的风",
+            outName:"计朗倩",
+            ID: "2021110027",
+            admit: "2024-02-28 10:16:23",
           },
         ],
         tableData16:[
           {
-            inName:"张三",
+            inName:"蓝育瑶",
             admit:"2023-03-11 12:34:56",
-            content:"处理较慢，影响体验感",
+            content:"图片上传较慢",
           }, 
           {
-            inName:"张三",
-            admit:"2023-03-11 12:34:56",
+            inName:"计朗倩",
+            admit:"2023-03-21 11:30:16",
             content:"处理较慢，影响体验感",
           },        
         ],

@@ -234,7 +234,7 @@
               >
               <el-input
                 v-model="wordValue"
-                placeholder="请输入"
+                placeholder="单位：元"
                 style="position: relative; height: 40px !important; width: 40%"
               >
               </el-input>
@@ -313,7 +313,7 @@
                 >
                 <el-input
                   v-model="first"
-                  placeholder="请输入"
+                  placeholder="单位：元"
                   style="
                     position: relative;
                     height: 40px !important;
@@ -336,7 +336,7 @@
                 >
                 <el-input
                   v-model="second"
-                  placeholder="请输入"
+                  placeholder="单位：元"
                   style="
                     position: relative;
                     height: 40px !important;
@@ -359,7 +359,7 @@
                 >
                 <el-input
                   v-model="third"
-                  placeholder="请输入"
+                  placeholder="单位：元"
                   style="
                     position: relative;
                     height: 40px !important;
@@ -415,7 +415,7 @@
                 >
                 <el-input
                   v-model="putValue"
-                  placeholder="请输入"
+                  placeholder="单位：元"
                   style="
                     position: relative;
                     height: 40px !important;
@@ -462,7 +462,7 @@
                 >
                 <el-input
                   v-model="topValue"
-                  placeholder="请输入"
+                  placeholder="单位：元"
                   style="
                     position: relative;
                     height: 40px !important;
@@ -557,7 +557,10 @@ export default {
   },
   methods:{
     save(){
-
+      this.$message({
+            message: "保存成功",
+            type: "success",
+          });
     },
   },
 };

@@ -2882,7 +2882,7 @@ export default {
     getList1() {
       return new Promise((resolve, reject) => {
         // 时间格式化
-        const date1 = new Date();
+        const date1 = new Date("2024-03-15 00:00:00");
         const year = date1.getFullYear();
         const month = (date1.getMonth() + 1).toString().padStart(2, "0");
         const day = date1.getDate().toString().padStart(2, "0");
@@ -2912,7 +2912,7 @@ export default {
     getList2() {
       return new Promise((resolve, reject) => {
         // 时间格式化
-        const date1 = new Date();
+        const date1 = new Date("2024-03-15 00:00:00");
         const year = date1.getFullYear();
         const month = (date1.getMonth() + 1).toString().padStart(2, "0");
         const day = date1.getDate().toString().padStart(2, "0");
