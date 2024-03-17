@@ -82,7 +82,7 @@
               justify-content: center;
             "
           >
-            广告名称:{{ fetchData.title }}
+            广告名称:
           </div>
           <div
             style="
@@ -103,7 +103,7 @@
               justify-content: center;
             "
           >
-            广告类型:{{ getCategoryText(fetchData.category) }}
+            广告类型:
           </div>
           <div
             style="
@@ -124,7 +124,7 @@
               justify-content: center;
             "
           >
-            收取费用:{{ fetchData.cost }}
+            收取费用:
           </div>
           <div
             style="
@@ -159,7 +159,7 @@
               background: #dddddd;
             "
           >
-            {{ fetchData.icon }}
+            
           </div>
         </div>
       </div>
@@ -177,7 +177,7 @@
             justify-content: center;
           "
         >
-          商家名称:{{ fetchData.name }}
+          商家名称:
         </div>
         <div
           style="
@@ -198,7 +198,7 @@
             justify-content: center;
           "
         >
-          商家电话:{{ fetchData.phone }}
+          商家电话:
         </div>
         <div
           style="
@@ -219,7 +219,7 @@
             justify-content: center;
           "
         >
-          商家地址:{{ fetchData.address }}
+          商家地址:
         </div>
         <div
           style="
@@ -244,7 +244,7 @@
             justify-content: center;
           "
         >
-          提交时间:{{ fetchData.createTime }}
+          提交时间:
         </div>
         <div
           style="
@@ -265,7 +265,7 @@
             justify-content: center;
           "
         >
-          投放时间:{{ fetchData.releaseTime }}
+          投放时间:
         </div>
         <div
           style="
@@ -286,7 +286,7 @@
             justify-content: center;
           "
         >
-          投放时长:{{ fetchData.duration }}
+          投放时长:
         </div>
         <div
           style="
@@ -314,7 +314,7 @@
               justify-content: center;
             "
           >
-            首页推广:xxxxx
+            首页推广:
           </div>
           <div
             style="
@@ -335,7 +335,7 @@
               justify-content: center;
             "
           >
-            首页投放时长:{{ fetchData.promoteTime }}
+            首页投放时长:
           </div>
           <div
             style="
@@ -356,7 +356,7 @@
               justify-content: center;
             "
           >
-            首页推广图片:xxxxx
+            首页推广图片:
           </div>
           <div
             style="
@@ -407,7 +407,7 @@
             justify-content: center;
           "
         >
-          搜索推广:xxxxx
+          搜索推广:
         </div>
         <div
           style="
@@ -428,7 +428,7 @@
             justify-content: center;
           "
         >
-          关键词:xxxxx
+          关键词:
         </div>
         <div
           style="
@@ -449,7 +449,7 @@
             justify-content: center;
           "
         >
-          工作方式:{{ fetchData.partTime.workWay }}
+          工作方式:
         </div>
         <div
           style="
@@ -474,7 +474,7 @@
             justify-content: center;
           "
         >
-          职位描述:{{ fetchData.partTime.description }}
+          职位描述:
         </div>
         <div
           style="
@@ -495,7 +495,7 @@
             justify-content: center;
           "
         >
-          薪资:{{ fetchData.partTime.salary }}
+          薪资:
         </div>
         <div
           style="

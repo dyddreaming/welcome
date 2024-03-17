@@ -53,6 +53,15 @@
             {{ currentTime }}
           </div>
         </div>
+        <div style="position:relative;height:4%;width:100%;">
+          <el-button
+          type="primary"
+          style="background-color: transparent; border: 1px solid #0c7fe9;left:1.5%;position:relative;"
+          size="small"
+          @click="goBack"
+          >返回</el-button
+        >
+        </div>
         <!-- 各学院注册情况 -->
         <div
           style="
@@ -60,7 +69,7 @@
             width: 90%;
             left: 5%;
             height: 85%;
-            top: 4%;
+            top: 0%;
             display: flex;
           "
         >
@@ -559,7 +568,7 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
-                  v-if="roles.length>0"
+                    v-if="roles.length > 0"
                     style="
                       position: relative;
                       width: 55%;
@@ -571,7 +580,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ roles[5].username }}
+                    {{ roles[5].username }}
                   </div>
                 </div>
                 <div
@@ -584,8 +593,8 @@
                   "
                 >
                   <el-progress
-                  v-if="progresses.length > 0"
-                  :percentage="progresses[5]"
+                    v-if="progresses.length > 0"
+                    :percentage="progresses[5]"
                     text-color="white"
                   ></el-progress>
                 </div>
@@ -612,7 +621,7 @@
                     <el-avatar :size="40" :src="circleUrl"></el-avatar>
                   </div>
                   <div
-                  v-if="roles.length>0"
+                    v-if="roles.length > 0"
                     style="
                       position: relative;
                       width: 55%;
@@ -624,7 +633,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ roles[6].username }}
+                    {{ roles[6].username }}
                   </div>
                 </div>
                 <div
@@ -637,15 +646,15 @@
                   "
                 >
                   <el-progress
-                  v-if="progresses.length > 0"
-                  :percentage="progresses[6]"
+                    v-if="progresses.length > 0"
+                    :percentage="progresses[6]"
                     text-color="white"
                   ></el-progress>
                 </div>
               </div>
               <!-- 第八 -->
               <div
-              v-if="roles.length>0"
+                v-if="roles.length > 0"
                 style="
                   position: relative;
                   width: 100%;
@@ -677,7 +686,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ roles[7].username }}
+                    {{ roles[7].username }}
                   </div>
                 </div>
                 <div
@@ -690,8 +699,8 @@
                   "
                 >
                   <el-progress
-                  v-if="progresses.length > 0"
-                  :percentage="progresses[7]"
+                    v-if="progresses.length > 0"
+                    :percentage="progresses[7]"
                     text-color="white"
                   ></el-progress>
                 </div>
@@ -1029,7 +1038,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[5].username }}
+                    {{ records[5].username }}
                   </div>
                   <div
                     v-if="records.length != 0"
@@ -1043,7 +1052,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[5].integral }}
+                    {{ records[5].integral }}
                   </div>
                 </div>
                 <div
@@ -1064,7 +1073,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1075,10 +1084,10 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[6].username }}
+                    {{ records[6].username }}
                   </div>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1089,7 +1098,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[6].integral }}
+                    {{ records[6].integral }}
                   </div>
                 </div>
                 <div
@@ -1110,7 +1119,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1121,10 +1130,10 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[7].username }}
+                    {{ records[7].username }}
                   </div>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1135,7 +1144,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[7].integral }}
+                    {{ records[7].integral }}
                   </div>
                 </div>
                 <div
@@ -1156,7 +1165,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1167,10 +1176,10 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[8].username }}
+                    {{ records[8].username }}
                   </div>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1181,7 +1190,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[8].integral }}
+                    {{ records[8].integral }}
                   </div>
                 </div>
                 <div
@@ -1202,7 +1211,7 @@
                     style="position: relative; left: 4%"
                   ></el-avatar>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 20%;
@@ -1213,10 +1222,10 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[9].username }}
+                    {{ records[9].username }}
                   </div>
                   <div
-                  v-if="records.length != 0"
+                    v-if="records.length != 0"
                     style="
                       position: relative;
                       width: 15%;
@@ -1227,7 +1236,7 @@
                       color: #ffffff;
                     "
                   >
-                  {{ records[9].integral }}
+                    {{ records[9].integral }}
                   </div>
                 </div>
               </div>
@@ -1376,7 +1385,7 @@
                     color: #ffffff;
                   "
                 >
-                {{ minuteList[1] }}分{{ secondsList[1] }}秒
+                  {{ minuteList[1] }}分{{ secondsList[1] }}秒
                 </div>
               </div>
               <!-- 第三 -->
@@ -1438,7 +1447,7 @@
                     color: #ffffff;
                   "
                 >
-                {{ minuteList[2] }}分{{ secondsList[2] }}秒
+                  {{ minuteList[2] }}分{{ secondsList[2] }}秒
                 </div>
               </div>
               <!-- 第四 -->
@@ -1489,7 +1498,7 @@
                     color: #ffffff;
                   "
                 >
-                {{ minuteList[3] }}分{{ secondsList[3] }}秒
+                  {{ minuteList[3] }}分{{ secondsList[3] }}秒
                 </div>
               </div>
               <!-- 第五 -->
@@ -1540,7 +1549,7 @@
                     color: #ffffff;
                   "
                 >
-                {{ minuteList[4] }}分{{ secondsList[4] }}秒
+                  {{ minuteList[4] }}分{{ secondsList[4] }}秒
                 </div>
               </div>
               <!-- 第六 -->
@@ -1591,7 +1600,7 @@
                     color: #ffffff;
                   "
                 >
-                {{ minuteList[5] }}分{{ secondsList[5] }}秒
+                  {{ minuteList[5] }}分{{ secondsList[5] }}秒
                 </div>
               </div>
               <!-- 第七 -->
@@ -1642,7 +1651,7 @@
                     color: #ffffff;
                   "
                 >
-                {{ minuteList[6] }}分{{ secondsList[6] }}秒
+                  {{ minuteList[6] }}分{{ secondsList[6] }}秒
                 </div>
               </div>
               <!-- 第八 -->
@@ -1693,7 +1702,7 @@
                     color: #ffffff;
                   "
                 >
-                {{ minuteList[7] }}分{{ secondsList[7] }}秒
+                  {{ minuteList[7] }}分{{ secondsList[7] }}秒
                 </div>
               </div>
             </div>
@@ -2044,7 +2053,9 @@ export default {
       taskId: null,
       minuteList: [],
       secondsList: [],
-      source:null,
+      source: null,
+      sevenAdNames: null,
+      sevenClicks: null,
     };
   },
   created() {
@@ -2079,9 +2090,11 @@ export default {
       this.renderJoinChart();
     });
     this.loadSource().then(() => {
-        this.loadData();
-      });
-    this.initChart();
+      this.loadData();
+    });
+    this.loadSevenData().then(() => {
+      this.initChart();
+    });
   },
   methods: {
     updateTime() {
@@ -2642,74 +2655,78 @@ export default {
       myChart.setOption(option);
     },
     // 获取广告数据
-    loadSource(){
+    loadSource() {
       return new Promise((resolve, reject) => {
-      // 类型
-      // let category = 0;
-      // if (this.type !== "全部") {
-      //   if (this.type === "社团") {
-      //     category = 0;
-      //   } else if (this.type === "兼职") {
-      //     category = 1;
-      //   } else if (this.type === "美食") {
-      //     category = 2;
-      //   } else if (this.type === "娱乐") {
-      //     category = 3;
-      //   }
-      // }
+        // 类型
+        // let category = 0;
+        // if (this.type !== "全部") {
+        //   if (this.type === "社团") {
+        //     category = 0;
+        //   } else if (this.type === "兼职") {
+        //     category = 1;
+        //   } else if (this.type === "美食") {
+        //     category = 2;
+        //   } else if (this.type === "娱乐") {
+        //     category = 3;
+        //   }
+        // }
 
-      // 时间格式化
-      // const date1 = new Date("2024-03-16");
-      // const year = date1.getFullYear();
-      // const month = (date1.getMonth() + 1).toString().padStart(2, "0");
-      // const day = date1.getDate().toString().padStart(2, "0");
-      // const formattedDate = `${year}-${month}-${day}`;
-      // console.log("dateValue1:",formattedDate);
+        // 时间格式化
+        // const date1 = new Date("2024-03-16");
+        // const year = date1.getFullYear();
+        // const month = (date1.getMonth() + 1).toString().padStart(2, "0");
+        // const day = date1.getDate().toString().padStart(2, "0");
+        // const formattedDate = `${year}-${month}-${day}`;
+        // console.log("dateValue1:",formattedDate);
 
-      let url = `${this.$store.getters.getIp}/ads/clicks/daily?`;
+        let url = `${this.$store.getters.getIp}/ads/clicks/daily?`;
 
-      axios
-        .get(url)
-        .then((response) => {
-          this.totalData4 = response.data.data;
-          this.adNames = this.totalData4.adNames;
-          this.clicks = this.totalData4.clicks;
-          // console.log(this.totalData4);
-          // console.log("广告名称",this.adNames);
-          // console.log("点击次数",this.clicks);
-          this.source = [
-            ["heat", "amount", "advertise"],
-            // [89.3, 58212, "Matcha Latte"],
-            // [57.1, 78254, "Milk Tea"],
-            // [44.4, 41032, "Cheese Cocoa"],
-            // [20.1, 12755, "Cheese Brownie"],
-            // [89.7, 56667, "Matcha Cocoa"],
-            // [68.1, 79146, "Tea"],
-            // [89.6, 91852, "Orange Juice"],
-            // [90.6, 101852, "Lemon Juice"],
-            // [32.7, 20112, "Walnut Brownie"],
-          ];
-          for (let i = 0; i < this.adNames.length; i++) {
-            let heat =
-              10 +
-              ((this.clicks[i] - Math.min(...this.clicks)) /
-                (Math.max(...this.clicks) - Math.min(...this.clicks))) *
-                90;
-            let item = [heat, this.clicks[i], this.adNames[i]];
-            this.source.push(item);
-          }
-          resolve(); // 异步操作完成后 resolve
-          // console.log(this.source);
-        })
-        .catch((error) => {
-          reject(error); // 出错时 reject
-          console.error("Error fetching data:", error);
-        });
-      })
+        axios
+          .get(url, {
+            params: {
+              time: "2024-03-16",
+            },
+          })
+          .then((response) => {
+            this.totalData4 = response.data.data;
+            this.adNames = this.totalData4.adNames;
+            this.clicks = this.totalData4.clicks;
+            // console.log(this.totalData4);
+            // console.log("广告名称",this.adNames);
+            // console.log("点击次数",this.clicks);
+            this.source = [
+              ["heat", "amount", "advertise"],
+              // [89.3, 58212, "Matcha Latte"],
+              // [57.1, 78254, "Milk Tea"],
+              // [44.4, 41032, "Cheese Cocoa"],
+              // [20.1, 12755, "Cheese Brownie"],
+              // [89.7, 56667, "Matcha Cocoa"],
+              // [68.1, 79146, "Tea"],
+              // [89.6, 91852, "Orange Juice"],
+              // [90.6, 101852, "Lemon Juice"],
+              // [32.7, 20112, "Walnut Brownie"],
+            ];
+            for (let i = 0; i < this.adNames.length; i++) {
+              let heat =
+                10 +
+                ((this.clicks[i] - Math.min(...this.clicks)) /
+                  (Math.max(...this.clicks) - Math.min(...this.clicks))) *
+                  90;
+              let item = [heat, this.clicks[i], this.adNames[i]];
+              this.source.push(item);
+            }
+            resolve(); // 异步操作完成后 resolve
+            // console.log(this.source);
+          })
+          .catch((error) => {
+            reject(error); // 出错时 reject
+            console.error("Error fetching data:", error);
+          });
+      });
     },
     // 获取当日广告点击情况
     loadData() {
-      console.log(this.source);
+      // console.log(this.source);
       var chartContainer = document.getElementById("chartContainer");
       var myChart = echarts.init(chartContainer);
       let option = {
@@ -2717,14 +2734,36 @@ export default {
           source: this.source,
         },
         grid: { containLabel: true },
-        xAxis: { name: "次数", min: 0, max: 120000 },
-        yAxis: { type: "category", name: "广告" },
+        xAxis: {
+          name: "次数",
+          min: 0,
+          max: 40000,
+          axisLabel: {
+            color: "#ffffff",
+          },
+          nameTextStyle: {
+            color: "#ffffff",
+          },
+        },
+        yAxis: {
+          type: "category",
+          name: "广告",
+          axisLabel: {
+            color: "#ffffff",
+          },
+          nameTextStyle: {
+            color: "#ffffff",
+          },
+        },
         visualMap: {
           orient: "horizontal",
           left: "center",
           min: 10,
           max: 100,
           text: ["High Click", "Low Click"],
+          textStyle: {
+            color: "#ffffff",
+          },
           dimension: 0,
           inRange: {
             color: ["#1af0ff", "#6cc4de", "#18cafd"],
@@ -2791,6 +2830,24 @@ export default {
     //   };
     //   myChart.setOption(option);
     // },
+    loadSevenData() {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${this.$store.getters.getIp}/ads/clicks/seven`)
+          .then((response) => {
+            this.totalData5 = response.data.data;
+            this.sevenAdNames = this.totalData5.adNames;
+            this.sevenClicks = this.totalData5.clicks;
+            // console.log(this.sevenAdNames);
+            // console.log(this.clicks);
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+            console.error("Axios request error:", error);
+          });
+      });
+    },
     initChart() {
       var chartContainer = document.getElementById("sevenContainer");
       var chart = echarts.init(chartContainer);
@@ -2800,26 +2857,24 @@ export default {
           name: "广告",
           type: "category",
           boundaryGap: false,
-          data: [
-            "舞蹈社招新",
-            "烤匠",
-            "xxxx",
-            "yyy",
-            "zzz",
-            "xxxxx",
-            "xxxxxxx",
-          ],
+          data: this.sevenAdNames,
+          axisLabel: {
+            rotate: -45,
+            textStyle: {
+              color: "white",
+            },
+          },
         },
         yAxis: {
           name: "累计点击次数",
           type: "value",
           min: 0,
-          max: 1500,
+          max: 40000,
         },
         textStyle: { color: "white" },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: this.sevenClicks,
             type: "line",
             itemStyle: {
               color: "rgb(24, 219, 253,1)",
@@ -3044,6 +3099,10 @@ export default {
           });
       });
     },
+    // 返回大屏数据设置
+    goBack(){
+      this.$router.push("/mainMenu/data/screen");
+    }
   },
 };
 </script>

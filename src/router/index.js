@@ -385,8 +385,9 @@ const routes = [{
     component: partTime
   },
   {
-    path: '/examinePart',
-    component: examinePart
+    path:'/examinePart',
+    component:examinePart,
+
   },
   {
     path: '/examineFood',

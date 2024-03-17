@@ -1008,7 +1008,7 @@ export default {
           source: this.source,
         },
         grid: { containLabel: true },
-        xAxis: { name: "次数", min: 0, max: 120000 },
+        xAxis: { name: "次数", min: 0, max: 40000 },
         yAxis: { type: "category", name: "广告" },
         visualMap: {
           orient: "horizontal",

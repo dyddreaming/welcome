@@ -294,7 +294,7 @@ export default {
     examine(ad) {
       this.$store.commit("setExamineID", ad.id);
       this.$nextTick(() => {
-        if (ad.status == "美食" || ad.status == "娱乐") {
+        if (ad.type == "美食" || ad.type == "娱乐") {
           this.$router.push("/examineFood");
         } else {
           this.$router.push("/examinePart");

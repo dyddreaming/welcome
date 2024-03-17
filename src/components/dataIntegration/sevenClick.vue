@@ -97,10 +97,13 @@ export default {
       clicks: [],
       time: null,
       lastDays: [],
+      search:"",
     };
   },
   mounted() {
-    this.initChart();
+    this.getData().then(() => {
+        this.initChart();
+      });
   },
   created() {
     let rowTime = new Date(this.$store.getters.getAdvertiseTime);
@@ -116,17 +119,24 @@ export default {
     }
   },
   methods: {
-    initChart() {
+    getData(){
+      return new Promise((resolve, reject) => {
       axios
         .get(`${this.$store.getters.getIp}/ads/clicks/seven`)
         .then((response) => {
           this.totalData5 = response.data.data;
           this.adNames = this.totalData5.adNames;
           this.clicks = this.totalData5.clicks;
+          // console.log(this.adNames);
+          console.log(this.clicks);
+          resolve();
         })
         .catch((error) => {
+          reject(error);
           console.error("Axios request error:", error);
-        });
+        });})
+    },
+    initChart() {
       var chartContainer = document.getElementById("chartContainer");
       var chart = echarts.init(chartContainer);
       // 图表配置
@@ -141,17 +151,17 @@ export default {
           name: "累计点击次数",
           type: "value",
           min: 0,
-          max: 1500,
+          max: 40000,
         },
         series: [
           {
             data: this.clicks,
             type: "line",
             itemStyle: {
-              color: "rgb(255, 132, 0,1)",
+              color: "rgb(14, 129, 116,1)",
             },
             areaStyle: {
-              color: "rgb(255, 132, 0,0.4)",
+              color: "rgb(13, 166, 153,0.4)",
             },
           },
         ],
