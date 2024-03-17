@@ -224,9 +224,9 @@ export default {
         //   setLong: "3天",
         // },
         {
-          adName: "周末兼职",
+          adName: "录题员",
           adType: "兼职",
-          meName: "临时剧组",
+          meName: "开封师学通文化有限公司",
           admitTime: "2024-02-28 10:16:23",
           setLong: "20天",
         },{
@@ -243,9 +243,9 @@ export default {
           admitTime: "2024-02-28 10:16:23",
           setLong: "20天",
         },{
-          adName: "经典密室逃脱",
+          adName: "体验不同人生",
           adType: "娱乐",
-          meName: "明天密室",
+          meName: "戏人间沉浸式剧本馆",
           admitTime: "2024-02-28 10:16:23",
           setLong: "20天",
         },
@@ -294,12 +294,13 @@ export default {
     examine(ad) {
       this.$store.commit("setExamineID", ad.id);
       this.$nextTick(() => {
-        if (ad.type == "美食" || ad.type == "娱乐") {
-          this.$router.push("/examineFood");
-        } else {
-          this.$router.push("/examinePart");
-          console.log("跳转到兼职审核界面");
-        }
+        // if (ad.type == "美食" || ad.type == "娱乐") {
+        //   this.$router.push("/examineFood");
+        // } else {
+        //   this.$router.push("/examinePart");
+        //   console.log("跳转到兼职审核界面");
+        // }
+        this.$router.push("/examinePart");
       });
     },
     // 获取广告列表

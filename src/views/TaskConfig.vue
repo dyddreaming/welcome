@@ -286,31 +286,29 @@
           ></el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
-              <div style="display: flex; justify-content: space-between">
+              <div style="display: flex; justify-content: center;">
                 <el-button
                   type="primary"
                   style="background-color: #209e91; border: #209e91"
                   size="small"
                   @click="handleEdit(scope.row)"
-                  >修改</el-button
-                >
+                >修改</el-button>
                 <el-button
                   type="primary"
                   style="background-color: #dfb81c; border: #dfb81c"
                   size="small"
                   @click="handleReset(scope.row)"
-                  >重置</el-button
-                >
+                >重置</el-button>
                 <el-button
                   type="primary"
                   style="background-color: #e85656; border: #e85656"
                   size="small"
                   @click="singleDelete(scope.row.id)"
-                  >删除</el-button
-                >
+                >删除</el-button>
               </div>
             </template>
           </el-table-column>
+          
         </el-table>
       </div>
     </div>
