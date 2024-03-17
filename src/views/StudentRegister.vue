@@ -297,7 +297,9 @@ export default {
       } else if (percentage < 50) {
         return "#6eba8c";
       } else if(percentage < 70){
-        return "#0e8174";
+        return "#10c4b5";
+      }else if(percentage < 80){
+        return "#0da699";
       }else{
         return "#0b6d62";
       }

@@ -31,13 +31,13 @@
       <!-- 左侧 -->
       <!-- <div style="position:absolute;height:5%;width:40%;color:#ffffff;font-size:22px;">Hi,你好!</div>
       <div style="position:absolute;height:5%;width:40%;color:#ffffff;font-size:22px;top:5%;">欢迎进入welcome迎新管理平台~</div> -->
-      <div style="position:absolute;height:60%;width:40%;top:25%;left:32%;background-color:rgb(0, 85, 98,0.6);border-radius:8px;">
+      <div style="position:relative;height:60%;width:40%;top:25%;left:32%;background-color:rgb(0, 72, 83,0.5);border-radius:8px;justify-content: center; align-items: center;">
         <div style="position:relative;height:10%;width:100%;text-align:center;font-size:25px;font-weight:600;color:#fffff0">欢迎回来
         </div>
         <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#fffff0">
           账号</div>
         <div style="position: relative; height: 15%; width: 90%;left:14%;top:5%;">
-          <input style="
+          <!-- <input style="
             width: 80%;
             height: 70%;
             box-sizing: border-box;
@@ -46,7 +46,18 @@
             border-radius: 5px;
             color:#fffff0;
           " v-model="account" 
-          id="account"/>
+          id="account"/> -->
+          <input style="
+                width: 80%;
+                height: 70%;
+                box-sizing: border-box;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                color:#747474;
+              " 
+              id="account"
+              v-model="account" />
         </div>
         <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#fffff0">
           密码</div>

@@ -110,7 +110,7 @@
                               <div slot="footer" class="dialog-footer">
                                     <!-- 批量提醒按钮 -->
                                     <el-button type="primary" style="background-color: #209e91; border: #209e91;"
-                                          size="small" @click="remind">批量提醒</el-button>
+                                          size="small" @click="remind" v-if="value === '累计未注册人数'">批量提醒</el-button>
                                     <!-- 下载按钮 -->
                                     <el-button type="primary" style="background-color: #209e91; border: #209e91;"
                                           size="small" @click="load">下载</el-button>
