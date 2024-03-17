@@ -225,7 +225,7 @@
       </div>
       <!-- 数据部分 -->
       <div
-        style="position: relative; height: 80%; top: 10%; width: 70%; left: 5%"
+        style="position: relative; height: 90%;  width: 80%; left: 5%"
       >
         <router-view></router-view>
       </div>

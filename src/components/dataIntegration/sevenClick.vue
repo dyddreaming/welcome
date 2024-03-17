@@ -122,7 +122,11 @@ export default {
     getData(){
       return new Promise((resolve, reject) => {
       axios
-        .get(`${this.$store.getters.getIp}/ads/clicks/seven`)
+        .get(`${this.$store.getters.getIp}/ads/clicks/seven`,{
+            params: {
+              time: "2024-03-16",
+            },
+          })
         .then((response) => {
           this.totalData5 = response.data.data;
           this.adNames = this.totalData5.adNames;

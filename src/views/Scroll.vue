@@ -2830,10 +2830,15 @@ export default {
     //   };
     //   myChart.setOption(option);
     // },
+    // 获取七日广告点击情况
     loadSevenData() {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${this.$store.getters.getIp}/ads/clicks/seven`)
+          .get(`${this.$store.getters.getIp}/ads/clicks/seven`,{
+            params: {
+              time: "2024-03-16",
+            },
+          })
           .then((response) => {
             this.totalData5 = response.data.data;
             this.sevenAdNames = this.totalData5.adNames;
