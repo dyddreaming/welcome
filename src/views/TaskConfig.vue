@@ -286,29 +286,31 @@
           ></el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
-              <div style="display: flex; justify-content: center;">
+              <div style="display: flex; justify-content: center">
                 <el-button
                   type="primary"
                   style="background-color: #209e91; border: #209e91"
                   size="small"
                   @click="handleEdit(scope.row)"
-                >修改</el-button>
+                  >修改</el-button
+                >
                 <el-button
                   type="primary"
                   style="background-color: #dfb81c; border: #dfb81c"
                   size="small"
                   @click="handleReset(scope.row)"
-                >重置</el-button>
+                  >重置</el-button
+                >
                 <el-button
                   type="primary"
                   style="background-color: #e85656; border: #e85656"
                   size="small"
                   @click="singleDelete(scope.row.id)"
-                >删除</el-button>
+                  >删除</el-button
+                >
               </div>
             </template>
           </el-table-column>
-          
         </el-table>
       </div>
     </div>
@@ -414,19 +416,19 @@
   border: none;
   color: #747474;
 }
-/deep/ .pagination{
-  background-color:#ffffff;
-  border:1px solid #e0e0e0;
-  color:#747474;
-  width:40px;
-  height:30px;
+/deep/ .pagination {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #747474;
+  width: 40px;
+  height: 30px;
 }
-/deep/ .changePage{
-  background-color:#ffffff;
-  border:1px solid #e0e0e0;
-  color:#747474;
-  width:60px;
-  height:30px;
+/deep/ .changePage {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #747474;
+  width: 60px;
+  height: 30px;
 }
 
 /deep/ .active {
@@ -440,6 +442,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      createUserName:"",
       searchWord: "",
       nameInput: "",
       statusValue: null,
@@ -489,7 +492,7 @@ export default {
       totalPages: 1,
     };
   },
-  created(){
+  created() {
     this.goToPage(1);
   },
   mounted() {
@@ -499,50 +502,58 @@ export default {
     displayedPages() {
       const maxDisplayedPages = 5; // 最多显示的页码数量
       const pages = [];
-      let startPage = Math.max(1, this.currentPage - Math.floor(maxDisplayedPages / 2));
-      let endPage = Math.min(this.totalPages, startPage + maxDisplayedPages - 1);
-      
+      let startPage = Math.max(
+        1,
+        this.currentPage - Math.floor(maxDisplayedPages / 2)
+      );
+      let endPage = Math.min(
+        this.totalPages,
+        startPage + maxDisplayedPages - 1
+      );
+
       if (endPage - startPage < maxDisplayedPages - 1) {
         startPage = Math.max(1, endPage - maxDisplayedPages + 1);
       }
-      
+
       if (startPage > 1) {
         pages.push(1); // 添加第一页
         if (startPage > 2) {
-          pages.push('...'); // 添加省略号
+          pages.push("..."); // 添加省略号
         }
       }
-      
+
       for (let i = startPage; i <= endPage; i++) {
         pages.push(i);
       }
-      
+
       if (endPage < this.totalPages) {
         if (endPage < this.totalPages - 1) {
-          pages.push('...'); // 添加省略号
+          pages.push("..."); // 添加省略号
         }
         pages.push(this.totalPages); // 添加最后一页
       }
-      
+
       return pages;
-    }
+    },
   },
   methods: {
-    search(){
+    search() {
       this.getList();
     },
     getList() {
       let queryString = `?page=${this.currentPage}&pageSize=${this.pageSize}`;
-      if(this.nameInput)
-      {
+      if (this.nameInput) {
         queryString += `&name=${this.nameInput}`;
       }
-      if(this.statusValue == 0 | this.statusValue == 1 | this.statusValue == 2 | this.statusValue == 3)
-      {
+      if (
+        (this.statusValue == 0) |
+        (this.statusValue == 1) |
+        (this.statusValue == 2) |
+        (this.statusValue == 3)
+      ) {
         queryString += `&status=${this.statusValue}`;
       }
-      if(this.taskLevel == 0 | this.taskLevel == 1)
-      {
+      if ((this.taskLevel == 0) | (this.taskLevel == 1)) {
         queryString += `&level=${this.taskLevel}`;
       }
       axios
@@ -614,6 +625,16 @@ export default {
               default:
                 category = "未知";
             }
+            // 获取任务发布者
+            axios
+              .get(`${this.$store.getters.getIp}/administrators/${item.createUser}`)
+              .then((response) => {
+                this.createUserName = response.data.data.name;
+                // console.log(name);
+              })
+              .catch((error) => {
+                console.error("获取数据时出错：", error);
+              });
             // console.log(item.id);
             return {
               id: item.id,
@@ -622,7 +643,7 @@ export default {
               taskStatus: status,
               level: level,
               category: category,
-              createUser: item.createUser,
+              createUser: this.createUserName,
             };
           });
         })

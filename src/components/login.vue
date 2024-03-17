@@ -4,7 +4,7 @@
       height: 100%;
       position: relative;
       background-size: cover;
-      background-image: url('./static/img/login.png');
+      background-image: url('./static/img/login.jpg');
     ">
     <div style="
         position: relative;
@@ -31,10 +31,10 @@
       <!-- 左侧 -->
       <!-- <div style="position:absolute;height:5%;width:40%;color:#ffffff;font-size:22px;">Hi,你好!</div>
       <div style="position:absolute;height:5%;width:40%;color:#ffffff;font-size:22px;top:5%;">欢迎进入welcome迎新管理平台~</div> -->
-      <div style="position:absolute;height:60%;width:40%;top:35%;left:50%;background-color:rgb(98, 187, 178,0.2);border-radius:8px;">
-        <div style="position:relative;height:10%;width:100%;text-align:center;font-size:25px;font-weight:600;color:#747474">欢迎回来
+      <div style="position:absolute;height:60%;width:40%;top:25%;left:32%;background-color:rgb(0, 85, 98,0.6);border-radius:8px;">
+        <div style="position:relative;height:10%;width:100%;text-align:center;font-size:25px;font-weight:600;color:#fffff0">欢迎回来
         </div>
-        <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#747474">
+        <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#fffff0">
           账号</div>
         <div style="position: relative; height: 15%; width: 90%;left:14%;top:5%;">
           <input style="
@@ -44,11 +44,11 @@
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            color:#747474;
+            color:#fffff0;
           " v-model="account" 
           id="account"/>
         </div>
-        <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#747474">
+        <div style="position:relative;height:10%;width:90%;font-size:18px;left:14%;top:5%;color:#fffff0">
           密码</div>
         <div style="position: relative; height: 15%; width: 90%;left:14%;top:5%;">
           <input type="password" style="
@@ -65,23 +65,23 @@
         </div>
         <div style="position:relative;height:10%;width:72%;left:14%;top:5%;display:flex;">
           <div style="position:relative;height:100%;width:50%;">
-            <el-checkbox v-model="remember" style="color:#747474">记住我</el-checkbox>
+            <el-checkbox v-model="remember" style="color:#fffff0">记住我</el-checkbox>
           </div>
-          <div style="position:relative;height:100%;width:20%;left:32%;text-align:right;color:#747474">
+          <div style="position:relative;height:100%;width:20%;left:32%;text-align:right;color:#fffff0">
             忘记密码？
           </div>
         </div>
         <div style="position:relative;height:15%;width:72%;left:14%;top:8%;">
           <el-button type="danger" size="mini" style="
       position:relative;
-        border: 2px solid rgb(98, 187, 178,0.6);;
+        border: none;
         height: 68%;
         width:100%;
         border-radius:8px;
         font-size:20px;
         top:10px;
         background-color:transparent;
-        color:#747474;
+        color:#fffff0;
       " @click="login">立即登录</el-button>
         </div>
       </div>
