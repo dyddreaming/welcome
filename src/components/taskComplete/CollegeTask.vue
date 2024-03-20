@@ -95,7 +95,7 @@
                 font-size: 12px;
               ">
               未完成人数（人）
-              <div style="color: #000000">{{ data.completed }}</div>
+              <div style="color: #000000">{{ data.inCompleted }}</div>
             </div>
             <div style="
                 text-align: center;
@@ -104,7 +104,7 @@
                 font-size: 12px;
               ">
               完成人数（人）
-              <div style="color: #000000">{{ data.inCompleted }}</div>
+              <div style="color: #000000">{{ data.completed }}</div>
             </div>
           </div>
           <!-- 操作 -->
@@ -197,7 +197,7 @@
                 font-size: 12px;
               ">
               未完成人数（人）
-              <div style="color: #000000">{{ data.completed }}</div>
+              <div style="color: #000000">{{ data.inCompleted }}</div>
             </div>
             <div style="
                 text-align: center;
@@ -206,7 +206,7 @@
                 font-size: 12px;
               ">
               完成人数（人）
-              <div style="color: #000000">{{ data.inCompleted }}</div>
+              <div style="color: #000000">{{ data.completed }}</div>
             </div>
           </div>
           <!-- 操作 -->
@@ -298,7 +298,7 @@
                 font-size: 12px;
               ">
               未完成人数（人）
-              <div style="color: #000000">{{ data.completed }}</div>
+              <div style="color: #000000">{{ data.inCompleted }}</div>
             </div>
             <div style="
                 text-align: center;
@@ -307,7 +307,7 @@
                 font-size: 12px;
               ">
               完成人数（人）
-              <div style="color: #000000">{{ data.inCompleted }}</div>
+              <div style="color: #000000">{{ data.completed }}</div>
             </div>
           </div>
           <!-- 操作 -->
@@ -399,7 +399,7 @@
                 font-size: 12px;
               ">
               未完成人数（人）
-              <div style="color: #000000">{{ data.completed }}</div>
+              <div style="color: #000000">{{ data.inCompleted }}</div>
             </div>
             <div style="
                 text-align: center;
@@ -408,7 +408,7 @@
                 font-size: 12px;
               ">
               完成人数（人）
-              <div style="color: #000000">{{ data.inCompleted }}</div>
+              <div style="color: #000000">{{ data.completed }}</div>
             </div>
           </div>
           <!-- 操作 -->
@@ -448,18 +448,20 @@
           top: 98%;
           position: absolute;
         " />
-      <el-dialog :visible.sync="dialogVisible" title="名单详情">
-        <el-table :data="dialogData" style="width: 100%">
-          <el-table-column prop="name" label="姓名"></el-table-column>
-          <el-table-column prop="studentId" label="学号"></el-table-column>
-          <el-table-column prop="major" label="专业"></el-table-column>
-          <el-table-column prop="completionTime" label="完成时间"></el-table-column>
-        </el-table>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
-            @click="downLoad">下载</el-button>
-        </div>
-      </el-dialog>
+        <el-dialog :visible.sync="dialogVisible" title="名单详情">
+          <div style="height: 300px; overflow-y: auto;">
+            <el-table :data="dialogData" style="width: 100%;">
+              <el-table-column prop="name" label="姓名"></el-table-column>
+              <el-table-column prop="studentId" label="学号"></el-table-column>
+              <el-table-column prop="major" label="专业"></el-table-column>
+              <el-table-column prop="completionTime" label="完成时间"></el-table-column>
+            </el-table>
+          </div>
+          <div slot="footer" class="dialog-footer">
+            <el-button type="primary" style="background-color: #209e91; border: #209e91;" size="small"
+              @click="downLoad">下载</el-button>
+          </div>
+        </el-dialog>
     </div>
     <!-- 返回按钮 -->
     <div style="
@@ -594,7 +596,7 @@ export default {
                 name: list.name,
                 studentId: list.id,
                 major: list.major,
-                completionTime: list.completeTime,
+                completionTime: list.completeTime.replace('T', ' '),
               });
             });
           }
@@ -615,13 +617,13 @@ export default {
         .then((response) => {
           this.fetchData = response.data.data;
           if (this.fetchData != null) {
-            console.log("未完成名单：", this.fetchData);
+            console.log("完成名单：", this.fetchData);
             this.fetchData.forEach((list, index) => {
               this.dialogData.push({
                 name: list.name,
                 studentId: list.id,
                 major: list.major,
-                completionTime: list.completeTime,
+                completionTime: list.completeTime.replace('T', ' '),
               });
             });
           }

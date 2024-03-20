@@ -145,7 +145,7 @@
           <el-table-column
             prop="admitTime"
             label="提交时间"
-            min-width="70"
+            min-width="60"
             :align="'center'"
           >
             <template slot="header" slot-scope="scope">
@@ -158,7 +158,7 @@
           <el-table-column
             prop="setTime"
             label="投放时间"
-            min-width="70"
+            min-width="60"
             :align="'center'"
           >
             <template slot="header" slot-scope="scope">
@@ -214,7 +214,7 @@
             :align="'center'"
           >
             <template slot-scope="scope">
-              <div style="display: flex">
+              <div style="display: flex; justify-content: center">
                 <el-button
                   type="danger"
                   size="mini"

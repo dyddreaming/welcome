@@ -273,7 +273,7 @@
                     "
                   />
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank1.PNG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles.length > 0 && roles[0].username"
@@ -338,7 +338,7 @@
                     "
                   />
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank2.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles.length > 0 && roles[1].username"
@@ -403,7 +403,7 @@
                     "
                   />
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank3.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles.length > 0 && roles[2].username"
@@ -457,7 +457,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank4.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles.length > 0 && roles[3].username"
@@ -511,7 +511,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank5.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles.length > 0 && roles[4].username"
@@ -565,7 +565,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank6.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles.length > 0"
@@ -618,7 +618,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank7.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles.length > 0"
@@ -672,7 +672,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank8.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     style="
@@ -752,7 +752,7 @@
                       transform: translate(-50%, -50%);
                     "
                   >
-                    <el-avatar :size="50" :src="circleUrl"></el-avatar>
+                  <el-avatar :size="40" style=" background-image: url('static/img/rank1.PNG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     style="
@@ -818,7 +818,7 @@
                         transform: translate(-50%, -50%);
                       "
                     >
-                      <el-avatar :size="50" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank2.JPG');background-size: cover;"></el-avatar>
                     </div>
                     <div
                       style="
@@ -876,7 +876,7 @@
                         transform: translate(-50%, -50%);
                       "
                     >
-                      <el-avatar :size="50" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style=" background-image: url('static/img/rank3.JPG');background-size: cover;"></el-avatar>
                     </div>
                     <div
                       style="
@@ -931,8 +931,7 @@
                 >
                   <el-avatar
                     :size="38"
-                    :src="circleUrl"
-                    style="position: relative; left: 4%"
+                    style="position: relative; left: 4%;background-image: url('static/img/rank4.JPG');background-size: cover;"
                   ></el-avatar>
                   <div
                     v-if="records.length != 0"
@@ -978,8 +977,7 @@
                 >
                   <el-avatar
                     :size="38"
-                    :src="circleUrl"
-                    style="position: relative; left: 4%"
+                    style="position: relative; left: 4%;background-image: url('static/img/rank5.JPG');background-size: cover;"
                   ></el-avatar>
                   <div
                     v-if="records.length != 0"
@@ -1023,8 +1021,7 @@
                 >
                   <el-avatar
                     :size="38"
-                    :src="circleUrl"
-                    style="position: relative; left: 4%"
+                    style="position: relative; left: 4%;background-image: url('static/img/rank6.JPG');background-size: cover;"
                   ></el-avatar>
                   <div
                     v-if="records.length != 0"
@@ -1069,8 +1066,7 @@
                 >
                   <el-avatar
                     :size="38"
-                    :src="circleUrl"
-                    style="position: relative; left: 4%"
+                    style="position: relative; left: 4%;background-image: url('static/img/rank7.JPG');background-size: cover;"
                   ></el-avatar>
                   <div
                     v-if="records.length != 0"
@@ -1115,8 +1111,7 @@
                 >
                   <el-avatar
                     :size="38"
-                    :src="circleUrl"
-                    style="position: relative; left: 4%"
+                    style="position: relative; left: 4%;background-image: url('static/img/rank8.JPG');background-size: cover;"
                   ></el-avatar>
                   <div
                     v-if="records.length != 0"
@@ -1161,8 +1156,7 @@
                 >
                   <el-avatar
                     :size="38"
-                    :src="circleUrl"
-                    style="position: relative; left: 4%"
+                    style="position: relative; left: 4%;background-image: url('static/img/rank9.JPG');background-size: cover;"
                   ></el-avatar>
                   <div
                     v-if="records.length != 0"
@@ -1207,8 +1201,7 @@
                 >
                   <el-avatar
                     :size="38"
-                    :src="circleUrl"
-                    style="position: relative; left: 4%"
+                    style="position: relative; left: 4%;background-image: url('static/img/rank10.PNG');background-size: cover;"
                   ></el-avatar>
                   <div
                     v-if="records.length != 0"
@@ -1294,7 +1287,7 @@
                     "
                   />
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank1.PNG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -1356,7 +1349,7 @@
                     "
                   />
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank3.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -1418,7 +1411,7 @@
                     "
                   />
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank4.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -1469,7 +1462,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank5.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -1520,7 +1513,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank6.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -1571,7 +1564,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank7.JPG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -1622,7 +1615,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank11.PNG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -1673,7 +1666,7 @@
                   "
                 >
                   <div class="block">
-                    <el-avatar :size="40" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="40" style="background-image: url('static/img/rank12.PNG');background-size: cover;"></el-avatar>
                   </div>
                   <div
                     v-if="roles2.length != 0"
@@ -2025,7 +2018,7 @@ export default {
         // },
       ],
       circleUrl:
-        "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+        "../public/static/img/rank1.PNG",
       UndergraduateC: 0,
       UndergraduateE: 0,
       UndergraduateN: 0,

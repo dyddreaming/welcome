@@ -58,7 +58,7 @@
           border-radius:8px;
           color:#747474;
         ">
-        <p style="position: relative; left: 2%">任务名称：报到倒计时1:</p>
+        <p style="position: relative; left: 2%">任务名称：报到倒计时①:</p>
         <p style="position: relative; left: 2%">任务描述：准备通知书</p>
         <p style="position: relative; left: 2%">任务类型：主线</p>
         <p style="position: relative; left: 2%;color:#e85656;">
@@ -77,7 +77,20 @@
           left: 2%;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           border-radius:8px;
-        "></div>
+        ">
+        <div
+            style="
+              position: relative;
+              width: 75%;
+              height: 90%;
+              top: 5%;
+              background-size: contain;
+              background-image: url('/static/img/test.png');
+              background-repeat: no-repeat; /* 防止图像重复 */
+              background-position: center center; /* 将图像置于容器中间 */
+            "
+          ></div>
+      </div>
       <div style="position: relative; height: 5%; left: 2%; width: 96%; top: 10%">
         <h3 style="margin-top: 0;color:#747474;">审核结果<lable style="color:#e85656;font-weight:600">*</lable></h3>
         <el-select v-model="resultValue" placeholder="请选择">

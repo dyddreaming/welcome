@@ -93,7 +93,7 @@
           <el-table-column prop="id" label="学号" width="200px" align="center"></el-table-column>
           <el-table-column prop="college" label="学院" width="200px" align="center"></el-table-column>
           <el-table-column prop="major" label="专业" width="200px" align="center"></el-table-column>
-          <el-table-column prop="enroll" label="是否注册" width="200px" align="center"></el-table-column>
+          <!-- <el-table-column prop="enroll" label="是否注册" width="200px" align="center"></el-table-column> -->
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
               <div style="items-align: center">
@@ -167,45 +167,48 @@ export default {
       totalData: null,
       collegeValue: "",
       collegeOptions: [
-        {
-          value: "计算机学院",
-          label: "计算机学院",
-        },
-        {
-          value: "建筑学院",
-          label: "建筑学院",
-        },
-        {
-          value: "信息学院",
-          label: "信息学院",
-        },
+        // {
+        //   value: "计算机学院",
+        //   label: "计算机学院",
+        // },
+        // {
+        //   value: "建筑学院",
+        //   label: "建筑学院",
+        // },
+        // {
+        //   value: "信息学院",
+        //   label: "信息学院",
+        // },
       ],
+      // students:[],
+      detailMessage:[],
       tableData: [
-        {
-          name: "张三",
-          id: "2021112802",
-          major: "计算机科学与技术",
-          enroll: "是",
-          process: "100",
-        },
-        {
-          name: "张三",
-          id: "2021112802",
-          major: "计算机科学与技术",
-          enroll: "是",
-          process: "100",
-        },
-        {
-          name: "张三",
-          id: "2021112802",
-          major: "计算机科学与技术",
-          enroll: "是",
-          process: "100",
-        },
+        // {
+        //   name: "张三",
+        //   id: "2021112802",
+        //   major: "计算机科学与技术",
+        //   enroll: "是",
+        //   process: "100",
+        // },
+        // {
+        //   name: "张三",
+        //   id: "2021112802",
+        //   major: "计算机科学与技术",
+        //   enroll: "是",
+        //   process: "100",
+        // },
+        // {
+        //   name: "张三",
+        //   id: "2021112802",
+        //   major: "计算机科学与技术",
+        //   enroll: "是",
+        //   process: "100",
+        // },
       ],
     };
   },
   mounted() {
+    this.fetchCollegesRegisterData();
     this.id = this.$store.getters.getRestTaskID;
     // console.log("查询任务ID为:",this.id);
     this.getList();
@@ -221,6 +224,7 @@ export default {
       this.$router.push("/mainMenu/task/config");
     },
     getList() {
+      this.tableData = [];
       let queryString = `?page=1&pageSize=6&taskId=${this.id}`;
       if(this.collegeValue)
       {
@@ -229,8 +233,13 @@ export default {
       axios
         .get(`${this.$store.getters.getIp}/tasks/students/page${queryString}`)
         .then((response) => {
-          this.totalData = response.data.data;
-          console.log("获取到的学院任务进度列表:", this.totalData);
+          this.totalData = response.data.data.taskStudents.records;
+          this.detailMessage = response.data.data.students;
+          // console.log("获取到的学院任务进度列表:", this.totalData);
+          this.totalData.forEach((item,index)=>{
+            this.tableData.push({id:item.studentId,college:item.stuCollege,name:this.detailMessage[index].name,major:this.detailMessage[index].major});
+          });
+          console.log(this.tableData);
         })
         .catch((error) => {
           console.error("获取数据时出错：", error);
@@ -252,6 +261,27 @@ export default {
           });
         })
         .catch(() => { });
+    },
+    // 获取学院数据
+    fetchCollegesRegisterData() {
+      this.collegeOptions = [];
+      axios
+        .get(`${this.$store.getters.getIp}/colleges/list`)
+        .then((response) => {
+          this.totalData = response.data.data;
+          // console.log(this.totalData);
+          this.totalData.forEach((item) => {
+            this.collegeOptions.push({
+              value : item.name,
+              label : item.name,
+            });
+          });
+          console.log(this.collegeOptions);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          // console.log(this.$store.getters.getIp);
+        });
     },
   },
 };

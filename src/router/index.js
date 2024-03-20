@@ -74,6 +74,8 @@ import safety from '../components/configSet/safety.vue'
 import messageNote from '../components/configSet/messageNote.vue'
 import dataCopy from '../components/configSet/dataCopy.vue'
 import versionSelect from '../components/configSet/versionSelect.vue'
+// 日志管理
+import log from '../views/Log.vue'
 // 帮助中心
 import Help from '../views/Help.vue'
 import helpFile from '../components/helpShow/helpFile.vue'
@@ -287,6 +289,10 @@ const routes = [{
             component: versionSelect
           },
         ],
+      },
+      {
+        path:'log',
+        component:log
       },
       {
         path: 'help',

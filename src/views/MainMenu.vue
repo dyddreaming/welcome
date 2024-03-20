@@ -88,8 +88,14 @@
                   <span slot="title" style="margin-left: 5px">平台参数配置</span>
                 </el-menu-item>
               </router-link>
+              <router-link to="/mainMenu/log" tag="span">
+                <el-menu-item index="8" id="logButton" style="color: #ffff;background-color: rgb(28, 43, 54);">
+                  <i class="el-icon-edit-outline" style="color: #ffff"></i>
+                  <span slot="title" style="margin-left: 5px">日志管理</span>
+                </el-menu-item>
+              </router-link>
               <router-link to="/mainMenu/help" tag="span">
-                <el-menu-item index="8" id="helpButton" style="color: #ffff;background-color: rgb(28, 43, 54);">
+                <el-menu-item index="9" id="helpButton" style="color: #ffff;background-color: rgb(28, 43, 54);">
                   <i class="el-icon-service" style="color: #ffff"></i>
                   <span slot="title" style="margin-left: 5px">帮助中心</span>
                 </el-menu-item>
@@ -98,7 +104,7 @@
           </el-col>
         </el-row>
       </el-menu>
-      <div style="position:relative;height:7%;width:100%;top:93%;text-align:center;color:#ffffff" id="quitText"
+      <div style="position:relative;height:4%;width:100%;top:96%;text-align:center;color:#ffffff;" id="quitText"
         @click="quit">
         <span>退出登录</span>
       </div>
@@ -162,6 +168,11 @@
 }
 
 .el-submenu__title:hover .el-icon-message,
+.el-submenu__title:hover span {
+  color: rgb(32, 158, 145) !important;
+}
+
+.el-submenu__title:hover .el-icon-edit-outline,
 .el-submenu__title:hover span {
   color: rgb(32, 158, 145) !important;
 }
@@ -238,6 +249,23 @@
 }
 
 #setButton.is-active {
+  background-color: rgb(32, 158, 145) !important;
+  color: #ffffff !important;
+}
+#logButton:hover {
+  background-color: rgb(28, 43, 54) !important;
+  color: rgb(32, 158, 145) !important;
+}
+
+#logButton:hover .el-icon-edit-outline {
+  color: rgb(32, 158, 145) !important;
+}
+
+#logButton.is-active .el-icon-edit-outline {
+  color: #ffffff !important;
+}
+
+#logButton.is-active {
   background-color: rgb(32, 158, 145) !important;
   color: #ffffff !important;
 }
