@@ -7,11 +7,32 @@
         <i class="el-icon-search" style="color: #ffff;margin-right:10px;"></i>
         <el-input v-model="search" placeholder="搜索" id="searchPart"></el-input>
       </div>
-      <router-link to="/mainMenu/help/helpFile"
-        style="color: inherit; text-decoration: none; margin-right: 20px; margin-left: auto; color: #ffffff;">
-        <span style="transition: color 0.3s;" class="hover-color">需要帮助吗？<span style="color: #209e91;">点击这里</span></span>
-      </router-link>
-      <i class="el-icon-s-home" style="color: #ffff;margin-right:10px; font-size: 24px;"></i>
+      <div style="
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      margin-right:2%;
+    ">
+        <el-avatar :size="35" :src="circleUrl"></el-avatar>
+        <div style="
+          margin-left: 10px;
+          color: #ffffff;
+      ">
+          <p style="margin: 0;">school@school.com</p>
+          <p style="margin: 0;font-size:14px;">管理员</p>
+        </div>
+        <div style="margin-left:10px;color:#ffffff">
+          <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+              <i class="el-icon-more" style="color:#ffffff;transform: rotate(90deg);"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="q">退出登录</el-dropdown-item>
+              <el-dropdown-item command="m">修改密码</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </div>
     </div>
     <div style="margin-top: 10px; width:100%;height:9%;display:flex;">
       <h2 style="
@@ -151,6 +172,7 @@
 export default {
   data(){
     return{
+      circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
       search:"",
     };
   },
@@ -158,6 +180,30 @@ export default {
     isShowCircle(route) {
       // 根据当前路由判断是否显示圆形
       return this.$route.path === `${route}`;
+    },
+    handleCommand(command) {
+      if (command == 'q') {
+        this.quit();
+      }
+      else if (command == 'm') {
+        this.$router.push("/mainMenu/config/safety");
+      }
+    },
+    quit() {
+      axios
+        .post(`${this.$store.getters.getIp}/administrators/logout`)
+        .then((response) => {
+          if (response.data.code) {
+            this.$message.success('退出成功');
+            this.$router.push('/login');
+          }
+          else {
+            this.$message.error(response.data.msg);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     },
   },
 };

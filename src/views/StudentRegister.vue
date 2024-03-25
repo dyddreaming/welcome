@@ -1,17 +1,14 @@
 <template>
   <div class="app-main" style="position: relative; background-color: #f0f3f4">
-    <div
-      style="
+    <div style="
         position: relative;
         height: 8%;
         width: 100%;
         background-color: rgb(28, 43, 54);
         display: flex;
         align-items: center;
-      "
-    >
-      <div
-        style="
+      ">
+      <div style="
           position: relative;
           width: 20%;
           height: 100%;
@@ -19,44 +16,52 @@
           align-items: center;
           left: 2%;
           background-color: rgb(28, 43, 54);
-        "
-      >
+        ">
         <i class="el-icon-search" style="color: #ffff; margin-right: 10px"></i>
         <el-input v-model="search" placeholder="搜索"></el-input>
       </div>
-      <router-link
-        to="/mainMenu/help/helpFile"
-        style="
-          color: inherit;
-          text-decoration: none;
-          margin-right: 20px;
-          margin-left: auto;
+      <div style="
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      margin-right:2%;
+    ">
+        <el-avatar :size="35" :src="circleUrl"></el-avatar>
+        <div style="
+          margin-left: 10px;
           color: #ffffff;
-        "
-      >
-        <span style="transition: color 0.3s" class="hover-color"
-          >需要帮助吗？<span style="color: #209e91">点击这里</span></span
-        >
-      </router-link>
-      <i
+      ">
+          <p style="margin: 0;">school@school.com</p>
+          <p style="margin: 0;font-size:14px;">管理员</p>
+        </div>
+        <div style="margin-left:10px;color:#ffffff">
+          <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+              <i class="el-icon-more" style="color:#ffffff;transform: rotate(90deg);"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="q">退出登录</el-dropdown-item>
+              <el-dropdown-item command="m">修改密码</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </div>
+      <!-- <i
         class="el-icon-s-home"
         style="color: #ffff; margin-right: 10px; font-size: 24px"
-      ></i>
+      ></i> -->
     </div>
     <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
-      <h2
-        style="
+      <h2 style="
           color: #747474;
           display: inline-block;
           left: 2%;
           position: relative;
           width: 98%;
-        "
-      >
+        ">
         学生注册情况
       </h2>
-      <div
-        style="
+      <div style="
           position: relative;
           height: 100%;
           width: 20%;
@@ -64,56 +69,41 @@
           align-items: center;
           justify-content: flex-end;
           right: 2%;
-        "
-      >
+        ">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item
-            :to="{ path: '/mainMenu/student/register' }"
-            style="font-size: 17px"
-            id="active-link"
-            >首页</el-breadcrumb-item
-          >
-          <el-breadcrumb-item
-            style="font-size: 17px; color: #747474; font-weight: 600"
-            id="current-link"
-            >学生注册情况</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/mainMenu/student/register' }" style="font-size: 17px"
+            id="active-link">首页</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 17px; color: #747474; font-weight: 600"
+            id="current-link">学生注册情况</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
     <!-- 横线 -->
-    <hr
-      style="
+    <hr style="
         width: 99%;
         border: 1px solid #ffffff;
         margin-top: 5px;
         position: relative;
-      "
-    />
+      " />
     <!-- 竖线 -->
-    <div
-      style="
+    <div style="
         position: absolute;
         left: 50%;
         top: 148px;
         bottom: 0;
         height: calc(100%);
         border-left: 2px solid #ffffff;
-      "
-    ></div>
-    <div
-      style="
+      "></div>
+    <div style="
         position: relative;
         height: 77%;
         width: 96%;
         left: 2%;
         top: 1%;
         display: flex;
-      "
-    >
+      ">
       <!-- 左侧内容 -->
-      <div
-        style="
+      <div style="
           position: relative;
           height: 100%;
           bottom: 0;
@@ -122,33 +112,26 @@
           background-color: #ffffff;
           border-radius: 8px;
           box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-        "
-      >
+        ">
         <!-- 上方环形进度图 -->
         <div ref="chartContainer" style="width: 100%; height: 50%"></div>
         <!-- 下侧进度条 -->
         <div style="width: 100%; height: 40%">
           <div id="UndergraduateR" style="width: 100%; height: 50%">
             <div>
-              <p
-                style="
+              <p style="
                   display: inline;
                   margin-left: 20px;
                   margin-right: 440px;
                   font-size: 14px;
-                "
-              >
+                ">
                 本科生注册情况
               </p>
               <p style="display: inline; font-size: 14px">人数</p>
             </div>
             <div style="margin-left: 20px; width: 95%">
-              <el-progress
-                :percentage="calculateTotalRate(UndergraduateC, UndergraduateE)"
-                :color="customColor"
-                :stroke-width="13"
-                :show-text="false"
-              ></el-progress>
+              <el-progress :percentage="calculateTotalRate(UndergraduateC, UndergraduateE)" :color="customColor"
+                :stroke-width="13" :show-text="false"></el-progress>
             </div>
             <div style="margin-left: 20px">
               <p style="display: inline; font-size: 12px; margin-right: 520px">
@@ -160,24 +143,18 @@
             </div>
           </div>
           <div id="GraduateR" style="width: 100%; height: 50%">
-            <p
-              style="
+            <p style="
                 display: inline;
                 margin-left: 20px;
                 margin-right: 440px;
                 font-size: 14px;
-              "
-            >
+              ">
               研究生注册情况
             </p>
             <p style="display: inline; font-size: 14px">人数</p>
             <div style="margin-left: 20px; width: 95%">
-              <el-progress
-                :percentage="calculateTotalRate(GraduateC, GraduateE)"
-                :color="customColor"
-                :stroke-width="13"
-                :show-text="false"
-              ></el-progress>
+              <el-progress :percentage="calculateTotalRate(GraduateC, GraduateE)" :color="customColor"
+                :stroke-width="13" :show-text="false"></el-progress>
             </div>
             <div style="margin-left: 20px">
               <p style="display: inline; font-size: 12px; margin-right: 520px">
@@ -186,29 +163,21 @@
               <p style="display: inline; font-size: 12px">{{ GraduateC }}</p>
             </div>
           </div>
-          <div
-            style="
+          <div style="
               display: flex;
               justify-content: center;
               align-items: center;
               position: relative;
               height: 10%;
               width: 100%;
-            "
-          >
-            <el-button
-              type="primary"
-              style="background-color: #209e91; border: #209e91"
-              size="small"
-              @click="redirectToPrevious"
-              >往日注册情况</el-button
-            >
+            ">
+            <el-button type="primary" style="background-color: #209e91; border: #209e91" size="small"
+              @click="redirectToPrevious">往日注册情况</el-button>
           </div>
         </div>
       </div>
       <!-- 右侧内容 -->
-      <div
-        style="
+      <div style="
           position: relative;
           height: 100%;
           bottom: 0;
@@ -219,21 +188,12 @@
           border-radius: 8px;
           box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
           overflow-y: auto;
-        "
-      >
+        ">
         <h3 style="margin-left: 20px">学院</h3>
-        <div
-          v-for="(college, index) in CollegeList"
-          :key="index"
-          class="college-item"
-        >
+        <div v-for="(college, index) in CollegeList" :key="index" class="college-item">
           <p style="margin-left: 20px; font-size: 14px">{{ college.name }}</p>
           <div style="margin-left: 20px; width: 95%">
-            <el-progress
-              :percentage="calculateRegistrationRate(index)"
-              :stroke-width="10"
-              :color="customColorMethod"
-            >
+            <el-progress :percentage="calculateRegistrationRate(index)" :stroke-width="10" :color="customColorMethod">
             </el-progress>
           </div>
         </div>
@@ -271,6 +231,7 @@ import * as echarts from "echarts";
 export default {
   data() {
     return {
+      circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
       search: "",
       customColor: "#0da699",
       myChart: null,
@@ -292,15 +253,15 @@ export default {
     customColorMethod(percentage) {
       if (percentage < 15) {
         return "#d1ffcc";
-      }else if(percentage <30){
+      } else if (percentage < 30) {
         return "#b9f2a1";
       } else if (percentage < 50) {
         return "#6eba8c";
-      } else if(percentage < 70){
+      } else if (percentage < 70) {
         return "#10c4b5";
-      }else if(percentage < 80){
+      } else if (percentage < 80) {
         return "#0da699";
-      }else{
+      } else {
         return "#0b6d62";
       }
     },
@@ -345,7 +306,7 @@ export default {
           this.TotalRegisterRate = Math.floor(
             ((this.UndergraduateE + this.GraduateE) /
               (this.UndergraduateC + this.GraduateC)) *
-              100
+            100
           );
           this.TotalUnRegisterRate = 100 - this.TotalRegisterRate;
           console.log(this.TotalRegisterRate);
@@ -425,6 +386,30 @@ export default {
     },
     redirectToPrevious() {
       this.$router.push("/mainMenu/student/integration");
+    },
+    handleCommand(command) {
+      if (command == 'q') {
+        this.quit();
+      }
+      else if (command == 'm') {
+        this.$router.push("/mainMenu/config/safety");
+      }
+    },
+    quit() {
+      axios
+        .post(`${this.$store.getters.getIp}/administrators/logout`)
+        .then((response) => {
+          if (response.data.code) {
+            this.$message.success('退出成功');
+            this.$router.push('/login');
+          }
+          else {
+            this.$message.error(response.data.msg);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     },
   },
 };

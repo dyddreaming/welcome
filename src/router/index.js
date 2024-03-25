@@ -74,6 +74,7 @@ import safety from '../components/configSet/safety.vue'
 import messageNote from '../components/configSet/messageNote.vue'
 import dataCopy from '../components/configSet/dataCopy.vue'
 import versionSelect from '../components/configSet/versionSelect.vue'
+import refineConfig from '../views/refineConfig.vue'
 // 日志管理
 import log from '../views/Log.vue'
 // 帮助中心
@@ -289,6 +290,10 @@ const routes = [{
             component: versionSelect
           },
         ],
+      },
+      {
+        path:'refineConfig',
+        component:refineConfig,
       },
       {
         path:'log',

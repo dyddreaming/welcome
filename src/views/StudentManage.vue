@@ -28,24 +28,32 @@
           id="searchPart"
         ></el-input>
       </div>
-      <router-link
-        to="/mainMenu/help/helpFile"
-        style="
-          color: inherit;
-          text-decoration: none;
-          margin-right: 20px;
-          margin-left: auto;
+      <div style="
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      margin-right:2%;
+    ">
+        <el-avatar :size="35" :src="circleUrl"></el-avatar>
+        <div style="
+          margin-left: 10px;
           color: #ffffff;
-        "
-      >
-        <span style="transition: color 0.3s" class="hover-color"
-          >需要帮助吗？<span style="color: #209e91">点击这里</span></span
-        >
-      </router-link>
-      <i
-        class="el-icon-s-home"
-        style="color: #ffff; margin-right: 10px; font-size: 24px"
-      ></i>
+      ">
+          <p style="margin: 0;">school@school.com</p>
+          <p style="margin: 0;font-size:14px;">管理员</p>
+        </div>
+        <div style="margin-left:10px;color:#ffffff">
+          <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+              <i class="el-icon-more" style="color:#ffffff;transform: rotate(90deg);"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="q">退出登录</el-dropdown-item>
+              <el-dropdown-item command="m">修改密码</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </div>
     </div>
     <div style="margin-top: 10px; width: 100%; height: 9%; display: flex">
       <h2
@@ -268,7 +276,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            prop="completion"
+            prop="compDegree"
             label="任务完成度/%"
             min-width="100"
             :align="centerAlign"
@@ -449,6 +457,8 @@ import axios from "axios";
 export default {
   data() {
     return {
+      circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+      search:"",
       fixedWidth: 100,
       centerAlign: "center",
       CollegeOptions: [
@@ -549,6 +559,14 @@ export default {
       let queryString = `?page=${this.currentPage}&pageSize=${this.pageSize}`;
       const category = this.typeValue === "本科生" ? 0 : 1;
       if (this.collegeValue == "所有") {
+        if(this.completeDegree>100)
+        {
+          this.$message({
+            message: "任务完成度只能在0-100之间",
+            type: "error",
+          });
+          return;
+        }
         queryString += `&category=${category}&compDegree=${this.completeDegree}`;
       } else {
         const collegeEncoded = encodeURIComponent(this.collegeValue);
@@ -693,6 +711,30 @@ export default {
         this.currentPage++;
         this.getData();
       }
+    },
+    handleCommand(command) {
+      if (command == 'q') {
+        this.quit();
+      }
+      else if (command == 'm') {
+        this.$router.push("/mainMenu/config/safety");
+      }
+    },
+    quit() {
+      axios
+        .post(`${this.$store.getters.getIp}/administrators/logout`)
+        .then((response) => {
+          if (response.data.code) {
+            this.$message.success('退出成功');
+            this.$router.push('/login');
+          }
+          else {
+            this.$message.error(response.data.msg);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     },
   },
 };

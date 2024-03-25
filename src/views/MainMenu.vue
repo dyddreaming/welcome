@@ -82,7 +82,7 @@
                   <span slot="title" style="margin-left: 5px">摄像头管理</span>
                 </el-menu-item>
               </router-link>
-              <router-link to="/mainMenu/config" tag="span">
+              <router-link to="/mainMenu/refineConfig" tag="span">
                 <el-menu-item index="7" id="setButton" style="color: #ffff;background-color: rgb(28, 43, 54);">
                   <i class="el-icon-setting" style="color: #ffff"></i>
                   <span slot="title" style="margin-left: 5px">平台参数配置</span>
@@ -104,10 +104,10 @@
           </el-col>
         </el-row>
       </el-menu>
-      <div style="position:relative;height:4%;width:100%;top:96%;text-align:center;color:#ffffff;" id="quitText"
+      <!-- <div style="position:relative;height:4%;width:100%;top:96%;text-align:center;color:#ffffff;" id="quitText"
         @click="quit">
         <span>退出登录</span>
-      </div>
+      </div> -->
     </div>
     <router-view></router-view>
   </div>

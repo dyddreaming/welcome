@@ -1308,15 +1308,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[0] }}分{{ secondsList[0] }}秒
+                 {{dayList[0]}}天{{ hourList[0] }}时{{ minuteList[0] }}分{{ secondsList[0] }}秒
                 </div>
               </div>
               <!-- 第二 -->
@@ -1370,15 +1370,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[1] }}分{{ secondsList[1] }}秒
+                {{dayList[1]}}天{{ hourList[1] }}时{{ minuteList[1] }}分{{ secondsList[1] }}秒
                 </div>
               </div>
               <!-- 第三 -->
@@ -1432,15 +1432,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[2] }}分{{ secondsList[2] }}秒
+                {{dayList[2]}}天{{ hourList[2] }}时{{ minuteList[2] }}分{{ secondsList[2] }}秒
                 </div>
               </div>
               <!-- 第四 -->
@@ -1483,15 +1483,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[3] }}分{{ secondsList[3] }}秒
+                {{dayList[3]}}天{{ hourList[3] }}时{{ minuteList[3] }}分{{ secondsList[3] }}秒
                 </div>
               </div>
               <!-- 第五 -->
@@ -1534,15 +1534,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[4] }}分{{ secondsList[4] }}秒
+                {{dayList[4]}}天{{ hourList[4] }}时{{ minuteList[4] }}分{{ secondsList[4] }}秒
                 </div>
               </div>
               <!-- 第六 -->
@@ -1585,15 +1585,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[5] }}分{{ secondsList[5] }}秒
+                {{dayList[5]}}天{{ hourList[5] }}时{{ minuteList[5] }}分{{ secondsList[5] }}秒
                 </div>
               </div>
               <!-- 第七 -->
@@ -1636,15 +1636,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[6] }}分{{ secondsList[6] }}秒
+                {{dayList[6]}}天{{ hourList[6] }}时{{ minuteList[6] }}分{{ secondsList[6] }}秒
                 </div>
               </div>
               <!-- 第八 -->
@@ -1687,15 +1687,15 @@
                 <div
                   style="
                     position: relative;
-                    width: 20%;
+                    width: 30%;
                     height: 100%;
-                    left: 40%;
+                    left: 30%;
                     display: flex;
                     align-items: center;
                     color: #ffffff;
                   "
                 >
-                  {{ minuteList[7] }}分{{ secondsList[7] }}秒
+                {{dayList[7]}}天{{ hourList[7] }}时{{ minuteList[7] }}分{{ secondsList[7] }}秒
                 </div>
               </div>
             </div>
@@ -2044,6 +2044,8 @@ export default {
       parCount: null,
       dateString: null,
       taskId: null,
+      dayList:[],
+      hourList:[],
       minuteList: [],
       secondsList: [],
       source: null,
@@ -2993,6 +2995,8 @@ export default {
     },
     // 单项任务完成速度排行榜
     getSingleComRank() {
+      this.dayList = [];
+      this.hourList = [];
       this.minuteList = [];
       this.secondsList = [];
       let taskId = this.taskId;
@@ -3008,8 +3012,10 @@ export default {
           this.consumeList = this.rolesData3.consumeList;
           console.log("角色", this.roles2);
           this.consumeList.forEach((item) => {
-            this.minuteList.push(Math.floor(item / 60));
-            this.secondsList.push(Math.floor(item % 60));
+            this.dayList.push(Math.floor(item / 86400));
+            this.hourList.push(Math.floor((item % 86400) / 3600));
+            this.minuteList.push(Math.floor(((item % 86400) % 3600) / 60));
+            this.secondsList.push(Math.floor(((item % 86400) % 3600) % 60));
           });
           console.log("分钟", this.minuteList);
           console.log("秒数", this.secondsList);

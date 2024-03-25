@@ -446,6 +446,30 @@ export default {
       }
       this.closeDialog(true);
     },
+    handleCommand(command) {
+      if (command == 'q') {
+        this.quit();
+      }
+      else if (command == 'm') {
+        this.$router.push("/mainMenu/config/safety");
+      }
+    },
+    quit() {
+      axios
+        .post(`${this.$store.getters.getIp}/administrators/logout`)
+        .then((response) => {
+          if (response.data.code) {
+            this.$message.success('退出成功');
+            this.$router.push('/login');
+          }
+          else {
+            this.$message.error(response.data.msg);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    },
   },
 };
 </script>
