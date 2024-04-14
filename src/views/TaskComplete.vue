@@ -242,7 +242,7 @@
                 <!-- 任务图片 -->
                 <img
                   :src="scope.row.img"
-                  style="margin-right: 0px; width: 40px; height: 40px"
+                  style="margin-right: 0px; width: 50px; height: 40px"
                 />
                 <!-- 任务名称和ID -->
                 <div
@@ -551,8 +551,10 @@ export default {
           this.totalPages = this.totalData.pages;
           records.forEach((task, index) => {
             if (this.transformStatus(task) !== -1) {
-              this.tableData.push({
-                img: require(`../../public/static/img/任务1.png`),
+              if(index==0||index==5)
+              {
+                this.tableData.push({
+                img: require(`../../public/static/img/任务2.png`),
                 name: task.name,
                 id: task.id,
                 date: task.releaseTime.replace("T", " "),
@@ -560,6 +562,52 @@ export default {
                 number: task.completed,
                 status: this.transformStatus(task),
               });
+              }
+              else if(index==1)
+              {
+                this.tableData.push({
+                img: require(`../../public/static/img/任务3.png`),
+                name: task.name,
+                id: task.id,
+                date: task.releaseTime.replace("T", " "),
+                type: this.transformType(task.category),
+                number: task.completed,
+                status: this.transformStatus(task),
+              });
+              }
+              else if(index==2){
+                this.tableData.push({
+                img: require(`../../public/static/img/任务4.png`),
+                name: task.name,
+                id: task.id,
+                date: task.releaseTime.replace("T", " "),
+                type: this.transformType(task.category),
+                number: task.completed,
+                status: this.transformStatus(task),
+              });
+              }
+              else if(index==3){
+                this.tableData.push({
+                img: require(`../../public/static/img/任务5.png`),
+                name: task.name,
+                id: task.id,
+                date: task.releaseTime.replace("T", " "),
+                type: this.transformType(task.category),
+                number: task.completed,
+                status: this.transformStatus(task),
+              });
+              }
+              else if(index==4){
+                this.tableData.push({
+                img: require(`../../public/static/img/任务6.png`),
+                name: task.name,
+                id: task.id,
+                date: task.releaseTime.replace("T", " "),
+                type: this.transformType(task.category),
+                number: task.completed,
+                status: this.transformStatus(task),
+              });
+              }
             }
           });
         })

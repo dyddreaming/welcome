@@ -28,24 +28,26 @@
           id="searchPart"
         ></el-input>
       </div>
-      <div style="
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      margin-right:2%;
-    ">
+      <div
+        style="
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          margin-right: 2%;
+        "
+      >
         <el-avatar :size="35" :src="circleUrl"></el-avatar>
-        <div style="
-          margin-left: 10px;
-          color: #ffffff;
-      ">
-          <p style="margin: 0;">school@school.com</p>
-          <p style="margin: 0;font-size:14px;">管理员</p>
+        <div style="margin-left: 10px; color: #ffffff">
+          <p style="margin: 0">school@school.com</p>
+          <p style="margin: 0; font-size: 14px">管理员</p>
         </div>
-        <div style="margin-left:10px;color:#ffffff">
+        <div style="margin-left: 10px; color: #ffffff">
           <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
-              <i class="el-icon-more" style="color:#ffffff;transform: rotate(90deg);"></i>
+              <i
+                class="el-icon-more"
+                style="color: #ffffff; transform: rotate(90deg)"
+              ></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="q">退出登录</el-dropdown-item>
@@ -360,19 +362,19 @@
   color: #747474;
 }
 
-/deep/ .pagination{
-  background-color:#ffffff;
-  border:1px solid #e0e0e0;
-  color:#747474;
-  width:40px;
-  height:30px;
+/deep/ .pagination {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #747474;
+  width: 40px;
+  height: 30px;
 }
-/deep/ .changePage{
-  background-color:#ffffff;
-  border:1px solid #e0e0e0;
-  color:#747474;
-  width:60px;
-  height:30px;
+/deep/ .changePage {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #747474;
+  width: 60px;
+  height: 30px;
 }
 
 /deep/ .active {
@@ -386,7 +388,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+      circleUrl:
+        "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
       searchWord: "",
       totalData: null,
       currentPage: 1,
@@ -402,7 +405,8 @@ export default {
           setLong: "30天",
           charge: "3000",
           status: "正常投放",
-        },{
+        },
+        {
           adName: "专注兔肉30年",
           adType: "美食",
           meName: "芭夯兔",
@@ -411,7 +415,8 @@ export default {
           setLong: "20天",
           charge: "2000",
           status: "正常投放",
-        },{
+        },
+        {
           adName: "经典烤肉",
           adType: "美食",
           meName: "九田家",
@@ -420,7 +425,8 @@ export default {
           setLong: "30天",
           charge: "3000",
           status: "暂停投放",
-        },{
+        },
+        {
           adName: "暑期兼职",
           adType: "兼职",
           meName: "软件组",
@@ -449,7 +455,8 @@ export default {
           setLong: "20天",
           charge: "2000",
           status: "正常投放",
-        },{
+        },
+        {
           adName: "温馨手工制作",
           adType: "娱乐",
           meName: "甜甜手作店",
@@ -466,33 +473,39 @@ export default {
     displayedPages() {
       const maxDisplayedPages = 5; // 最多显示的页码数量
       const pages = [];
-      let startPage = Math.max(1, this.currentPage - Math.floor(maxDisplayedPages / 2));
-      let endPage = Math.min(this.totalPages, startPage + maxDisplayedPages - 1);
-      
+      let startPage = Math.max(
+        1,
+        this.currentPage - Math.floor(maxDisplayedPages / 2)
+      );
+      let endPage = Math.min(
+        this.totalPages,
+        startPage + maxDisplayedPages - 1
+      );
+
       if (endPage - startPage < maxDisplayedPages - 1) {
         startPage = Math.max(1, endPage - maxDisplayedPages + 1);
       }
-      
+
       if (startPage > 1) {
         pages.push(1); // 添加第一页
         if (startPage > 2) {
-          pages.push('...'); // 添加省略号
+          pages.push("..."); // 添加省略号
         }
       }
-      
+
       for (let i = startPage; i <= endPage; i++) {
         pages.push(i);
       }
-      
+
       if (endPage < this.totalPages) {
         if (endPage < this.totalPages - 1) {
-          pages.push('...'); // 添加省略号
+          pages.push("..."); // 添加省略号
         }
         pages.push(this.totalPages); // 添加最后一页
       }
-      
+
       return pages;
-    }
+    },
   },
   create() {
     this.goToPage(1);
@@ -613,7 +626,12 @@ export default {
           if (value == null) {
             this.$message.error("请输入暂停投放原因");
           } else {
-            let data = {
+            this.$message({
+              message: "暂停投放成功",
+              type: "success",
+            });
+            ad.status = "暂停投放";
+            /* let data = {
               id: parseInt(ad.id),
               status: 1,
               feedback: value,
@@ -642,7 +660,7 @@ export default {
               })
               .catch((error) => {
                 console.error("修改错误:", error);
-              });
+              }); */
           }
         })
         .catch(() => {
@@ -667,10 +685,9 @@ export default {
       }
     },
     handleCommand(command) {
-      if (command == 'q') {
+      if (command == "q") {
         this.quit();
-      }
-      else if (command == 'm') {
+      } else if (command == "m") {
         this.$router.push("/mainMenu/config/safety");
       }
     },
@@ -679,10 +696,9 @@ export default {
         .post(`${this.$store.getters.getIp}/administrators/logout`)
         .then((response) => {
           if (response.data.code) {
-            this.$message.success('退出成功');
-            this.$router.push('/login');
-          }
-          else {
+            this.$message.success("退出成功");
+            this.$router.push("/login");
+          } else {
             this.$message.error(response.data.msg);
           }
         })

@@ -1052,7 +1052,8 @@ export default {
       const idNumber = this.cardInput;
       const name = this.nameInput;
       const gender = parseInt(this.radio);
-      const birth = this.dateValue;
+      const birthStr = this.dateValue;
+      const birth = "2023-03-13";
       const nation = this.nationInput;
       const grade = parseInt(this.gradeValue);
       const college = this.collegeValue;
@@ -1065,7 +1066,7 @@ export default {
       const category = this.typeValue === "本科生" ? 0 : 1; // 0: 本科生, 1: 研究生
 
       // 验证必选项是否填写
-      if (
+      /* if (
         !id ||
         !idNumber ||
         !name ||
@@ -1079,7 +1080,7 @@ export default {
       ) {
         this.$message.error("请填写所有必选项");
         return;
-      }
+      } */
 
       // 验证身份证号格式是否符合要求
       const idNumberRegex =

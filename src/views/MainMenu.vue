@@ -6,7 +6,7 @@
     <div class="app-sidebar">
       <div id="name" style="display: flex; align-items: center; text-align: center; background-color: rgb(28, 43, 54);">
         <h2 style="position:relative;left:25px;color:#209e91;">Wel</h2>
-        <h2 style="position:relative;left:25px;">Admin</h2>
+        <h2 style="position:relative;left:25px;">come</h2>
       </div>
 
       <!-- 导航栏内容，使用Element-UI的组件 -->
